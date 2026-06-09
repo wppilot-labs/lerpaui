@@ -41,10 +41,6 @@ Thumbs.db
 *.swp
 *.swo
 
-# Claude Code local config (skills are tracked; local machine settings are not)
-.claude/settings.local.json
-.claude/launch.json
-
 # Coverage / test artifacts
 coverage/
 **/coverage/
