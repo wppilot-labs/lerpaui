@@ -36,24 +36,43 @@ No lock-in. No black-box `node_modules` component. Just production-grade React y
 
 ## 🚀 Quick start
 
-Pick whichever fits your workflow — all three deliver the same source you own.
-
-**Option 1 · shadcn registry (zero install):**
+**1. Initialize once** — scaffolds the Tailwind v4 design tokens (`@theme` + `:root`) and the `cn` helper, so components render styled on first paint:
 
 ```bash
+npx lerpa-cli init
+```
+
+**2. Add components** — every path delivers the same source you own:
+
+```bash
+# Lerpa CLI (recommended — resolves dependencies, respects your src/ layout + alias)
+npx lerpa-cli add button
+
+# …or via the shadcn-compatible registry
 npx shadcn add https://lerpaui.com/r/button.json
 ```
 
-**Option 2 · Lerpa CLI:**
+Or **browse & copy** from the [component gallery](https://lerpaui.com/gallery/components) — preview live, copy with one click.
+
+> Replace `button` with any id (e.g. `pricing-table`, `aurora-shader`, `dashboard-revenue-overview`). `registryDependencies` install automatically.
+
+## 🧰 CLI reference
 
 ```bash
-pnpm dlx lerpa-cli add button
-# or: npx lerpa-cli add button
+npx lerpa-cli <command>
 ```
 
-**Option 3 · browse & copy** — open the [component gallery](https://lerpaui.com/gallery/components), preview live, and copy the code with one click.
+| Command | What it does |
+| --- | --- |
+| `init` | Scaffold config + `cn` helper + Tailwind v4 tokens. Flags: `--yes`, `--css <path>`, `--components <alias>`, `--utils <alias>`, `--pm <npm\|pnpm\|yarn\|bun>`, `--no-tokens`. |
+| `add <name>` | Install a component/block with all registry + npm dependencies (one batched install). `--yes` skips prompts. |
+| `theme [name]` | Apply a color theme — `lime`, `mono`, `ocean`, `grape`, `ember`, `gold`, `paper`. Replaces a managed block, so it's safe to re-run. |
+| `list` | List every component and block (`--json` for machine output). |
+| `search <query>` | Search the registry by name. |
+| `doctor` | Verify config and that the Tailwind v4 tokens are present. |
+| `info` | Show CLI + project metadata. |
 
-> Replace `button` with any component id (e.g. `pricing-table`, `aurora-shader`, `dashboard-revenue-overview`). `registryDependencies` resolve automatically.
+Every command accepts `--yes`, so it runs unattended in CI.
 
 ## 🤖 Use with AI coding agents (MCP)
 
@@ -150,5 +169,5 @@ Contributions are welcome — read the [Contributing Guidelines](CONTRIBUTING.md
 Lerpa UI is free and open-source under the [MIT License](LICENSE.md). Use it in personal and commercial projects.
 
 <div align="center">
-<sub>Built by <a href="https://github.com/cuibit-labs">Cuibit Labs</a> · <a href="https://lerpaui.com">lerpaui.com</a></sub>
+<sub>Built by <a href="https://cuibit.com">Cuibit Labs</a> · <a href="https://lerpaui.com">lerpaui.com</a> · <a href="https://github.com/cuibit-labs/lerpaui">GitHub</a></sub>
 </div>
