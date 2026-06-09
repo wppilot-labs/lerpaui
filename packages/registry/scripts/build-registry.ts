@@ -38,7 +38,9 @@ interface RegItem { name: string; type: string; files?: RegFile[]; registryDepen
 // Bundled block-local helpers reference cn via the relative source path; rewrite
 // to the shadcn alias so they resolve once copied into the consumer project.
 function transformHelperContent(src: string): string {
-  return src.replace(/from\s+(['"])\.\.?\/lib\/cn\1/g, 'from "@/lib/cn"');
+  // The registry convention (and what `lerpa init` scaffolds + the CLI rewrites)
+  // is @/lib/utils — NOT @/lib/cn. Map the helper's source cn import to it.
+  return src.replace(/from\s+(['"])\.\.?\/lib\/cn\1/g, 'from "@/lib/utils"');
 }
 
 // Make every item compile on install:
