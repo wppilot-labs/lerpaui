@@ -1,6 +1,6 @@
 {
   "name": "lerpa-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Copy-paste components and blocks from the Lerpa UI registry into any React/Tailwind project.",
   "license": "MIT",
   "repository": {

@@ -8,760 +8,536 @@ import ora from "ora";
 
 const program = new Command();
 const CONFIG_FILE = "lerpa.json";
+const VERSION = "0.1.1";
 
 interface Config {
   style: string;
-  tailwind: {
-    config: string;
-    css: string;
-  };
-  aliases: {
-    components: string;
-    utils: string;
-  };
+  tailwind: { css: string };
+  aliases: { components: string; utils: string };
   packageManager: "npm" | "pnpm" | "yarn" | "bun";
 }
 
-// Default Registry resolution
-function getLocalRegistryPath(): string | null {
-  // 1. Bundled with the published CLI (preferred for `pnpm dlx lerpa-cli`).
-  //    The publish step copies `packages/registry/generated/registry.json`
-  //    into `packages/cli/registry/registry.json` so the tarball is
-  //    self-contained.
-  const bundled = path.join(__dirname, "../registry/registry.json");
-  if (fs.existsSync(bundled)) {
-    return bundled;
-  }
+// ---------------------------------------------------------------------------
+// Tailwind v4 token scaffold. Lerpa components use both the "Lunch" tokens
+// (bg-bg, text-text, text-accent) and shadcn-compat utilities (bg-primary,
+// text-foreground, border-input). In Tailwind v4 these only generate if the
+// --color-* are declared via @theme. Without this block a fresh install
+// renders unstyled — the #1 onboarding gap. init writes it into globals CSS.
+// ---------------------------------------------------------------------------
+const TOKENS_START = "/* lerpa-ui:tokens:start (managed by lerpa-cli — edit values in :root) */";
+const TOKENS_END = "/* lerpa-ui:tokens:end */";
 
-  // 2. Local registry inside monorepo context (developer convenience).
-  const monorepoPath = path.join(process.cwd(), "packages/registry/generated/registry.json");
-  if (fs.existsSync(monorepoPath)) {
-    return monorepoPath;
-  }
+const LERPA_BASE_CSS = `@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-bg-4: var(--bg-4);
+  --color-edge: var(--edge);
+  --color-edge-2: var(--edge-2);
+  --color-edge-3: var(--edge-3);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-text-4: var(--text-4);
+  --color-text-5: var(--text-5);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-d: var(--accent-d);
+  --color-pink: var(--pink);
+  --color-amber: var(--amber);
+  --color-cyan: var(--cyan);
+  --color-violet: var(--violet);
+  --color-mint: var(--mint);
+  --color-red: var(--red);
 
-  // 3. Peer registry path if running inside mono packages.
-  const peerPath = path.join(__dirname, "../../../registry/generated/registry.json");
-  if (fs.existsSync(peerPath)) {
-    return peerPath;
-  }
+  /* shadcn-compatible aliases — point at Lunch tokens */
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--bg);
+  --color-secondary: var(--bg-3);
+  --color-secondary-foreground: var(--text);
+  --color-muted: var(--bg-3);
+  --color-muted-foreground: var(--text-3);
+  --color-accent-foreground: var(--bg);
+  --color-border: var(--edge);
+  --color-input: var(--edge-2);
+  --color-ring: var(--accent);
+  --color-card: var(--bg-2);
+  --color-card-foreground: var(--text);
+  --color-popover: var(--bg-2);
+  --color-popover-foreground: var(--text);
 
-  // 4. Locally installed inside node_modules relative path.
-  const localNodePath = path.join(__dirname, "../registry/generated/registry.json");
-  if (fs.existsSync(localNodePath)) {
-    return localNodePath;
-  }
-
-  return null;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --font-sans: var(--font-geist-sans, "Geist"), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono, "Geist Mono"), ui-monospace, monospace;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- registry items are dynamic shadcn JSON; downstream uses heterogeneous fields
+:root {
+  --bg: oklch(0.10 0.012 285);
+  --bg-2: oklch(0.15 0.018 285);
+  --bg-3: oklch(0.20 0.020 285);
+  --bg-4: oklch(0.25 0.022 285);
+  --edge: oklch(1 0 0 / 0.07);
+  --edge-2: oklch(1 0 0 / 0.14);
+  --edge-3: oklch(1 0 0 / 0.22);
+  --text: oklch(0.95 0.005 300);
+  --text-2: oklch(0.78 0.012 290);
+  --text-3: oklch(0.55 0.015 290);
+  --text-4: oklch(0.35 0.015 290);
+  --text-5: oklch(0.25 0.012 290);
+  --accent: oklch(0.93 0.18 124);
+  --accent-glow: oklch(0.93 0.18 124 / 0.55);
+  --accent-soft: oklch(0.93 0.18 124 / 0.14);
+  --accent-d: oklch(0.78 0.18 124);
+  --pink: oklch(0.65 0.24 7);
+  --amber: oklch(0.85 0.16 78);
+  --cyan: oklch(0.85 0.13 213);
+  --violet: oklch(0.72 0.16 290);
+  --mint: oklch(0.78 0.14 158);
+  --red: oklch(0.65 0.22 25);
+  --radius: 0.875rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}`;
+
+// Theme presets = oklch overrides for the base tokens. Applied as a managed
+// :root block (replaced, never appended) so re-running theme can't duplicate.
+const THEME_START = "/* lerpa-ui:theme:start (managed by lerpa-cli) */";
+const THEME_END = "/* lerpa-ui:theme:end */";
+
+const THEME_PRESETS: Record<string, string> = {
+  lime: `  --bg: oklch(0.11 0.012 285); --bg-2: oklch(0.155 0.016 285); --bg-3: oklch(0.205 0.018 285); --bg-4: oklch(0.255 0.02 285);
+  --text: oklch(0.96 0.005 300); --text-2: oklch(0.78 0.012 290); --text-3: oklch(0.56 0.014 290); --text-4: oklch(0.40 0.014 290); --text-5: oklch(0.30 0.012 290);
+  --edge: oklch(1 0 0 / 0.07); --edge-2: oklch(1 0 0 / 0.14); --edge-3: oklch(1 0 0 / 0.22);
+  --accent: oklch(0.93 0.18 124); --accent-glow: oklch(0.93 0.18 124 / 0.55); --accent-soft: oklch(0.93 0.18 124 / 0.14); --accent-d: oklch(0.78 0.18 124);`,
+  mono: `  --bg: oklch(0.12 0 0); --bg-2: oklch(0.16 0 0); --bg-3: oklch(0.21 0 0); --bg-4: oklch(0.26 0 0);
+  --text: oklch(0.97 0 0); --text-2: oklch(0.78 0 0); --text-3: oklch(0.56 0 0); --text-4: oklch(0.40 0 0); --text-5: oklch(0.30 0 0);
+  --edge: oklch(1 0 0 / 0.08); --edge-2: oklch(1 0 0 / 0.15); --edge-3: oklch(1 0 0 / 0.24);
+  --accent: oklch(0.95 0 0); --accent-glow: oklch(0.95 0 0 / 0.40); --accent-soft: oklch(0.95 0 0 / 0.12); --accent-d: oklch(0.75 0 0);`,
+  ocean: `  --bg: oklch(0.12 0.035 245); --bg-2: oklch(0.16 0.04 243); --bg-3: oklch(0.21 0.045 242); --bg-4: oklch(0.26 0.048 241);
+  --text: oklch(0.95 0.012 235); --text-2: oklch(0.79 0.02 232); --text-3: oklch(0.57 0.03 230); --text-4: oklch(0.41 0.03 228); --text-5: oklch(0.31 0.025 226);
+  --edge: oklch(1 0 0 / 0.08); --edge-2: oklch(1 0 0 / 0.15); --edge-3: oklch(1 0 0 / 0.23);
+  --accent: oklch(0.80 0.13 222); --accent-glow: oklch(0.80 0.13 222 / 0.55); --accent-soft: oklch(0.80 0.13 222 / 0.15); --accent-d: oklch(0.64 0.12 224);`,
+  grape: `  --bg: oklch(0.12 0.03 300); --bg-2: oklch(0.16 0.035 300); --bg-3: oklch(0.21 0.04 300); --bg-4: oklch(0.26 0.042 300);
+  --text: oklch(0.96 0.012 300); --text-2: oklch(0.79 0.02 298); --text-3: oklch(0.57 0.03 296); --text-4: oklch(0.41 0.03 294); --text-5: oklch(0.31 0.025 292);
+  --edge: oklch(1 0 0 / 0.08); --edge-2: oklch(1 0 0 / 0.15); --edge-3: oklch(1 0 0 / 0.23);
+  --accent: oklch(0.70 0.18 295); --accent-glow: oklch(0.70 0.18 295 / 0.55); --accent-soft: oklch(0.70 0.18 295 / 0.15); --accent-d: oklch(0.55 0.18 295);`,
+  ember: `  --bg: oklch(0.13 0.03 22); --bg-2: oklch(0.17 0.035 22); --bg-3: oklch(0.22 0.038 22); --bg-4: oklch(0.27 0.04 22);
+  --text: oklch(0.96 0.015 30); --text-2: oklch(0.80 0.022 28); --text-3: oklch(0.58 0.028 26); --text-4: oklch(0.42 0.028 24); --text-5: oklch(0.32 0.024 22);
+  --edge: oklch(1 0 0 / 0.08); --edge-2: oklch(1 0 0 / 0.15); --edge-3: oklch(1 0 0 / 0.23);
+  --accent: oklch(0.66 0.22 20); --accent-glow: oklch(0.66 0.22 20 / 0.55); --accent-soft: oklch(0.66 0.22 20 / 0.15); --accent-d: oklch(0.52 0.21 18);`,
+  gold: `  --bg: oklch(0.13 0.018 80); --bg-2: oklch(0.17 0.022 80); --bg-3: oklch(0.22 0.024 80); --bg-4: oklch(0.27 0.026 80);
+  --text: oklch(0.96 0.015 90); --text-2: oklch(0.80 0.02 85); --text-3: oklch(0.58 0.024 82); --text-4: oklch(0.42 0.024 80); --text-5: oklch(0.32 0.02 78);
+  --edge: oklch(1 0 0 / 0.08); --edge-2: oklch(1 0 0 / 0.15); --edge-3: oklch(1 0 0 / 0.23);
+  --accent: oklch(0.84 0.15 85); --accent-glow: oklch(0.84 0.15 85 / 0.55); --accent-soft: oklch(0.84 0.15 85 / 0.15); --accent-d: oklch(0.68 0.15 82);`,
+  paper: `  --bg: oklch(0.99 0.003 95); --bg-2: oklch(0.975 0.004 95); --bg-3: oklch(0.95 0.005 95); --bg-4: oklch(0.91 0.006 95);
+  --text: oklch(0.22 0.01 285); --text-2: oklch(0.40 0.012 285); --text-3: oklch(0.52 0.012 285); --text-4: oklch(0.64 0.01 285); --text-5: oklch(0.72 0.008 285);
+  --edge: oklch(0 0 0 / 0.09); --edge-2: oklch(0 0 0 / 0.14); --edge-3: oklch(0 0 0 / 0.20);
+  --accent: oklch(0.52 0.20 275); --accent-glow: oklch(0.52 0.20 275 / 0.40); --accent-soft: oklch(0.52 0.20 275 / 0.12); --accent-d: oklch(0.42 0.20 275);`,
+};
+
+// ---------------------------------------------------------------------------
+// Registry resolution.
+// ---------------------------------------------------------------------------
+function getLocalRegistryPath(): string | null {
+  const candidates = [
+    path.join(__dirname, "../registry/registry.json"),
+    path.join(process.cwd(), "packages/registry/generated/registry.json"),
+    path.join(__dirname, "../../../registry/generated/registry.json"),
+  ];
+  return candidates.find((p) => fs.existsSync(p)) ?? null;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- registry items are dynamic shadcn JSON
 function loadRegistry(): any[] {
   const localPath = getLocalRegistryPath();
   if (localPath) {
     try {
-      const content = fs.readFileSync(localPath, "utf-8");
-      return JSON.parse(content);
-    } catch (e) {
-      console.warn(pc.yellow(`⚠️ Warning: Failed to read local registry from ${localPath}. Using fallback.`));
+      return JSON.parse(fs.readFileSync(localPath, "utf-8"));
+    } catch {
+      console.warn(pc.yellow(`⚠️  Failed to read registry at ${localPath}.`));
     }
   }
-
-  // Fallback embedded subset registry if registry.json is not generated yet
-  return [
-    {
-      name: "button",
-      type: "registry:ui",
-      dependencies: ["class-variance-authority"],
-      files: [
-        {
-          path: "components/ui/button.tsx",
-          type: "registry:ui",
-          content: "import * as React from \"react\";\nimport { Slot } from \"@radix-ui/react-slot\";\nimport { cva, type VariantProps } from \"class-variance-authority\";\nimport { cn } from \"@/lib/utils\";\n\nconst buttonVariants = cva(\n  \"inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50\",\n  {\n    variants: {\n      variant: {\n        default: \"bg-primary text-primary-foreground shadow hover:bg-primary/90\",\n        destructive: \"bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90\",\n        outline: \"border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground\",\n        secondary: \"bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80\",\n        ghost: \"hover:bg-accent hover:text-accent-foreground\",\n        link: \"text-primary underline-offset-4 hover:underline\",\n      },\n      size: {\n        default: \"h-9 px-4 py-2\",\n        sm: \"h-8 rounded-md px-3 text-xs\",\n        lg: \"h-10 rounded-md px-8\",\n        icon: \"h-9 w-9\",\n      },\n    },\n    defaultVariants: {\n      variant: \"default\",\n      size: \"default\",\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  ({ className, variant, size, asChild = false, ...props }, ref) => {\n    const Comp = asChild ? Slot : \"button\";\n    return (\n      <Comp\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        {...props}\n      />\n    );\n  }\n);\nButton.displayName = \"Button\";\n\nexport { Button, buttonVariants };\n"
-        }
-      ]
-    }
-  ];
+  console.error(pc.red("❌ Registry not found. Reinstall lerpa-cli or run the registry build."));
+  return [];
 }
 
 function getConfig(): Config | null {
   const configPath = path.join(process.cwd(), CONFIG_FILE);
-  if (!fs.existsSync(configPath)) {
-    return null;
-  }
+  if (!fs.existsSync(configPath)) return null;
   try {
     return JSON.parse(fs.readFileSync(configPath, "utf-8"));
-  } catch (e) {
+  } catch {
     return null;
   }
 }
 
-function detectPackageManager(): "npm" | "pnpm" | "yarn" | "bun" {
+function detectPackageManager(): Config["packageManager"] {
   const cwd = process.cwd();
   if (fs.existsSync(path.join(cwd, "pnpm-lock.yaml"))) return "pnpm";
   if (fs.existsSync(path.join(cwd, "yarn.lock"))) return "yarn";
   if (fs.existsSync(path.join(cwd, "bun.lockb"))) return "bun";
-  if (fs.existsSync(path.join(cwd, "package-lock.json"))) return "npm";
   return "npm";
 }
 
 function getInstallCommand(pm: string, deps: string[]): string {
   const depStr = deps.join(" ");
   switch (pm) {
-    case "pnpm":
-      return `pnpm add ${depStr}`;
-    case "yarn":
-      return `yarn add ${depStr}`;
-    case "bun":
-      return `bun add ${depStr}`;
-    default:
-      return `npm install ${depStr} --save`;
+    case "pnpm": return `pnpm add ${depStr}`;
+    case "yarn": return `yarn add ${depStr}`;
+    case "bun": return `bun add ${depStr}`;
+    default: return `npm install ${depStr}`;
   }
 }
 
 function ensureDirectoryExists(filePath: string) {
-  const dirname = path.dirname(filePath);
-  if (!fs.existsSync(dirname)) {
-    fs.mkdirSync(dirname, { recursive: true });
-  }
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
 
 function backupFile(targetPath: string) {
   if (fs.existsSync(targetPath)) {
-    const backupPath = `${targetPath}.bak`;
-    fs.copyFileSync(targetPath, backupPath);
-    console.log(pc.gray(`📁 Created backup file at: ${backupPath}`));
+    fs.copyFileSync(targetPath, `${targetPath}.bak`);
+    console.log(pc.gray(`📁 Backup: ${targetPath}.bak`));
   }
 }
 
-// -----------------------------------------
-// CLI commands implementation
-// -----------------------------------------
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
+// Strip // and /* */ comments so tsconfig.json (which allows them) parses.
+function parseJsonc(text: string): unknown {
+  const stripped = text
+    .replace(/\\"|"(?:\\"|[^"])*"|(\/\/[^\n\r]*|\/\*[\s\S]*?\*\/)/g, (m, c) => (c ? "" : m));
+  return JSON.parse(stripped);
+}
+
+function readTsconfigPaths(): Record<string, string[]> | null {
+  for (const f of ["tsconfig.json", "jsconfig.json"]) {
+    const p = path.join(process.cwd(), f);
+    if (!fs.existsSync(p)) continue;
+    try {
+      const json = parseJsonc(fs.readFileSync(p, "utf-8")) as {
+        compilerOptions?: { paths?: Record<string, string[]> };
+      };
+      if (json.compilerOptions?.paths) return json.compilerOptions.paths;
+    } catch {
+      /* ignore */
+    }
+  }
+  return null;
+}
+
+// Resolve an import alias (e.g. "@/components") to a real on-disk directory
+// (e.g. "src/components"), honoring tsconfig "paths", then falling back to a
+// src/ layout heuristic. Fixes installs landing in the wrong folder.
+function aliasToDir(alias: string): string {
+  const paths = readTsconfigPaths();
+  if (paths) {
+    for (const [key, targets] of Object.entries(paths)) {
+      const keyPrefix = key.replace(/\*$/, "");
+      if (alias.startsWith(keyPrefix) && targets?.length) {
+        const target = targets[0].replace(/\*$/, "").replace(/^\.\//, "");
+        return path.normalize(path.join(target, alias.slice(keyPrefix.length)));
+      }
+    }
+  }
+  let rel = alias.replace(/^[@~]\//, "");
+  if (fs.existsSync(path.join(process.cwd(), "src")) && !rel.startsWith("src" + path.sep) && !rel.startsWith("src/")) {
+    rel = path.join("src", rel);
+  }
+  return rel;
+}
+
+// ---------------------------------------------------------------------------
 program
   .name("lerpa")
-  .description("Interactive Registry CLI utility for Lerpa UI animated blocks & components")
-  .version("0.1.0");
+  .description("Lerpa UI registry CLI — copy-paste animated React components & blocks")
+  .version(VERSION);
 
-// INIT COMMAND
+// INIT --------------------------------------------------------------------
 program
   .command("init")
-  .description("Initialize configuration and styling aliases in your project")
-  .action(async () => {
-    console.log(pc.cyan("\n🚀 Welcome to the Lerpa UI Registry System!\n"));
+  .description("Initialize Lerpa UI: writes config, the cn helper, and Tailwind v4 tokens")
+  .option("-y, --yes", "Non-interactive: accept detected/flagged defaults (CI-friendly)", false)
+  .option("--css <path>", "Path to your global CSS file")
+  .option("--components <alias>", "Import alias for components", "@/components")
+  .option("--utils <alias>", "Import alias for the cn helper", "@/lib/utils")
+  .option("--pm <manager>", "Package manager (npm|pnpm|yarn|bun)")
+  .option("--no-tokens", "Skip writing the Tailwind v4 token block into your CSS")
+  .action(async (opts) => {
+    console.log(pc.cyan("\n🚀 Lerpa UI init\n"));
 
     const configPath = path.join(process.cwd(), CONFIG_FILE);
-    if (fs.existsSync(configPath)) {
-      const overwrite = await prompts({
-        type: "confirm",
-        name: "value",
-        message: `${CONFIG_FILE} already exists. Overwrite configuration?`,
-        initial: false,
-      });
-      if (!overwrite.value) {
-        console.log(pc.yellow("Initialization aborted."));
-        return;
-      }
+    if (fs.existsSync(configPath) && !opts.yes) {
+      const ow = await prompts({ type: "confirm", name: "value", message: `${CONFIG_FILE} exists. Overwrite?`, initial: false });
+      if (!ow.value) return console.log(pc.yellow("Aborted."));
     }
 
     const detectedPm = detectPackageManager();
+    const defaultCss = fs.existsSync("src/app/globals.css")
+      ? "src/app/globals.css"
+      : fs.existsSync("app/globals.css")
+      ? "app/globals.css"
+      : fs.existsSync("src")
+      ? "src/index.css"
+      : "styles/globals.css";
 
-    const questions = [
-      {
-        type: "select" as const,
-        name: "packageManager",
-        message: "Which package manager do you use?",
-        choices: [
-          { title: "pnpm", value: "pnpm" },
-          { title: "npm", value: "npm" },
-          { title: "yarn", value: "yarn" },
-          { title: "bun", value: "bun" },
-        ],
-        initial: ["pnpm", "npm", "yarn", "bun"].indexOf(detectedPm),
-      },
-      {
-        type: "text" as const,
-        name: "cssPath",
-        message: "Where is your main globals CSS stylesheet located?",
-        initial: fs.existsSync("src/app/globals.css")
-          ? "src/app/globals.css"
-          : fs.existsSync("app/globals.css")
-          ? "app/globals.css"
-          : "src/index.css",
-      },
-      {
-        type: "text" as const,
-        name: "tailwindConfigPath",
-        message: "Where is your Tailwind config file located?",
-        initial: fs.existsSync("tailwind.config.ts")
-          ? "tailwind.config.ts"
-          : "tailwind.config.js",
-      },
-      {
-        type: "text" as const,
-        name: "componentsAlias",
-        message: "What import alias / target folder do you want to use for components?",
-        initial: "@/components",
-      },
-      {
-        type: "text" as const,
-        name: "utilsAlias",
-        message: "What import alias do you use for helper utility functions (e.g. cn)?",
-        initial: "@/lib/utils",
-      },
-    ];
-
-    const answers = await prompts(questions);
-
-    if (
-      !answers.packageManager ||
-      !answers.cssPath ||
-      !answers.tailwindConfigPath ||
-      !answers.componentsAlias ||
-      !answers.utilsAlias
-    ) {
-      console.log(pc.red("❌ Initialization cancelled. Missing inputs."));
-      return;
+    let answers: { packageManager: string; cssPath: string; componentsAlias: string; utilsAlias: string };
+    if (opts.yes) {
+      answers = {
+        packageManager: opts.pm || detectedPm,
+        cssPath: opts.css || defaultCss,
+        componentsAlias: opts.components,
+        utilsAlias: opts.utils,
+      };
+    } else {
+      const a = await prompts([
+        { type: "select", name: "packageManager", message: "Package manager?",
+          choices: ["pnpm", "npm", "yarn", "bun"].map((v) => ({ title: v, value: v })),
+          initial: Math.max(0, ["pnpm", "npm", "yarn", "bun"].indexOf(opts.pm || detectedPm)) },
+        { type: "text", name: "cssPath", message: "Global CSS file?", initial: opts.css || defaultCss },
+        { type: "text", name: "componentsAlias", message: "Components import alias?", initial: opts.components },
+        { type: "text", name: "utilsAlias", message: "cn helper import alias?", initial: opts.utils },
+      ]);
+      if (!a.packageManager || !a.cssPath || !a.componentsAlias || !a.utilsAlias) {
+        return console.log(pc.red("❌ Cancelled — missing inputs."));
+      }
+      answers = a;
     }
 
     const config: Config = {
       style: "default",
-      tailwind: {
-        config: answers.tailwindConfigPath,
-        css: answers.cssPath,
-      },
-      aliases: {
-        components: answers.componentsAlias,
-        utils: answers.utilsAlias,
-      },
-      packageManager: answers.packageManager,
+      tailwind: { css: answers.cssPath },
+      aliases: { components: answers.componentsAlias, utils: answers.utilsAlias },
+      packageManager: answers.packageManager as Config["packageManager"],
     };
-
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf-8");
-    console.log(pc.green(`\n✔ Config successfully saved to ${pc.bold(CONFIG_FILE)}`));
+    console.log(pc.green(`✔ Wrote ${pc.bold(CONFIG_FILE)}`));
 
-    // Ensure utils path and cn helper exists
-    const utilsRoot = answers.utilsAlias.startsWith("@/")
-      ? answers.utilsAlias.replace("@/", "")
-      : answers.utilsAlias;
-    const targetUtilsPath = path.join(process.cwd(), utilsRoot + ".ts");
-
+    // cn helper
+    const targetUtilsPath = path.join(process.cwd(), aliasToDir(answers.utilsAlias) + ".ts");
     if (!fs.existsSync(targetUtilsPath)) {
       ensureDirectoryExists(targetUtilsPath);
-      const cnCode = `import { clsx, type ClassValue } from "clsx";\nimport { twMerge } from "tailwind-merge";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n`;
-      fs.writeFileSync(targetUtilsPath, cnCode, "utf-8");
-      console.log(pc.green(`✔ Created helper utility function 'cn' at: ${pc.bold(targetUtilsPath)}`));
+      fs.writeFileSync(targetUtilsPath,
+        `import { clsx, type ClassValue } from "clsx";\nimport { twMerge } from "tailwind-merge";\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs));\n}\n`, "utf-8");
+      console.log(pc.green(`✔ Wrote cn helper → ${pc.bold(path.relative(process.cwd(), targetUtilsPath))}`));
     }
 
-    console.log(pc.cyan("\n🎉 Lerpa UI initialized successfully! Run 'lerpa add <name>' to fetch items.\n"));
+    // Tailwind v4 tokens
+    if (opts.tokens) {
+      const cssPath = path.join(process.cwd(), answers.cssPath);
+      let css = fs.existsSync(cssPath) ? fs.readFileSync(cssPath, "utf-8") : "";
+      const hasImport = /@import\s+["']tailwindcss|@tailwind\s+base/.test(css);
+      const block = `${TOKENS_START}\n${LERPA_BASE_CSS}\n${TOKENS_END}`;
+      if (css.includes(TOKENS_START)) {
+        css = css.replace(new RegExp(escapeRegExp(TOKENS_START) + "[\\s\\S]*?" + escapeRegExp(TOKENS_END)), block);
+      } else {
+        css = (hasImport ? "" : '@import "tailwindcss";\n\n') + block + "\n\n" + css;
+      }
+      ensureDirectoryExists(cssPath);
+      fs.writeFileSync(cssPath, css, "utf-8");
+      console.log(pc.green(`✔ Wrote Tailwind v4 tokens → ${pc.bold(answers.cssPath)}`));
+    } else {
+      console.log(pc.yellow("• Skipped CSS tokens (--no-tokens). Components may render unstyled."));
+    }
+
+    console.log(pc.cyan(`\n🎉 Ready. Try ${pc.bold("lerpa add button")} (or ${pc.bold("lerpa theme ocean")}).\n`));
   });
 
-// ADD COMMAND
+// ADD ---------------------------------------------------------------------
 program
   .command("add <name>")
-  .description("Fetch and install a specific component/block from the registry")
-  .option("-y, --yes", "Skip verification prompt", false)
+  .description("Add a component/block and its dependencies into your project")
+  .option("-y, --yes", "Skip confirmation prompts", false)
   .action(async (name, options) => {
     const config = getConfig();
     if (!config) {
-      console.error(pc.red(`❌ Error: Please initialize Lerpa UI first by running 'lerpa init'`));
+      console.error(pc.red("❌ Not initialized. Run 'lerpa init' first."));
       process.exit(1);
     }
-
     const registry = loadRegistry();
-    const item = registry.find((x) => x.name === name);
-
-    if (!item) {
-      console.error(pc.red(`❌ Error: Component "${name}" not found in registry.`));
+    const root = registry.find((x) => x.name === name);
+    if (!root) {
+      console.error(pc.red(`❌ "${name}" not found in registry.`));
       process.exit(1);
     }
 
-    console.log(pc.cyan(`\n📦 Found item "${pc.bold(item.name)}" [type: ${item.type}]`));
+    // Resolve the full set in-process: files + npm deps across all
+    // registryDependencies, deduped. No child processes, no per-dep installs.
+    const seen = new Set<string>();
+    const npmDeps = new Set<string>();
+    const files: Array<{ owner: string; file: { path: string; content: string; type?: string } }> = [];
+    const resolve = (n: string) => {
+      if (seen.has(n)) return;
+      seen.add(n);
+      const it = registry.find((x) => x.name === n);
+      if (!it) { console.warn(pc.yellow(`⚠️  registry dependency "${n}" missing — skipped.`)); return; }
+      (it.dependencies || []).forEach((d: string) => npmDeps.add(d));
+      (it.files || []).forEach((f: { path: string; content: string; type?: string }) => files.push({ owner: it.name, file: f }));
+      (it.registryDependencies || []).forEach((rd: string) => resolve(rd));
+    };
+    resolve(name);
 
-    // Ask to confirm if not --yes
+    const extra = [...seen].filter((n) => n !== name);
+    console.log(pc.cyan(`\n📦 ${pc.bold(name)} [${root.type}] — ${files.length} file(s)${extra.length ? `, ${extra.length} registry dep(s): ${extra.join(", ")}` : ""}`));
+
     if (!options.yes) {
-      const confirm = await prompts({
-        type: "confirm",
-        name: "value",
-        message: `Install "${item.name}" and all its dependencies into your project?`,
-        initial: true,
-      });
-      if (!confirm.value) {
-        console.log(pc.yellow("Installation cancelled."));
-        return;
-      }
+      const c = await prompts({ type: "confirm", name: "value", message: `Install into your project?`, initial: true });
+      if (!c.value) return console.log(pc.yellow("Cancelled."));
     }
 
-    // Resolve dependencies and install them
-    const deps = item.dependencies || [];
-    if (deps.length > 0) {
-      const spinner = ora(`Installing npm dependencies: ${deps.join(", ")}...`).start();
+    // One batched npm install for ALL collected deps — errors surfaced.
+    if (npmDeps.size) {
+      const deps = [...npmDeps];
+      const spinner = ora(`Installing ${deps.length} npm dep(s): ${deps.join(", ")}`).start();
       try {
-        const cmd = getInstallCommand(config.packageManager, deps);
-        child_process.execSync(cmd, { stdio: "ignore" });
-        spinner.succeed(pc.green(`Dependencies installed successfully via ${config.packageManager}`));
+        child_process.execSync(getInstallCommand(config.packageManager, deps), { stdio: "pipe" });
+        spinner.succeed(pc.green(`Installed ${deps.length} dependency(ies) via ${config.packageManager}`));
       } catch (e) {
-        spinner.fail(pc.red("Failed to install npm dependencies."));
-        console.error(e);
+        spinner.fail(pc.red("npm dependency install failed:"));
+        console.error(pc.gray((e as { stderr?: Buffer; message?: string }).stderr?.toString() || (e as Error).message));
         process.exit(1);
       }
     }
 
-    // Handle registry dependencies recursively
-    const regDeps = item.registryDependencies || [];
-    for (const regDep of regDeps) {
-      console.log(pc.blue(`🔗 Component "${item.name}" depends on "${regDep}". Processing automatically...`));
-      // Call add function recursively/synchronously
-      child_process.execSync(`node ${process.argv[1]} add ${regDep} --yes`, { stdio: "inherit" });
-    }
-
-    // Write file components
-    for (const file of item.files) {
-      // Map file path based on component path alias
+    const compBase = aliasToDir(config.aliases.components);
+    let wrote = 0;
+    const writtenPaths = new Set<string>();
+    for (const { file } of files) {
       const fileBase = path.basename(file.path);
       const isUi = file.path.includes("components/ui/");
       const isBlock = file.path.includes("components/blocks/");
-      
-      const compRoot = config.aliases.components.startsWith("@/")
-        ? config.aliases.components.replace("@/", "")
-        : config.aliases.components;
+      const rel = isUi ? path.join(compBase, "ui", fileBase)
+        : isBlock ? path.join(compBase, "blocks", fileBase)
+        : path.join(compBase, fileBase);
+      if (writtenPaths.has(rel)) continue; // shared file (e.g. hooks) already written
+      writtenPaths.add(rel);
 
-      let relativeTarget = "";
-      if (isUi) {
-        relativeTarget = path.join(compRoot, "ui", fileBase);
-      } else if (isBlock) {
-        relativeTarget = path.join(compRoot, "blocks", fileBase);
-      } else {
-        relativeTarget = path.join(compRoot, fileBase);
-      }
+      let content = file.content;
+      if (config.aliases.utils !== "@/lib/utils") content = content.replaceAll("@/lib/utils", config.aliases.utils);
+      if (config.aliases.components !== "@/components") content = content.replaceAll("@/components", config.aliases.components);
 
-      const targetPath = path.join(process.cwd(), relativeTarget);
-
-      // Process content to replace alias imports if needed (e.g. "@/lib/utils" replaced by actual alias)
-      let finalContent = file.content;
-      if (config.aliases.utils !== "@/lib/utils") {
-        finalContent = finalContent.replaceAll("@/lib/utils", config.aliases.utils);
-      }
-      if (config.aliases.components !== "@/components") {
-        finalContent = finalContent.replaceAll("@/components", config.aliases.components);
-      }
-
+      const targetPath = path.join(process.cwd(), rel);
       if (fs.existsSync(targetPath)) {
-        // Identical (e.g. a shared bundled file like use-animation-hooks re-added by a
-        // dependency) — skip silently: no prompt, no .bak clutter.
-        if (fs.readFileSync(targetPath, "utf-8") === finalContent) {
-          continue;
-        }
-        // --yes auto-overwrites; otherwise confirm.
+        if (fs.readFileSync(targetPath, "utf-8") === content) continue; // identical, skip silently
         if (!options.yes) {
-          const overwrite = await prompts({
-            type: "confirm",
-            name: "value",
-            message: `File already exists: ${pc.bold(relativeTarget)}. Overwrite?`,
-            initial: true,
-          });
-          if (!overwrite.value) {
-            console.log(pc.yellow(`Skipped ${relativeTarget}`));
-            continue;
-          }
+          const ow = await prompts({ type: "confirm", name: "value", message: `Overwrite ${pc.bold(rel)}?`, initial: true });
+          if (!ow.value) { console.log(pc.yellow(`Skipped ${rel}`)); continue; }
         }
         backupFile(targetPath);
       }
-
       ensureDirectoryExists(targetPath);
-      fs.writeFileSync(targetPath, finalContent, "utf-8");
-      console.log(pc.green(`✔ Wrote file to: ${pc.bold(relativeTarget)}`));
+      fs.writeFileSync(targetPath, content, "utf-8");
+      console.log(pc.green(`✔ ${rel}`));
+      wrote++;
     }
 
-    console.log(pc.green(`\n🎉 Component "${item.name}" successfully added to your project!\n`));
+    console.log(pc.green(`\n🎉 Added ${pc.bold(name)} (${wrote} file(s) written).\n`));
   });
 
-// LIST COMMAND
+// LIST --------------------------------------------------------------------
 program
   .command("list")
-  .description("List all available components and blocks in the registry")
-  .action(() => {
+  .description("List all registry components and blocks")
+  .option("--json", "Output as JSON", false)
+  .action((opts) => {
     const registry = loadRegistry();
+    if (opts.json) { console.log(JSON.stringify(registry.map((x) => ({ name: x.name, type: x.type })), null, 2)); return; }
     const uis = registry.filter((x) => x.type === "registry:ui");
     const blocks = registry.filter((x) => x.type === "registry:block");
-
-    console.log(pc.cyan("\n✨ Available Atomic UI Components (registry:ui):"));
-    if (uis.length === 0) {
-      console.log(pc.gray("  (No UI components found. Run build script first)"));
-    } else {
-      uis.forEach((x) => {
-        console.log(`  - ${pc.bold(pc.green(x.name))} ${pc.gray(`(Dependencies: ${x.dependencies?.join(", ") || "none"})`)}`);
-      });
-    }
-
-    console.log(pc.cyan("\n✨ Available High-Fidelity Interactive Blocks (registry:block):"));
-    if (blocks.length === 0) {
-      console.log(pc.gray("  (No interactive blocks found. Run build script first)"));
-    } else {
-      blocks.forEach((x) => {
-        const regDepsStr = x.registryDependencies ? ` [requires: ${x.registryDependencies.join(", ")}]` : "";
-        console.log(`  - ${pc.bold(pc.blue(x.name))}${pc.gray(regDepsStr)}`);
-      });
-    }
+    console.log(pc.cyan(`\n✨ UI components (${uis.length}):`));
+    uis.forEach((x) => console.log(`  - ${pc.green(x.name)}`));
+    console.log(pc.cyan(`\n✨ Blocks (${blocks.length}):`));
+    blocks.forEach((x) => console.log(`  - ${pc.blue(x.name)}${x.registryDependencies ? pc.gray(` [needs: ${x.registryDependencies.join(", ")}]`) : ""}`));
     console.log("");
   });
 
-// SEARCH COMMAND
+// SEARCH ------------------------------------------------------------------
 program
   .command("search [query]")
-  .description("Search registry elements for matches")
+  .description("Search the registry by name")
   .action((query) => {
     const registry = loadRegistry();
-    const matches = registry.filter((x) => {
-      if (!query) return true;
-      return x.name.toLowerCase().includes(query.toLowerCase());
-    });
-
-    console.log(pc.cyan(`\n🔍 Found ${matches.length} matching items in registry:`));
-    matches.forEach((x) => {
-      console.log(`  [${x.type === "registry:ui" ? pc.green("UI") : pc.blue("Block")}] ${pc.bold(x.name)}`);
-    });
+    const matches = registry.filter((x) => !query || x.name.toLowerCase().includes(query.toLowerCase()));
+    console.log(pc.cyan(`\n🔍 ${matches.length} match(es):`));
+    matches.forEach((x) => console.log(`  [${x.type === "registry:ui" ? pc.green("UI") : pc.blue("Block")}] ${x.name}`));
     console.log("");
   });
 
-// THEME COMMAND
+// THEME -------------------------------------------------------------------
 program
-  .command("theme")
-  .description("Apply a specific color theme values to tailwind CSS file")
-  .action(async () => {
+  .command("theme [name]")
+  .description(`Apply a color theme (replaces the managed block). Presets: ${Object.keys(THEME_PRESETS).join(", ")}`)
+  .option("-y, --yes", "Non-interactive", false)
+  .action(async (name, opts) => {
     const config = getConfig();
-    if (!config) {
-      console.error(pc.red(`❌ Error: Lerpa UI is not initialized yet. Run 'lerpa init'`));
-      process.exit(1);
-    }
-
+    if (!config) { console.error(pc.red("❌ Run 'lerpa init' first.")); process.exit(1); }
     const cssPath = path.join(process.cwd(), config.tailwind.css);
-    if (!fs.existsSync(cssPath)) {
-      console.error(pc.red(`❌ Error: Global CSS file not found at: ${cssPath}`));
-      process.exit(1);
+    if (!fs.existsSync(cssPath)) { console.error(pc.red(`❌ CSS file not found: ${config.tailwind.css}`)); process.exit(1); }
+
+    let theme = name;
+    if (!theme && !opts.yes) {
+      const r = await prompts({ type: "select", name: "theme", message: "Theme?", choices: Object.keys(THEME_PRESETS).map((v) => ({ title: v, value: v })) });
+      theme = r.theme;
     }
+    if (!theme) return;
+    if (!THEME_PRESETS[theme]) { console.error(pc.red(`❌ Unknown theme "${theme}". Options: ${Object.keys(THEME_PRESETS).join(", ")}`)); process.exit(1); }
 
-    const themeResponse = await prompts({
-      type: "select",
-      name: "theme",
-      message: "Select a visual color theme to apply:",
-      choices: [
-        { title: "Zinc (Modern Slate Minimalist)", value: "zinc" },
-        { title: "Slate (Corporate Developer Grey)", value: "slate" },
-        { title: "Rose (Immersive Warm Gradient)", value: "rose" },
-        { title: "Violet (AI Chat Futuristic Purple)", value: "violet" },
-        { title: "Orange (Energetic High-Contrast Glow)", value: "orange" },
-      ],
-    });
-
-    if (!themeResponse.theme) {
-      return;
+    let css = fs.readFileSync(cssPath, "utf-8");
+    const block = `${THEME_START}\n:root {\n${THEME_PRESETS[theme]}\n}\n${THEME_END}`;
+    if (css.includes(THEME_START)) {
+      css = css.replace(new RegExp(escapeRegExp(THEME_START) + "[\\s\\S]*?" + escapeRegExp(THEME_END)), block);
+      console.log(pc.gray("• Replaced existing theme block."));
+    } else {
+      css = css.trimEnd() + "\n\n" + block + "\n";
     }
-
-    const themeVariables: Record<string, string> = {
-      zinc: `
-:root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
-}
-.dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
-  --accent-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
-}`,
-      slate: `
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-}
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
-}`,
-      rose: `
-:root {
-  --background: 0 0% 100%;
-  --foreground: 343 35% 3.9%;
-  --primary: 343 90% 46%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 343 20% 96%;
-  --secondary-foreground: 343 90% 46%;
-  --muted: 343 20% 96%;
-  --muted-foreground: 343 10% 46%;
-  --border: 343 20% 90%;
-  --input: 343 20% 90%;
-  --ring: 343 90% 46%;
-}
-.dark {
-  --background: 343 35% 3.9%;
-  --foreground: 0 0% 98%;
-  --primary: 343 90% 60%;
-  --primary-foreground: 343 35% 3.9%;
-  --secondary: 343 20% 15%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 343 20% 15%;
-  --muted-foreground: 343 10% 65%;
-  --border: 343 20% 15%;
-  --input: 343 20% 15%;
-  --ring: 343 90% 60%;
-}`,
-      violet: `
-:root {
-  --background: 0 0% 100%;
-  --foreground: 262.1 83.3% 2%;
-  --primary: 262.1 83.3% 58%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 262.1 83.3% 58%;
-}
-.dark {
-  --background: 224 71.4% 4.1%;
-  --foreground: 210 20% 98%;
-  --primary: 263.4 70% 50.4%;
-  --primary-foreground: 210 20% 98%;
-  --secondary: 215 27.9% 16.9%;
-  --secondary-foreground: 210 20% 98%;
-  --muted: 215 27.9% 16.9%;
-  --muted-foreground: 217.9 10.6% 64.9%;
-  --border: 215 27.9% 16.9%;
-  --input: 215 27.9% 16.9%;
-  --ring: 263.4 70% 50.4%;
-}`,
-      orange: `
-:root {
-  --background: 0 0% 100%;
-  --foreground: 20 14.3% 4.1%;
-  --primary: 24.6 95% 53.1%;
-  --primary-foreground: 60 9.1% 97.8%;
-  --secondary: 60 4.8% 95.9%;
-  --secondary-foreground: 24.6 95% 53.1%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
-  --border: 20 5.9% 90%;
-  --input: 20 5.9% 90%;
-  --ring: 24.6 95% 53.1%;
-}
-.dark {
-  --background: 20 14.3% 4.1%;
-  --foreground: 60 9.1% 97.8%;
-  --primary: 20.5 90.2% 48.2%;
-  --primary-foreground: 60 9.1% 97.8%;
-  --secondary: 12 6.5% 15.1%;
-  --secondary-foreground: 60 9.1% 97.8%;
-  --muted: 12 6.5% 15.1%;
-  --muted-foreground: 24 5.4% 63.9%;
-  --border: 12 6.5% 15.1%;
-  --input: 12 6.5% 15.1%;
-  --ring: 20.5 90.2% 48.2%;
-}`,
-    };
-
-    backupFile(cssPath);
-    const originalCSS = fs.readFileSync(cssPath, "utf-8");
-
-    // Replace existing :root block or append it
-    const chosenThemeVars = themeVariables[themeResponse.theme];
-    if (originalCSS.includes(":root")) {
-      console.log(pc.yellow("⚠️ A :root section was detected in your CSS file. Appending select Lerpa UI variables."));
-    }
-    
-    fs.writeFileSync(cssPath, originalCSS + "\n" + chosenThemeVars, "utf-8");
-    console.log(pc.green(`\n✔ Theme "${pc.bold(themeResponse.theme)}" successfully applied to ${pc.bold(config.tailwind.css)}!\n`));
+    fs.writeFileSync(cssPath, css, "utf-8");
+    console.log(pc.green(`\n✔ Applied theme "${pc.bold(theme)}" → ${config.tailwind.css}\n`));
   });
 
-// DOCTOR COMMAND
+// DOCTOR ------------------------------------------------------------------
 program
   .command("doctor")
-  .description("Validate current workspace configurations and check dependency health status")
+  .description("Validate workspace configuration")
   .action(() => {
-    console.log(pc.cyan("\n👨‍⚕️ Running Lerpa UI Doctor diagnostic health check...\n"));
-
+    console.log(pc.cyan("\n👨‍⚕️ Lerpa doctor\n"));
     const config = getConfig();
-    if (!config) {
-      console.error(pc.red(`❌ Diagnostic Fail: No lerpa.json detected. Run 'lerpa init' to configure.`));
-      process.exit(1);
-    }
-
-    console.log(`[PASS] Config file lerpa.json detected.`);
-    console.log(`       Target Package Manager: ${config.packageManager}`);
-    console.log(`       Globals Stylesheet: ${config.tailwind.css}`);
-    console.log(`       Tailwind configuration: ${config.tailwind.config}`);
-
-    // Check CSS existence
-    if (fs.existsSync(path.join(process.cwd(), config.tailwind.css))) {
-      console.log(`[PASS] Globals CSS file exists.`);
-    } else {
-      console.warn(`[WARN] Globals CSS file not found at matching path: ${config.tailwind.css}`);
-    }
-
-    // Check packages
-    const packageJsonPath = path.join(process.cwd(), "package.json");
-    if (fs.existsSync(packageJsonPath)) {
-      try {
-        const pkg = JSON.parse(fs.readFileSync(packageJsonPath, "utf-8"));
-        const allDeps = { ...(pkg.dependencies || {}), ...(pkg.devDependencies || {}) };
-
-        const standardChecks = ["lucide-react", "motion", "clsx", "tailwind-merge"];
-        standardChecks.forEach((dep) => {
-          if (allDeps[dep]) {
-            console.log(`[PASS] Found standard dependency: ${dep} (${allDeps[dep]})`);
-          } else {
-            console.log(`[INFO] Suggestion: ${dep} is not explicitly specified in package.json root. (CLI automatically installs it when components require it)`);
-          }
-        });
-      } catch (e) {
-        console.error(`[FAIL] Could not parse package.json. Check syntax integrity.`);
-      }
-    } else {
-      console.warn(`[WARN] No package.json found at project root directory.`);
-    }
-
-    console.log(pc.green(`\n✔ Diagnostics complete! System configurations look healthy and ready to go.\n`));
+    if (!config) { console.error(pc.red("❌ No lerpa.json. Run 'lerpa init'.")); process.exit(1); }
+    console.log(`[PASS] lerpa.json — pm: ${config.packageManager}, css: ${config.tailwind.css}`);
+    const cssPath = path.join(process.cwd(), config.tailwind.css);
+    console.log(fs.existsSync(cssPath) ? `[PASS] CSS file exists.` : `[WARN] CSS file missing: ${config.tailwind.css}`);
+    const tokensOk = fs.existsSync(cssPath) && fs.readFileSync(cssPath, "utf-8").includes(TOKENS_START);
+    console.log(tokensOk ? `[PASS] Tailwind v4 tokens present.` : `[WARN] Tokens missing — run 'lerpa init' (components may be unstyled).`);
+    console.log(pc.green(`\n✔ Done.\n`));
   });
 
-// UPDATE COMMAND
-program
-  .command("update [name]")
-  .description("Update a specific component or all installed components to latest versions")
-  .action(async (name) => {
-    const config = getConfig();
-    if (!config) {
-      console.error(pc.red(`❌ Error: Lerpa UI is not initialized yet. Run 'lerpa init'`));
-      process.exit(1);
-    }
-
-    const registry = loadRegistry();
-    
-    if (name) {
-      // Update specific component
-      const item = registry.find((x) => x.name === name);
-      if (!item) {
-        console.error(pc.red(`❌ Error: Component "${name}" not found in registry.`));
-        process.exit(1);
-      }
-      console.log(pc.cyan(`Updating component: ${name}...`));
-      child_process.execSync(`node ${process.argv[1]} add ${name} --yes`, { stdio: "inherit" });
-    } else {
-      // Update all components currently installed in components/ui or components/blocks directories
-      console.log(pc.cyan("Updating all installed Lerpa UI components and blocks..."));
-      const compRoot = config.aliases.components.startsWith("@/")
-        ? config.aliases.components.replace("@/", "")
-        : config.aliases.components;
-      
-      const uiDir = path.join(process.cwd(), compRoot, "ui");
-      const blockDir = path.join(process.cwd(), compRoot, "blocks");
-
-      const installedNames: string[] = [];
-
-      if (fs.existsSync(uiDir)) {
-        fs.readdirSync(uiDir).forEach((file) => {
-          if (file.endsWith(".tsx")) {
-            const componentName = path.basename(file, ".tsx");
-            if (registry.some((x) => x.name === componentName)) {
-              installedNames.push(componentName);
-            }
-          }
-        });
-      }
-
-      if (fs.existsSync(blockDir)) {
-        fs.readdirSync(blockDir).forEach((file) => {
-          if (file.endsWith(".tsx")) {
-            const componentName = path.basename(file, ".tsx");
-            if (registry.some((x) => x.name === componentName)) {
-              installedNames.push(componentName);
-            }
-          }
-        });
-      }
-
-      if (installedNames.length === 0) {
-        console.log(pc.yellow("No standard registry components detected in your components folders."));
-        return;
-      }
-
-      console.log(pc.blue(`Detected ${installedNames.length} components to update: ${installedNames.join(", ")}`));
-
-      for (const componentName of installedNames) {
-        console.log(pc.cyan(`\nUpdating ${componentName}...`));
-        try {
-          child_process.execSync(`node ${process.argv[1]} add ${componentName} --yes`, { stdio: "inherit" });
-        } catch (e) {
-          console.error(pc.red(`❌ Failed to update component ${componentName}`));
-        }
-      }
-      
-      console.log(pc.green("\n🎉 All detected components successfully updated to latest versions!\n"));
-    }
-  });
-
-// INFO COMMAND
+// INFO --------------------------------------------------------------------
 program
   .command("info")
-  .description("Display Lerpa UI monorepo CLI metadata info")
+  .description("Show CLI + project metadata")
   .action(() => {
-    console.log(pc.cyan("\n🔥 Lerpa UI Monorepo developer environment metadata:"));
-    console.log(`   CLI tool version: ${pc.bold("0.1.0-alpha")}`);
-    console.log(`   License terms   : MIT License`);
-    console.log(`   Repository URL  : https://github.com/cuibit-labs/lerpaui`);
-    console.log(`   Official docs   : https://lerpaui.com`);
-
+    console.log(pc.cyan("\n🔥 Lerpa UI CLI"));
+    console.log(`   Version    : ${pc.bold(VERSION)}`);
+    console.log(`   License    : MIT`);
+    console.log(`   Repository : https://github.com/cuibit-labs/lerpaui`);
+    console.log(`   Docs       : https://lerpaui.com`);
     const config = getConfig();
     if (config) {
-      console.log(pc.green("\n✔ Local Project configuration details:"));
-      console.log(`   Import components alias : ${config.aliases.components}`);
-      console.log(`   Import utility alias    : ${config.aliases.utils}`);
-      console.log(`   Global CSS file path    : ${config.tailwind.css}`);
-      console.log(`   Package Manager Lock    : ${config.packageManager}`);
-    } else {
-      console.log(pc.yellow("\n⚠️ Lerpa UI is not initialized yet in this directory. Run 'lerpa init'"));
+      console.log(pc.green("\n✔ Project config:"));
+      console.log(`   components : ${config.aliases.components}`);
+      console.log(`   utils      : ${config.aliases.utils}`);
+      console.log(`   css        : ${config.tailwind.css}`);
+      console.log(`   pm         : ${config.packageManager}`);
     }
     console.log("");
   });

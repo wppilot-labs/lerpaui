@@ -4,7 +4,7 @@
 
 ### Free, animated React components & blocks — copy the code, own it forever.
 
-**1,234 components · 30 page blocks · 1,318 shadcn-compatible registry items.**
+**1,099 components · 219 blocks · 1,318 shadcn-compatible registry items.**
 Built for React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion & Radix UI.
 
 [![MIT License](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE.md)
@@ -88,11 +88,11 @@ Then just ask: *"Use lerpa to add a pricing section with three tiers and a reven
 
 ## 📦 What's inside
 
-- **Components** — `1,234` source components → `1,099` registry UI items.
-- **Blocks** — `30` source page blocks → `219` registry block items.
+- **Components** — `1,099` animated, accessible registry UI items.
+- **Blocks** — `219` registry block items — full page sections.
 - **Registry** — `1,318` total shadcn-compatible items with embedded source.
 - **Gallery** — `1,179` catalog entries across `16` categories.
-- **Tested** — `86` test files with `471` assertions (Vitest + vitest-axe).
+- **Tested** — `807` tests across `86` files (Vitest + vitest-axe).
 
 ## 🗂️ Categories
 
