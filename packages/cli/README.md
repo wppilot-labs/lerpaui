@@ -1,6 +1,6 @@
 # lerpa-cli
 
-Copy-paste components and blocks from the [Lerpa UI](https://github.com/lerpa-ui/lerpa)
+Copy-paste components and blocks from the [Lerpa UI](https://github.com/cuibit-labs/lerpaui)
 registry into any React + Tailwind project.
 
 ## Quick start

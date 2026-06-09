@@ -5,12 +5,12 @@
   "description": "Model Context Protocol server exposing the Lerpa UI registry to AI agents (Claude Code, Cursor, v0, Continue).",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lerpa-ui/lerpa.git",
+    "url": "https://github.com/cuibit-labs/lerpaui.git",
     "directory": "packages/mcp-server"
   },
   "author": "Lerpa UI",
-  "homepage": "https://github.com/lerpa-ui/lerpa#readme",
-  "bugs": "https://github.com/lerpa-ui/lerpa/issues",
+  "homepage": "https://github.com/cuibit-labs/lerpaui#readme",
+  "bugs": "https://github.com/cuibit-labs/lerpaui/issues",
   "publishConfig": {
     "access": "public"
   },

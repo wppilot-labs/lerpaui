@@ -750,7 +750,7 @@ program
     console.log(pc.cyan("\n🔥 Lerpa UI Monorepo developer environment metadata:"));
     console.log(`   CLI tool version: ${pc.bold("0.1.0-alpha")}`);
     console.log(`   License terms   : MIT License`);
-    console.log(`   Repository URL  : https://github.com/lerpa-ui/lerpa`);
+    console.log(`   Repository URL  : https://github.com/cuibit-labs/lerpaui`);
     console.log(`   Official docs   : https://lerpaui.com`);
 
     const config = getConfig();

@@ -1,70 +1,137 @@
+<div align="center">
+
 # Lerpa UI
 
-**Free animated React components and blocks for building premium interfaces fast.**
+### Free, animated React components & blocks — copy the code, own it forever.
 
-Lerpa UI is an open-source React + Tailwind CSS component library with a shadcn-compatible registry. Browse polished components, copy the code, or install exactly what you need with the CLI.
+**1,234 components · 30 page blocks · 1,318 shadcn-compatible registry items.**
+Built for React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion & Radix UI.
 
-[Website](https://lerpaui.com) · [Components](https://lerpaui.com/gallery/components) · [Blocks](https://lerpaui.com/gallery/blocks) · [Registry](https://lerpaui.com/r)
+[![MIT License](https://img.shields.io/badge/License-MIT-22c55e.svg)](LICENSE.md)
+[![React 19](https://img.shields.io/badge/React-19-149ECA?logo=react&logoColor=white)](https://react.dev)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind-v4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![shadcn compatible](https://img.shields.io/badge/shadcn-compatible-000000)](https://ui.shadcn.com)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-22c55e.svg)](CONTRIBUTING.md)
+[![GitHub stars](https://img.shields.io/github/stars/cuibit-labs/lerpaui?style=social)](https://github.com/cuibit-labs/lerpaui)
 
-## Highlights
+[**Website**](https://lerpaui.com) · [**Components**](https://lerpaui.com/gallery/components) · [**Blocks**](https://lerpaui.com/gallery/blocks) · [**Registry**](https://lerpaui.com/r) · [**MCP for AI agents**](#-use-with-ai-coding-agents-mcp)
 
-- **Copy-paste ownership**: install a component, keep the source, customize everything.
-- **Production-ready blocks**: landing pages, pricing sections, dashboards, AI surfaces, ecommerce UI, forms, charts, navigation, and more.
-- **Modern stack**: React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion, Radix UI, and Lucide icons.
-- **Accessible by default**: keyboard states, focus handling, color contrast, and reduced-motion support are first-class concerns.
-- **shadcn-compatible registry**: install individual components without adopting a heavy package runtime.
+</div>
 
-## Install a Component
+---
 
-```bash
-pnpm dlx lerpa-cli add button
-```
+**Lerpa UI** is an open-source **React + Tailwind CSS component library** with a **shadcn-compatible registry**. Instead of installing a heavy runtime dependency, you install the *source* of each component straight into your project — then own, read, and customize it like code you wrote yourself. Browse polished, animated components in the gallery, copy the code, install one with the CLI, or let an **AI coding agent** pull components for you over **MCP**.
 
-Or install directly through the shadcn registry URL:
+No lock-in. No black-box `node_modules` component. Just production-grade React you control.
+
+## ✨ Why Lerpa UI
+
+- **🧩 Copy-paste ownership** — install a component, keep the source, change anything. No version churn, no peer-dependency conflicts.
+- **🎬 Motion built in** — entrance, scroll, and gesture animations via Framer Motion, with `prefers-reduced-motion` fallbacks handled for you.
+- **🏗️ Production-ready blocks** — full landing pages, pricing sections, dashboards, AI surfaces, ecommerce flows, auth screens, forms, charts, and navigation.
+- **♿ Accessible by default** — keyboard interaction, focus management, color contrast, and reduced motion are first-class, axe-tested concerns.
+- **🤖 AI-native** — a Model Context Protocol (MCP) server exposes the whole registry to Claude Code, Cursor, Windsurf, and more, plus `llms.txt` for agent discovery.
+- **🎨 Token-driven theming** — every component is themed through CSS variables and design tokens (never inline styles), so one theme switch restyles everything.
+
+## 🚀 Quick start
+
+Pick whichever fits your workflow — all three deliver the same source you own.
+
+**Option 1 · shadcn registry (zero install):**
 
 ```bash
 npx shadcn add https://lerpaui.com/r/button.json
 ```
 
-## Explore the Library
+**Option 2 · Lerpa CLI:**
 
-- **Components**: `1234` source components and `1099` registry UI items.
-- **Blocks**: `30` source blocks and `219` registry block items.
-- **Gallery**: `1179` catalog entries across `16` categories.
-- **Quality**: `86` test files with `471` assertions.
+```bash
+pnpm dlx lerpa-cli add button
+# or: npx lerpa-cli add button
+```
 
-## Live Previews
+**Option 3 · browse & copy** — open the [component gallery](https://lerpaui.com/gallery/components), preview live, and copy the code with one click.
 
-Every catalog entry is wired into the docs gallery with an interactive demo and install command.
+> Replace `button` with any component id (e.g. `pricing-table`, `aurora-shader`, `dashboard-revenue-overview`). `registryDependencies` resolve automatically.
 
-- **Component gallery**: https://lerpaui.com/gallery/components
-- **Blocks gallery**: https://lerpaui.com/gallery/blocks
-- **Category browser**: https://lerpaui.com/gallery
+## 🤖 Use with AI coding agents (MCP)
 
-Use the live gallery as the source for launch screenshots, GIFs, and social previews so visuals stay aligned with the latest components.
+Lerpa ships a **Model Context Protocol server** — [`@lerpa/mcp-server`](https://www.npmjs.com/package/@lerpa/mcp-server) — that hands the entire registry to AI coding agents. Your agent can list, search, and pull copy-paste component source directly into your project, on demand.
 
-## Categories
+| Tool | What it does |
+| --- | --- |
+| `list_components(category?)` | List components, optionally filtered by category. |
+| `get_component(id)` | Return a component's full registry item, including its source code. |
+| `search_components(query)` | Fuzzy search across component names and descriptions. |
+
+**Claude Code:**
+
+```bash
+claude mcp add lerpa -- npx -y @lerpa/mcp-server
+```
+
+**Cursor · Windsurf · Continue · Cline · Zed** — add to your `mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "lerpa": {
+      "command": "npx",
+      "args": ["-y", "@lerpa/mcp-server"]
+    }
+  }
+}
+```
+
+Then just ask: *"Use lerpa to add a pricing section with three tiers and a revenue chart."*
+
+## 📦 What's inside
+
+- **Components** — `1,234` source components → `1,099` registry UI items.
+- **Blocks** — `30` source page blocks → `219` registry block items.
+- **Registry** — `1,318` total shadcn-compatible items with embedded source.
+- **Gallery** — `1,179` catalog entries across `16` categories.
+- **Tested** — `86` test files with `471` assertions (Vitest + vitest-axe).
+
+## 🗂️ Categories
 
 `ai` · `buttons` · `calendars` · `cards` · `charts` · `creative` · `feedback` · `forms` · `navigation` · `tables` · `account` · `ecommerce` · `auth` · `blog` · `dashboard` · `docs`
 
-## Repository Structure
+## 🧱 Tech stack
+
+React 19 · Next.js 16 · Tailwind CSS v4 · TypeScript 5.7 · Framer Motion 12 · Radix UI · Lucide icons · Vitest. Distributed through a shadcn-compatible registry and an interactive CLI.
+
+## 👀 Live previews
+
+Every catalog entry is wired into the docs gallery with an interactive demo and a copy-ready install command:
+
+- **Components** — https://lerpaui.com/gallery/components
+- **Blocks** — https://lerpaui.com/gallery/blocks
+- **All categories** — https://lerpaui.com/gallery
+
+## 🏗️ Repository structure
 
 ```txt
-packages/ui       Source components, blocks, hooks, tokens, and animations
-packages/registry shadcn-compatible registry compiler and generated items
-packages/cli      Interactive installer CLI
+packages/ui         Source components, blocks, hooks, design tokens, animations
+packages/registry   shadcn-compatible registry compiler + generated items
+packages/cli        Interactive installer CLI (lerpa-cli)
+packages/mcp-server Model Context Protocol server (@lerpa/mcp-server)
 ```
 
-## Development
+## 🛠️ Local development
 
 ```bash
 git clone https://github.com/cuibit-labs/lerpaui.git
 cd lerpaui
 pnpm install
-pnpm dev
+pnpm build        # compiles the registry + packages
+pnpm test         # Vitest + a11y checks
 ```
 
-## Quality Gates
+Requires Node ≥ 20 and pnpm 10.
+
+## ✅ Quality gates
 
 ```bash
 pnpm run lint
@@ -72,11 +139,16 @@ pnpm run typecheck
 pnpm run test
 pnpm run build
 pnpm run registry:validate
-pnpm run registry:validate:coverage
 ```
 
-## License
+## 🤝 Contributing
 
-Lerpa UI is free and open-source under the [MIT License](LICENSE.md).
+Contributions are welcome — read the [Contributing Guidelines](CONTRIBUTING.md) and our [Code of Conduct](CODE_OF_CONDUCT.md). Found a bug or want a component? [Open an issue](https://github.com/cuibit-labs/lerpaui/issues).
 
-For contribution rules, read the [Contributing Guidelines](CONTRIBUTING.md).
+## 📄 License
+
+Lerpa UI is free and open-source under the [MIT License](LICENSE.md). Use it in personal and commercial projects.
+
+<div align="center">
+<sub>Built by <a href="https://github.com/cuibit-labs">Cuibit Labs</a> · <a href="https://lerpaui.com">lerpaui.com</a></sub>
+</div>

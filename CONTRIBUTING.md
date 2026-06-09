@@ -19,7 +19,7 @@ Ensure you have **Node.js v20+** and **pnpm v9+** installed.
 
 ```bash
 # Clone and install dependencies
-git clone https://github.com/lerpa-ui/lerpa.git
+git clone https://github.com/cuibit-labs/lerpaui.git
 cd lerpa
 pnpm install
 
