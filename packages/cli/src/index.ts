@@ -67,6 +67,8 @@ const LERPA_BASE_CSS = `@theme inline {
   --color-card-foreground: var(--text);
   --color-popover: var(--bg-2);
   --color-popover-foreground: var(--text);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
 
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -99,6 +101,8 @@ const LERPA_BASE_CSS = `@theme inline {
   --violet: oklch(0.72 0.16 290);
   --mint: oklch(0.78 0.14 158);
   --red: oklch(0.65 0.22 25);
+  --destructive: oklch(0.62 0.23 25);
+  --destructive-foreground: oklch(0.98 0.01 25);
   --radius: 0.875rem;
 }
 
