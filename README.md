@@ -180,7 +180,7 @@ pnpm run registry:validate
 | Animation | **Framer Motion baked in**, reduced-motion safe | Not included |
 | Page blocks | Hero, pricing, dashboards, ecommerce, AI surfaces… | Limited |
 | Registry | **shadcn-compatible** — works with `npx shadcn add` | Native |
-| CLI | `lerpa-cli` (+ the shadcn CLI) | shadcn CLI |
+| CLI | **`lerpa-cli`** — first-party (shadcn CLI optional, not required) | shadcn CLI |
 | AI / MCP | **First-class MCP server + `llms.txt`** | — |
 | License | MIT, free | MIT, free |
 
