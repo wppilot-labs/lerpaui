@@ -47,8 +47,11 @@ if (typeof window !== "undefined" && !window.matchMedia) {
   });
 }
 
-// HTMLCanvasElement.getContext stub for canvas-based components
-if (typeof HTMLCanvasElement !== "undefined" && !HTMLCanvasElement.prototype.getContext) {
+// HTMLCanvasElement.getContext stub. jsdom ships a getContext that THROWS
+// "Not implemented" (recharts and canvas components hit it), flooding stderr.
+// Override unconditionally — the previous `!...getContext` guard never fired
+// because jsdom's implementation already exists.
+if (typeof HTMLCanvasElement !== "undefined") {
   HTMLCanvasElement.prototype.getContext = (() => null) as never;
 }
 

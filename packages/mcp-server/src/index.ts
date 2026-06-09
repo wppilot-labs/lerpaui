@@ -61,6 +61,7 @@ const REGISTRY_JSON = firstExisting(
 );
 const CATALOG_JSON = firstExisting(
   path.join(PKG_ROOT, "registry", "component-catalog.json"),
+  path.join(REPO_ROOT, "packages", "registry", "generated", "component-catalog.json"),
   path.join(REPO_ROOT, "apps", "docs", "src", "data", "component-catalog.json"),
 );
 

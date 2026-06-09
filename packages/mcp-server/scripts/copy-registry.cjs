@@ -27,9 +27,9 @@ const COPIES = [
   },
   {
     label: "catalog",
-    src: path.resolve(__dirname, "../../../apps/docs/src/data/component-catalog.json"),
+    src: path.resolve(__dirname, "../../registry/generated/component-catalog.json"),
     dest: path.join(DEST_DIR, "component-catalog.json"),
-    hint: "Expected apps/docs/src/data/component-catalog.json.",
+    hint: "Run `pnpm --filter @lerpa/registry run build` first (it snapshots the catalog into generated/).",
   },
 ];
 

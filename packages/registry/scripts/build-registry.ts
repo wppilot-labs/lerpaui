@@ -10,6 +10,25 @@ const OUTPUT_FILE = path.join(OUTPUT_DIR, "registry.json");
 const MANIFEST_OUTPUT = path.join(OUTPUT_DIR, "manifest.json");
 const SKILLS_OUTPUT_DIR = path.join(OUTPUT_DIR, "skills");
 
+// Normalize an install file path's basename to kebab-case so the filename
+// matches the (kebab) registry name and the already-kebab sibling imports.
+// Fixes case-sensitive (Linux) module resolution. A content scan confirmed
+// zero PascalCase relative sibling imports, so no import rewriting is needed.
+function kebabPath(p: string): string {
+  const slash = p.lastIndexOf("/");
+  const dir = slash >= 0 ? p.slice(0, slash + 1) : "";
+  const file = slash >= 0 ? p.slice(slash + 1) : p;
+  const dot = file.lastIndexOf(".");
+  const base = dot >= 0 ? file.slice(0, dot) : file;
+  const ext = dot >= 0 ? file.slice(dot) : "";
+  const kebab = base
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+    .replace(/[_\s]+/g, "-")
+    .toLowerCase();
+  return dir + kebab + ext;
+}
+
 function buildRegistry() {
   console.log("🚀 Starting registry build...");
 
@@ -31,6 +50,11 @@ function buildRegistry() {
     try {
       const content = fs.readFileSync(filePath, "utf-8");
       const json = JSON.parse(content);
+      if (Array.isArray(json.files)) {
+        for (const f of json.files) {
+          if (f && typeof f.path === "string") f.path = kebabPath(f.path);
+        }
+      }
       registryItems.push(json);
       itemIndex.push({ name: json.name, type: json.type });
       console.log(`✅ Loaded ${json.name} (${json.type})`);
@@ -108,6 +132,18 @@ function buildRegistry() {
       );
     }
     console.log(`🧠 Skills copied: ${SKILLS_OUTPUT_DIR}`);
+  }
+
+  // Snapshot the curated component catalog (descriptions + categories) into
+  // generated/ so the MCP server and fresh clones don't depend on apps/docs.
+  // apps/docs remains the editable source; this is a build-time copy.
+  const catalogSrc = path.join(PACKAGE_ROOT, "..", "..", "apps", "docs", "src", "data", "component-catalog.json");
+  if (fs.existsSync(catalogSrc)) {
+    const catalogOut = path.join(OUTPUT_DIR, "component-catalog.json");
+    fs.copyFileSync(catalogSrc, catalogOut);
+    console.log(`🗂️  Catalog snapshot: ${catalogOut}`);
+  } else {
+    console.warn(`⚠️  Catalog source not found at ${catalogSrc}; skipping snapshot (generated/component-catalog.json kept if present).`);
   }
   console.log();
 }
