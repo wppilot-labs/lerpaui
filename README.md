@@ -15,6 +15,9 @@ Built for React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion & Rad
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-22c55e.svg)](CONTRIBUTING.md)
 [![GitHub stars](https://img.shields.io/github/stars/cuibit-labs/lerpaui?style=social)](https://github.com/cuibit-labs/lerpaui)
 
+[![npm lerpa-cli](https://img.shields.io/npm/v/lerpa-cli?logo=npm&label=lerpa-cli&color=cb3837)](https://www.npmjs.com/package/lerpa-cli)
+[![npm @lerpa/mcp-server](https://img.shields.io/npm/v/%40lerpa%2Fmcp-server?logo=npm&label=%40lerpa%2Fmcp-server&color=cb3837)](https://www.npmjs.com/package/@lerpa/mcp-server)
+
 [**Website**](https://lerpaui.com) · [**Components**](https://lerpaui.com/gallery/components) · [**Blocks**](https://lerpaui.com/gallery/blocks) · [**Registry**](https://lerpaui.com/r) · [**MCP for AI agents**](#-use-with-ai-coding-agents-mcp)
 
 </div>
@@ -24,6 +27,8 @@ Built for React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion & Rad
 **Lerpa UI** is an open-source **React + Tailwind CSS component library** with a **shadcn-compatible registry**. Instead of installing a heavy runtime dependency, you install the *source* of each component straight into your project — then own, read, and customize it like code you wrote yourself. Browse polished, animated components in the gallery, copy the code, install one with the CLI, or let an **AI coding agent** pull components for you over **MCP**.
 
 No lock-in. No black-box `node_modules` component. Just production-grade React you control.
+
+**Jump to:** [Quick start](#-quick-start) · [CLI](#-cli-reference) · [MCP for AI agents](#-use-with-ai-coding-agents-mcp) · [What's inside](#-whats-inside) · [Lerpa vs shadcn/ui](#️-lerpa-ui-vs-shadcnui) · [FAQ](#-faq)
 
 ## ✨ Why Lerpa UI
 
@@ -76,34 +81,40 @@ Every command accepts `--yes`, so it runs unattended in CI.
 
 ## 🤖 Use with AI coding agents (MCP)
 
-Lerpa ships a **Model Context Protocol server** — [`@lerpa/mcp-server`](https://www.npmjs.com/package/@lerpa/mcp-server) — that hands the entire registry to AI coding agents. Your agent can list, search, and pull copy-paste component source directly into your project, on demand.
+Lerpa ships a **Model Context Protocol (MCP) server** — [`@lerpa/mcp-server`](https://www.npmjs.com/package/@lerpa/mcp-server) — so AI coding agents (**Claude Code, Cursor, Windsurf, Continue, Cline, Zed**) can browse and install Lerpa components for you. It runs via `npx`; no local checkout needed.
 
-| Tool | What it does |
-| --- | --- |
-| `list_components(category?)` | List components, optionally filtered by category. |
-| `get_component(id)` | Return a component's full registry item, including its source code. |
-| `search_components(query)` | Fuzzy search across component names and descriptions. |
+**Step 1 — register the server.**
 
-**Claude Code:**
+Claude Code (one command):
 
 ```bash
 claude mcp add lerpa -- npx -y @lerpa/mcp-server
 ```
 
-**Cursor · Windsurf · Continue · Cline · Zed** — add to your `mcp.json`:
+Cursor / Windsurf / Continue / Cline / Zed — add to `mcp.json` (e.g. `~/.cursor/mcp.json`):
 
 ```json
 {
   "mcpServers": {
-    "lerpa": {
-      "command": "npx",
-      "args": ["-y", "@lerpa/mcp-server"]
-    }
+    "lerpa": { "command": "npx", "args": ["-y", "@lerpa/mcp-server"] }
   }
 }
 ```
 
-Then just ask: *"Use lerpa to add a pricing section with three tiers and a revenue chart."*
+**Step 2 — restart your agent.** Three tools become available:
+
+| Tool | What it does |
+| --- | --- |
+| `list_components(category?)` | List components, optionally by category. |
+| `get_component(id)` | Full registry item + source code for one component. |
+| `search_components(query)` | Fuzzy search by name and description. |
+
+**Step 3 — just ask.** For example:
+
+> *"Use lerpa to build a pricing section with three tiers and a revenue chart."*
+> *"Search lerpa for a magnetic button and add it."*
+
+Your agent searches the registry, pulls the source, and writes it into your project — accessible, animated, and yours to edit.
 
 ## 📦 What's inside
 
@@ -159,6 +170,35 @@ pnpm run test
 pnpm run build
 pnpm run registry:validate
 ```
+
+## ⚖️ Lerpa UI vs shadcn/ui
+
+|  | Lerpa UI | shadcn/ui |
+| --- | --- | --- |
+| Install model | Copy-paste — you own the source | Copy-paste — you own the source |
+| Catalog | **1,318 items** (1,099 components + 219 blocks) | ~50 primitives |
+| Animation | **Framer Motion baked in**, reduced-motion safe | Not included |
+| Page blocks | Hero, pricing, dashboards, ecommerce, AI surfaces… | Limited |
+| Registry | **shadcn-compatible** — works with `npx shadcn add` | Native |
+| CLI | `lerpa-cli` (+ the shadcn CLI) | shadcn CLI |
+| AI / MCP | **First-class MCP server + `llms.txt`** | — |
+| License | MIT, free | MIT, free |
+
+Lerpa is **shadcn-compatible** — already using shadcn? Lerpa components drop straight into the same `components.json` / `@/components/ui` setup.
+
+## ❓ FAQ
+
+**Is Lerpa UI free?** Yes — MIT licensed, free for personal and commercial projects.
+
+**Do I install a runtime package?** No. You install the *source* of each component into your project and own it outright — no runtime dependency on Lerpa, no version churn.
+
+**Does it work outside Next.js (Vite, Remix, plain React)?** Yes. Components are standard React + Tailwind. `lerpa-cli init` reads your `tsconfig` paths and `src/` layout so files land in the right place in any setup.
+
+**How is it different from shadcn/ui?** Same copy-paste philosophy and a shadcn-compatible registry, but a much larger catalog, motion baked in, full page blocks, and first-class AI/MCP tooling. See the table above.
+
+**Can my AI assistant use it?** Yes — [`@lerpa/mcp-server`](https://www.npmjs.com/package/@lerpa/mcp-server) exposes the whole registry to Claude Code, Cursor, Windsurf, and more.
+
+**How do I theme it?** Everything runs on CSS variables / design tokens. Run `lerpa-cli theme <name>` or edit the `:root` tokens — one change restyles every component.
 
 ## 🤝 Contributing
 
