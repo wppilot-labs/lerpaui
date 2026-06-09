@@ -1,6 +1,6 @@
 {
   "name": "@lerpa/mcp-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "description": "Model Context Protocol server exposing the Lerpa UI registry to AI agents (Claude Code, Cursor, v0, Continue).",
   "repository": {

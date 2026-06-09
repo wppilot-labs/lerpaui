@@ -14,6 +14,14 @@ const SKILLS_OUTPUT_DIR = path.join(OUTPUT_DIR, "skills");
 // matches the (kebab) registry name and the already-kebab sibling imports.
 // Fixes case-sensitive (Linux) module resolution. A content scan confirmed
 // zero PascalCase relative sibling imports, so no import rewriting is needed.
+function kebab(s: string): string {
+  return s
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+    .replace(/[_\s]+/g, "-")
+    .toLowerCase();
+}
+
 function kebabPath(p: string): string {
   const slash = p.lastIndexOf("/");
   const dir = slash >= 0 ? p.slice(0, slash + 1) : "";
@@ -21,12 +29,100 @@ function kebabPath(p: string): string {
   const dot = file.lastIndexOf(".");
   const base = dot >= 0 ? file.slice(0, dot) : file;
   const ext = dot >= 0 ? file.slice(dot) : "";
-  const kebab = base
-    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-    .replace(/[_\s]+/g, "-")
-    .toLowerCase();
-  return dir + kebab + ext;
+  return dir + kebab(base) + ext;
+}
+
+interface RegFile { path: string; type?: string; content?: string }
+interface RegItem { name: string; type: string; files?: RegFile[]; registryDependencies?: string[]; dependencies?: string[] }
+
+// Bundled block-local helpers reference cn via the relative source path; rewrite
+// to the shadcn alias so they resolve once copied into the consumer project.
+function transformHelperContent(src: string): string {
+  return src.replace(/from\s+(['"])\.\.?\/lib\/cn\1/g, 'from "@/lib/cn"');
+}
+
+// Make every item compile on install:
+//  A. `../components/<Pascal>` / `./<Pascal>` references a block-local primitive
+//     in packages/ui/src/components — bundle it (transitively) into files[] at
+//     components/<dir>/<kebab>.tsx and rewrite the import to ./<kebab>.
+//  B. `./<kebab>` references a sibling registry item — declare it in
+//     registryDependencies so the CLI installs it alongside.
+//  C. single-file items: force the filename to equal the registry id.
+function linkAndBundle(items: RegItem[], itemNames: Set<string>): void {
+  const UI_COMPONENTS_DIR = path.join(PACKAGE_ROOT, "..", "ui", "src", "components");
+  const COMPONENT_IMPORT = /from\s+(['"])(?:\.\.?\/)+(?:components\/)?([A-Z][A-Za-z0-9]*)\1/g;
+  const SIBLING_IMPORT = /from\s+['"]\.\/([a-z0-9-]+)['"]/g;
+  let bundled = 0, renamed = 0;
+
+  for (const it of items) {
+    if (!Array.isArray(it.files) || it.files.length === 0) continue;
+    const installDir = it.files[0].path.includes("/blocks/") ? "blocks" : "ui";
+    const byBase = new Map<string, RegFile>();
+    for (const f of it.files) byBase.set(f.path.split("/").pop()!.replace(/\.(tsx|ts)$/, ""), f);
+    const regDeps = new Set<string>(it.registryDependencies ?? []);
+    let didBundle = false;
+
+    // A — bundle local helpers, transitively (Button -> Spinner, StatCard -> Card).
+    const queue: RegFile[] = [...it.files];
+    while (queue.length) {
+      const f = queue.shift()!;
+      if (typeof f.content !== "string") continue;
+      f.content = f.content.replace(COMPONENT_IMPORT, (full, q: string, Pascal: string) => {
+        const kb = kebab(Pascal);
+        if (byBase.has(kb)) return `from ${q}./${kb}${q}`;
+        const srcPath = path.join(UI_COMPONENTS_DIR, `${Pascal}.tsx`);
+        if (!fs.existsSync(srcPath)) return full;
+        const newFile: RegFile = {
+          path: `components/${installDir}/${kb}.tsx`,
+          type: it.type === "registry:block" ? "registry:block" : "registry:ui",
+          content: transformHelperContent(fs.readFileSync(srcPath, "utf-8")),
+        };
+        it.files!.push(newFile);
+        byBase.set(kb, newFile);
+        queue.push(newFile);
+        bundled++;
+        didBundle = true;
+        return `from ${q}./${kb}${q}`;
+      });
+    }
+
+    // Augment npm deps for items that gained bundled helpers, so the CLI
+    // installs everything the helpers import (e.g. class-variance-authority).
+    if (didBundle) {
+      const npm = new Set<string>(it.dependencies ?? []);
+      for (const f of it.files) {
+        if (typeof f.content !== "string") continue;
+        for (const m of f.content.matchAll(/from\s+["']([^"']+)["']/g)) {
+          const p = m[1];
+          if (p.startsWith(".") || p.startsWith("@/")) continue;
+          const pkg = p.startsWith("@") ? p.split("/").slice(0, 2).join("/") : p.split("/")[0];
+          if (pkg === "react" || pkg === "react-dom") continue;
+          npm.add(pkg);
+        }
+      }
+      it.dependencies = [...npm].sort();
+    }
+
+    // B — declare sibling registry items as dependencies.
+    for (const f of it.files) {
+      if (typeof f.content !== "string") continue;
+      for (const m of f.content.matchAll(SIBLING_IMPORT)) {
+        const dep = m[1];
+        if (!byBase.has(dep) && itemNames.has(dep) && dep !== it.name) regDeps.add(dep);
+      }
+    }
+    if (regDeps.size) it.registryDependencies = [...regDeps].sort();
+
+    // C — single-file items: filename must equal the id.
+    if (it.files.length === 1) {
+      const f = it.files[0];
+      const slash = f.path.lastIndexOf("/");
+      const dot = f.path.lastIndexOf(".");
+      const want = `${f.path.slice(0, slash + 1)}${it.name}${f.path.slice(dot)}`;
+      if (f.path !== want) { f.path = want; renamed++; }
+    }
+  }
+  console.log(`🔗 Linked deps: bundled ${bundled} helper file(s), declared sibling deps, ${renamed} file(s) renamed to id.`);
 }
 
 function buildRegistry() {
@@ -63,6 +159,10 @@ function buildRegistry() {
       process.exit(1);
     }
   }
+
+  // Resolve authored helper imports (bundle local primitives, declare sibling
+  // deps) and align filenames with ids so every item compiles on install.
+  linkAndBundle(registryItems as unknown as RegItem[], new Set(itemIndex.map(i => i.name)));
 
   // Preserve existing consumers: keep the items-array shape at generated/registry.json.
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(registryItems, null, 2), "utf-8");

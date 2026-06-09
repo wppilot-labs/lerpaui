@@ -8,7 +8,7 @@ import ora from "ora";
 
 const program = new Command();
 const CONFIG_FILE = "lerpa.json";
-const VERSION = "0.2.1";
+const VERSION = "0.2.2";
 
 interface Config {
   style: string;
