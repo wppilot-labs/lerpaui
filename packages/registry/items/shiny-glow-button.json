@@ -1,0 +1,12 @@
+{
+  "name": "shiny-glow-button",
+  "type": "registry:ui",
+  "dependencies": ["lucide-react"],
+  "files": [
+    {
+      "path": "components/ui/shiny-glow-button.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\nimport { Sparkles } from \"lucide-react\";\n\nexport interface ShinyGlowButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  icon?: React.ReactNode;\n  children?: React.ReactNode;\n}\n\n/**\n * ShinyGlowButton — premium action button with a gradient body and a soft\n * outer glow that intensifies on hover. SSR-safe and keyboard accessible.\n */\nexport const ShinyGlowButton = React.forwardRef<\n  HTMLButtonElement,\n  ShinyGlowButtonProps\n>(function ShinyGlowButton(\n  { icon, children = \"Launch Platform\", className, ...rest },\n  ref\n) {\n  const composed =\n    \"relative group inline-flex items-center justify-center px-6 py-3 bg-gradient-to-tr from-primary to-purple-600 font-bold text-white rounded-xl shadow-lg transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-60 disabled:pointer-events-none\";\n  return (\n    <button ref={ref} className={[composed, className].filter(Boolean).join(\" \")} {...rest}>\n      <span\n        aria-hidden\n        className=\"absolute -inset-1 rounded-xl bg-gradient-to-tr from-primary to-purple-600 opacity-30 blur transition-opacity duration-300 group-hover:opacity-80\"\n      />\n      <span className=\"relative flex items-center gap-2\">\n        {icon ?? <Sparkles className=\"w-4 h-4\" aria-hidden />}\n        <span>{children}</span>\n      </span>\n    </button>\n  );\n});\n\nShinyGlowButton.displayName = \"ShinyGlowButton\";\n\nexport default ShinyGlowButton;\n"
+    }
+  ]
+}

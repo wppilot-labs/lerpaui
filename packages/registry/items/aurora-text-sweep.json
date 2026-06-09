@@ -1,0 +1,12 @@
+{
+  "name": "aurora-text-sweep",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/aurora-text-sweep.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport interface AuroraTextSweepProps {\n  text?: string;\n  speed?: number;\n  colors?: string[];\n  className?: string;\n  size?: \"sm\" | \"md\" | \"lg\" | \"xl\";\n}\n\nconst SIZE: Record<NonNullable<AuroraTextSweepProps[\"size\"]>, number> = {\n  sm: 22,\n  md: 36,\n  lg: 56,\n  xl: 84,\n};\n\nexport function AuroraTextSweep({\n  text = \"Ship something premium\",\n  speed = 6,\n  colors = [\"var(--accent)\", \"var(--violet)\", \"var(--pink)\", \"var(--cyan)\", \"var(--accent)\"],\n  className,\n  size = \"lg\",\n}: AuroraTextSweepProps) {\n  const gradient = `linear-gradient(120deg, ${colors.join(\", \")})`;\n  return (\n    <span\n      role=\"heading\"\n      aria-level={2}\n      aria-label={text}\n      className={className}\n      style={{\n        display: \"inline-block\",\n        fontFamily: \"var(--font-sans)\",\n        fontSize: SIZE[size],\n        fontWeight: 600,\n        letterSpacing: \"-0.025em\",\n        lineHeight: 1.05,\n        background: gradient,\n        backgroundSize: \"300% auto\",\n        backgroundClip: \"text\",\n        WebkitBackgroundClip: \"text\",\n        WebkitTextFillColor: \"transparent\",\n        color: \"transparent\",\n        animation: `aurora ${speed}s linear infinite`,\n        filter: `drop-shadow(0 0 24px color-mix(in srgb, ${colors[0]} 38%, transparent))`,\n      }}\n    >\n      {text}\n    </span>\n  );\n}\n"
+    }
+  ]
+}

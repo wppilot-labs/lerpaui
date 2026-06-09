@@ -1,0 +1,14 @@
+{
+  "name": "auth-account-created-success",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/AuthAccountCreatedSuccess.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Check, ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AuthAccountCreatedSuccessProps {\n  className?: string;\n}\n\nexport function AuthAccountCreatedSuccess({ className }: AuthAccountCreatedSuccessProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-sm rounded-2xl border border-border bg-card p-8 text-center text-card-foreground shadow-sm\",\n        className,\n      )}\n    >\n      <div className=\"mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-500/10\">\n        <span className=\"flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-white\">\n          <Check className=\"h-6 w-6\" strokeWidth={3} />\n        </span>\n      </div>\n\n      <h2 className=\"mt-6 text-xl font-semibold text-foreground\">Account created</h2>\n      <p className=\"mx-auto mt-2 max-w-xs text-sm text-muted-foreground\">\n        Your workspace is ready. We&apos;ve sent a confirmation to your inbox so you can verify your email\n        anytime.\n      </p>\n\n      <button\n        type=\"button\"\n        className=\"mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n      >\n        Continue to dashboard\n        <ArrowRight className=\"h-4 w-4\" />\n      </button>\n    </div>\n  );\n}\n\nexport default AuthAccountCreatedSuccess;\n"
+    }
+  ]
+}

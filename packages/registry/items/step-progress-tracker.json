@@ -1,0 +1,14 @@
+{
+  "name": "step-progress-tracker",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/StepProgressTracker.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface StepProgressTrackerProps {\n  steps?: string[];\n  initialStep?: number;\n  className?: string;\n}\n\n/**\n * Signature horizontal stepper with an animated progress rail.\n * Production scale, theme-aware, keyboard + ARIA driven.\n */\nexport function StepProgressTracker({\n  steps = [\"Cart\", \"Address\", \"Payment\", \"Review\"],\n  initialStep = 1,\n  className,\n}: StepProgressTrackerProps) {\n  const [active, setActive] = useState(Math.min(initialStep, steps.length - 1));\n  const pct = steps.length > 1 ? (active / (steps.length - 1)) * 100 : 0;\n\n  return (\n    <div className={cn(\"w-full max-w-md rounded-2xl border border-border bg-card p-6 text-card-foreground shadow-sm\", className)}>\n      <ol className=\"relative flex items-center justify-between\">\n        <div className=\"absolute left-0 right-0 top-4 h-0.5 -translate-y-1/2 bg-muted\" aria-hidden=\"true\" />\n        <div\n          className=\"absolute left-0 top-4 h-0.5 -translate-y-1/2 bg-primary transition-all duration-500\"\n          style={{ width: `${pct}%` }}\n          aria-hidden=\"true\"\n        />\n        {steps.map((label, i) => {\n          const done = i < active;\n          const current = i === active;\n          return (\n            <li key={label} className=\"relative z-10 flex flex-col items-center gap-2\">\n              <button\n                type=\"button\"\n                onClick={() => setActive(i)}\n                aria-current={current ? \"step\" : undefined}\n                aria-label={`Step ${i + 1}: ${label}`}\n                className={cn(\n                  \"flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\",\n                  done && \"border-primary bg-primary text-primary-foreground\",\n                  current && \"border-primary bg-background text-primary\",\n                  !done && !current && \"border-border bg-background text-muted-foreground\",\n                )}\n              >\n                {done ? <Check className=\"h-4 w-4\" /> : i + 1}\n              </button>\n              <span className={cn(\"text-xs font-medium\", current ? \"text-foreground\" : \"text-muted-foreground\")}>{label}</span>\n            </li>\n          );\n        })}\n      </ol>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

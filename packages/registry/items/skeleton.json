@@ -1,0 +1,11 @@
+{
+  "name": "skeleton",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/skeleton.tsx",
+      "type": "registry:ui",
+      "content": "import React from 'react';\nimport { cn } from \"@/lib/utils\";\n\nfunction Skeleton({\n  className,\n  ...props\n}: React.HTMLAttributes<HTMLDivElement>) {\n  return (\n    <div\n      role=\"status\"\n      aria-busy=\"true\"\n      aria-live=\"polite\"\n      className={cn(\n        'animate-pulse rounded-md bg-muted/60 motion-reduce:animate-[pulse_3s_ease-in-out_infinite]',\n        className\n      )}\n      {...props}\n    />\n  );\n}\n\nexport { Skeleton };\n"
+    }
+  ]
+}

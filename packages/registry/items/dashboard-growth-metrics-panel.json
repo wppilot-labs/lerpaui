@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-growth-metrics-panel",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardGrowthMetricsPanel.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { TrendingUp, ArrowUp, ArrowDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Metric = { label: string; value: string; delta: number; spark: number[] };\n\nconst METRICS: Metric[] = [\n  { label: \"MRR\", value: \"$48.2k\", delta: 12.4, spark: [4, 6, 5, 7, 8, 7, 9] },\n  { label: \"Active users\", value: \"9,310\", delta: 8.1, spark: [5, 5, 6, 6, 7, 8, 9] },\n  { label: \"Churn\", value: \"1.8%\", delta: -0.6, spark: [4, 3, 4, 3, 3, 2, 2] },\n];\n\nfunction Spark({ data, up }: { data: number[]; up: boolean }) {\n  const max = Math.max(...data);\n  return (\n    <div className=\"flex items-end gap-0.5 h-7\" aria-hidden=\"true\">\n      {data.map((d, i) => (\n        <span\n          key={i}\n          className={cn(\"w-1 rounded-sm\", up ? \"bg-emerald-400/70\" : \"bg-red-400/70\")}\n          style={{ height: `${(d / max) * 100}%` }}\n        />\n      ))}\n    </div>\n  );\n}\n\nexport interface DashboardGrowthMetricsPanelProps {\n  className?: string;\n}\n\nexport function DashboardGrowthMetricsPanel({ className }: DashboardGrowthMetricsPanelProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold flex items-center gap-1.5 mb-4\">\n        <TrendingUp className=\"w-4 h-4 text-primary\" /> Growth\n      </h3>\n      <ul className=\"space-y-3\">\n        {METRICS.map((m) => {\n          const up = m.delta >= 0;\n          return (\n            <li key={m.label} className=\"flex items-center gap-3\">\n              <div className=\"min-w-0 flex-1\">\n                <div className=\"text-xs uppercase tracking-wide text-muted-foreground/50\">{m.label}</div>\n                <div className=\"text-2xl font-black leading-tight\">{m.value}</div>\n              </div>\n              <Spark data={m.spark} up={up} />\n              <span className={cn(\"inline-flex items-center gap-0.5 text-xs font-bold w-14 justify-end\", up ? \"text-emerald-400\" : \"text-red-400\")}>\n                {up ? <ArrowUp className=\"w-4 h-4\" /> : <ArrowDown className=\"w-4 h-4\" />}\n                {Math.abs(m.delta)}%\n              </span>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "announcement-bar-gradient",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/AnnouncementBarGradient.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { Sparkles, ArrowRight, X } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AnnouncementBarGradientProps {\n  className?: string;\n}\n\nexport function AnnouncementBarGradient({ className }: AnnouncementBarGradientProps) {\n  const [open, setOpen] = useState(true);\n  if (!open) return null;\n\n  return (\n    <div\n      className={cn(\n        \"relative w-full overflow-hidden rounded-xl border border-foreground/10 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-orange-400 px-4 py-3 text-white shadow-lg\",\n        className\n      )}\n    >\n      <div className=\"flex items-center justify-center gap-2 text-center text-sm font-medium\">\n        <Sparkles className=\"w-4 h-4 shrink-0\" />\n        <span>\n          <span className=\"font-bold\">Spring sale</span> — 40% off all annual plans this week\n        </span>\n        <a\n          href=\"/\"\n          className=\"hidden items-center gap-1 rounded-full bg-white/20 px-3 py-1 text-xs font-bold backdrop-blur-sm transition hover:bg-white/30 sm:inline-flex\"\n        >\n          Claim offer <ArrowRight className=\"w-3.5 h-3.5\" />\n        </a>\n      </div>\n      <button\n        type=\"button\"\n        onClick={() => setOpen(false)}\n        aria-label=\"Dismiss announcement\"\n        className=\"absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-white/80 transition hover:bg-white/20 hover:text-white\"\n      >\n        <X className=\"w-4 h-4\" />\n      </button>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-goal-progress-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardGoalProgressCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { TrendingUp } from \"lucide-react\";\n\nexport function DashboardGoalProgressCard() {\n  const [value, setValue] = useState(82);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <TrendingUp className=\"w-4 h-4 text-violet-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">General Objectives</span>\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-violet-400\">Monthly Targets</span>\n      </div>\n\n      <div className=\"space-y-4\">\n        <div>\n          <div className=\"flex justify-between text-xs mb-1.5\">\n            <span className=\"text-muted-foreground/60\">Project Milestones</span>\n            <span className=\"font-bold text-violet-400\">{value}% Complete</span>\n          </div>\n          <div className=\"h-1.5 bg-secondary/40 rounded-full overflow-hidden\">\n            <div className=\"h-full bg-violet-500 rounded-full\" style={{ width: `${value}%` }} />\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-project-summary",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DashboardProjectSummary.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Folder, Calendar, CheckSquare } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DashboardProjectSummaryProps {\n  className?: string;\n}\n\nexport function DashboardProjectSummary({ className }: DashboardProjectSummaryProps) {\n  const progress = 64;\n  const members = [\"JD\", \"ML\", \"PP\", \"AK\"];\n\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center gap-2.5 mb-4\">\n        <div className=\"h-10 w-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0\">\n          <Folder className=\"w-5 h-5\" />\n        </div>\n        <div>\n          <h3 className=\"text-base font-bold leading-tight\">Website redesign</h3>\n          <span className=\"text-xs text-muted-foreground/55\">Design · 12 tasks</span>\n        </div>\n      </div>\n\n      <div className=\"flex items-center gap-2 mb-4\">\n        <div className=\"flex-1 h-2 rounded-full bg-foreground/[0.06] overflow-hidden\">\n          <div className=\"h-full rounded-full bg-primary\" style={{ width: `${progress}%` }} />\n        </div>\n        <span className=\"text-xs font-bold tabular-nums\">{progress}%</span>\n      </div>\n\n      <div className=\"grid grid-cols-2 gap-2 mb-4\">\n        <div className=\"flex items-center gap-2 p-2.5 rounded-xl bg-foreground/[0.02] border border-foreground/[0.04]\">\n          <CheckSquare className=\"w-4 h-4 text-emerald-400\" />\n          <div className=\"text-xs\"><span className=\"font-bold\">8</span> done</div>\n        </div>\n        <div className=\"flex items-center gap-2 p-2.5 rounded-xl bg-foreground/[0.02] border border-foreground/[0.04]\">\n          <Calendar className=\"w-4 h-4 text-amber-400\" />\n          <div className=\"text-xs\">Due <span className=\"font-bold\">Jul 12</span></div>\n        </div>\n      </div>\n\n      <div className=\"flex items-center justify-between\">\n        <div className=\"flex -space-x-2\">\n          {members.map((m) => (\n            <div key={m} className=\"h-8 w-8 rounded-full bg-secondary/60 border border-card flex items-center justify-center text-[11px] font-bold\">{m}</div>\n          ))}\n        </div>\n        <button type=\"button\" className=\"text-xs font-bold text-primary hover:underline\">Open</button>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

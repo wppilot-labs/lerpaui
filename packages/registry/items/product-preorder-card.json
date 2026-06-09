@@ -1,0 +1,14 @@
+{
+  "name": "product-preorder-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ProductPreorderCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState, useEffect } from \"react\";\nimport { Clock, ArrowRight } from \"lucide-react\";\n\nexport function ProductPreorderCard() {\n  const [timeLeft, setTimeLeft] = useState(86400 * 3); // 3 days\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <span className=\"text-[9px] font-extrabold uppercase bg-violet-500/15 text-violet-300 px-2 py-0.5 rounded border border-violet-500/20 tracking-wider\">Preorder Launch</span>\n        <span className=\"text-[10px] text-muted-foreground font-mono flex items-center gap-1\">\n          <Clock className=\"w-3.5 h-3.5 text-violet-400\" /> 3d remaining\n        </span>\n      </div>\n\n      <div className=\"h-28 bg-secondary/20 rounded-xl mb-4 border border-white/[0.04] flex flex-col items-center justify-center\">\n        <p className=\"text-xs font-bold text-muted-foreground/60\">Batch-4 Launch Package</p>\n        <p className=\"text-lg font-black text-foreground\">$149.00</p>\n      </div>\n\n      <button className=\"w-full py-2 bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all\">\n        <span>Reserve Preorder Unit</span>\n        <ArrowRight className=\"w-3.5 h-3.5\" />\n      </button>\n    </div>\n  );\n}"
+    }
+  ]
+}

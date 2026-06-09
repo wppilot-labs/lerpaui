@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-empty-cart",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceEmptyCart.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShoppingCart, ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface EcommerceEmptyCartProps {\n  className?: string;\n}\n\nexport function EcommerceEmptyCart({ className }: EcommerceEmptyCartProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-8 rounded-2xl shadow-xl font-sans text-foreground text-center\", className)}>\n      <div className=\"mx-auto h-20 w-20 rounded-full bg-secondary/40 flex items-center justify-center mb-4\">\n        <ShoppingCart className=\"w-9 h-9 text-muted-foreground/50\" />\n      </div>\n      <h3 className=\"text-base font-bold\">Your cart is empty</h3>\n      <p className=\"text-xs text-muted-foreground/60 mt-1 mb-5 max-w-[260px] mx-auto\">\n        Looks like you haven&apos;t added anything yet. Let&apos;s fix that.\n      </p>\n      <button type=\"button\" className=\"inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-sm font-bold rounded-xl bg-primary text-primary-foreground hover:brightness-110 transition-all\">\n        Start shopping <ArrowRight className=\"w-4 h-4\" />\n      </button>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

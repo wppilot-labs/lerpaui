@@ -1,0 +1,55 @@
+{
+  "name": "lerpa-cli",
+  "version": "0.1.0",
+  "description": "Copy-paste components and blocks from the Lerpa UI registry into any React/Tailwind project.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lerpa-ui/lerpa.git",
+    "directory": "packages/cli"
+  },
+  "author": "Lerpa UI",
+  "homepage": "https://github.com/lerpa-ui/lerpa#readme",
+  "bugs": "https://github.com/lerpa-ui/lerpa/issues",
+  "bin": {
+    "lerpa": "./dist/index.js",
+    "lerpa-cli": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "registry",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && node ./scripts/copy-registry.js",
+    "dev": "tsc -w",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm --filter @lerpa/registry run build && pnpm run build"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "prompts": "^2.4.2",
+    "picocolors": "^1.0.0",
+    "ora": "^5.4.1",
+    "execa": "^5.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.11.24",
+    "@types/prompts": "^2.4.9"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "react",
+    "tailwindcss",
+    "shadcn",
+    "components",
+    "copy-paste",
+    "cli"
+  ]
+}

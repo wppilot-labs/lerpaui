@@ -1,0 +1,14 @@
+{
+  "name": "customer-order-detail",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CustomerOrderDetail.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { FileText, Package } from \"lucide-react\";\n\nexport function CustomerOrderDetail() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <FileText className=\"w-4 h-4 text-violet-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Order details</span>\n        </div>\n        <span className=\"text-[9px] font-bold uppercase bg-violet-500/10 text-violet-300 px-2 py-0.5 rounded border border-violet-500/20\">Invoice #1842</span>\n      </div>\n\n      <div className=\"space-y-3.5 text-xs\">\n        <div className=\"p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.03] space-y-2\">\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Transaction Date:</span>\n            <span className=\"font-bold\">May 22, 2026</span>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Registered Item:</span>\n            <span className=\"font-bold flex items-center gap-1\"><Package className=\"w-3.5 h-3.5 text-violet-400\" /> Studio Suite</span>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Amount Paid:</span>\n            <span className=\"font-bold\">$129.00</span>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

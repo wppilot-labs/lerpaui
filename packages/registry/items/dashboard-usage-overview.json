@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-usage-overview",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardUsageOverview.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Gauge } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst QUOTAS = [\n  { label: \"Compute hours\", used: 320, limit: 500, unit: \"hrs\" },\n  { label: \"Build minutes\", used: 1840, limit: 2000, unit: \"min\" },\n  { label: \"Team seats\", used: 17, limit: 25, unit: \"\" },\n];\n\nexport interface DashboardUsageOverviewProps {\n  className?: string;\n}\n\nexport function DashboardUsageOverview({ className }: DashboardUsageOverviewProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-4\">\n        <h3 className=\"text-base font-bold flex items-center gap-1.5\"><Gauge className=\"w-4 h-4 text-primary\" /> Usage</h3>\n        <span className=\"text-[11px] uppercase font-bold tracking-wide px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20\">Pro plan</span>\n      </div>\n\n      <ul className=\"space-y-3.5\">\n        {QUOTAS.map((q) => {\n          const pct = Math.round((q.used / q.limit) * 100);\n          const warn = pct >= 85;\n          return (\n            <li key={q.label}>\n              <div className=\"flex items-center justify-between text-xs mb-1.5\">\n                <span className=\"font-medium\">{q.label}</span>\n                <span className=\"text-muted-foreground/55 tabular-nums\">{q.used.toLocaleString()} / {q.limit.toLocaleString()} {q.unit}</span>\n              </div>\n              <div className=\"h-1.5 rounded-full bg-foreground/[0.06] overflow-hidden\">\n                <div className={cn(\"h-full rounded-full\", warn ? \"bg-amber-400\" : \"bg-primary\")} style={{ width: `${pct}%` }} />\n              </div>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "pricing-trust-strip",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/PricingTrustStrip.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShieldCheck, RefreshCcw, Lock, Headphones } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Badge = {\n  id: string;\n  icon: React.ComponentType<{ className?: string }>;\n  title: string;\n  sub: string;\n};\n\nconst BADGES: Badge[] = [\n  { id: \"guarantee\", icon: ShieldCheck, title: \"30-day guarantee\", sub: \"Full refund, no questions\" },\n  { id: \"cancel\", icon: RefreshCcw, title: \"Cancel anytime\", sub: \"No long-term contracts\" },\n  { id: \"secure\", icon: Lock, title: \"Secure checkout\", sub: \"256-bit SSL encryption\" },\n  { id: \"support\", icon: Headphones, title: \"Human support\", sub: \"Avg. reply under 2h\" },\n];\n\nexport interface PricingTrustStripProps {\n  className?: string;\n}\n\nexport function PricingTrustStrip({ className }: PricingTrustStripProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-3xl bg-card border border-border rounded-2xl shadow-sm font-sans text-foreground p-5\",\n        className,\n      )}\n    >\n      <ul className=\"grid grid-cols-2 md:grid-cols-4 gap-3\">\n        {BADGES.map((b) => {\n          const Icon = b.icon;\n          return (\n            <li\n              key={b.id}\n              className=\"flex items-center gap-3 rounded-xl bg-muted border border-border p-3\"\n            >\n              <div className=\"h-10 w-10 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0\">\n                <Icon className=\"w-4 h-4\" />\n              </div>\n              <div className=\"min-w-0\">\n                <div className=\"text-sm font-bold truncate\">{b.title}</div>\n                <div className=\"text-xs text-muted-foreground truncate\">\n                  {b.sub}\n                </div>\n              </div>\n            </li>\n          );\n        })}\n      </ul>\n\n      <div className=\"mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-muted-foreground\">\n        <span>Trusted by 12,000+ teams</span>\n        <span aria-hidden=\"true\">·</span>\n        <span>SOC 2 Type II</span>\n        <span aria-hidden=\"true\">·</span>\n        <span>GDPR compliant</span>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

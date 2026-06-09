@@ -1,0 +1,14 @@
+{
+  "name": "version-badge",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/VersionBadge.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { AppWindow } from \"lucide-react\";\n\nexport function VersionBadge() {\n  return (\n    <div className=\"w-max bg-violet-500/15 border border-violet-500/20 px-3 py-1 rounded-full flex items-center gap-1.5 text-xs text-violet-300 font-extrabold uppercase select-none tracking-wider\">\n      <AppWindow className=\"w-3.5 h-3.5 text-violet-400\" />\n      <span>Lerpa UI Version 4.2.1-Prod</span>\n    </div>\n  );\n}"
+    }
+  ]
+}

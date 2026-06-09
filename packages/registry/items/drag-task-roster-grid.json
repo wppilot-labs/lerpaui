@@ -1,0 +1,15 @@
+{
+  "name": "drag-task-roster-grid",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/drag-task-roster-grid.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from 'react';\nimport { Reorder} from \"framer-motion\";\nimport { Menu } from 'lucide-react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface DragTaskRosterGridProps {\n  className?: string;\n}\n\nexport const DragTaskRosterGrid: React.FC<DragTaskRosterGridProps> = ({\n  className,\n}) => {\n  const [items, setItems] = useState([\n    { id: '1', name: 'Verify registry schema compilation', tag: 'High' },\n    { id: '2', name: 'Implement circular menu controls', tag: 'Medium' },\n    { id: '3', name: 'Optimize dynamic coordinates trail', tag: 'Low' },\n  ]);\n\n  return (\n    <div className={cn('relative w-full max-w-[320px] h-[340px] bg-secondary/5 rounded-2xl border border-border flex flex-col justify-start p-4 select-none overflow-hidden', className)}>\n      <span className=\"text-[9px] text-muted-foreground font-black uppercase tracking-widest text-center mb-4\">Draggable Checklist</span>\n\n      <Reorder.Group axis=\"y\" values={items} onReorder={setItems} className=\"flex flex-col gap-2 w-full\">\n        {items.map((item) => (\n          <Reorder.Item\n            key={item.id}\n            value={item}\n            className=\"w-full flex items-center justify-between px-3 py-2.5 border border-border rounded-xl bg-card shadow-sm cursor-grab active:cursor-grabbing hover:border-primary/20 active:scale-98 transition-all duration-200\"\n          >\n            <div className=\"flex flex-col gap-0.5\">\n              <span className=\"text-[10px] font-black text-foreground leading-normal\">{item.name}</span>\n              <span className={cn('text-[8px] font-extrabold uppercase px-1.5 py-0.5 rounded-full border w-fit leading-none mt-1',\n                item.tag === 'High' ? 'border-rose-500/20 bg-rose-500/5 text-rose-500' :\n                item.tag === 'Medium' ? 'border-amber-500/20 bg-amber-500/5 text-amber-500' :\n                'border-sky-500/20 bg-sky-500/5 text-sky-500'\n              )}>\n                {item.tag}\n              </span>\n            </div>\n            <Menu className=\"w-3.5 h-3.5 text-muted-foreground/35 cursor-row-resize\" />\n          </Reorder.Item>\n        ))}\n      </Reorder.Group>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

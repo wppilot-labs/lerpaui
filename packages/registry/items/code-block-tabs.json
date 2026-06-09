@@ -1,0 +1,14 @@
+{
+  "name": "code-block-tabs",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CodeBlockTabs.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport { useState } from \"react\";\nimport { Copy, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Tab = { label: string; code: string };\n\nconst TABS: Tab[] = [\n  {\n    label: \"index.ts\",\n    code: `export { Button } from \"./button\";\nexport { Card } from \"./card\";\nexport { Input } from \"./input\";`,\n  },\n  {\n    label: \"button.tsx\",\n    code: `export function Button(props: ButtonProps) {\n  return <button className=\"btn\" {...props} />;\n}`,\n  },\n  {\n    label: \"styles.css\",\n    code: `.btn {\n  border-radius: 0.5rem;\n  padding: 0.5rem 1rem;\n}`,\n  },\n];\n\nexport interface CodeBlockTabsProps {\n  className?: string;\n}\n\nexport function CodeBlockTabs({ className }: CodeBlockTabsProps) {\n  const [active, setActive] = useState(0);\n  const [copied, setCopied] = useState(false);\n  const current = TABS[active] ?? TABS[0];\n\n  const handleCopy = async () => {\n    try {\n      await navigator.clipboard.writeText(current.code);\n    } catch {\n      /* clipboard unavailable */\n    }\n    setCopied(true);\n    window.setTimeout(() => setCopied(false), 1500);\n  };\n\n  return (\n    <div className={cn(\"w-full max-w-md overflow-hidden rounded-2xl border border-border bg-muted font-mono shadow-sm\", className)}>\n      <div className=\"flex items-center justify-between border-b border-border bg-foreground/[0.02] pl-2 pr-2\">\n        <div role=\"tablist\" aria-label=\"Source files\" className=\"flex\">\n          {TABS.map((t, i) => (\n            <button\n              key={t.label}\n              role=\"tab\"\n              aria-selected={active === i}\n              onClick={() => setActive(i)}\n              className={cn(\n                \"border-b-2 px-3 py-2.5 text-xs transition-colors\",\n                active === i\n                  ? \"border-primary text-foreground\"\n                  : \"border-transparent text-muted-foreground hover:text-foreground\"\n              )}\n            >\n              {t.label}\n            </button>\n          ))}\n        </div>\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied to clipboard\" : \"Copy code to clipboard\"}\n          className=\"grid h-8 w-8 place-items-center rounded-lg text-muted-foreground transition hover:text-foreground\"\n        >\n          {copied ? <Check className=\"h-4 w-4 text-emerald-600 dark:text-emerald-400\" /> : <Copy className=\"h-4 w-4\" />}\n        </button>\n      </div>\n      <pre className=\"overflow-x-auto p-5 text-xs leading-relaxed text-foreground/85\">\n        <code>{current.code}</code>\n      </pre>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

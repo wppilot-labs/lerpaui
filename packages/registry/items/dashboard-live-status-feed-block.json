@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-live-status-feed-block",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/dashboard-live-status-feed-block.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Radio } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Kind = \"ok\" | \"warn\" | \"err\";\n\ntype Entry = { time: string; kind: Kind; text: string };\n\nconst DOT: Record<Kind, string> = { ok: \"bg-emerald-400\", warn: \"bg-amber-400\", err: \"bg-red-400\" };\n\nconst FEED: Entry[] = [\n  { time: \"09:42:11\", kind: \"ok\", text: \"Deploy v2.4.0 succeeded on production\" },\n  { time: \"09:41:03\", kind: \"warn\", text: \"Auth service latency above 300ms\" },\n  { time: \"09:38:55\", kind: \"ok\", text: \"Autoscaler added 2 workers (us-east)\" },\n  { time: \"09:31:20\", kind: \"err\", text: \"Webhook delivery failed → retrying\" },\n  { time: \"09:27:08\", kind: \"ok\", text: \"Database backup completed (4.2 GB)\" },\n];\n\nexport interface DashboardLiveStatusFeedBlockProps {\n  className?: string;\n}\n\nexport function DashboardLiveStatusFeedBlock({ className }: DashboardLiveStatusFeedBlockProps) {\n  return (\n    <div className={cn(\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl font-sans text-foreground overflow-hidden\", className)}>\n      <div className=\"flex items-center justify-between px-5 py-3 border-b border-foreground/[0.05]\">\n        <h3 className=\"text-base font-bold flex items-center gap-1.5\">\n          <Radio className=\"w-4 h-4 text-primary\" /> Event stream\n        </h3>\n        <span className=\"text-[11px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20\">Live</span>\n      </div>\n\n      <ul className=\"divide-y divide-foreground/[0.04] font-mono\">\n        {FEED.map((e, i) => (\n          <li key={i} className=\"flex items-center gap-3 px-5 py-2.5 hover:bg-foreground/[0.02] transition-colors\">\n            <span className=\"text-xs tabular-nums text-muted-foreground/40 shrink-0\">{e.time}</span>\n            <span className={cn(\"h-1.5 w-1.5 rounded-full shrink-0\", DOT[e.kind])} />\n            <span className=\"text-xs text-foreground/85 truncate\">{e.text}</span>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

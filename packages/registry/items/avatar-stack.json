@@ -1,0 +1,12 @@
+{
+  "name": "avatar-stack",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/AvatarStack.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AvatarStackPerson {\n  name: string;\n  initials: string;\n}\n\nexport interface AvatarStackProps {\n  people?: AvatarStackPerson[];\n  max?: number;\n  className?: string;\n}\n\nconst DEFAULT: AvatarStackPerson[] = [\n  { name: \"Jane Doe\", initials: \"JD\" },\n  { name: \"Marcus Lee\", initials: \"ML\" },\n  { name: \"Priya Patel\", initials: \"PP\" },\n  { name: \"Alex Kim\", initials: \"AK\" },\n  { name: \"Sofia Ramos\", initials: \"SR\" },\n  { name: \"Noah Park\", initials: \"NP\" },\n];\n\nconst TINTS = [\"bg-indigo-500\", \"bg-emerald-500\", \"bg-rose-500\", \"bg-amber-500\", \"bg-sky-500\", \"bg-violet-500\"];\n\n/**\n * Signature overlapping avatar group with hover spread + overflow count.\n * Production scale, theme-aware, each avatar focusable + labelled.\n */\nexport function AvatarStack({ people = DEFAULT, max = 4, className }: AvatarStackProps) {\n  const shown = people.slice(0, max);\n  const extra = people.length - shown.length;\n\n  return (\n    <div className={cn(\"flex items-center\", className)}>\n      <ul className=\"flex -space-x-3\">\n        {shown.map((p, i) => (\n          <li key={p.name}>\n            <button\n              type=\"button\"\n              aria-label={p.name}\n              title={p.name}\n              className={cn(\n                \"flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold text-white ring-2 ring-background transition-transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\",\n                TINTS[i % TINTS.length],\n              )}\n            >\n              {p.initials}\n            </button>\n          </li>\n        ))}\n        {extra > 0 && (\n          <li>\n            <span className=\"flex h-10 w-10 items-center justify-center rounded-full bg-muted text-sm font-semibold text-muted-foreground ring-2 ring-background\">\n              +{extra}\n            </span>\n          </li>\n        )}\n      </ul>\n      <span className=\"ml-3 text-sm text-muted-foreground\">{people.length} collaborators</span>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

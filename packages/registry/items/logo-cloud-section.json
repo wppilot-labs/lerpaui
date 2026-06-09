@@ -1,0 +1,15 @@
+{
+  "name": "logo-cloud-section",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/LogoCloudSection.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Hexagon, Triangle, Circle, Square, Diamond, Octagon } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Logo = { name: string; Icon: React.ElementType };\n\nconst LOGOS: Logo[] = [\n  { name: \"Hexa\", Icon: Hexagon },\n  { name: \"Vertex\", Icon: Triangle },\n  { name: \"Orbit\", Icon: Circle },\n  { name: \"Quad\", Icon: Square },\n  { name: \"Prism\", Icon: Diamond },\n  { name: \"Octane\", Icon: Octagon },\n];\n\nexport interface LogoCloudSectionProps {\n  className?: string;\n}\n\nexport function LogoCloudSection({ className }: LogoCloudSectionProps) {\n  return (\n    <div className={cn(\"w-full max-w-3xl font-sans text-foreground text-center\", className)}>\n      <p className=\"text-xs font-bold uppercase tracking-widest text-muted-foreground/50 mb-6\">\n        Trusted by teams at\n      </p>\n      <div className=\"grid grid-cols-3 sm:grid-cols-6 gap-x-6 gap-y-8\">\n        {LOGOS.map((l) => (\n          <div\n            key={l.name}\n            className=\"flex items-center justify-center gap-1.5 text-muted-foreground/45 hover:text-foreground transition-colors\"\n          >\n            <l.Icon className=\"w-5 h-5\" />\n            <span className=\"text-[13px] font-bold tracking-tight\">{l.name}</span>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

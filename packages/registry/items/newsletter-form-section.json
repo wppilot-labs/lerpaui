@@ -1,0 +1,14 @@
+{
+  "name": "newsletter-form-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/NewsletterFormSection.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Mail, Check, ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface NewsletterFormSectionProps {\n  className?: string;\n}\n\nexport function NewsletterFormSection({ className }: NewsletterFormSectionProps) {\n  const [email, setEmail] = useState(\"\");\n  const [done, setDone] = useState(false);\n\n  const submit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (email) setDone(true);\n  };\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-xl rounded-2xl border border-border/50 bg-card/60 p-5 font-sans text-foreground shadow-xl backdrop-blur-xl\",\n        className,\n      )}\n    >\n      <div className=\"flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between\">\n        <div className=\"min-w-0\">\n          <h3 className=\"text-base font-bold\">Weekly product digest</h3>\n          <p className=\"text-sm text-muted-foreground/60\">One email, every Friday. No spam, unsubscribe anytime.</p>\n        </div>\n\n        <form onSubmit={submit} className=\"flex w-full shrink-0 items-center gap-2 sm:w-auto\">\n          <label htmlFor=\"nl-inline-email\" className=\"sr-only\">\n            Email address\n          </label>\n          <div className=\"relative flex-1 sm:w-56\">\n            <Mail className=\"pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/40\" />\n            <input\n              id=\"nl-inline-email\"\n              type=\"email\"\n              required\n              value={email}\n              onChange={(e) => setEmail(e.target.value)}\n              placeholder=\"you@email.com\"\n              className=\"w-full rounded-xl border border-foreground/[0.06] bg-foreground/[0.03] py-2.5 pl-10 pr-3 text-sm placeholder:text-muted-foreground/30 focus:border-primary/40 focus:outline-none\"\n            />\n          </div>\n          <button\n            type=\"submit\"\n            disabled={done}\n            className=\"flex items-center gap-1 rounded-xl bg-primary px-4 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:brightness-110 disabled:bg-emerald-500/20 disabled:text-emerald-400\"\n          >\n            {done ? (\n              <>\n                <Check className=\"h-4 w-4\" /> Done\n              </>\n            ) : (\n              <>\n                Subscribe <ArrowRight className=\"h-4 w-4\" />\n              </>\n            )}\n          </button>\n        </form>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

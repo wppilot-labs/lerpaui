@@ -1,0 +1,14 @@
+{
+  "name": "team-presence-avatars",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TeamPresenceAvatars.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Users } from \"lucide-react\";\n\nexport function TeamPresenceAvatars() {\n  const [online, setOnline] = useState(3);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <Users className=\"w-4 h-4 text-violet-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Active Team Presence</span>\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20\">{online} Teammates Online</span>\n      </div>\n\n      <div className=\"flex items-center gap-3\">\n        <div className=\"flex -space-x-2.5 overflow-hidden\">\n          <div className=\"inline-block h-8 w-8 rounded-full ring-2 ring-card bg-violet-600 flex items-center justify-center font-bold text-white text-xs relative\">\n            JD\n            <span className=\"absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-card\" />\n          </div>\n          <div className=\"inline-block h-8 w-8 rounded-full ring-2 ring-card bg-indigo-600 flex items-center justify-center font-bold text-white text-xs relative\">\n            AB\n            <span className=\"absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-card\" />\n          </div>\n          <div className=\"inline-block h-8 w-8 rounded-full ring-2 ring-card bg-emerald-600 flex items-center justify-center font-bold text-white text-xs relative\">\n            ML\n            <span className=\"absolute bottom-0 right-0 block h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-card\" />\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

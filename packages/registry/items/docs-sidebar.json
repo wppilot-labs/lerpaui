@@ -1,0 +1,15 @@
+{
+  "name": "docs-sidebar",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DocsSidebar.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsSidebarProps {\n  className?: string;\n}\n\ntype NavSection = { label: string; items: string[] };\n\nconst NAV: NavSection[] = [\n  { label: \"Getting Started\", items: [\"Introduction\", \"Installation\", \"Quickstart\"] },\n  { label: \"Customization\", items: [\"Theming\", \"Dark mode\", \"Tokens\"] },\n  { label: \"Components\", items: [\"Button\", \"Input\", \"Dialog\", \"Toast\"] },\n];\n\nexport function DocsSidebar({ className }: DocsSidebarProps) {\n  const [active, setActive] = useState(\"Installation\");\n\n  return (\n    <nav\n      aria-label=\"Documentation\"\n      className={cn(\n        \"w-full max-w-[16rem] bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      {NAV.map((section) => (\n        <div key={section.label} className=\"mb-4 last:mb-0\">\n          <p className=\"px-2 mb-1 text-[11px] uppercase font-bold tracking-wider text-muted-foreground/45\">\n            {section.label}\n          </p>\n          <ul className=\"space-y-0.5\">\n            {section.items.map((item) => {\n              const isActive = item === active;\n              return (\n                <li key={item}>\n                  <button\n                    type=\"button\"\n                    aria-current={isActive ? \"page\" : undefined}\n                    onClick={() => setActive(item)}\n                    className={cn(\n                      \"w-full text-left px-2 py-2 rounded-lg text-sm transition-colors\",\n                      isActive\n                        ? \"bg-primary/10 text-primary font-medium\"\n                        : \"text-muted-foreground/65 hover:text-foreground hover:bg-foreground/[0.03]\",\n                    )}\n                  >\n                    {item}\n                  </button>\n                </li>\n              );\n            })}\n          </ul>\n        </div>\n      ))}\n    </nav>\n  );\n}\n"
+    }
+  ]
+}

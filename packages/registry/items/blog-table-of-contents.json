@@ -1,0 +1,15 @@
+{
+  "name": "blog-table-of-contents",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BlogTableOfContents.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ListTree } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Heading = { id: string; label: string; level: 2 | 3 };\n\nconst HEADINGS: Heading[] = [\n  { id: \"intro\", label: \"Introduction\", level: 2 },\n  { id: \"problem\", label: \"The problem with cold starts\", level: 2 },\n  { id: \"measuring\", label: \"Measuring p99 latency\", level: 3 },\n  { id: \"edge-cache\", label: \"Moving to edge caching\", level: 2 },\n  { id: \"invalidation\", label: \"Cache invalidation strategy\", level: 3 },\n  { id: \"results\", label: \"Results & benchmarks\", level: 2 },\n  { id: \"takeaways\", label: \"Key takeaways\", level: 2 },\n];\n\nexport interface BlogTableOfContentsProps {\n  className?: string;\n}\n\nexport function BlogTableOfContents({ className }: BlogTableOfContentsProps) {\n  const [active, setActive] = useState(\"edge-cache\");\n\n  return (\n    <nav\n      aria-label=\"Table of contents\"\n      className={cn(\n        \"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <div className=\"mb-3 flex items-center gap-1.5\">\n        <ListTree className=\"h-4 w-4 text-primary\" />\n        <span className=\"text-xs font-bold uppercase tracking-widest text-muted-foreground/70\">\n          On this page\n        </span>\n      </div>\n\n      <ul className=\"space-y-0.5\">\n        {HEADINGS.map((h) => {\n          const isActive = active === h.id;\n          return (\n            <li key={h.id}>\n              <a\n                href={`#${h.id}`}\n                aria-current={isActive ? \"location\" : undefined}\n                onClick={() => setActive(h.id)}\n                className={cn(\n                  \"flex items-center gap-2 border-l-2 py-1.5 text-xs leading-snug transition-colors\",\n                  h.level === 3 ? \"pl-5\" : \"pl-3\",\n                  isActive\n                    ? \"border-primary font-semibold text-foreground\"\n                    : \"border-transparent text-muted-foreground hover:border-border hover:text-foreground\",\n                )}\n              >\n                {h.label}\n              </a>\n            </li>\n          );\n        })}\n      </ul>\n    </nav>\n  );\n}\n"
+    }
+  ]
+}

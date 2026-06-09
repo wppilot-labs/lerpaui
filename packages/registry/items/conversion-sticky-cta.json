@@ -1,0 +1,14 @@
+{
+  "name": "conversion-sticky-cta",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/ConversionStickyCta.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Sparkles, X, ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ConversionStickyCtaProps {\n  className?: string;\n}\n\nexport function ConversionStickyCta({ className }: ConversionStickyCtaProps) {\n  const [dismissed, setDismissed] = useState(false);\n\n  if (dismissed) return null;\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-3xl bg-card/80 backdrop-blur-xl border border-border/50 shadow-2xl rounded-2xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-3 px-4 py-3 sm:px-5\">\n        <span className=\"hidden sm:flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-primary\">\n          <Sparkles className=\"w-4 h-4\" />\n        </span>\n\n        <div className=\"min-w-0 flex-1\">\n          <p className=\"text-sm font-bold sm:text-base\">Start your free 14-day trial</p>\n          <p className=\"text-xs text-muted-foreground/65 truncate\">\n            No credit card required. Cancel anytime.\n          </p>\n        </div>\n\n        <button\n          type=\"button\"\n          className=\"inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-110 sm:px-4\"\n        >\n          Get started\n          <ArrowRight className=\"w-4 h-4\" />\n        </button>\n\n        <button\n          type=\"button\"\n          aria-label=\"Dismiss\"\n          onClick={() => setDismissed(true)}\n          className=\"shrink-0 rounded-lg p-1.5 text-muted-foreground/50 transition-colors hover:bg-foreground/[0.06] hover:text-foreground\"\n        >\n          <X className=\"w-4 h-4\" />\n        </button>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

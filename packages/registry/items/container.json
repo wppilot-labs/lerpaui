@@ -1,0 +1,11 @@
+{
+  "name": "container",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/container.tsx",
+      "type": "registry:ui",
+      "content": "import React from 'react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {\n  as?: React.ElementType;\n  clean?: boolean;\n}\n\nconst Container = React.forwardRef<HTMLDivElement, ContainerProps>(\n  ({ className, as: Component = 'div', clean = false, ...props }, ref) => {\n    return (\n      <Component\n        ref={ref}\n        className={cn(\n          !clean && 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8',\n          className\n        )}\n        {...props}\n      />\n    );\n  }\n);\nContainer.displayName = 'Container';\n\nexport { Container };\n"
+    }
+  ]
+}

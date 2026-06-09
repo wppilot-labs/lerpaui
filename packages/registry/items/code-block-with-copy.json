@@ -1,0 +1,14 @@
+{
+  "name": "code-block-with-copy",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CodeBlockWithCopy.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport { useState } from \"react\";\nimport { Copy, Check, FileCode2 } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst FILENAME = \"fetch-user.ts\";\nconst CODE = `async function fetchUser(id: string) {\n  const res = await fetch(\\`/api/users/\\${id}\\`);\n  if (!res.ok) throw new Error(\"Not found\");\n  return res.json();\n}`;\n\nexport interface CodeBlockWithCopyProps {\n  className?: string;\n}\n\nexport function CodeBlockWithCopy({ className }: CodeBlockWithCopyProps) {\n  const [copied, setCopied] = useState(false);\n\n  const handleCopy = async () => {\n    try {\n      await navigator.clipboard.writeText(CODE);\n    } catch {\n      /* clipboard unavailable */\n    }\n    setCopied(true);\n    window.setTimeout(() => setCopied(false), 1500);\n  };\n\n  const lines = CODE.split(\"\\n\");\n\n  return (\n    <div className={cn(\"w-full max-w-md overflow-hidden rounded-2xl border border-border bg-muted font-mono shadow-sm\", className)}>\n      <div className=\"flex items-center justify-between border-b border-border bg-foreground/[0.02] px-3 py-2.5\">\n        <div className=\"flex items-center gap-1.5 text-muted-foreground\">\n          <FileCode2 className=\"h-4 w-4\" />\n          <span className=\"text-xs\">{FILENAME}</span>\n        </div>\n        <button\n          type=\"button\"\n          onClick={handleCopy}\n          aria-label={copied ? \"Copied to clipboard\" : \"Copy code to clipboard\"}\n          className=\"flex items-center gap-1.5 rounded-lg border border-border bg-foreground/[0.04] px-2 py-1 text-xs text-muted-foreground transition hover:text-foreground\"\n        >\n          {copied ? (\n            <>\n              <Check className=\"h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400\" />\n              Copied\n            </>\n          ) : (\n            <>\n              <Copy className=\"h-3.5 w-3.5\" />\n              Copy\n            </>\n          )}\n        </button>\n      </div>\n      <pre className=\"overflow-x-auto p-5 text-xs leading-relaxed text-foreground/85\">\n        <code className=\"grid\">\n          {lines.map((line, i) => (\n            <span key={i} className=\"grid grid-cols-[1.5rem_1fr] gap-3\">\n              <span className=\"select-none text-right text-muted-foreground/40\">{i + 1}</span>\n              <span>{line || \" \"}</span>\n            </span>\n          ))}\n        </code>\n      </pre>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

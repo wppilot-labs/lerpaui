@@ -1,0 +1,14 @@
+{
+  "name": "newsletter-signup-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/NewsletterSignupSection.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface NewsletterSignupSectionProps {\n  className?: string;\n}\n\nexport function NewsletterSignupSection({ className }: NewsletterSignupSectionProps) {\n  const [email, setEmail] = useState(\"\");\n  const [done, setDone] = useState(false);\n\n  const submit = (e: React.FormEvent) => {\n    e.preventDefault();\n    if (email) setDone(true);\n  };\n\n  return (\n    <div className={cn(\"w-full max-w-sm text-center font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold\">Subscribe to our newsletter</h3>\n      <p className=\"mt-1 text-sm text-muted-foreground/55\">Fresh ideas, delivered monthly.</p>\n\n      {done ? (\n        <p className=\"mt-4 inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1.5 text-sm font-semibold text-emerald-400\">\n          <Check className=\"h-4 w-4\" /> Thanks for subscribing\n        </p>\n      ) : (\n        <form onSubmit={submit} className=\"mt-4 flex items-center border-b border-foreground/15 pb-1.5 focus-within:border-primary\">\n          <label htmlFor=\"nl-min-email\" className=\"sr-only\">\n            Email address\n          </label>\n          <input\n            id=\"nl-min-email\"\n            type=\"email\"\n            required\n            value={email}\n            onChange={(e) => setEmail(e.target.value)}\n            placeholder=\"Enter your email\"\n            className=\"flex-1 bg-transparent px-1 py-1 text-sm placeholder:text-muted-foreground/30 focus:outline-none\"\n          />\n          <button\n            type=\"submit\"\n            className=\"shrink-0 px-1 text-sm font-bold text-primary transition-opacity hover:opacity-80\"\n          >\n            Join\n          </button>\n        </form>\n      )}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

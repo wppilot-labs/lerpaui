@@ -1,0 +1,14 @@
+{
+  "name": "checkout-trust-security-strip",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CheckoutTrustSecurityStrip.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Lock } from \"lucide-react\";\n\nexport function CheckoutTrustSecurityStrip() {\n  return (\n    <div className=\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-xl shadow-lg select-none font-sans text-foreground\">\n      <div className=\"flex flex-col sm:flex-row items-center justify-between gap-4\">\n        <div className=\"flex items-center gap-2\">\n          <div className=\"p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400\">\n            <Lock className=\"w-4 h-4\" />\n          </div>\n          <div className=\"text-xs\">\n            <p className=\"font-black leading-none text-foreground\">256-Bit SSL Encrypted</p>\n            <p className=\"text-[10px] text-muted-foreground/60\">100% Secure transaction guaranteed</p>\n          </div>\n        </div>\n\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <span className=\"text-[10px] font-black uppercase text-muted-foreground/50 border border-white/[0.04] px-2 py-0.5 rounded\">Stripe PCI-DSS</span>\n          <span className=\"text-[10px] font-black uppercase text-muted-foreground/50 border border-white/[0.04] px-2 py-0.5 rounded\">PayPal Verified</span>\n          <span className=\"text-[10px] font-black uppercase text-muted-foreground/50 border border-white/[0.04] px-2 py-0.5 rounded\">Apple Pay</span>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

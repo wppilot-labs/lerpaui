@@ -1,0 +1,15 @@
+{
+  "name": "docs-toc-sidebar",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DocsTocSidebar.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsTocSidebarProps {\n  className?: string;\n}\n\ntype Heading = { id: string; title: string; depth: 2 | 3 };\n\nconst HEADINGS: Heading[] = [\n  { id: \"overview\", title: \"Overview\", depth: 2 },\n  { id: \"install\", title: \"Installation\", depth: 2 },\n  { id: \"npm\", title: \"Using npm\", depth: 3 },\n  { id: \"pnpm\", title: \"Using pnpm\", depth: 3 },\n  { id: \"config\", title: \"Configuration\", depth: 2 },\n  { id: \"faq\", title: \"FAQ\", depth: 2 },\n];\n\nexport function DocsTocSidebar({ className }: DocsTocSidebarProps) {\n  const [active, setActive] = useState(\"install\");\n\n  return (\n    <nav\n      aria-label=\"On this page\"\n      className={cn(\n        \"w-full max-w-[16rem] bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <p className=\"mb-2 text-[11px] uppercase font-bold tracking-wider text-muted-foreground/45\">On this page</p>\n      <ul className=\"space-y-0.5 border-l border-foreground/[0.08]\">\n        {HEADINGS.map((h) => {\n          const isActive = h.id === active;\n          return (\n            <li key={h.id}>\n              <button\n                type=\"button\"\n                aria-current={isActive ? \"location\" : undefined}\n                onClick={() => setActive(h.id)}\n                className={cn(\n                  \"block w-full text-left -ml-px border-l-2 py-1 text-sm transition-colors\",\n                  h.depth === 3 ? \"pl-6\" : \"pl-3\",\n                  isActive\n                    ? \"border-primary text-primary font-medium\"\n                    : \"border-transparent text-muted-foreground/60 hover:text-foreground\",\n                )}\n              >\n                {h.title}\n              </button>\n            </li>\n          );\n        })}\n      </ul>\n    </nav>\n  );\n}\n"
+    }
+  ]
+}

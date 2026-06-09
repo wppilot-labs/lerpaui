@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-resource-usage-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardResourceUsageCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Cpu } from \"lucide-react\";\n\nexport function DashboardResourceUsageCard() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center gap-1.5 mb-4\">\n        <Cpu className=\"w-4 h-4 text-violet-400\" />\n        <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">System CPU load</span>\n      </div>\n\n      <div className=\"space-y-3.5 text-xs\">\n        <div>\n          <div className=\"flex justify-between mb-1\">\n            <span className=\"text-muted-foreground/60\">Core Processor Load</span>\n            <span className=\"font-bold\">42%</span>\n          </div>\n          <div className=\"h-1.5 bg-secondary/40 rounded-full overflow-hidden\">\n            <div className=\"h-full w-[42%] bg-violet-500 rounded-full\" />\n          </div>\n        </div>\n\n        <div>\n          <div className=\"flex justify-between mb-1\">\n            <span className=\"text-muted-foreground/60\">Memory Usage</span>\n            <span className=\"font-bold\">6.8 GB / 16 GB</span>\n          </div>\n          <div className=\"h-1.5 bg-secondary/40 rounded-full overflow-hidden\">\n            <div className=\"h-full w-[42.5%] bg-indigo-500 rounded-full\" />\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

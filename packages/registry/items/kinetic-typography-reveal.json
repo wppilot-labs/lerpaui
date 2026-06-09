@@ -1,0 +1,14 @@
+{
+  "name": "kinetic-typography-reveal",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/KineticTypographyReveal.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function KineticTypographyReveal({ className }: { className?: string }) {\n  const [isHovered, setIsHovered] = useState(false);\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center min-h-[140px]\", className)}>\n      <div\n        onMouseEnter={() => setIsHovered(true)}\n        onMouseLeave={() => setIsHovered(false)}\n        className=\"cursor-pointer select-none space-y-1.5 text-center\"\n      >\n        <motion.h4\n          animate={{ scale: isHovered ? 1.06 : 1, color: isHovered ? \"var(--color-primary, #3b82f6)\" : \"var(--color-foreground)\" }}\n          className=\"text-lg font-black tracking-widest uppercase transition-colors\"\n        >\n          KINETIC STUDIO\n        </motion.h4>\n        <motion.p\n          animate={{ y: isHovered ? -2 : 0, opacity: isHovered ? 1 : 0.6 }}\n          className=\"text-[9px] font-mono text-muted-foreground uppercase tracking-widest\"\n        >\n          Hover mouse to trigger spring coordinate lift\n        </motion.p>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

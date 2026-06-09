@@ -1,0 +1,14 @@
+{
+  "name": "product-card-horizontal",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ProductCardHorizontal.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ArrowRight, ShoppingCart } from \"lucide-react\";\n\nexport function ProductCardHorizontal() {\n  return (\n    <div className=\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl select-none font-sans text-foreground flex items-center gap-4\">\n      <div className=\"w-20 h-20 bg-secondary/20 rounded-xl border border-white/[0.04] flex items-center justify-center shrink-0\">\n        <ShoppingCart className=\"w-8 h-8 text-violet-400\" />\n      </div>\n\n      <div className=\"flex-1 min-w-0 space-y-1\">\n        <h4 className=\"text-xs font-black truncate\">Premium Modular Architecture</h4>\n        <p className=\"text-[10px] text-muted-foreground/60 leading-normal line-clamp-2\">Complete set of developer license layout systems.</p>\n        <div className=\"flex justify-between items-center pt-1\">\n          <span className=\"text-xs font-black text-violet-400\">$189.00</span>\n          <button className=\"px-3 py-1 bg-primary hover:brightness-110 text-white text-[10px] font-bold rounded-lg flex items-center gap-0.5\">\n            <span>Details</span>\n            <ArrowRight className=\"w-3 h-3\" />\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

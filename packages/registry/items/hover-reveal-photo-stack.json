@@ -1,0 +1,14 @@
+{
+  "name": "hover-reveal-photo-stack",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/HoverRevealPhotoStack.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function HoverRevealPhotoStack({\n  className,\n}: {\n  className?: string;\n}) {\n  const [isHovered, setIsHovered] = useState(false);\n\n  const images = [\n    { bg: \"bg-gradient-to-tr from-purple-500 to-indigo-600\", rotate: -8, scale: 0.9 },\n    { bg: \"bg-gradient-to-tr from-cyan-500 to-blue-600\", rotate: 6, scale: 0.95 },\n    { bg: \"bg-gradient-to-tr from-emerald-500 to-teal-600\", rotate: -2, scale: 1 },\n  ];\n\n  return (\n    <div\n      onMouseEnter={() => setIsHovered(true)}\n      onMouseLeave={() => setIsHovered(false)}\n      className={cn(\n        \"relative w-44 h-44 flex items-center justify-center cursor-pointer select-none\",\n        className\n      )}\n    >\n      {images.map((img, idx) => {\n        // Calculate offsets on hover vs stacked\n        const hoverX = (idx - 1) * 64; // Fan out horizontally\n        const hoverY = (idx - 1) * -8;\n        const hoverRotate = (idx - 1) * 12;\n\n        return (\n          <motion.div\n            key={idx}\n            className={cn(\n              \"absolute w-28 h-36 rounded-2xl border border-white/[0.08] shadow-2xl p-2 bg-zinc-950 flex flex-col justify-between\",\n              img.bg\n            )}\n            animate={{\n              x: isHovered ? hoverX : 0,\n              y: isHovered ? hoverY : 0,\n              rotate: isHovered ? hoverRotate : img.rotate,\n              scale: isHovered ? 1.05 : img.scale,\n              zIndex: idx,\n            }}\n            transition={{\n              type: \"spring\",\n              stiffness: 200,\n              damping: 18,\n            }}\n          >\n            {/* White Polaroid Border Style Card inside */}\n            <div className=\"w-full h-[78%] bg-black/20 rounded-lg flex items-center justify-center text-white/50 text-[10px] font-mono select-none\">\n              UI {idx + 1}\n            </div>\n            <div className=\"h-[18%] flex items-center px-1\">\n              <div className=\"w-1.5 h-1.5 rounded-full bg-white/60 mr-1.5\" />\n              <span className=\"text-[7px] uppercase font-bold text-white/60 tracking-wider\">\n                Module\n              </span>\n            </div>\n          </motion.div>\n        );\n      })}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-kpi-grid-block",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/dashboard-kpi-grid-block.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { DollarSign, Users, ShoppingCart, Activity, ArrowUp, ArrowDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Kpi = { label: string; value: string; delta: number; icon: React.ComponentType<{ className?: string }> };\n\nconst KPIS: Kpi[] = [\n  { label: \"Revenue\", value: \"$48.2k\", delta: 12.4, icon: DollarSign },\n  { label: \"Users\", value: \"9,310\", delta: 8.1, icon: Users },\n  { label: \"Orders\", value: \"1,284\", delta: -3.2, icon: ShoppingCart },\n  { label: \"Uptime\", value: \"99.98%\", delta: 0.1, icon: Activity },\n];\n\nexport interface DashboardKpiGridBlockProps {\n  className?: string;\n}\n\nexport function DashboardKpiGridBlock({ className }: DashboardKpiGridBlockProps) {\n  return (\n    <div className={cn(\"w-full max-w-md grid grid-cols-2 gap-3 font-sans text-foreground\", className)}>\n      {KPIS.map((k) => {\n        const Icon = k.icon;\n        const up = k.delta >= 0;\n        return (\n          <div key={k.label} className=\"bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl\">\n            <div className=\"flex items-center justify-between mb-2\">\n              <div className=\"h-9 w-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center\">\n                <Icon className=\"w-5 h-5\" />\n              </div>\n              <span className={cn(\"inline-flex items-center gap-0.5 text-xs font-bold\", up ? \"text-emerald-400\" : \"text-red-400\")}>\n                {up ? <ArrowUp className=\"w-4 h-4\" /> : <ArrowDown className=\"w-4 h-4\" />}\n                {Math.abs(k.delta)}%\n              </span>\n            </div>\n            <div className=\"text-2xl font-black leading-tight\">{k.value}</div>\n            <div className=\"text-xs uppercase tracking-wide text-muted-foreground/50\">{k.label}</div>\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "review-list-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ReviewListCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Star, ShieldCheck } from \"lucide-react\";\n\nexport function ReviewListCard() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-3\">\n        <div className=\"flex items-center gap-1\">\n          {[1, 2, 3, 4, 5].map((s) => (\n            <Star key={s} className=\"w-3.5 h-3.5 fill-yellow-400 text-yellow-400\" />\n          ))}\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 flex items-center gap-0.5\">\n          <ShieldCheck className=\"w-3 h-3\" /> Verified Buyer\n        </span>\n      </div>\n\n      <p className=\"text-xs text-muted-foreground/80 leading-normal mb-3\">\n        \"Absolute jaw-dropping design! The dark glassmorphism styling and Framer Motion spring integrations compile flawlessly.\"\n      </p>\n\n      <div className=\"text-[10px] text-muted-foreground\">\n        <span>Author: <span className=\"font-bold text-foreground\">Jane Doe</span></span>\n        <span className=\"float-right\">Reviewed 1d ago</span>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

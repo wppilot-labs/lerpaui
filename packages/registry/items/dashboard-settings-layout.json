@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-settings-layout",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardSettingsLayout.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { User, Bell, CreditCard, Shield, ChevronRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst NAV = [\n  { id: \"profile\", label: \"Profile\", icon: User },\n  { id: \"notifications\", label: \"Notifications\", icon: Bell },\n  { id: \"billing\", label: \"Billing\", icon: CreditCard },\n  { id: \"security\", label: \"Security\", icon: Shield },\n];\n\nexport interface DashboardSettingsLayoutProps {\n  className?: string;\n}\n\nexport function DashboardSettingsLayout({ className }: DashboardSettingsLayoutProps) {\n  const [active, setActive] = useState(\"profile\");\n  const current = NAV.find((n) => n.id === active)!;\n\n  return (\n    <div className={cn(\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl font-sans text-foreground overflow-hidden grid grid-cols-[40%_60%]\", className)}>\n      <nav className=\"border-r border-foreground/[0.05] p-2.5 space-y-0.5\" aria-label=\"Settings\">\n        {NAV.map((n) => {\n          const Icon = n.icon;\n          const on = n.id === active;\n          return (\n            <button\n              key={n.id}\n              type=\"button\"\n              onClick={() => setActive(n.id)}\n              aria-current={on ? \"page\" : undefined}\n              className={cn(\n                \"w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors\",\n                on ? \"bg-primary/10 text-primary\" : \"text-muted-foreground/70 hover:text-foreground hover:bg-foreground/[0.03]\",\n              )}\n            >\n              <Icon className=\"w-4 h-4\" />\n              {n.label}\n              <ChevronRight className={cn(\"w-4 h-4 ml-auto transition-opacity\", on ? \"opacity-100\" : \"opacity-0\")} />\n            </button>\n          );\n        })}\n      </nav>\n\n      <div className=\"p-5\">\n        <h3 className=\"text-base font-bold flex items-center gap-1.5 mb-1\">\n          <current.icon className=\"w-4 h-4 text-primary\" /> {current.label}\n        </h3>\n        <p className=\"text-xs text-muted-foreground/60 mb-4\">Manage your {current.label.toLowerCase()} settings</p>\n        <div className=\"space-y-2.5\">\n          <div className=\"h-9 rounded-lg bg-foreground/[0.03] border border-foreground/[0.06]\" />\n          <div className=\"h-9 rounded-lg bg-foreground/[0.03] border border-foreground/[0.06]\" />\n          <button type=\"button\" className=\"w-full py-2 text-xs font-bold rounded-lg bg-primary text-primary-foreground hover:brightness-110 transition-all\">Save</button>\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

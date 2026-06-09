@@ -1,0 +1,15 @@
+{
+  "name": "elastic-list-reorderable",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ElasticListReorderable.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion, AnimatePresence} from \"framer-motion\";\nimport { GripVertical, Sparkles } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function ElasticListReorderable({ className }: { className?: string }) {\n  const [items, _setItems] = useState([\n    { id: \"1\", label: \"Elastic Physics Engine\" },\n    { id: \"2\", label: \"Bento Layout Config\" },\n    { id: \"3\", label: \"Glow Accent Indicators\" },\n  ]);\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Reorderable List</h3>\n          <p className=\"text-[10px] text-muted-foreground\">List items stretch slightly when reordered</p>\n        </div>\n        <Sparkles className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div className=\"space-y-2\">\n        <AnimatePresence initial={false}>\n          {items.map((item, _idx) => (\n            <motion.div\n              key={item.id}\n              layout\n              className=\"flex items-center gap-3 p-3 bg-zinc-900/40 border border-border/30 rounded-xl cursor-grab active:cursor-grabbing transition-all hover:bg-zinc-900/60\"\n            >\n              <GripVertical className=\"w-4 h-4 text-muted-foreground\" />\n              <span className=\"text-xs text-foreground font-medium\">{item.label}</span>\n            </motion.div>\n          ))}\n        </AnimatePresence>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

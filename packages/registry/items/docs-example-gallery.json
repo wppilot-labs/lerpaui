@@ -1,0 +1,14 @@
+{
+  "name": "docs-example-gallery",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DocsExampleGallery.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ArrowUpRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsExampleGalleryProps {\n  className?: string;\n}\n\ntype Example = { title: string; tag: string; from: string; to: string };\n\nconst EXAMPLES: Example[] = [\n  { title: \"SaaS Dashboard\", tag: \"App\", from: \"#6366f1\", to: \"#8b5cf6\" },\n  { title: \"Pricing Page\", tag: \"Marketing\", from: \"#0ea5e9\", to: \"#22d3ee\" },\n  { title: \"Auth Flow\", tag: \"Starter\", from: \"#10b981\", to: \"#34d399\" },\n  { title: \"Blog Theme\", tag: \"Content\", from: \"#f59e0b\", to: \"#fb7185\" },\n];\n\nexport function DocsExampleGallery({ className }: DocsExampleGalleryProps) {\n  const [hovered, setHovered] = useState<string | null>(null);\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <header className=\"mb-4\">\n        <p className=\"text-[11px] uppercase font-bold tracking-wider text-muted-foreground/45\">Showcase</p>\n        <h3 className=\"text-base font-bold mt-0.5\">Example gallery</h3>\n      </header>\n\n      <div className=\"grid grid-cols-2 gap-3\">\n        {EXAMPLES.map((ex) => (\n          <a\n            key={ex.title}\n            href=\"/\"\n            onMouseEnter={() => setHovered(ex.title)}\n            onMouseLeave={() => setHovered(null)}\n            className=\"group rounded-xl border border-foreground/[0.06] overflow-hidden hover:border-foreground/[0.12] transition-colors\"\n          >\n            <div\n              className=\"relative h-24 flex items-end p-2.5\"\n              style={{ backgroundImage: `linear-gradient(135deg, ${ex.from}, ${ex.to})` }}\n            >\n              <ArrowUpRight\n                className={cn(\n                  \"absolute top-2 right-2 w-4 h-4 text-white/80 transition-transform\",\n                  hovered === ex.title && \"translate-x-0.5 -translate-y-0.5\",\n                )}\n              />\n              <span className=\"text-[11px] font-bold uppercase tracking-wider text-white/90 bg-black/25 px-1.5 py-0.5 rounded\">\n                {ex.tag}\n              </span>\n            </div>\n            <div className=\"px-3 py-2.5\">\n              <p className=\"text-sm font-semibold\">{ex.title}</p>\n              <p className=\"text-xs text-muted-foreground/50\">Live preview &amp; source</p>\n            </div>\n          </a>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

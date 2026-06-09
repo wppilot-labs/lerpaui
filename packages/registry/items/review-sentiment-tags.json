@@ -1,0 +1,14 @@
+{
+  "name": "review-sentiment-tags",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ReviewSentimentTags.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ThumbsUp, ThumbsDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Tag = { label: string; count: number; positive: boolean };\n\nconst TAGS: Tag[] = [\n  { label: \"Easy to use\", count: 412, positive: true },\n  { label: \"Great value\", count: 388, positive: true },\n  { label: \"Fast shipping\", count: 301, positive: true },\n  { label: \"High quality\", count: 264, positive: true },\n  { label: \"Helpful support\", count: 198, positive: true },\n  { label: \"Runs small\", count: 74, positive: false },\n  { label: \"Pricey\", count: 52, positive: false },\n  { label: \"Setup confusing\", count: 41, positive: false },\n];\n\nexport interface ReviewSentimentTagsProps {\n  className?: string;\n}\n\nexport function ReviewSentimentTags({ className }: ReviewSentimentTagsProps) {\n  const [selected, setSelected] = useState<string[]>([]);\n\n  const toggle = (label: string) =>\n    setSelected((cur) => (cur.includes(label) ? cur.filter((l) => l !== label) : [...cur, label]));\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-md rounded-2xl border border-border/50 bg-card/60 p-4 font-sans text-foreground shadow-xl backdrop-blur-xl\",\n        className,\n      )}\n    >\n      <h3 className=\"mb-1 text-base font-bold\">What customers mention</h3>\n      <p className=\"mb-3 text-sm text-muted-foreground/55\">Tap a tag to filter reviews by topic.</p>\n\n      <div className=\"flex flex-wrap gap-1.5\">\n        {TAGS.map((tag) => {\n          const isSel = selected.includes(tag.label);\n          return (\n            <button\n              key={tag.label}\n              type=\"button\"\n              aria-pressed={isSel}\n              onClick={() => toggle(tag.label)}\n              className={cn(\n                \"flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-colors\",\n                isSel\n                  ? \"border-primary bg-primary/10 text-primary\"\n                  : tag.positive\n                    ? \"border-emerald-500/20 bg-emerald-500/[0.07] text-emerald-700 hover:bg-emerald-500/15 dark:text-emerald-300\"\n                    : \"border-rose-500/20 bg-rose-500/[0.07] text-rose-700 hover:bg-rose-500/15 dark:text-rose-300\",\n              )}\n            >\n              {tag.positive ? <ThumbsUp className=\"h-3.5 w-3.5\" /> : <ThumbsDown className=\"h-3.5 w-3.5\" />}\n              <span>{tag.label}</span>\n              <span className=\"opacity-60\">{tag.count}</span>\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

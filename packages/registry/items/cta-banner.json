@@ -1,0 +1,14 @@
+{
+  "name": "cta-banner",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CtaBanner.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Sparkles, ArrowRight } from \"lucide-react\";\n\nexport function CtaBanner() {\n  return (\n    <div className=\"w-full max-w-2xl bg-gradient-to-r from-violet-600/20 to-indigo-600/20 border border-violet-500/20 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground flex flex-col sm:flex-row items-center justify-between gap-4\">\n      <div className=\"flex items-center gap-3\">\n        <div className=\"w-12 h-12 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400\">\n          <Sparkles className=\"w-6 h-6 animate-pulse\" />\n        </div>\n        <div>\n          <h3 className=\"text-base font-black leading-none mb-1\">Claim 45% Discount Bundle Today!</h3>\n          <p className=\"text-xs text-muted-foreground/60\">Unlock all 952 premium components with a single developer license.</p>\n        </div>\n      </div>\n\n      <button className=\"px-4 py-2 bg-primary hover:brightness-110 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all\">\n        <span>Claim Promo</span>\n        <ArrowRight className=\"w-3.5 h-3.5\" />\n      </button>\n    </div>\n  );\n}"
+    }
+  ]
+}

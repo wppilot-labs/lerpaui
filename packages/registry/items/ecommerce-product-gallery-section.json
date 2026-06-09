@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-product-gallery-section",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceProductGallerySection.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Expand } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst VIEWS = [\n  { id: \"front\", label: \"Front\", tone: \"from-orange-400/30 to-amber-500/20\" },\n  { id: \"side\", label: \"Side\", tone: \"from-rose-400/30 to-pink-500/20\" },\n  { id: \"back\", label: \"Back\", tone: \"from-violet-400/30 to-purple-500/20\" },\n  { id: \"detail\", label: \"Detail\", tone: \"from-sky-400/30 to-blue-500/20\" },\n];\n\nexport interface EcommerceProductGallerySectionProps {\n  className?: string;\n}\n\nexport function EcommerceProductGallerySection({ className }: EcommerceProductGallerySectionProps) {\n  const [active, setActive] = useState(0);\n\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className={cn(\"relative aspect-[4/5] rounded-xl border border-foreground/[0.05] bg-gradient-to-br\", VIEWS[active].tone)}>\n        <span className=\"absolute left-3 top-3 text-xs font-medium bg-background/60 backdrop-blur px-2 py-1 rounded-md text-muted-foreground\">\n          {VIEWS[active].label}\n        </span>\n        <button\n          type=\"button\"\n          aria-label=\"Expand image\"\n          className=\"absolute right-3 top-3 h-9 w-9 rounded-md bg-background/60 backdrop-blur flex items-center justify-center text-muted-foreground hover:text-foreground transition\"\n        >\n          <Expand className=\"w-4 h-4\" />\n        </button>\n        <span className=\"absolute bottom-3 right-3 text-xs text-muted-foreground/70 bg-background/60 backdrop-blur px-2 py-1 rounded-md\">\n          {active + 1} / {VIEWS.length}\n        </span>\n      </div>\n\n      <div className=\"grid grid-cols-4 gap-2 mt-3\">\n        {VIEWS.map((v, i) => (\n          <button\n            key={v.id}\n            type=\"button\"\n            aria-label={`View ${v.label}`}\n            aria-pressed={i === active}\n            onClick={() => setActive(i)}\n            className={cn(\n              \"aspect-square rounded-lg bg-gradient-to-br border transition\",\n              v.tone,\n              i === active ? \"border-primary ring-1 ring-primary/40\" : \"border-foreground/[0.06] opacity-70 hover:opacity-100\",\n            )}\n          />\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

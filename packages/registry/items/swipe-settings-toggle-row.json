@@ -1,0 +1,15 @@
+{
+  "name": "swipe-settings-toggle-row",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/swipe-settings-toggle-row.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from 'react';\nimport { motion, useMotionValue, useSpring, PanInfo } from 'framer-motion';\nimport { Settings, Eye, EyeOff } from 'lucide-react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface SwipeSettingsToggleRowProps {\n  id: string;\n  label: string;\n  initialValue?: boolean;\n  onToggle?: (id: string, value: boolean) => void;\n  className?: string;\n}\n\nexport const SwipeSettingsToggleRow: React.FC<SwipeSettingsToggleRowProps> = ({\n  id,\n  label,\n  initialValue = false,\n  onToggle,\n  className,\n}) => {\n  const [active, setActive] = useState(initialValue);\n  const x = useMotionValue(0);\n  const springX = useSpring(x, { stiffness: 350, damping: 25 });\n  const triggerWidth = 70;\n\n  const handleDragEnd = (_event: unknown, _info: PanInfo) => {\n    const currentX = x.get();\n    if (currentX < -40) {\n      // Toggle\n      const next = !active;\n      setActive(next);\n      onToggle?.(id, next);\n      if (typeof window !== 'undefined' && navigator.vibrate) navigator.vibrate(10);\n      x.set(0);\n    } else {\n      x.set(0);\n    }\n  };\n\n  return (\n    <div className={cn('relative overflow-hidden w-full rounded-xl border border-border bg-card shadow-sm select-none', className)}>\n      {/* Background toggle trigger */}\n      <div className=\"absolute inset-0 flex justify-end\">\n        <div \n          className={cn('flex items-center justify-center text-white px-6 rounded-r-xl transition-colors duration-300 w-24 ml-auto', \n            active ? 'bg-primary' : 'bg-zinc-600'\n          )}\n        >\n          {active ? <Eye className=\"w-5 h-5 animate-pulse\" /> : <EyeOff className=\"w-5 h-5\" />}\n        </div>\n      </div>\n\n      {/* Main Draggable Foreground */}\n      <motion.div\n        drag=\"x\"\n        dragConstraints={{ left: -triggerWidth - 10, right: 0 }}\n        dragElastic={0.1}\n        style={{ x: springX }}\n        onDragEnd={handleDragEnd}\n        className=\"relative z-10 w-full bg-card p-4 flex items-center justify-between cursor-grab active:cursor-grabbing border-b border-border/40\"\n      >\n        <div className=\"flex items-center gap-3\">\n          <div className=\"p-2 rounded-lg bg-secondary/50 text-muted-foreground\">\n            <Settings className=\"w-4 h-4\" />\n          </div>\n          <span className=\"text-sm font-bold text-foreground\">{label}</span>\n        </div>\n        <div className=\"flex items-center gap-3 pointer-events-none\">\n          <div className={cn('w-9 h-5 rounded-full p-0.5 transition-colors duration-250', active ? 'bg-primary' : 'bg-muted')}>\n            <div className={cn('w-4 h-4 bg-white rounded-full transition-transform duration-250 shadow-sm', active ? 'translate-x-4' : 'translate-x-0')} />\n          </div>\n        </div>\n      </motion.div>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

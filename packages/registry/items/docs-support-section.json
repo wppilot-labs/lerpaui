@@ -1,0 +1,14 @@
+{
+  "name": "docs-support-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DocsSupportSection.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { MessageCircle, Mail, Github, BookOpen, ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsSupportSectionProps {\n  className?: string;\n}\n\ntype Channel = {\n  title: string;\n  desc: string;\n  action: string;\n  icon: React.ComponentType<{ className?: string }>;\n  href: string;\n};\n\nconst CHANNELS: Channel[] = [\n  { title: \"Community Discord\", desc: \"Chat with the team and other developers.\", action: \"Join server\", icon: MessageCircle, href: \"#\" },\n  { title: \"Email support\", desc: \"Reach us for account or billing issues.\", action: \"support@acme.dev\", icon: Mail, href: \"mailto:support@acme.dev\" },\n  { title: \"GitHub issues\", desc: \"Report bugs or request a feature.\", action: \"Open an issue\", icon: Github, href: \"#\" },\n  { title: \"Browse guides\", desc: \"Find answers in the documentation.\", action: \"Read docs\", icon: BookOpen, href: \"#\" },\n];\n\nexport function DocsSupportSection({ className }: DocsSupportSectionProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <header className=\"mb-4\">\n        <p className=\"text-[11px] uppercase font-bold tracking-wider text-muted-foreground/45\">Help</p>\n        <h3 className=\"text-base font-bold mt-0.5\">Need support?</h3>\n      </header>\n\n      <div className=\"grid grid-cols-1 sm:grid-cols-2 gap-3\">\n        {CHANNELS.map((c) => {\n          const Icon = c.icon;\n          return (\n            <a\n              key={c.title}\n              href={c.href}\n              className=\"group flex flex-col gap-2 p-4 rounded-xl border border-foreground/[0.06] hover:border-foreground/[0.12] hover:bg-foreground/[0.02] transition-colors\"\n            >\n              <span className=\"grid place-items-center h-10 w-10 rounded-lg bg-primary/10 text-primary\">\n                <Icon className=\"w-4 h-4\" />\n              </span>\n              <h4 className=\"text-sm font-semibold\">{c.title}</h4>\n              <p className=\"text-xs text-muted-foreground/60 leading-relaxed flex-1\">{c.desc}</p>\n              <span className=\"inline-flex items-center gap-1 text-sm font-medium text-primary\">\n                {c.action}\n                <ArrowRight className=\"w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5\" />\n              </span>\n            </a>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

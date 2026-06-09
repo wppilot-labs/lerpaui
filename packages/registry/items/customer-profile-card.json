@@ -1,0 +1,12 @@
+{
+  "name": "customer-profile-card",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/CustomerProfileCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nexport function CustomerProfileCard() {\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"p-4 space-y-4\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"w-11 h-11 rounded-2xl bg-gradient-to-tr from-violet-500 to-indigo-500 flex items-center justify-center font-bold text-white text-xs\">\n            AB\n          </div>\n          <div>\n            <h4 className=\"text-xs font-black leading-none mb-1\">Alex Bennett</h4>\n            <span className=\"text-[9px] uppercase font-bold text-emerald-400\">Enterprise Partner</span>\n          </div>\n        </div>\n\n        <div className=\"pt-3.5 border-t border-white/[0.04] grid grid-cols-2 gap-2 text-xs\">\n          <div className=\"p-2 bg-white/[0.02] border border-white/[0.03] rounded-xl\">\n            <span className=\"block text-[8px] text-muted-foreground/50 uppercase font-bold\">Lifetime spend</span>\n            <span className=\"font-extrabold\">$1,420.00</span>\n          </div>\n          <div className=\"p-2 bg-white/[0.02] border border-white/[0.03] rounded-xl\">\n            <span className=\"block text-[8px] text-muted-foreground/50 uppercase font-bold\">Open Tickets</span>\n            <span className=\"font-extrabold text-violet-400\">0 Active</span>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

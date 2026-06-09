@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-sort-toolbar",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceSortToolbar.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ArrowDownWideNarrow, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst SORTS = [\n  { id: \"relevance\", label: \"Relevance\" },\n  { id: \"newest\", label: \"Newest\" },\n  { id: \"rating\", label: \"Rating\" },\n  { id: \"price-asc\", label: \"Price ↑\" },\n  { id: \"price-desc\", label: \"Price ↓\" },\n];\n\nconst PER_PAGE = [24, 48, 96];\n\nexport interface EcommerceSortToolbarProps {\n  className?: string;\n}\n\nexport function EcommerceSortToolbar({ className }: EcommerceSortToolbarProps) {\n  const [sort, setSort] = useState(\"relevance\");\n  const [perPage, setPerPage] = useState(24);\n\n  return (\n    <div className={cn(\"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-3 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex flex-wrap items-center gap-3\">\n        <span className=\"inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground/70\">\n          <ArrowDownWideNarrow className=\"w-4 h-4\" /> Sort by\n        </span>\n\n        <div className=\"flex flex-wrap items-center gap-1.5\">\n          {SORTS.map((s) => (\n            <button\n              key={s.id}\n              type=\"button\"\n              aria-pressed={sort === s.id}\n              onClick={() => setSort(s.id)}\n              className={cn(\n                \"inline-flex items-center gap-1 text-xs font-medium rounded-full px-3 py-1.5 border transition\",\n                sort === s.id ? \"bg-primary text-primary-foreground border-primary\" : \"border-foreground/[0.1] bg-foreground/[0.03] text-muted-foreground hover:text-foreground hover:border-foreground/25\",\n              )}\n            >\n              {sort === s.id && <Check className=\"w-3.5 h-3.5\" />}\n              {s.label}\n            </button>\n          ))}\n        </div>\n\n        <div className=\"ml-auto flex items-center gap-2\">\n          <label htmlFor=\"per-page\" className=\"text-xs text-muted-foreground/55\">Per page</label>\n          <select\n            id=\"per-page\"\n            value={perPage}\n            onChange={(e) => setPerPage(Number(e.target.value))}\n            className=\"text-xs font-medium rounded-lg border border-foreground/[0.1] bg-foreground/[0.03] px-2 py-1.5 focus:ring-1 focus:ring-primary/50 focus:outline-none\"\n          >\n            {PER_PAGE.map((n) => (\n              <option key={n} value={n} className=\"bg-card text-foreground\">{n}</option>\n            ))}\n          </select>\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

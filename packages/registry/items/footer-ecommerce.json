@@ -1,0 +1,12 @@
+{
+  "name": "footer-ecommerce",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/FooterEcommerce.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport function FooterEcommerce() {\n  return (\n    <div className=\"w-full max-w-4xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-xl shadow-lg select-none font-sans text-foreground\">\n      <div className=\"flex flex-col sm:flex-row items-center justify-between gap-4\">\n        <span className=\"text-[10px] text-muted-foreground/60\">Lerpa UI Premium Marketplace Store © 2026.</span>\n        <div className=\"flex gap-4 text-[10px] text-muted-foreground\">\n          <a href=\"#\" className=\"hover:text-foreground\">RMA Return Exchange</a>\n          <a href=\"#\" className=\"hover:text-foreground\">Secure Checkout SSL</a>\n          <a href=\"#\" className=\"hover:text-foreground\">Contact Support</a>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "checkout-payment-method-card",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/CheckoutPaymentMethodCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nexport function CheckoutPaymentMethodCard() {\n  const [activeTab, setActiveTab] = useState(\"card\");\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex gap-1 bg-secondary/20 p-0.5 rounded-lg mb-4\">\n        {[\"card\", \"paypal\"].map((tab) => (\n          <button\n            key={tab}\n            type=\"button\"\n            aria-pressed={activeTab === tab}\n            onClick={() => setActiveTab(tab)}\n            className={`flex-1 py-1 rounded-md text-[10px] uppercase font-bold transition-all ${\n              activeTab === tab ? \"bg-card text-foreground shadow-sm\" : \"text-muted-foreground/60 hover:text-foreground\"\n            }`}\n          >\n            {tab}\n          </button>\n        ))}\n      </div>\n\n      {activeTab === \"card\" ? (\n        <div className=\"space-y-3\">\n          <label htmlFor=\"cpmc-name\" className=\"sr-only\">Cardholder name</label>\n          <input\n            id=\"cpmc-name\"\n            type=\"text\"\n            autoComplete=\"cc-name\"\n            placeholder=\"Cardholder Name\"\n            className=\"w-full px-3 py-1.5 bg-secondary/30 border border-white/[0.04] rounded-xl text-xs focus:outline-none focus:border-violet-500/50\"\n          />\n          <label htmlFor=\"cpmc-number\" className=\"sr-only\">Card number</label>\n          <input\n            id=\"cpmc-number\"\n            type=\"text\"\n            inputMode=\"numeric\"\n            autoComplete=\"cc-number\"\n            placeholder=\"Card Number\"\n            className=\"w-full px-3 py-1.5 bg-secondary/30 border border-white/[0.04] rounded-xl text-xs focus:outline-none focus:border-violet-500/50\"\n          />\n        </div>\n      ) : (\n        <div className=\"py-4 text-center text-xs text-muted-foreground/60\">\n          Redirecting securely to secure PayPal endpoints...\n        </div>\n      )}\n    </div>\n  );\n}"
+    }
+  ]
+}

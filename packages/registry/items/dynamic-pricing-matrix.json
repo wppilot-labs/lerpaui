@@ -1,0 +1,14 @@
+{
+  "name": "dynamic-pricing-matrix",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DynamicPricingMatrix.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Check, Shield } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function DynamicPricingMatrix({ className }: { className?: string }) {\n  const [selectedPlan, setSelectedPlan] = useState(\"pro\");\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Pricing Selection</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Select a pricing plan option</p>\n        </div>\n        <Shield className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div className=\"space-y-2\">\n        {[\n          { id: \"starter\", name: \"Starter Tier\", price: \"$29\" },\n          { id: \"pro\", name: \"Pro Tier\", price: \"$79\" },\n        ].map((plan) => {\n          const isSelected = selectedPlan === plan.id;\n          return (\n            <button\n              key={plan.id}\n              onClick={() => setSelectedPlan(plan.id)}\n              className={cn(\n                \"w-full flex items-center justify-between p-3 rounded-xl border text-left cursor-pointer transition-colors\",\n                isSelected\n                  ? \"bg-primary/20 border-primary text-primary\"\n                  : \"bg-zinc-900/30 border-border/40 text-muted-foreground hover:bg-zinc-900/60 hover:text-foreground\"\n              )}\n            >\n              <div>\n                <span className=\"text-xs font-bold text-foreground capitalize\">{plan.name}</span>\n                <p className=\"text-[9px] text-muted-foreground\">Annual billing cycle</p>\n              </div>\n              <div className=\"flex items-center gap-3\">\n                <span className=\"text-sm font-mono font-black text-foreground\">{plan.price}</span>\n                {isSelected && <Check className=\"w-4 h-4 text-primary\" />}\n              </div>\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

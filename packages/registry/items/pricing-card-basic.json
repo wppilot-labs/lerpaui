@@ -1,0 +1,14 @@
+{
+  "name": "pricing-card-basic",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/PricingCardBasic.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Check, ArrowRight } from \"lucide-react\";\n\nexport function PricingCardBasic() {\n  const [yearly, setYearly] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"p-5 relative space-y-4\">\n        <div className=\"flex items-center justify-between\">\n          <span className=\"text-[9px] font-extrabold uppercase bg-violet-500/15 text-violet-300 px-2 py-0.5 rounded border border-violet-500/20 tracking-wider\">Startup Tier</span>\n          <button\n            type=\"button\"\n            onClick={() => setYearly(!yearly)}\n            aria-pressed={yearly}\n            aria-label={yearly ? \"Switch to monthly billing\" : \"Switch to yearly billing\"}\n            className=\"text-[9px] uppercase font-bold text-violet-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-400/60 rounded\"\n          >\n            {yearly ? \"Billing Yearly\" : \"Billing Monthly\"}\n          </button>\n        </div>\n\n        <div>\n          <span className=\"block text-[8px] text-muted-foreground/50 uppercase font-bold\">Standard Cost</span>\n          <div className=\"flex items-baseline gap-1 mt-0.5\">\n            <span className=\"text-2xl font-black text-foreground\">{yearly ? \"$99.00\" : \"$9.00\"}</span>\n            <span className=\"text-[10px] text-muted-foreground\">/{yearly ? \"yr\" : \"mo\"}</span>\n          </div>\n        </div>\n\n        <div className=\"space-y-2 text-xs pt-2 border-t border-white/[0.04]\">\n          <div className=\"flex items-center gap-1.5\">\n            <Check className=\"w-3.5 h-3.5 text-emerald-400\" />\n            <span>Standard SLA routing channels</span>\n          </div>\n          <div className=\"flex items-center gap-1.5\">\n            <Check className=\"w-3.5 h-3.5 text-emerald-400\" />\n            <span>Active token limits safety checks</span>\n          </div>\n        </div>\n\n        <button className=\"w-full py-2 bg-primary hover:brightness-110 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1 transition-all\">\n          <span>Register Startup Plan</span>\n          <ArrowRight className=\"w-3.5 h-3.5\" />\n        </button>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

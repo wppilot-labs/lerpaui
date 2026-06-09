@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-settings-summary",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DashboardSettingsSummary.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Building2, Globe, CreditCard, Users } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Item = { icon: React.ComponentType<{ className?: string }>; label: string; value: string };\n\nconst ITEMS: Item[] = [\n  { icon: Building2, label: \"Workspace\", value: \"Acme Inc\" },\n  { icon: CreditCard, label: \"Plan\", value: \"Pro · $29/mo\" },\n  { icon: Globe, label: \"Region\", value: \"US East\" },\n  { icon: Users, label: \"Members\", value: \"17 of 25\" },\n];\n\nexport interface DashboardSettingsSummaryProps {\n  className?: string;\n}\n\nexport function DashboardSettingsSummary({ className }: DashboardSettingsSummaryProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-4\">\n        <h3 className=\"text-base font-bold\">Workspace settings</h3>\n        <button type=\"button\" className=\"text-xs font-bold text-primary hover:underline\">Edit</button>\n      </div>\n      <ul className=\"grid grid-cols-2 gap-3\">\n        {ITEMS.map((it) => {\n          const Icon = it.icon;\n          return (\n            <li key={it.label} className=\"p-3 rounded-xl bg-foreground/[0.02] border border-foreground/[0.04]\">\n              <div className=\"flex items-center gap-1.5 text-muted-foreground/50 mb-1.5\">\n                <Icon className=\"w-4 h-4\" />\n                <span className=\"text-[11px] uppercase tracking-wide font-bold\">{it.label}</span>\n              </div>\n              <div className=\"text-sm font-bold\">{it.value}</div>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

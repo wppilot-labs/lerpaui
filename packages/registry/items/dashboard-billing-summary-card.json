@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-billing-summary-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardBillingSummaryCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { CreditCard, ArrowRight } from \"lucide-react\";\n\nexport function DashboardBillingSummaryCard() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <span className=\"block text-[9px] font-extrabold uppercase bg-violet-500/15 text-violet-300 px-2 py-0.5 rounded border border-violet-500/20 tracking-wider mb-4 w-max\">Billing Summary</span>\n\n      <div className=\"space-y-3.5\">\n        <div className=\"p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.03] space-y-2 text-xs\">\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Active Plan</span>\n            <span className=\"font-bold text-violet-400\">Enterprise Pro</span>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Next Invoice</span>\n            <span className=\"font-bold\">$129.00 (June 1)</span>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Credit Card</span>\n            <span className=\"font-bold flex items-center gap-1\"><CreditCard className=\"w-3.5 h-3.5 text-violet-400\" /> **** 9820</span>\n          </div>\n        </div>\n\n        <button className=\"w-full py-2 bg-secondary hover:bg-secondary/60 text-foreground font-bold text-xs rounded-xl flex items-center justify-center gap-1 transition-all\">\n          <span>Manage Invoices</span>\n          <ArrowRight className=\"w-3.5 h-3.5\" />\n        </button>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

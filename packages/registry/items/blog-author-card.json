@@ -1,0 +1,12 @@
+{
+  "name": "blog-author-card",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/BlogAuthorCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nexport function BlogAuthorCard() {\n  const [subs, setSubs] = useState(1420);\n  const [voted, setVoted] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"p-4 space-y-4\">\n        <div className=\"flex items-center gap-3\">\n          <div className=\"w-10 h-10 rounded-2xl bg-gradient-to-tr from-violet-500 to-indigo-500 flex items-center justify-center font-bold text-white text-xs\">\n            AB\n          </div>\n          <div>\n            <h4 className=\"text-xs font-black leading-none mb-1\">Alex Bennett</h4>\n            <span className=\"text-[9px] uppercase font-bold text-violet-400\">Core UI Engineer</span>\n          </div>\n        </div>\n\n        <p className=\"text-xs text-muted-foreground/60 leading-normal\">\n          Writing about Next.js static optimizations, dark HSL glassmorphism design tokens, and creative animation presets.\n        </p>\n\n        <div className=\"pt-3.5 border-t border-white/[0.04] flex items-center justify-between text-xs\">\n          <span className=\"text-muted-foreground/60\">{subs.toLocaleString()} subscribers</span>\n          <button \n            onClick={() => {\n              if (!voted) {\n                setSubs(subs + 1);\n                setVoted(true);\n              }\n            }}\n            className=\"text-violet-400 font-bold hover:text-violet-300 transition-colors\"\n          >\n            {voted ? \"Subscribed\" : \"Subscribe\"}\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

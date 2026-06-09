@@ -1,0 +1,14 @@
+{
+  "name": "product-discount-badge",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ProductDiscountBadge.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Sparkles } from \"lucide-react\";\n\nexport function ProductDiscountBadge() {\n  return (\n    <div className=\"w-max bg-gradient-to-r from-rose-500/20 to-amber-500/20 border border-rose-500/30 px-3 py-1 rounded-full flex items-center gap-1.5 text-xs text-rose-300 font-extrabold uppercase select-none tracking-wider\">\n      <Sparkles className=\"w-3.5 h-3.5 text-amber-400 animate-pulse\" />\n      <span>Save 20% today</span>\n    </div>\n  );\n}"
+    }
+  ]
+}

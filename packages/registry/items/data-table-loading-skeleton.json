@@ -1,0 +1,12 @@
+{
+  "name": "data-table-loading-skeleton",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/DataTableLoadingSkeleton.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport function DataTableLoadingSkeleton() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden p-4 space-y-4\">\n      <div className=\"h-32 bg-secondary/20 rounded-xl border border-white/[0.04] relative overflow-hidden\">\n        <div className=\"absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer\" />\n      </div>\n\n      <div className=\"space-y-2\">\n        <div className=\"h-4 bg-secondary/30 rounded-md w-2/3 relative overflow-hidden\">\n          <div className=\"absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer\" />\n        </div>\n        <div className=\"h-3 bg-secondary/20 rounded-md w-full relative overflow-hidden\">\n          <div className=\"absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-shimmer\" />\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "pricing-billing-swapper",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/pricing-billing-swapper.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from 'react';\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface PricingBillingSwapperProps {\n  onBillingChange?: (billing: 'monthly' | 'yearly') => void;\n  className?: string;\n}\n\nexport const PricingBillingSwapper: React.FC<PricingBillingSwapperProps> = ({\n  onBillingChange,\n  className,\n}) => {\n  const [active, setActive] = useState<'monthly' | 'yearly'>('monthly');\n\n  const selectBilling = (opt: 'monthly' | 'yearly') => {\n    setActive(opt);\n    onBillingChange?.(opt);\n    if (typeof window !== 'undefined' && navigator.vibrate) navigator.vibrate(8);\n  };\n\n  return (\n    <div className={cn('relative flex items-center p-1 border border-border/40 bg-card/65 backdrop-blur-md rounded-2xl select-none max-w-[260px] w-full mx-auto', className)}>\n      \n      {/* Sliding Glass Pill indicator */}\n      <motion.div\n        layoutId=\"pricingSlidePill\"\n        className=\"absolute inset-y-1 w-[calc(50%-4px)] bg-primary rounded-xl border border-primary/25 -z-10\"\n        animate={{\n          x: active === 'monthly' ? 0 : '100%',\n        }}\n        transition={{ type: 'spring', stiffness: 350, damping: 25 }}\n      />\n\n      <button\n        type=\"button\"\n        onClick={() => selectBilling('monthly')}\n        className={cn(\n          'flex-1 py-2 text-center text-[10px] font-extrabold uppercase tracking-wider transition-colors duration-250 cursor-pointer focus:outline-none',\n          active === 'monthly' ? 'text-white' : 'text-muted-foreground hover:text-foreground'\n        )}\n      >\n        Monthly\n      </button>\n\n      <button\n        type=\"button\"\n        onClick={() => selectBilling('yearly')}\n        className={cn(\n          'flex-1 py-2 text-center text-[10px] font-extrabold uppercase tracking-wider transition-colors duration-250 cursor-pointer focus:outline-none flex items-center justify-center gap-1.5',\n          active === 'yearly' ? 'text-white' : 'text-muted-foreground hover:text-foreground'\n        )}\n      >\n        <span>Yearly</span>\n        <span className={cn(\n          'px-1.5 py-0.5 rounded text-[7px] uppercase font-black tracking-widest shrink-0',\n          active === 'yearly' ? 'bg-white text-primary font-black' : 'bg-primary/10 text-primary border border-primary/25'\n        )}>\n          -20%\n        </span>\n      </button>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

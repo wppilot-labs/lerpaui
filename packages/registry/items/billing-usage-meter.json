@@ -1,0 +1,15 @@
+{
+  "name": "billing-usage-meter",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BillingUsageMeter.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport { Gauge } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Meter = {\n  label: string;\n  used: number;\n  limit: number;\n  unit: string;\n};\n\nconst METERS: Meter[] = [\n  { label: \"API requests\", used: 842000, limit: 1000000, unit: \"\" },\n  { label: \"Bandwidth\", used: 318, limit: 500, unit: \"GB\" },\n  { label: \"Team seats\", used: 22, limit: 25, unit: \"\" },\n  { label: \"Storage\", used: 47, limit: 100, unit: \"GB\" },\n];\n\nfunction fmt(n: number) {\n  return n >= 1000 ? `${(n / 1000).toLocaleString()}k` : `${n}`;\n}\n\nfunction barColor(pct: number) {\n  if (pct >= 90) return \"bg-rose-500\";\n  if (pct >= 75) return \"bg-amber-500\";\n  return \"bg-primary\";\n}\n\nexport interface BillingUsageMeterProps {\n  className?: string;\n}\n\nexport function BillingUsageMeter({ className }: BillingUsageMeterProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card backdrop-blur-xl border border-border p-5 rounded-2xl shadow-sm font-sans text-foreground\", className)}>\n      <div className=\"mb-4 flex items-center justify-between\">\n        <div className=\"flex items-center gap-2\">\n          <Gauge className=\"w-4 h-4 text-primary\" />\n          <h3 className=\"text-sm font-bold\">Usage this cycle</h3>\n        </div>\n        <span className=\"text-xs text-muted-foreground\">Resets Jul 1</span>\n      </div>\n\n      <ul className=\"space-y-4\">\n        {METERS.map((m) => {\n          const pct = Math.min(100, Math.round((m.used / m.limit) * 100));\n          return (\n            <li key={m.label}>\n              <div className=\"mb-1.5 flex items-baseline justify-between text-sm\">\n                <span className=\"font-medium text-muted-foreground\">{m.label}</span>\n                <span className=\"font-semibold tabular-nums\">\n                  {fmt(m.used)}\n                  {m.unit} <span className=\"text-muted-foreground\">/ {fmt(m.limit)}{m.unit}</span>\n                </span>\n              </div>\n              <div className=\"h-2 overflow-hidden rounded-full bg-foreground/[0.06]\">\n                <div className={cn(\"h-full rounded-full transition-all\", barColor(pct))} style={{ width: `${pct}%` }} />\n              </div>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

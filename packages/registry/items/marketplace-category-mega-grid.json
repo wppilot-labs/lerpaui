@@ -1,0 +1,15 @@
+{
+  "name": "marketplace-category-mega-grid",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/MarketplaceCategoryMegaGrid.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport {\n  Smartphone, Laptop, Headphones, Camera, Gamepad2, Watch,\n  Home, Shirt, Dumbbell, Car, Baby, BookOpen, ChevronRight,\n} from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Category = { name: string; count: string; Icon: React.ElementType };\n\nconst CATEGORIES: Category[] = [\n  { name: \"Phones\", count: \"2,340\", Icon: Smartphone },\n  { name: \"Laptops\", count: \"1,180\", Icon: Laptop },\n  { name: \"Audio\", count: \"3,902\", Icon: Headphones },\n  { name: \"Cameras\", count: \"640\", Icon: Camera },\n  { name: \"Gaming\", count: \"1,775\", Icon: Gamepad2 },\n  { name: \"Wearables\", count: \"890\", Icon: Watch },\n  { name: \"Home\", count: \"5,210\", Icon: Home },\n  { name: \"Fashion\", count: \"8,430\", Icon: Shirt },\n  { name: \"Fitness\", count: \"1,260\", Icon: Dumbbell },\n  { name: \"Auto\", count: \"740\", Icon: Car },\n  { name: \"Kids\", count: \"2,015\", Icon: Baby },\n  { name: \"Books\", count: \"9,800\", Icon: BookOpen },\n];\n\nexport interface MarketplaceCategoryMegaGridProps {\n  className?: string;\n}\n\nexport function MarketplaceCategoryMegaGrid({ className }: MarketplaceCategoryMegaGridProps) {\n  return (\n    <div className={cn(\"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-4\">\n        <h3 className=\"text-base font-bold\">Browse categories</h3>\n        <a href=\"/\" className=\"inline-flex items-center gap-0.5 text-xs font-semibold text-primary hover:underline\">\n          All categories <ChevronRight className=\"w-3.5 h-3.5\" />\n        </a>\n      </div>\n      <div className=\"grid grid-cols-3 sm:grid-cols-4 gap-2.5\">\n        {CATEGORIES.map((c) => (\n          <a\n            key={c.name}\n            href=\"/\"\n            className=\"group flex flex-col items-center gap-2 rounded-xl border border-foreground/[0.05] bg-foreground/[0.02] py-5 hover:border-primary/30 hover:bg-primary/[0.04] transition-colors\"\n          >\n            <span className=\"flex h-11 w-11 items-center justify-center rounded-xl bg-foreground/[0.04] text-muted-foreground/70 group-hover:text-primary transition-colors\">\n              <c.Icon className=\"w-5 h-5\" />\n            </span>\n            <span className=\"text-sm font-semibold\">{c.name}</span>\n            <span className=\"text-[11px] text-muted-foreground/45 tabular-nums\">{c.count}</span>\n          </a>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

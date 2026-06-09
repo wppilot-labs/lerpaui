@@ -1,0 +1,14 @@
+{
+  "name": "keyboard-access-command-menu",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/KeyboardAccessCommandMenu.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Terminal } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function KeyboardAccessCommandMenu({ className }: { className?: string }) {\n  const [typed, setTyped] = useState(\"\");\n  const [result, setResult] = useState<string | null>(null);\n\n  const handleCommand = (cmd: string) => {\n    if (cmd.toLowerCase() === \"help\") {\n      setResult(\"Available: help, secure, theme\");\n    } else if (cmd.toLowerCase() === \"secure\") {\n      setResult(\"System status: 100% Protected.\");\n    } else if (cmd.toLowerCase() === \"theme\") {\n      setResult(\"Luxury Darkmode Active.\");\n    } else {\n      setResult(`Command not found: ${cmd}`);\n    }\n  };\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Interactive Keyboard Hub</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Type commands: help, secure, theme</p>\n        </div>\n        <Terminal className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div className=\"space-y-3\">\n        <div className=\"flex gap-2\">\n          <input\n            type=\"text\"\n            value={typed}\n            onChange={(e) => setTyped(e.target.value)}\n            placeholder=\"Type 'help' and press Enter...\"\n            className=\"flex-1 bg-zinc-950/60 border border-border/50 rounded-xl px-3 py-1.5 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/60 transition-colors\"\n            onKeyDown={(e) => {\n              if (e.key === \"Enter\") {\n                handleCommand(typed);\n                setTyped(\"\");\n              }\n            }}\n          />\n        </div>\n\n        {result && (\n          <div className=\"bg-zinc-950/80 p-3 rounded-xl border border-border/30 font-mono text-[10px] text-emerald-400 space-y-1\">\n            <span className=\"text-muted-foreground\">$ output:</span>\n            <p className=\"font-bold\">{result}</p>\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

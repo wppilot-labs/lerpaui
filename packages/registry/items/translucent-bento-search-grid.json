@@ -1,0 +1,14 @@
+{
+  "name": "translucent-bento-search-grid",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TranslucentBentoSearchGrid.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Filter } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function TranslucentBentoSearchGrid({ className }: { className?: string }) {\n  const [filter, setFilter] = useState(\"all\");\n\n  const items = [\n    { id: \"1\", title: \"Auth Flow\", category: \"dev\" },\n    { id: \"2\", title: \"Bento Layout\", category: \"design\" },\n    { id: \"3\", title: \"Sales Analysis\", category: \"analytics\" },\n  ];\n\n  const filtered = items.filter(item => filter === \"all\" || item.category === filter);\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Bento Grid Filter</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Select a category below</p>\n        </div>\n        <Filter className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div className=\"flex gap-1.5 justify-around bg-zinc-950/60 p-2 rounded-xl border border-border/30\">\n        {[\"all\", \"dev\", \"design\", \"analytics\"].map((cat) => (\n          <button\n            key={cat}\n            onClick={() => setFilter(cat)}\n            className={cn(\n              \"px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider rounded-lg transition-colors cursor-pointer capitalize\",\n              filter === cat ? \"bg-primary text-white\" : \"text-muted-foreground hover:text-foreground\"\n            )}\n          >\n            {cat}\n          </button>\n        ))}\n      </div>\n\n      <div className=\"grid grid-cols-1 gap-2\">\n        {filtered.map((item) => (\n          <div\n            key={item.id}\n            className=\"flex items-center justify-between p-3 bg-zinc-900/40 border border-border/20 rounded-xl\"\n          >\n            <span className=\"text-xs text-foreground font-medium\">{item.title}</span>\n            <span className=\"px-1.5 py-0.5 rounded text-[8px] font-bold uppercase bg-primary/20 text-primary border border-primary/30\">\n              {item.category}\n            </span>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

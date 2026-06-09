@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-kpi-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardKpiCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { TrendingUp } from \"lucide-react\";\n\nexport function DashboardKPICard() {\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"p-4 space-y-1 relative\">\n        <div className=\"flex items-center justify-between text-xs text-muted-foreground mb-1\">\n          <span className=\"font-bold uppercase tracking-wider\">Conversion rate</span>\n          <span className=\"text-emerald-400 font-extrabold flex items-center gap-0.5\"><TrendingUp className=\"w-3.5 h-3.5\" /> +14.2%</span>\n        </div>\n        <h3 className=\"text-2xl font-black text-foreground\">4.82%</h3>\n        <p className=\"text-[10px] text-muted-foreground/60\">Live metrics analyzed over the past 24 hours.</p>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

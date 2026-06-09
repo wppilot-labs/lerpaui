@@ -1,0 +1,14 @@
+{
+  "name": "seller-profile-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/SellerProfileCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Star, Award } from \"lucide-react\";\n\nexport function SellerProfileCard() {\n  const [isFollowing, setIsFollowing] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"h-16 bg-gradient-to-r from-emerald-600/20 to-teal-600/20 relative\" />\n      <div className=\"px-4 pb-4 relative\">\n        <div className=\"-mt-8 mb-3 flex items-end justify-between\">\n          <div className=\"w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-500 border-4 border-card flex items-center justify-center shadow-lg\">\n            <Award className=\"w-8 h-8 text-white\" />\n          </div>\n          <button \n            onClick={() => setIsFollowing(!isFollowing)}\n            className={`px-3 py-1 text-[10px] font-bold rounded-lg border transition-all ${\n              isFollowing ? \"bg-secondary text-foreground border-border\" : \"bg-emerald-600 hover:bg-emerald-500 text-white border-transparent\"\n            }`}\n          >\n            {isFollowing ? \"Following\" : \"Follow\"}\n          </button>\n        </div>\n\n        <div className=\"space-y-1\">\n          <div className=\"flex items-center gap-1.5\">\n            <h3 className=\"text-sm font-extrabold\">AeroLabs Store</h3>\n            <span className=\"text-[9px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-extrabold uppercase border border-emerald-500/20\">Pro Seller</span>\n          </div>\n          <p className=\"text-xs text-muted-foreground/60 leading-normal\">Premium React design frameworks and interactive animations creators.</p>\n        </div>\n\n        <div className=\"grid grid-cols-2 gap-2 mt-4 pt-3.5 border-t border-white/[0.04]\">\n          <div className=\"text-xs\">\n            <span className=\"block text-[8px] text-muted-foreground/50 uppercase font-bold\">Feedback Rating</span>\n            <div className=\"flex items-center gap-1 mt-0.5\">\n              <Star className=\"w-3.5 h-3.5 fill-yellow-400 text-yellow-400\" />\n              <span className=\"font-extrabold\">4.98</span>\n              <span className=\"text-[9px] text-muted-foreground/50\">(420 reviews)</span>\n            </div>\n          </div>\n          <div className=\"text-xs\">\n            <span className=\"block text-[8px] text-muted-foreground/50 uppercase font-bold\">Response Speed</span>\n            <span className=\"block font-extrabold mt-0.5 text-emerald-400\">Under 15 mins</span>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

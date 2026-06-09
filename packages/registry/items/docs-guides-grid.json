@@ -1,0 +1,14 @@
+{
+  "name": "docs-guides-grid",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DocsGuidesGrid.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Rocket, Palette, Lock, Plug, Gauge, BookOpen } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsGuidesGridProps {\n  className?: string;\n}\n\ntype Guide = {\n  title: string;\n  desc: string;\n  icon: React.ComponentType<{ className?: string }>;\n  minutes: number;\n};\n\nconst GUIDES: Guide[] = [\n  { title: \"Getting started\", desc: \"Install the SDK and ship your first request.\", icon: Rocket, minutes: 5 },\n  { title: \"Theming\", desc: \"Customize tokens, colors, and dark mode.\", icon: Palette, minutes: 8 },\n  { title: \"Authentication\", desc: \"Manage API keys and OAuth scopes.\", icon: Lock, minutes: 6 },\n  { title: \"Webhooks\", desc: \"Receive and verify event payloads.\", icon: Plug, minutes: 10 },\n  { title: \"Rate limits\", desc: \"Understand quotas and backoff strategy.\", icon: Gauge, minutes: 4 },\n  { title: \"Migration\", desc: \"Upgrade from v1 to v2 cleanly.\", icon: BookOpen, minutes: 12 },\n];\n\nexport function DocsGuidesGrid({ className }: DocsGuidesGridProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-3xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <header className=\"mb-4\">\n        <p className=\"text-[11px] uppercase font-bold tracking-wider text-muted-foreground/45\">Learn</p>\n        <h3 className=\"text-base font-bold mt-0.5\">Guides</h3>\n      </header>\n\n      <div className=\"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3\">\n        {GUIDES.map((g) => {\n          const Icon = g.icon;\n          return (\n            <a\n              key={g.title}\n              href=\"/\"\n              className=\"group flex flex-col gap-2 p-4 rounded-xl border border-foreground/[0.06] hover:border-foreground/[0.12] hover:bg-foreground/[0.02] transition-colors\"\n            >\n              <span className=\"grid place-items-center h-10 w-10 rounded-lg bg-primary/10 text-primary\">\n                <Icon className=\"w-4 h-4\" />\n              </span>\n              <h4 className=\"text-sm font-semibold\">{g.title}</h4>\n              <p className=\"text-xs text-muted-foreground/60 leading-relaxed flex-1\">{g.desc}</p>\n              <span className=\"text-[11px] text-muted-foreground/40\">{g.minutes} min read</span>\n            </a>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "rating-stars",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/RatingStars.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Star } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface RatingStarsProps {\n  max?: number;\n  defaultValue?: number;\n  onChange?: (value: number) => void;\n  className?: string;\n}\n\n/**\n * Accessible interactive star rating — hover preview, click/keyboard select.\n * Production scale, theme-aware. Radiogroup semantics.\n */\nexport function RatingStars({ max = 5, defaultValue = 0, onChange, className }: RatingStarsProps) {\n  const [value, setValue] = useState(defaultValue);\n  const [hover, setHover] = useState(0);\n  const shown = hover || value;\n\n  const set = (v: number) => {\n    setValue(v);\n    onChange?.(v);\n  };\n\n  return (\n    <div className={cn(\"inline-flex flex-col gap-1.5\", className)}>\n      <div role=\"radiogroup\" aria-label=\"Rating\" tabIndex={-1} className=\"flex items-center gap-1\" onMouseLeave={() => setHover(0)}>\n        {Array.from({ length: max }, (_, i) => i + 1).map((v) => {\n          const filled = v <= shown;\n          return (\n            <button\n              key={v}\n              type=\"button\"\n              role=\"radio\"\n              aria-checked={value === v}\n              aria-label={`${v} star${v > 1 ? \"s\" : \"\"}`}\n              onMouseEnter={() => setHover(v)}\n              onClick={() => set(v)}\n              onKeyDown={(e) => {\n                if (e.key === \"ArrowRight\") { e.preventDefault(); set(Math.min(max, value + 1)); }\n                if (e.key === \"ArrowLeft\") { e.preventDefault(); set(Math.max(1, value - 1)); }\n              }}\n              className=\"rounded-md p-0.5 transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n            >\n              <Star\n                className={cn(\n                  \"h-6 w-6 transition-colors\",\n                  filled ? \"fill-amber-400 text-amber-400\" : \"fill-transparent text-muted-foreground/40\",\n                )}\n              />\n            </button>\n          );\n        })}\n      </div>\n      <span className=\"text-xs text-muted-foreground\">{value ? `${value} of ${max}` : \"Tap to rate\"}</span>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "how-it-works-steps",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/HowItWorksSteps.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { UserPlus, Settings, Rocket } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface HowItWorksStepsProps {\n  className?: string;\n}\n\ninterface Step {\n  title: string;\n  description: string;\n  icon: React.ComponentType<{ className?: string }>;\n}\n\nconst STEPS: Step[] = [\n  {\n    title: \"Create your account\",\n    description: \"Sign up in seconds with email or SSO — no credit card required to start.\",\n    icon: UserPlus,\n  },\n  {\n    title: \"Configure your workspace\",\n    description: \"Connect your tools, invite teammates, and tailor settings to fit your workflow.\",\n    icon: Settings,\n  },\n  {\n    title: \"Launch and scale\",\n    description: \"Go live with confidence and watch real-time insights as your product grows.\",\n    icon: Rocket,\n  },\n];\n\nexport function HowItWorksSteps({ className }: HowItWorksStepsProps) {\n  return (\n    <section aria-label=\"How it works\" className={cn(\"w-full max-w-4xl\", className)}>\n      <div className=\"mb-10 text-center\">\n        <h2 className=\"text-2xl font-bold tracking-tight text-foreground\">How it works</h2>\n        <p className=\"mt-2 text-sm text-muted-foreground\">Get up and running in three simple steps.</p>\n      </div>\n\n      <ol className=\"relative grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-6\">\n        <div\n          className=\"absolute left-0 right-0 top-7 hidden h-px bg-border md:block\"\n          aria-hidden=\"true\"\n        />\n        {STEPS.map((step, index) => {\n          const Icon = step.icon;\n          return (\n            <li key={step.title} className=\"relative flex flex-col items-center text-center\">\n              <div className=\"relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-card text-primary shadow-sm\">\n                <Icon className=\"h-6 w-6\" />\n                <span className=\"absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground\">\n                  {index + 1}\n                </span>\n              </div>\n              <h3 className=\"mt-5 text-base font-semibold text-foreground\">{step.title}</h3>\n              <p className=\"mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground\">\n                {step.description}\n              </p>\n            </li>\n          );\n        })}\n      </ol>\n    </section>\n  );\n}\n\nexport default HowItWorksSteps;\n"
+    }
+  ]
+}

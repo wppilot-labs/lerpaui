@@ -1,0 +1,15 @@
+{
+  "name": "magnetic-magnetic-button",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/magnetic-magnetic-button.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useRef, useState } from 'react';\nimport { motion, useSpring, useMotionValue} from \"framer-motion\";\nimport { Sparkles } from 'lucide-react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface MagneticMagneticButtonProps {\n  label?: string;\n  className?: string;\n}\n\nexport const MagneticMagneticButton: React.FC<MagneticMagneticButtonProps> = ({\n  label = \"Magnetic Hub\",\n  className,\n}) => {\n  const ref = useRef<HTMLDivElement>(null);\n  const [hovered, setHovered] = useState(false);\n\n  const x = useMotionValue(0);\n  const y = useMotionValue(0);\n\n  const springX = useSpring(x, { stiffness: 150, damping: 15 });\n  const springY = useSpring(y, { stiffness: 150, damping: 15 });\n\n  const handleMouseMove = (e: React.MouseEvent) => {\n    if (!ref.current) return;\n    const rect = ref.current.getBoundingClientRect();\n    const centerX = rect.left + rect.width / 2;\n    const centerY = rect.top + rect.height / 2;\n    \n    // Magnetic pull coordinates subtraction\n    const pullX = (e.clientX - centerX) * 0.42;\n    const pullY = (e.clientY - centerY) * 0.42;\n\n    x.set(pullX);\n    y.set(pullY);\n  };\n\n  const handleMouseLeave = () => {\n    setHovered(false);\n    x.set(0);\n    y.set(0);\n  };\n\n  return (\n    <div \n      ref={ref}\n      onMouseMove={handleMouseMove}\n      onMouseEnter={() => setHovered(true)}\n      onMouseLeave={handleMouseLeave}\n      className={cn('relative p-6 cursor-pointer select-none flex items-center justify-center', className)}\n    >\n      <motion.button\n        type=\"button\"\n        style={{ x: springX, y: springY, boxShadow: hovered ? '0 0 15px rgba(var(--primary-rgb), 0.6)' : undefined }}\n        className={cn(\n          'px-6 py-3 border rounded-xl flex items-center gap-2 text-xs font-black uppercase tracking-widest transition-all cursor-pointer shadow-md select-none',\n          hovered ? 'bg-primary border-primary text-white' : 'bg-card border-border text-muted-foreground'\n        )}\n      >\n        <Sparkles className={cn('w-4 h-4 shrink-0', hovered && 'animate-spin-slow text-white')} />\n        <span>{label}</span>\n      </motion.button>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

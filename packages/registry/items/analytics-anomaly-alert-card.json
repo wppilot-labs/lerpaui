@@ -1,0 +1,14 @@
+{
+  "name": "analytics-anomaly-alert-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/AnalyticsAnomalyAlertCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { AlertTriangle } from \"lucide-react\";\n\nexport function AnalyticsAnomalyAlertCard() {\n  const [dismissed, setDismissed] = useState(false);\n\n  if (dismissed) return null;\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-rose-500/20 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-3\">\n        <div className=\"flex items-center gap-1.5\">\n          <AlertTriangle className=\"w-4 h-4 text-rose-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-rose-400\">Anomaly Warning</span>\n        </div>\n        <button \n          onClick={() => setDismissed(true)}\n          className=\"text-[9px] uppercase font-bold text-muted-foreground/60 hover:text-foreground\"\n        >\n          Dismiss\n        </button>\n      </div>\n\n      <div className=\"space-y-3.5\">\n        <div className=\"p-3 rounded-xl bg-rose-500/5 border border-rose-500/10 text-xs\">\n          <p className=\"font-bold mb-1\">Server response peak detected</p>\n          <p className=\"text-[10px] text-muted-foreground/60 leading-normal\">Response spikes at 1,420ms (Avg 120ms) inside customer checkout nodes.</p>\n        </div>\n\n        <div className=\"h-10 flex items-end justify-between gap-1 border-b border-white/[0.04] pt-2\">\n          <div className=\"w-full bg-rose-500/20 h-[10%]\" />\n          <div className=\"w-full bg-rose-500/20 h-[15%]\" />\n          <div className=\"w-full bg-rose-500/80 h-[95%]\" />\n          <div className=\"w-full bg-rose-500/40 h-[30%]\" />\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

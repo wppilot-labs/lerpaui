@@ -1,0 +1,14 @@
+{
+  "name": "docs-cli-command-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DocsCliCommandSection.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Terminal, Copy, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsCliCommandSectionProps {\n  className?: string;\n}\n\nconst COMMAND = \"acme deploy --env production --force\";\n\nconst FLAGS: { flag: string; desc: string }[] = [\n  { flag: \"--env <name>\", desc: \"Target environment to deploy to.\" },\n  { flag: \"--force\", desc: \"Skip the interactive confirmation prompt.\" },\n  { flag: \"--dry-run\", desc: \"Print the plan without applying changes.\" },\n];\n\nexport function DocsCliCommandSection({ className }: DocsCliCommandSectionProps) {\n  const [copied, setCopied] = useState(false);\n\n  const handleCopy = () => {\n    navigator.clipboard?.writeText(COMMAND).catch(() => {});\n    setCopied(true);\n    setTimeout(() => setCopied(false), 1600);\n  };\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center gap-1.5 mb-3\">\n        <Terminal className=\"w-4 h-4 text-primary\" />\n        <h3 className=\"text-xs uppercase font-bold tracking-wider text-muted-foreground/55\">\n          Deploy command\n        </h3>\n      </div>\n\n      <div className=\"relative rounded-xl bg-muted border border-foreground/[0.05] p-4 pr-10 font-mono text-sm\">\n        <span className=\"text-muted-foreground/40 select-none\">$ </span>\n        <span className=\"text-emerald-400/90 break-all\">{COMMAND}</span>\n        <button\n          type=\"button\"\n          aria-label=\"Copy command\"\n          onClick={handleCopy}\n          className=\"absolute right-2.5 top-2.5 p-1 rounded hover:bg-foreground/[0.05] text-muted-foreground/50 hover:text-foreground transition-colors\"\n        >\n          {copied ? <Check className=\"w-4 h-4 text-emerald-400\" /> : <Copy className=\"w-4 h-4\" />}\n        </button>\n      </div>\n\n      <dl className=\"mt-4 space-y-2.5\">\n        {FLAGS.map((f) => (\n          <div key={f.flag} className=\"flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-3\">\n            <dt className=\"shrink-0 w-44 font-mono text-sm text-sky-300/90\">{f.flag}</dt>\n            <dd className=\"text-sm text-muted-foreground/65 leading-relaxed\">{f.desc}</dd>\n          </div>\n        ))}\n      </dl>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

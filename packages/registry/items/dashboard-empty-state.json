@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-empty-state",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardEmptyState.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { AppWindow, CheckCircle2, ChevronRight } from \"lucide-react\";\n\nexport function DashboardEmptyState() {\n  const [completed, setCompleted] = useState([true, false]);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center gap-2 mb-4\">\n        <div className=\"p-2 bg-violet-500/15 rounded-xl border border-violet-500/20\">\n          <AppWindow className=\"w-4 h-4 text-violet-400\" />\n        </div>\n        <div>\n          <h4 className=\"text-xs font-black text-foreground leading-none\">Setup Guide</h4>\n          <span className=\"text-[9px] uppercase font-bold text-muted-foreground/60\">Complete actions below</span>\n        </div>\n      </div>\n\n      <div className=\"space-y-2\">\n        <div className=\"flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.03] text-xs\">\n          <span className=\"flex items-center gap-2 text-muted-foreground/50 line-through\">\n            <CheckCircle2 className=\"w-4 h-4 text-emerald-400\" /> Register Workspace Account\n          </span>\n        </div>\n        <div className=\"flex items-center justify-between p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.03] text-xs\">\n          <span className=\"flex items-center gap-2 text-foreground font-semibold\">\n            <CheckCircle2 className=\"w-4 h-4 text-muted-foreground/40\" /> Register API Security Token\n          </span>\n          <ChevronRight className=\"w-4 h-4 text-violet-400\" />\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

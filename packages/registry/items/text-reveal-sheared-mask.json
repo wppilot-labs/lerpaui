@@ -1,0 +1,14 @@
+{
+  "name": "text-reveal-sheared-mask",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TextRevealShearedMask.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\ninterface TextRevealShearedMaskProps {\n  text?: string;\n  className?: string;\n}\n\nexport function TextRevealShearedMask({\n  text = \"LAUNCH_ELITE\",\n  className,\n}: TextRevealShearedMaskProps) {\n  // Break word into individual character indexes\n  const chars = Array.from(text);\n\n  const containerVariants = {\n    hidden: { opacity: 0 },\n    visible: {\n      opacity: 1,\n      transition: {\n        staggerChildren: 0.05,\n      },\n    },\n  };\n\n  const charVariants = {\n    hidden: { \n      y: 80, \n      rotate: 15,\n      skewY: 10,\n      opacity: 0 \n    },\n    visible: {\n      y: 0,\n      rotate: 0,\n      skewY: 0,\n      opacity: 1,\n      transition: {\n        type: \"spring\",\n        damping: 18,\n        stiffness: 140,\n      },\n    },\n  };\n\n  return (\n    <div\n      className={cn(\n        \"relative flex flex-col items-center justify-center border border-white/5 bg-zinc-950/40 rounded-2xl p-6 shadow-2xl overflow-hidden select-none\",\n        className\n      )}\n      style={{ width: 340, height: 140 }}\n    >\n      <div className=\"absolute top-4 left-4 flex flex-col gap-1 font-mono select-none\">\n        <span className=\"text-[9px] uppercase tracking-widest font-bold text-primary\">TYPOGRAPHY_MASK</span>\n        <span className=\"text-[8px] text-white/40 uppercase font-semibold\">Hover to replay reveal</span>\n      </div>\n\n      {/* Masked Character Reveal Row */}\n      <motion.div\n        variants={containerVariants}\n        initial=\"hidden\"\n        whileInView=\"visible\"\n        viewport={{ once: false }}\n        className=\"flex items-center gap-1.5 overflow-hidden py-2\"\n      >\n        {chars.map((char, idx) => (\n          <div key={idx} className=\"overflow-hidden inline-block relative py-1\">\n            <motion.span\n              variants={charVariants}\n              className=\"inline-block text-3xl font-extrabold tracking-tighter text-white font-mono\"\n            >\n              {char}\n            </motion.span>\n          </div>\n        ))}\n      </motion.div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "cart-cross-sell-panel",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CartCrossSellPanel.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Plus, ShieldCheck } from \"lucide-react\";\n\nexport function CartCrossSellPanel() {\n  const [added, setAdded] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <h5 className=\"text-[10px] font-extrabold uppercase text-muted-foreground/60 tracking-wider mb-3\">Often Bought Together</h5>\n\n      <div className=\"p-3 rounded-xl bg-white/[0.02] border border-white/[0.03] flex items-center justify-between gap-3 text-xs\">\n        <div className=\"flex items-center gap-2\">\n          <div className=\"w-10 h-10 bg-secondary/30 rounded-lg flex items-center justify-center border border-white/[0.04]\">\n            <ShieldCheck className=\"w-5 h-5 text-violet-400\" />\n          </div>\n          <div>\n            <p className=\"font-bold\">Extended 1Yr Warranty</p>\n            <span className=\"block text-[10px] text-violet-400 font-bold\">$19.00</span>\n          </div>\n        </div>\n        <button \n          onClick={() => setAdded(!added)}\n          className={`p-1.5 rounded-lg border transition-all ${\n            added ? \"bg-emerald-600 border-transparent text-white\" : \"bg-secondary border-border hover:bg-secondary/60 text-foreground\"\n          }`}\n        >\n          {added ? <ShieldCheck className=\"w-3.5 h-3.5\" /> : <Plus className=\"w-3.5 h-3.5\" />}\n        </button>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

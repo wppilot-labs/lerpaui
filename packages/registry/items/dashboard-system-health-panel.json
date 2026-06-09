@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-system-health-panel",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardSystemHealthPanel.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Server, CheckCircle2, AlertTriangle } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Svc = { name: string; ok: boolean; rt: string; load: number };\n\nconst SERVICES: Svc[] = [\n  { name: \"Web app\", ok: true, rt: \"38ms\", load: 42 },\n  { name: \"API gateway\", ok: true, rt: \"51ms\", load: 61 },\n  { name: \"Worker queue\", ok: false, rt: \"—\", load: 0 },\n  { name: \"Database\", ok: true, rt: \"9ms\", load: 73 },\n];\n\nexport interface DashboardSystemHealthPanelProps {\n  className?: string;\n}\n\nexport function DashboardSystemHealthPanel({ className }: DashboardSystemHealthPanelProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold flex items-center gap-1.5 mb-4\">\n        <Server className=\"w-4 h-4 text-primary\" /> Service health\n      </h3>\n      <ul className=\"space-y-2\">\n        {SERVICES.map((s) => (\n          <li key={s.name} className=\"flex items-center gap-3 p-3 rounded-xl bg-foreground/[0.02] border border-foreground/[0.04]\">\n            {s.ok ? <CheckCircle2 className=\"w-4 h-4 text-emerald-400 shrink-0\" /> : <AlertTriangle className=\"w-4 h-4 text-red-400 shrink-0\" />}\n            <span className=\"text-sm font-semibold flex-1\">{s.name}</span>\n            <div className=\"w-16 h-1.5 rounded-full bg-foreground/[0.06] overflow-hidden\">\n              <div className={cn(\"h-full rounded-full\", s.ok ? \"bg-emerald-400\" : \"bg-red-400\")} style={{ width: `${s.load}%` }} />\n            </div>\n            <span className=\"text-xs tabular-nums text-muted-foreground/55 w-10 text-right\">{s.rt}</span>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

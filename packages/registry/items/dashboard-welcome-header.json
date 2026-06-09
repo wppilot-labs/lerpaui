@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-welcome-header",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardWelcomeHeader.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShieldCheck, ArrowRight } from \"lucide-react\";\n\nexport function DashboardWelcomeHeader() {\n  return (\n    <div className=\"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground flex flex-col sm:flex-row items-center justify-between gap-4\">\n      <div className=\"flex items-center gap-3\">\n        <div className=\"w-12 h-12 rounded-full bg-violet-500/10 border border-violet-500/20 flex items-center justify-center text-violet-400\">\n          <ShieldCheck className=\"w-6 h-6\" />\n        </div>\n        <div>\n          <h3 className=\"text-base font-black leading-none mb-1\">Welcome back, Admin!</h3>\n          <p className=\"text-xs text-muted-foreground/60\">NovaCore status is healthy. Review today's metrics below.</p>\n        </div>\n      </div>\n\n      <button className=\"px-4 py-2 bg-primary hover:brightness-110 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all\">\n        <span>Analytics Dashboard</span>\n        <ArrowRight className=\"w-3.5 h-3.5\" />\n      </button>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "cart-empty-state",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CartEmptyState.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShoppingBag, ArrowRight } from \"lucide-react\";\n\nexport function CartEmptyState() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl select-none font-sans text-foreground flex flex-col items-center text-center\">\n      <div className=\"w-14 h-14 bg-secondary/30 rounded-2xl flex items-center justify-center border border-white/[0.04] mb-4\">\n        <ShoppingBag className=\"w-7 h-7 text-muted-foreground/50 animate-bounce\" />\n      </div>\n\n      <h4 className=\"text-sm font-black mb-1\">Your cart is empty</h4>\n      <p className=\"text-xs text-muted-foreground/60 max-w-[240px] leading-normal mb-5\">Register active designs or browse our gallery catalogs to unlock premium assets.</p>\n\n      <button className=\"px-4 py-2 bg-primary hover:brightness-110 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-all cursor-pointer\">\n        <span>Browse Components</span>\n        <ArrowRight className=\"w-3.5 h-3.5\" />\n      </button>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "stat-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/stat-card.tsx",
+      "type": "registry:ui",
+      "content": "import React from 'react';\nimport { Card, CardContent } from './card';\nimport { cn } from \"@/lib/utils\";\nimport { ArrowUpRight, ArrowDownRight } from 'lucide-react';\n\nexport interface StatCardProps extends React.HTMLAttributes<HTMLDivElement> {\n  title: string;\n  value: string | number;\n  change?: number;\n  changeType?: 'positive' | 'negative' | 'neutral';\n  timeframe?: string;\n  icon?: React.ReactNode;\n  trendLabel?: string;\n}\n\nconst StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(\n  ({ className, title, value, change, changeType, timeframe, icon, trendLabel, ...props }, ref) => {\n    const defaultChangeType = change !== undefined\n      ? change > 0 ? 'positive' : change < 0 ? 'negative' : 'neutral'\n      : changeType;\n\n    const isPositive = defaultChangeType === 'positive';\n    const isNegative = defaultChangeType === 'negative';\n\n    return (\n      <Card ref={ref} className={cn('overflow-hidden relative', className)} {...props}>\n        <CardContent className=\"p-6\">\n          <div className=\"flex items-center justify-between\">\n            <p className=\"text-sm font-medium text-muted-foreground truncate\">{title}</p>\n            {icon && (\n              <div className=\"p-2 bg-muted rounded-md text-muted-foreground\">\n                {icon}\n              </div>\n            )}\n          </div>\n          <div className=\"mt-2 flex items-baseline justify-between\">\n            <div>\n              {value != null && value !== '' && (\n                <h4 className=\"text-3xl font-bold tracking-tight text-foreground\">{value}</h4>\n              )}\n            </div>\n          </div>\n          {(change !== undefined || timeframe || trendLabel) && (\n            <div className=\"mt-4 flex items-center gap-2 text-xs\">\n              {change !== undefined && (\n                <span\n                  className={cn(\n                    'flex items-center gap-0.5 font-semibold px-1.5 py-0.5 rounded-full',\n                    isPositive && 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',\n                    isNegative && 'bg-rose-500/10 text-rose-600 dark:text-rose-400',\n                    !isPositive && !isNegative && 'bg-muted text-muted-foreground'\n                  )}\n                >\n                  {isPositive && <ArrowUpRight className=\"h-3 w-3 shrink-0\" />}\n                  {isNegative && <ArrowDownRight className=\"h-3 w-3 shrink-0\" />}\n                  {Math.abs(change)}%\n                </span>\n              )}\n              {trendLabel && <span className=\"text-muted-foreground font-medium\">{trendLabel}</span>}\n              {timeframe && <span className=\"text-muted-foreground/80\">{timeframe}</span>}\n            </div>\n          )}\n        </CardContent>\n      </Card>\n    );\n  }\n);\nStatCard.displayName = 'StatCard';\n\nexport { StatCard };\n"
+    }
+  ],
+  "registryDependencies": [
+    "card"
+  ]
+}

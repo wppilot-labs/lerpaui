@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-related-products",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceRelatedProducts.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Star, ChevronRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Item = { id: string; name: string; price: number; rating: number; tone: string };\n\nconst ITEMS: Item[] = [\n  { id: \"a\", name: \"Ribbed Knit Sweater\", price: 78, rating: 4.7, tone: \"from-amber-400/30 to-orange-500/20\" },\n  { id: \"b\", name: \"Selvedge Denim\", price: 132, rating: 4.8, tone: \"from-indigo-400/30 to-blue-500/20\" },\n  { id: \"c\", name: \"Suede Chelsea Boot\", price: 168, rating: 4.5, tone: \"from-rose-400/30 to-pink-500/20\" },\n  { id: \"d\", name: \"Wool Overshirt\", price: 98, rating: 4.6, tone: \"from-emerald-400/30 to-teal-500/20\" },\n];\n\nexport interface EcommerceRelatedProductsProps {\n  className?: string;\n}\n\nexport function EcommerceRelatedProducts({ className }: EcommerceRelatedProductsProps) {\n  return (\n    <div className={cn(\"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-3\">\n        <h3 className=\"text-base font-bold\">You may also like</h3>\n        <button type=\"button\" className=\"inline-flex items-center gap-0.5 text-xs text-primary hover:underline\">\n          View all <ChevronRight className=\"w-4 h-4\" />\n        </button>\n      </div>\n\n      <div className=\"flex gap-3 overflow-x-auto pb-1 -mx-1 px-1\">\n        {ITEMS.map((it) => (\n          <button key={it.id} type=\"button\" className=\"group shrink-0 w-40 text-left\">\n            <div className={cn(\"aspect-square rounded-xl bg-gradient-to-br border border-foreground/[0.05]\", it.tone)} />\n            <div className=\"mt-2 text-sm font-semibold truncate group-hover:text-primary transition\">{it.name}</div>\n            <div className=\"flex items-center justify-between mt-0.5\">\n              <span className=\"text-base font-bold\">${it.price}</span>\n              <span className=\"inline-flex items-center gap-0.5 text-xs text-amber-400\">\n                <Star className=\"w-3.5 h-3.5 fill-amber-400\" /> {it.rating.toFixed(1)}\n              </span>\n            </div>\n          </button>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "review-rating-breakdown",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ReviewRatingBreakdown.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Star } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Row = { stars: number; count: number };\n\nconst ROWS: Row[] = [\n  { stars: 5, count: 902 },\n  { stars: 4, count: 241 },\n  { stars: 3, count: 88 },\n  { stars: 2, count: 33 },\n  { stars: 1, count: 20 },\n];\n\nexport interface ReviewRatingBreakdownProps {\n  className?: string;\n}\n\nexport function ReviewRatingBreakdown({ className }: ReviewRatingBreakdownProps) {\n  const total = ROWS.reduce((sum, r) => sum + r.count, 0);\n  const avg = ROWS.reduce((sum, r) => sum + r.stars * r.count, 0) / total;\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-sm rounded-2xl border border-border/50 bg-card/60 p-5 font-sans text-foreground shadow-xl backdrop-blur-xl\",\n        className,\n      )}\n    >\n      <div className=\"mb-4 flex items-center gap-4\">\n        <div className=\"text-center\">\n          <div className=\"text-4xl font-black leading-none\">{avg.toFixed(1)}</div>\n          <div className=\"mt-1.5 flex justify-center gap-0.5\">\n            {Array.from({ length: 5 }).map((_, i) => (\n              <Star\n                key={i}\n                className={cn(\n                  \"h-4 w-4\",\n                  i < Math.round(avg) ? \"fill-amber-400 text-amber-400\" : \"fill-foreground/15 text-foreground/15\",\n                )}\n              />\n            ))}\n          </div>\n          <div className=\"mt-1.5 text-xs text-muted-foreground/50\">{total.toLocaleString()} reviews</div>\n        </div>\n\n        <div className=\"flex-1 space-y-1.5\">\n          {ROWS.map((r) => {\n            const pct = Math.round((r.count / total) * 100);\n            return (\n              <div key={r.stars} className=\"flex items-center gap-2\">\n                <span className=\"flex w-6 items-center gap-0.5 text-xs font-medium text-muted-foreground/70\">\n                  {r.stars}\n                  <Star className=\"h-3 w-3 fill-amber-400 text-amber-400\" />\n                </span>\n                <div\n                  className=\"h-2.5 flex-1 overflow-hidden rounded-full bg-foreground/[0.06]\"\n                  role=\"progressbar\"\n                  aria-valuenow={pct}\n                  aria-valuemin={0}\n                  aria-valuemax={100}\n                  aria-label={`${r.stars} star reviews`}\n                >\n                  <div className=\"h-full rounded-full bg-amber-400\" style={{ width: `${pct}%` }} />\n                </div>\n                <span className=\"w-8 text-right text-xs tabular-nums text-muted-foreground/50\">{pct}%</span>\n              </div>\n            );\n          })}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

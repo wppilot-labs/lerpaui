@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-team-performance-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardTeamPerformanceCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Users } from \"lucide-react\";\n\nexport function DashboardTeamPerformanceCard() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center gap-1.5 mb-4\">\n        <Users className=\"w-4 h-4 text-violet-400\" />\n        <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Team Closed metrics</span>\n      </div>\n\n      <div className=\"space-y-3 text-xs\">\n        <div className=\"flex justify-between items-center p-2.5 bg-white/[0.02] border border-white/[0.03] rounded-xl\">\n          <div>\n            <p className=\"font-bold\">Core Support (Helpdesk)</p>\n            <span className=\"text-[9px] text-muted-foreground\">12 tickets closed</span>\n          </div>\n          <span className=\"font-black text-emerald-400\">98.4%</span>\n        </div>\n\n        <div className=\"flex justify-between items-center p-2.5 bg-white/[0.02] border border-white/[0.03] rounded-xl\">\n          <div>\n            <p className=\"font-bold\">Documentation Authors</p>\n            <span className=\"text-[9px] text-muted-foreground\">14 reviews complete</span>\n          </div>\n          <span className=\"font-black text-violet-400\">92%</span>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

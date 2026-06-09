@@ -1,0 +1,14 @@
+{
+  "name": "ai-token-cost-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/AiTokenCostSection.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Coins, ArrowUp, ArrowDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst RATE_IN = 0.0025; // per 1K\nconst RATE_OUT = 0.01;\n\nconst rows = [\n  { id: \"in\", label: \"Input tokens\", tokens: 1840, rate: RATE_IN, icon: ArrowUp, tone: \"text-sky-400\" },\n  { id: \"out\", label: \"Output tokens\", tokens: 612, rate: RATE_OUT, icon: ArrowDown, tone: \"text-emerald-400\" },\n];\n\nexport interface AiTokenCostSectionProps {\n  className?: string;\n}\n\nexport function AiTokenCostSection({ className }: AiTokenCostSectionProps) {\n  const total = rows.reduce((s, r) => s + (r.tokens / 1000) * r.rate, 0);\n  const totalTokens = rows.reduce((s, r) => s + r.tokens, 0);\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl p-5 font-sans text-foreground\",\n        className,\n      )}\n    >\n      <div className=\"flex items-center justify-between mb-4\">\n        <h3 className=\"text-base font-bold flex items-center gap-1.5\">\n          <Coins className=\"w-4 h-4 text-amber-400\" /> Token cost\n        </h3>\n        <span className=\"text-xs text-muted-foreground/45\">This request</span>\n      </div>\n\n      <div className=\"rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] divide-y divide-foreground/[0.05]\">\n        {rows.map((r) => {\n          const Icon = r.icon;\n          const cost = (r.tokens / 1000) * r.rate;\n          return (\n            <div key={r.id} className=\"flex items-center gap-3 px-3.5 py-3\">\n              <Icon className={cn(\"w-4 h-4 shrink-0\", r.tone)} />\n              <div className=\"min-w-0 flex-1\">\n                <div className=\"text-sm font-semibold\">{r.label}</div>\n                <div className=\"text-xs text-muted-foreground/50 tabular-nums\">\n                  {r.tokens.toLocaleString()} tok · ${r.rate.toFixed(4)}/1K\n                </div>\n              </div>\n              <div className=\"text-sm font-bold tabular-nums\">${cost.toFixed(4)}</div>\n            </div>\n          );\n        })}\n      </div>\n\n      <div className=\"mt-4 flex items-end justify-between border-t border-foreground/[0.06] pt-3\">\n        <div>\n          <div className=\"text-xs uppercase tracking-wider text-muted-foreground/40 font-bold\">Total</div>\n          <div className=\"text-xs text-muted-foreground/50 tabular-nums\">\n            {totalTokens.toLocaleString()} tokens\n          </div>\n        </div>\n        <div className=\"text-3xl font-black tabular-nums\">${total.toFixed(4)}</div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

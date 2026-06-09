@@ -1,0 +1,15 @@
+{
+  "name": "checkout-progress-steps",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CheckoutProgressSteps.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport { Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst STEPS = [\"Cart\", \"Shipping\", \"Payment\", \"Review\"];\n\nexport interface CheckoutProgressStepsProps {\n  className?: string;\n}\n\nexport function CheckoutProgressSteps({ className }: CheckoutProgressStepsProps) {\n  const current = 2; // 0-indexed: Payment is active\n\n  return (\n    <nav\n      aria-label=\"Checkout progress\"\n      className={cn(\"w-full max-w-lg bg-card backdrop-blur-xl border border-border p-5 rounded-2xl shadow-sm font-sans text-foreground\", className)}\n    >\n      <ol className=\"flex items-center\">\n        {STEPS.map((label, i) => {\n          const done = i < current;\n          const active = i === current;\n          const isLast = i === STEPS.length - 1;\n          return (\n            <li key={label} className={cn(\"flex items-center\", !isLast && \"flex-1\")}>\n              <div className=\"flex flex-col items-center gap-1.5\">\n                <span\n                  aria-current={active ? \"step\" : undefined}\n                  className={cn(\n                    \"grid h-9 w-9 place-items-center rounded-full border text-xs font-bold transition-colors\",\n                    done && \"border-primary bg-primary text-primary-foreground\",\n                    active && \"border-primary bg-primary/15 text-primary\",\n                    !done && !active && \"border-foreground/15 bg-foreground/[0.02] text-muted-foreground\"\n                  )}\n                >\n                  {done ? <Check className=\"h-4 w-4\" /> : i + 1}\n                </span>\n                <span\n                  className={cn(\n                    \"text-xs font-medium\",\n                    active ? \"text-foreground\" : \"text-muted-foreground\"\n                  )}\n                >\n                  {label}\n                </span>\n              </div>\n              {!isLast && (\n                <span\n                  className={cn(\n                    \"mx-2 mb-6 h-0.5 flex-1 rounded-full\",\n                    i < current ? \"bg-primary\" : \"bg-foreground/[0.08]\"\n                  )}\n                />\n              )}\n            </li>\n          );\n        })}\n      </ol>\n    </nav>\n  );\n}\n"
+    }
+  ]
+}

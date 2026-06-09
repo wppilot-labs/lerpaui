@@ -1,0 +1,14 @@
+{
+  "name": "breadcrumb-bar",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BreadcrumbBar.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ChevronRight, AppWindow } from \"lucide-react\";\n\nexport function BreadcrumbBar() {\n  return (\n    <div className=\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-3.5 rounded-xl shadow-lg select-none font-sans text-foreground flex items-center gap-2 text-xs\">\n      <span className=\"flex items-center gap-1 text-muted-foreground hover:text-foreground cursor-pointer\">\n        <AppWindow className=\"w-4 h-4 text-violet-400\" /> Gallery\n      </span>\n      <ChevronRight className=\"w-3.5 h-3.5 text-muted-foreground/40\" />\n      <span className=\"text-muted-foreground hover:text-foreground cursor-pointer\">Components</span>\n      <ChevronRight className=\"w-3.5 h-3.5 text-muted-foreground/40\" />\n      <span className=\"text-foreground font-bold\">Uniques</span>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "ai-source-list-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/AiSourceListSection.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Globe, ChevronRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Source = { id: string; title: string; domain: string; snippet: string; initial: string; tone: string };\n\nconst SOURCES: Source[] = [\n  {\n    id: \"s1\",\n    title: \"How Stripe scaled developer onboarding\",\n    domain: \"stripe.com/blog\",\n    snippet: \"We cut time-to-first-API-call from days to minutes by…\",\n    initial: \"S\",\n    tone: \"bg-violet-500/20 text-violet-300\",\n  },\n  {\n    id: \"s2\",\n    title: \"Activation metrics that actually matter\",\n    domain: \"lennysnewsletter.com\",\n    snippet: \"The single best leading indicator of retention is…\",\n    initial: \"L\",\n    tone: \"bg-sky-500/20 text-sky-300\",\n  },\n  {\n    id: \"s3\",\n    title: \"Reducing churn with lifecycle emails\",\n    domain: \"customer.io\",\n    snippet: \"Behavioral triggers outperform time-based sends 3 to 1…\",\n    initial: \"C\",\n    tone: \"bg-emerald-500/20 text-emerald-300\",\n  },\n];\n\nexport interface AiSourceListSectionProps {\n  className?: string;\n}\n\nexport function AiSourceListSection({ className }: AiSourceListSectionProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl p-5 font-sans text-foreground\",\n        className,\n      )}\n    >\n      <h3 className=\"text-sm font-bold flex items-center gap-1.5 mb-3\">\n        <Globe className=\"w-4 h-4 text-primary\" /> Sources from the web\n      </h3>\n\n      <ul className=\"space-y-1\">\n        {SOURCES.map((s) => (\n          <li key={s.id}>\n            <a\n              href=\"/\"\n              className=\"group flex items-center gap-3 rounded-xl px-2.5 py-2.5 hover:bg-foreground/[0.04] transition-colors\"\n            >\n              <span\n                className={cn(\n                  \"h-8 w-8 shrink-0 grid place-items-center rounded-lg text-xs font-black\",\n                  s.tone,\n                )}\n              >\n                {s.initial}\n              </span>\n              <div className=\"min-w-0 flex-1\">\n                <div className=\"text-sm font-semibold truncate\">{s.title}</div>\n                <div className=\"text-xs text-muted-foreground/55 truncate\">{s.snippet}</div>\n                <div className=\"text-xs text-muted-foreground/40 mt-0.5\">{s.domain}</div>\n              </div>\n              <ChevronRight className=\"w-4 h-4 text-muted-foreground/30 shrink-0 group-hover:translate-x-0.5 transition-transform\" />\n            </a>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

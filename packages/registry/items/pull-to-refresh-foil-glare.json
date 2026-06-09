@@ -1,0 +1,15 @@
+{
+  "name": "pull-to-refresh-foil-glare",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/pull-to-refresh-foil-glare.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from 'react';\nimport { motion, useMotionValue, useSpring, useTransform, PanInfo } from 'framer-motion';\nimport { ArrowDown, RefreshCw } from 'lucide-react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface PullToRefreshFoilGlareProps {\n  onRefresh?: () => Promise<void>;\n  children: React.ReactNode;\n  className?: string;\n}\n\nexport const PullToRefreshFoilGlare: React.FC<PullToRefreshFoilGlareProps> = ({\n  onRefresh,\n  children,\n  className,\n}) => {\n  const [loading, setLoading] = useState(false);\n  const y = useMotionValue(0);\n  const springY = useSpring(y, { stiffness: 220, damping: 22 });\n  const threshold = 110;\n\n  // Sweep coordinates for holo glare sheen\n  const glareX = useTransform(y, [0, threshold], ['-150%', '150%']);\n  const indicatorOpacity = useTransform(y, [20, threshold], [0, 0.9]);\n\n  const handleDragEnd = async (_event: unknown, _info: PanInfo) => {\n    if (loading) return;\n    const currentY = y.get();\n    if (currentY > threshold) {\n      setLoading(true);\n      y.set(0);\n      if (typeof window !== 'undefined' && navigator.vibrate) navigator.vibrate(15);\n      \n      try {\n        await onRefresh?.();\n      } finally {\n        setLoading(false);\n      }\n    } else {\n      y.set(0);\n    }\n  };\n\n  return (\n    <div className={cn('relative w-full overflow-hidden select-none border border-border rounded-2xl bg-secondary/5', className)}>\n      {/* Background Foil Glare sweeps */}\n      <div className=\"absolute inset-x-0 top-0 h-[60px] pointer-events-none overflow-hidden z-20\">\n        <motion.div\n          style={{ x: glareX }}\n          className=\"absolute inset-y-0 w-[60%] bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-30\"\n        />\n        <div className=\"absolute inset-0 flex items-center justify-center\">\n          {loading ? (\n            <RefreshCw className=\"w-5 h-5 text-primary animate-spin\" />\n          ) : (\n            <motion.div\n              style={{ opacity: indicatorOpacity }}\n              className=\"flex items-center gap-1.5 text-[9px] font-black uppercase text-primary tracking-widest\"\n            >\n              <ArrowDown className=\"w-3.5 h-3.5 animate-pulse\" />\n              <span>Holographic Pull</span>\n            </motion.div>\n          )}\n        </div>\n      </div>\n\n      {/* Pullable body */}\n      <motion.div\n        drag=\"y\"\n        dragConstraints={{ top: 0, bottom: 180 }}\n        dragElastic={0.15}\n        style={{ y: springY }}\n        onDragEnd={handleDragEnd}\n        className=\"w-full bg-card min-h-[220px] p-6 relative z-10 cursor-grab active:cursor-grabbing flex flex-col items-center justify-center border-t border-border/30 shadow-inner\"\n      >\n        {children}\n      </motion.div>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

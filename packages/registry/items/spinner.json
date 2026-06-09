@@ -1,0 +1,14 @@
+{
+  "name": "spinner",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "files": [
+    {
+      "path": "components/ui/spinner.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { cn } from \"@/lib/utils\";\n\nconst spinnerVariants = cva(\n  'inline-block animate-spin rounded-full border-current border-solid border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]',\n  {\n    variants: {\n      size: {\n        xs: 'h-3 w-3 border',\n        sm: 'h-4 w-4 border-2',\n        default: 'h-5 w-5 border-2',\n        lg: 'h-8 w-8 border-[3px]',\n        xl: 'h-12 w-12 border-4',\n      },\n    },\n    defaultVariants: {\n      size: 'default',\n    },\n  }\n);\n\nexport interface SpinnerProps\n  extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'role'>,\n    VariantProps<typeof spinnerVariants> {\n  label?: string;\n}\n\nconst Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(\n  ({ className, size, label = 'Loading', ...props }, ref) => {\n    return (\n      <span\n        ref={ref}\n        role=\"status\"\n        aria-live=\"polite\"\n        className={cn(spinnerVariants({ size }), className)}\n        {...props}\n      >\n        <span className=\"sr-only\">{label}</span>\n      </span>\n    );\n  }\n);\nSpinner.displayName = 'Spinner';\n\nexport { Spinner, spinnerVariants };\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "infinite-brand-loop-marquee",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/InfiniteBrandLoopMarquee.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Slack, Figma, Github, Chrome, Twitter } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface BrandLoopItem {\n  Icon: React.ComponentType<{ className?: string }>;\n  name: string;\n}\n\nexport interface InfiniteBrandLoopMarqueeProps {\n  className?: string;\n  title?: string;\n  subtitle?: string;\n  brands?: BrandLoopItem[];\n}\n\nconst DEFAULT_BRANDS: BrandLoopItem[] = [\n  { Icon: Slack, name: \"Slack\" },\n  { Icon: Figma, name: \"Figma\" },\n  { Icon: Github, name: \"GitHub\" },\n  { Icon: Chrome, name: \"Chrome\" },\n  { Icon: Twitter, name: \"Twitter\" },\n];\n\nexport function InfiniteBrandLoopMarquee({\n  className,\n  title = \"Integrations\",\n  subtitle = \"Lightweight brand loop marquee\",\n  brands = DEFAULT_BRANDS,\n}: InfiniteBrandLoopMarqueeProps) {\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl overflow-hidden space-y-4\", className)}>\n      <div>\n        <h3 className=\"text-sm font-bold text-foreground\">{title}</h3>\n        <p className=\"text-[10px] text-muted-foreground\">{subtitle}</p>\n      </div>\n\n      <div className=\"relative flex w-full overflow-hidden bg-zinc-950/60 rounded-xl border border-border/40 py-3.5\">\n        <div className=\"flex gap-6 animate-marquee whitespace-nowrap min-w-full\">\n          {brands.map((b, idx) => {\n            const Icon = b.Icon;\n            return (\n              <div\n                key={idx}\n                className=\"inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-900/60 border border-border/30 rounded-lg text-xs font-bold text-foreground/80 shrink-0\"\n              >\n                <Icon className=\"w-4 h-4 text-primary shrink-0\" />\n                <span>{b.name}</span>\n              </div>\n            );\n          })}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

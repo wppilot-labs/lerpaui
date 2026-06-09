@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-kpi-row",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DashboardKpiRow.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { ArrowUp, ArrowDown } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Kpi = { label: string; value: string; delta: number };\n\nconst KPIS: Kpi[] = [\n  { label: \"Revenue\", value: \"$48.2k\", delta: 12.4 },\n  { label: \"New users\", value: \"1,204\", delta: 8.1 },\n  { label: \"Conversion\", value: \"3.6%\", delta: -1.2 },\n  { label: \"Avg. order\", value: \"$72\", delta: 4.5 },\n];\n\nexport interface DashboardKpiRowProps {\n  className?: string;\n}\n\nexport function DashboardKpiRow({ className }: DashboardKpiRowProps) {\n  return (\n    <div className={cn(\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"grid grid-cols-2 sm:grid-cols-4 divide-x divide-y sm:divide-y-0 divide-foreground/[0.05]\">\n        {KPIS.map((k) => {\n          const up = k.delta >= 0;\n          return (\n            <div key={k.label} className=\"p-5\">\n              <div className=\"text-xs uppercase tracking-wide text-muted-foreground/50\">{k.label}</div>\n              <div className=\"text-2xl font-black leading-tight mt-0.5\">{k.value}</div>\n              <span className={cn(\"inline-flex items-center gap-0.5 text-xs font-bold mt-1\", up ? \"text-emerald-400\" : \"text-red-400\")}>\n                {up ? <ArrowUp className=\"w-4 h-4\" /> : <ArrowDown className=\"w-4 h-4\" />}\n                {Math.abs(k.delta)}%\n              </span>\n            </div>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

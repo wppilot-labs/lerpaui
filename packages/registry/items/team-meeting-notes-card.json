@@ -1,0 +1,14 @@
+{
+  "name": "team-meeting-notes-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TeamMeetingNotesCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { FileText } from \"lucide-react\";\n\nexport function TeamMeetingNotesCard() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <FileText className=\"w-4 h-4 text-violet-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Meeting Action items</span>\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-violet-400\">Today</span>\n      </div>\n\n      <div className=\"space-y-2 text-xs\">\n        <div className=\"p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.03] flex items-center justify-between\">\n          <div>\n            <span className=\"font-bold block\">Update registry templates</span>\n            <span className=\"text-[10px] text-muted-foreground\">Assignee: Jane Doe</span>\n          </div>\n          <span className=\"text-[10px] text-muted-foreground/60 font-bold\">1h ago</span>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

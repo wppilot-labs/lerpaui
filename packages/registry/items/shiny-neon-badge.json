@@ -1,0 +1,12 @@
+{
+  "name": "shiny-neon-badge",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/shiny-neon-badge.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from \"react\";\n\nexport interface ShinyNeonBadgeProps\n  extends React.HTMLAttributes<HTMLSpanElement> {\n  pulse?: boolean;\n  children?: React.ReactNode;\n}\n\n/**\n * ShinyNeonBadge — pill-style status badge with a soft pulsing dot.\n * Uses primary tokens so it adapts to light and dark themes automatically.\n */\nexport function ShinyNeonBadge({\n  pulse = true,\n  className,\n  children = \"Registry Live\",\n  ...rest\n}: ShinyNeonBadgeProps) {\n  return (\n    <span\n      {...rest}\n      className={[\n        \"inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary\",\n        className,\n      ]\n        .filter(Boolean)\n        .join(\" \")}\n    >\n      <span\n        aria-hidden\n        className={[\n          \"h-1.5 w-1.5 rounded-full bg-primary\",\n          pulse ? \"animate-pulse motion-reduce:animate-none\" : \"\",\n        ]\n          .filter(Boolean)\n          .join(\" \")}\n      />\n      {children}\n    </span>\n  );\n}\n\nexport default ShinyNeonBadge;\n"
+    }
+  ]
+}

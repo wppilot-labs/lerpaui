@@ -1,0 +1,12 @@
+{
+  "name": "footer-docs",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/FooterDocs.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport function FooterDocs() {\n  return (\n    <div className=\"w-full max-w-4xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-xl shadow-lg select-none font-sans text-foreground\">\n      <div className=\"flex flex-col sm:flex-row items-center justify-between gap-4\">\n        <span className=\"text-[10px] text-muted-foreground/60\">Lerpa UI Documentation Frameworks © 2026.</span>\n        <div className=\"flex gap-4 text-[10px] text-muted-foreground\">\n          <a href=\"#\" className=\"hover:text-foreground\">Guide Guidelines</a>\n          <a href=\"#\" className=\"hover:text-foreground\">API Quota Terms</a>\n          <a href=\"#\" className=\"hover:text-foreground\">License Security</a>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

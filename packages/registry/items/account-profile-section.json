@@ -1,0 +1,14 @@
+{
+  "name": "account-profile-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/AccountProfileSection.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { MapPin, Link2, Pencil } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AccountProfileSectionProps {\n  className?: string;\n}\n\nconst STATS = [\n  { label: \"Projects\", value: \"24\" },\n  { label: \"Followers\", value: \"1.2k\" },\n  { label: \"Following\", value: \"318\" },\n];\n\nexport function AccountProfileSection({ className }: AccountProfileSectionProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl font-sans text-foreground overflow-hidden\", className)}>\n      <div className=\"h-16 bg-gradient-to-r from-primary/30 via-primary/10 to-transparent\" />\n\n      <div className=\"px-5 pb-5 -mt-8\">\n        <div className=\"flex items-end justify-between\">\n          <div className=\"h-16 w-16 rounded-2xl border-2 border-card bg-secondary/60 flex items-center justify-center text-xl font-black\">JD</div>\n          <button type=\"button\" className=\"inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-lg bg-secondary/50 border border-foreground/[0.06] text-muted-foreground hover:text-foreground transition-colors mb-1\">\n            <Pencil className=\"w-3.5 h-3.5\" /> Edit\n          </button>\n        </div>\n\n        <h3 className=\"text-base font-bold mt-2\">Jane Doe</h3>\n        <p className=\"text-xs text-muted-foreground/70\">Senior Product Designer</p>\n        <p className=\"text-xs text-muted-foreground/60 leading-snug mt-2\">Designing calm interfaces for complex systems. Coffee, type, and long walks.</p>\n\n        <div className=\"flex items-center gap-3 mt-2.5 text-xs text-muted-foreground/55\">\n          <span className=\"inline-flex items-center gap-1\"><MapPin className=\"w-3.5 h-3.5\" /> San Francisco</span>\n          <span className=\"inline-flex items-center gap-1\"><Link2 className=\"w-3.5 h-3.5\" /> jane.design</span>\n        </div>\n\n        <div className=\"grid grid-cols-3 gap-2 mt-4\">\n          {STATS.map((s) => (\n            <div key={s.label} className=\"rounded-xl bg-foreground/[0.02] border border-foreground/[0.04] py-2 text-center\">\n              <div className=\"text-lg font-black\">{s.value}</div>\n              <div className=\"text-[11px] uppercase tracking-wide text-muted-foreground/50\">{s.label}</div>\n            </div>\n          ))}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

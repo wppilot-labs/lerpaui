@@ -1,0 +1,14 @@
+{
+  "name": "docs-quickstart-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DocsQuickstartSection.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DocsQuickstartSectionProps {\n  className?: string;\n}\n\ntype Step = { title: string; desc: string; code?: string };\n\nconst STEPS: Step[] = [\n  { title: \"Install the package\", desc: \"Add the library to your project.\", code: \"npm install @acme/ui\" },\n  { title: \"Add the provider\", desc: \"Wrap your app so components inherit the theme.\", code: \"<AcmeProvider>{children}</AcmeProvider>\" },\n  { title: \"Import a component\", desc: \"Drop it into any page or route.\", code: 'import { Button } from \"@acme/ui\";' },\n  { title: \"Ship it\", desc: \"Build and deploy — you're done.\" },\n];\n\nexport function DocsQuickstartSection({ className }: DocsQuickstartSectionProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <header className=\"mb-5\">\n        <p className=\"text-[11px] uppercase font-bold tracking-wider text-muted-foreground/45\">Get started</p>\n        <h3 className=\"text-base font-bold mt-0.5\">Quickstart</h3>\n      </header>\n\n      <ol className=\"space-y-5\">\n        {STEPS.map((s, i) => (\n          <li key={s.title} className=\"flex gap-3.5\">\n            <span className=\"grid place-items-center shrink-0 h-7 w-7 rounded-full bg-primary/15 text-primary text-xs font-bold\">\n              {i + 1}\n            </span>\n            <div className=\"min-w-0 flex-1 pt-0.5\">\n              <h4 className=\"text-sm font-semibold\">{s.title}</h4>\n              <p className=\"text-sm text-muted-foreground/60 mt-0.5 leading-relaxed\">{s.desc}</p>\n              {s.code && (\n                <div className=\"mt-2 rounded-lg bg-muted border border-foreground/[0.05] px-3 py-2 font-mono text-sm text-emerald-400/90 overflow-x-auto\">\n                  {s.code}\n                </div>\n              )}\n            </div>\n          </li>\n        ))}\n      </ol>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

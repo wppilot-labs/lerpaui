@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-kpi-grid",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardKpiGrid.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ArrowUpRight, ArrowDownRight, Users, DollarSign, ShoppingCart, Activity } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DashboardKpiGridProps {\n  className?: string;\n}\n\ninterface Kpi {\n  label: string;\n  value: string;\n  delta: string;\n  positive: boolean;\n  icon: React.ComponentType<{ className?: string }>;\n}\n\nconst KPIS: Kpi[] = [\n  { label: \"Total revenue\", value: \"$48,290\", delta: \"12.4%\", positive: true, icon: DollarSign },\n  { label: \"Active users\", value: \"8,412\", delta: \"5.1%\", positive: true, icon: Users },\n  { label: \"Orders\", value: \"1,938\", delta: \"2.3%\", positive: false, icon: ShoppingCart },\n  { label: \"Conversion\", value: \"3.84%\", delta: \"0.6%\", positive: true, icon: Activity },\n];\n\nexport function DashboardKpiGrid({ className }: DashboardKpiGridProps) {\n  return (\n    <div className={cn(\"grid w-full max-w-lg grid-cols-2 gap-4\", className)}>\n      {KPIS.map((kpi) => {\n        const Icon = kpi.icon;\n        return (\n          <div\n            key={kpi.label}\n            className=\"rounded-2xl border border-border bg-card p-5 text-card-foreground shadow-sm\"\n          >\n            <div className=\"flex items-center justify-between\">\n              <span className=\"flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-muted-foreground\">\n                <Icon className=\"h-4 w-4\" />\n              </span>\n              <span\n                className={cn(\n                  \"inline-flex items-center gap-0.5 text-xs font-semibold\",\n                  kpi.positive\n                    ? \"text-emerald-600 dark:text-emerald-400\"\n                    : \"text-red-600 dark:text-red-400\",\n                )}\n              >\n                {kpi.positive ? (\n                  <ArrowUpRight className=\"h-3.5 w-3.5\" />\n                ) : (\n                  <ArrowDownRight className=\"h-3.5 w-3.5\" />\n                )}\n                {kpi.delta}\n              </span>\n            </div>\n            <p className=\"mt-4 text-2xl font-bold tracking-tight tabular-nums text-foreground\">\n              {kpi.value}\n            </p>\n            <p className=\"mt-1 text-sm text-muted-foreground\">{kpi.label}</p>\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n\nexport default DashboardKpiGrid;\n"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "name": "@lerpa/mcp-server",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Model Context Protocol server exposing the Lerpa UI registry to AI agents (Claude Code, Cursor, v0, Continue).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lerpa-ui/lerpa.git",
+    "directory": "packages/mcp-server"
+  },
+  "author": "Lerpa UI",
+  "homepage": "https://github.com/lerpa-ui/lerpa#readme",
+  "bugs": "https://github.com/lerpa-ui/lerpa/issues",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "lerpa-mcp": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "registry",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc && node ./scripts/copy-registry.cjs",
+    "dev": "tsc -w",
+    "lint": "eslint src --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "start": "node ./dist/index.js",
+    "prepublishOnly": "pnpm --filter @lerpa/registry run build && pnpm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "lerpa",
+    "shadcn",
+    "registry",
+    "ai",
+    "claude",
+    "cursor",
+    "v0"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0"
+  }
+}

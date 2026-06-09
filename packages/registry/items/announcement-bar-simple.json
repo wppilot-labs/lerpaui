@@ -1,0 +1,15 @@
+{
+  "name": "announcement-bar-simple",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/AnnouncementBarSimple.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { Megaphone, X } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface AnnouncementBarSimpleProps {\n  className?: string;\n}\n\nexport function AnnouncementBarSimple({ className }: AnnouncementBarSimpleProps) {\n  const [open, setOpen] = useState(true);\n  if (!open) return null;\n\n  return (\n    <div\n      className={cn(\n        \"relative w-full rounded-xl border border-border bg-secondary/40 px-4 py-3 text-foreground backdrop-blur-xl\",\n        className\n      )}\n    >\n      <div className=\"flex items-center justify-center gap-2 text-center text-sm\">\n        <Megaphone className=\"w-4 h-4 shrink-0 text-primary\" />\n        <span className=\"text-muted-foreground\">\n          We just shipped v2.4 —{\" \"}\n          <a href=\"/\" className=\"font-semibold text-foreground underline-offset-2 hover:underline\">\n            read the changelog\n          </a>\n        </span>\n      </div>\n      <button\n        type=\"button\"\n        onClick={() => setOpen(false)}\n        aria-label=\"Dismiss announcement\"\n        className=\"absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition hover:bg-foreground/[0.05] hover:text-foreground\"\n      >\n        <X className=\"w-4 h-4\" />\n      </button>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

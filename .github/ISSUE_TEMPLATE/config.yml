@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question / Discussion
+    url: https://github.com/lerpa-ui/lerpa/discussions
+    about: Ask questions and discuss ideas with the community.
+  - name: Security report
+    url: https://github.com/lerpa-ui/lerpa/security/policy
+    about: Please report security vulnerabilities privately — see SECURITY.md.

@@ -1,0 +1,14 @@
+{
+  "name": "billing-payment-method-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BillingPaymentMethodCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { CreditCard } from \"lucide-react\";\n\nexport function BillingPaymentMethodCard() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <span className=\"block text-[9px] font-extrabold uppercase bg-violet-500/15 text-violet-300 px-2 py-0.5 rounded border border-violet-500/20 tracking-wider mb-4 w-max\">Active Credit Card</span>\n\n      <div className=\"p-4 rounded-xl bg-gradient-to-tr from-violet-600/30 to-indigo-600/30 border border-white/[0.06] text-white space-y-4 relative overflow-hidden\">\n        <div className=\"flex justify-between items-start\">\n          <CreditCard className=\"w-8 h-8 text-violet-300\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider\">Visa Platinum</span>\n        </div>\n        <div>\n          <span className=\"block text-[10px] text-violet-200/50 uppercase\">Card Number</span>\n          <span className=\"text-base font-mono font-bold\">**** **** **** 9820</span>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

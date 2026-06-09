@@ -1,0 +1,15 @@
+{
+  "name": "liquid-blob-tab-bar",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/liquid-blob-tab-bar.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from 'react';\nimport { motion} from \"framer-motion\";\nimport { Sparkles, Cpu, Network, Layers } from 'lucide-react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface LiquidBlobTabBarProps {\n  onSelect?: (idx: number) => void;\n  className?: string;\n}\n\nexport const LiquidBlobTabBar: React.FC<LiquidBlobTabBarProps> = ({\n  onSelect,\n  className,\n}) => {\n  const [activeTab, setActiveTab] = useState(0);\n\n  const tabs = [\n    { icon: Sparkles, label: 'Core' },\n    { icon: Cpu, label: 'Chips' },\n    { icon: Network, label: 'Graph' },\n    { icon: Layers, label: 'Stack' },\n  ];\n\n  return (\n    <div className={cn('relative w-full max-w-[300px] bg-card border border-border rounded-xl shadow-lg p-2 select-none overflow-hidden', className)}>\n      {/* SVG filter for organic liquid goo blur */}\n      <svg className=\"hidden\">\n        <defs>\n          <filter id=\"liquid-goo-tab-filter\">\n            <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"6\" result=\"blur\" />\n            <feColorMatrix in=\"blur\" mode=\"matrix\" values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8\" result=\"goo\" />\n            <feComposite in=\"SourceGraphic\" in2=\"goo\" operator=\"atop\" />\n          </filter>\n        </defs>\n      </svg>\n\n      <div style={{ filter: 'url(#liquid-goo-tab-filter)' }} className=\"flex justify-between relative w-full\">\n        {tabs.map((tab, idx) => {\n          const isActive = idx === activeTab;\n          const Icon = tab.icon;\n\n          return (\n            <button\n              key={idx}\n              type=\"button\"\n              onClick={() => {\n                setActiveTab(idx);\n                onSelect?.(idx);\n              }}\n              className=\"relative flex-1 py-2.5 flex items-center justify-center bg-transparent border-none outline-none cursor-pointer\"\n            >\n              {isActive && (\n                <motion.div\n                  layoutId=\"liquid-blob-tab-indicator\"\n                  className=\"absolute inset-0 bg-primary/20 border-2 border-primary/30 rounded-xl\"\n                  transition={{ type: 'spring', stiffness: 220, damping: 20 }}\n                />\n              )}\n\n              <div className=\"relative z-10 flex flex-col items-center gap-1\">\n                <Icon className={cn('w-4.5 h-4.5 transition-colors duration-300', isActive ? 'text-primary scale-110' : 'text-muted-foreground')} />\n                <span className={cn('text-[9px] font-black uppercase tracking-wider transition-colors', isActive ? 'text-primary' : 'text-muted-foreground/60')}>\n                  {tab.label}\n                </span>\n              </div>\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "cart-abandoned-recovery-banner",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CartAbandonedRecoveryBanner.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState, useEffect } from \"react\";\nimport { Sparkles, Clock, ArrowRight } from \"lucide-react\";\n\nexport function CartAbandonedRecoveryBanner() {\n  const [seconds, setSeconds] = useState(599); // 10 mins\n\n  useEffect(() => {\n    const timer = setInterval(() => {\n      setSeconds((prev) => (prev > 0 ? prev - 1 : 0));\n    }, 1000);\n    return () => clearInterval(timer);\n  }, []);\n\n  const formatTime = (sec: number) => {\n    const m = Math.floor(sec / 60);\n    const s = sec % 60;\n    return `${m}:${s < 10 ? \"0\" : \"\"}${s}`;\n  };\n\n  return (\n    <div className=\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-violet-500/20 p-4 rounded-xl shadow-lg select-none font-sans text-foreground flex flex-col sm:flex-row items-center justify-between gap-3 relative overflow-hidden\">\n      <div className=\"absolute inset-0 bg-gradient-to-r from-violet-500/10 to-transparent pointer-events-none\" />\n      \n      <div className=\"flex items-center gap-2.5 relative z-10\">\n        <div className=\"p-2 rounded-lg bg-violet-500/15 border border-violet-500/20\">\n          <Sparkles className=\"w-4 h-4 text-violet-400\" />\n        </div>\n        <div className=\"text-xs\">\n          <h4 className=\"font-black leading-none mb-1 text-violet-300\">Claim 20% Off Your Cart!</h4>\n          <p className=\"text-[10px] text-muted-foreground/60\">Unlock items in your shopping bag now.</p>\n        </div>\n      </div>\n\n      <div className=\"flex items-center gap-3 relative z-10 w-full sm:w-auto justify-between sm:justify-end\">\n        <span className=\"flex items-center gap-1 text-[10px] font-mono text-violet-300 font-bold bg-violet-500/10 px-2.5 py-1 rounded-lg border border-violet-500/20\">\n          <Clock className=\"w-3.5 h-3.5\" />\n          {formatTime(seconds)}\n        </span>\n        <button className=\"px-3.5 py-1.5 bg-violet-600 hover:bg-violet-500 text-white text-[10px] font-extrabold rounded-lg flex items-center gap-1 transition-all\">\n          <span>Apply (SAVE20)</span>\n          <ArrowRight className=\"w-3 h-3\" />\n        </button>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "feature-grid-section",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/FeatureGridSection.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Zap, Shield, Globe, GitBranch, Gauge, Lock } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Feature = { title: string; desc: string; Icon: React.ElementType };\n\nconst FEATURES: Feature[] = [\n  { title: \"Blazing fast\", desc: \"Edge-rendered in under 50ms worldwide.\", Icon: Zap },\n  { title: \"Secure by default\", desc: \"SOC 2 Type II with end-to-end encryption.\", Icon: Shield },\n  { title: \"Global CDN\", desc: \"300+ points of presence across 6 continents.\", Icon: Globe },\n  { title: \"Git-based\", desc: \"Preview every branch with isolated deploys.\", Icon: GitBranch },\n  { title: \"Real-time metrics\", desc: \"Latency, errors and traffic, live.\", Icon: Gauge },\n  { title: \"Access control\", desc: \"Granular roles and SSO for your team.\", Icon: Lock },\n];\n\nexport interface FeatureGridSectionProps {\n  className?: string;\n}\n\nexport function FeatureGridSection({ className }: FeatureGridSectionProps) {\n  return (\n    <div className={cn(\"w-full max-w-3xl font-sans text-foreground\", className)}>\n      <div className=\"text-center mb-6\">\n        <h3 className=\"text-xl font-bold\">Everything you need to ship</h3>\n        <p className=\"text-sm text-muted-foreground/60 mt-1\">A complete platform, built for speed and scale.</p>\n      </div>\n      <div className=\"grid sm:grid-cols-2 lg:grid-cols-3 gap-3\">\n        {FEATURES.map((f) => (\n          <div\n            key={f.title}\n            className=\"rounded-2xl border border-border/50 bg-card/45 backdrop-blur-xl p-5 shadow-lg hover:border-foreground/[0.12] transition-colors\"\n          >\n            <span className=\"flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary mb-3\">\n              <f.Icon className=\"w-5 h-5\" />\n            </span>\n            <h4 className=\"text-sm font-bold\">{f.title}</h4>\n            <p className=\"text-xs text-muted-foreground/60 mt-1 leading-relaxed\">{f.desc}</p>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

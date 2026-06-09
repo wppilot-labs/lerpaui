@@ -1,0 +1,14 @@
+{
+  "name": "glow-tab-slider-header",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/GlowTabSliderHeader.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function GlowTabSliderHeader({ className }: { className?: string }) {\n  const [activeTab, setActiveTab] = useState(\"all\");\n\n  const tabs = [\"all\", \"dev\", \"design\", \"ops\"];\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div>\n        <h3 className=\"text-sm font-bold text-foreground\">Glow Tab Switcher</h3>\n        <p className=\"text-[10px] text-muted-foreground\">Stretching linear background indicators</p>\n      </div>\n\n      <div className=\"flex gap-1.5 p-1 bg-zinc-950/60 rounded-xl border border-border/30 justify-around\">\n        {tabs.map((tab) => {\n          const isActive = activeTab === tab;\n\n          return (\n            <button\n              key={tab}\n              onClick={() => setActiveTab(tab)}\n              className={cn(\n                \"relative px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-lg transition-colors cursor-pointer capitalize flex-1 text-center\",\n                isActive ? \"text-primary\" : \"text-muted-foreground hover:text-foreground\"\n              )}\n            >\n              {isActive && (\n                <motion.div\n                  layoutId=\"glow-tab-bg\"\n                  className=\"absolute inset-0 bg-primary/15 border border-primary/30 rounded-lg\"\n                  transition={{ type: \"spring\", stiffness: 350, damping: 25 }}\n                />\n              )}\n              <span className=\"relative z-10\">{tab}</span>\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

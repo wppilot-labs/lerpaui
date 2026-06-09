@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-product-info-section",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceProductInfoSection.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Star, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst HIGHLIGHTS = [\n  \"100% organic combed cotton\",\n  \"Pre-shrunk, garment-dyed\",\n  \"Reinforced shoulder seams\",\n];\n\nexport interface EcommerceProductInfoSectionProps {\n  className?: string;\n}\n\nexport function EcommerceProductInfoSection({ className }: EcommerceProductInfoSectionProps) {\n  const rating = 4.6;\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"text-xs uppercase tracking-wider text-muted-foreground/55 font-semibold\">Heritage Goods</div>\n      <h2 className=\"text-lg font-bold mt-0.5\">Garment-Dyed Heavyweight Tee</h2>\n\n      <div className=\"flex items-center gap-2 mt-2\">\n        <span className=\"inline-flex items-center gap-0.5\">\n          {Array.from({ length: 5 }).map((_, i) => (\n            <Star\n              key={i}\n              className={cn(\"w-4 h-4\", i < Math.round(rating) ? \"fill-amber-400 text-amber-400\" : \"fill-none text-muted-foreground/30\")}\n            />\n          ))}\n        </span>\n        <span className=\"text-sm font-medium\">{rating.toFixed(1)}</span>\n        <span className=\"text-xs text-muted-foreground/50\">· 412 reviews</span>\n      </div>\n\n      <div className=\"flex items-baseline gap-2.5 mt-4\">\n        <span className=\"text-2xl font-bold\">$48</span>\n        <span className=\"text-sm text-muted-foreground/45 line-through\">$60</span>\n        <span className=\"text-[11px] font-bold uppercase bg-red-500/15 text-red-400 px-2 py-0.5 rounded border border-red-500/20\">20% off</span>\n      </div>\n\n      <p className=\"text-sm leading-relaxed text-muted-foreground/70 mt-4\">\n        A wardrobe staple cut from 7.5oz cotton with a relaxed drape. Each piece is dyed individually for a\n        lived-in tone that softens with every wash.\n      </p>\n\n      <ul className=\"mt-4 space-y-1.5\">\n        {HIGHLIGHTS.map((h) => (\n          <li key={h} className=\"flex items-center gap-2 text-sm text-muted-foreground/80\">\n            <Check className=\"w-4 h-4 text-emerald-400 shrink-0\" />\n            {h}\n          </li>\n        ))}\n      </ul>\n\n      <div className=\"mt-4 inline-flex items-center gap-1.5 text-xs text-emerald-400\">\n        <span className=\"h-1.5 w-1.5 rounded-full bg-emerald-400\" />\n        In stock — ships within 24 hours\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

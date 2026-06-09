@@ -1,0 +1,15 @@
+{
+  "name": "floating-polaroid-wall",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/floating-polaroid-wall.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useRef } from 'react';\nimport { motion, useReducedMotion } from \"framer-motion\";\n\nimport { cn } from \"@/lib/utils\";\n\nexport interface FloatingPolaroidWallProps {\n  photos?: { id: string; url: string; title: string }[];\n  className?: string;\n}\n\nexport const FloatingPolaroidWall: React.FC<FloatingPolaroidWallProps> = ({\n  photos = [\n    { id: \"p1\", url: \"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop\", title: \"Core Architecture\" },\n    { id: \"p2\", url: \"https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop\", title: \"Creative Lead\" },\n    { id: \"p3\", url: \"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop\", title: \"Design Systems\" }\n  ],\n  className,\n}) => {\n  const constraintsRef = useRef<HTMLDivElement>(null);\n  const prefersReducedMotion = useReducedMotion();\n\n  return (\n    <div \n      ref={constraintsRef}\n      className={cn('relative w-full max-w-[340px] h-60 bg-zinc-950/20 border border-border/40 rounded-2xl overflow-hidden select-none flex items-center justify-center p-3', className)}\n    >\n      <span className=\"text-[9px] text-muted-foreground uppercase font-black tracking-widest absolute top-4\">Drag profiles below</span>\n\n      {photos.map((ph, idx) => {\n        // Distribute polaroids scattered positions\n        const left = 35 + idx * 75;\n        const top = 35 + (idx % 2 === 0 ? 15 : 45);\n        const rot = idx * 10 - 10;\n\n        return (\n          <motion.div\n            key={ph.id}\n            drag={prefersReducedMotion ? false : true}\n            dragConstraints={constraintsRef}\n            dragElastic={0.12}\n            initial={{ left, top, rotate: rot }}\n            whileDrag={prefersReducedMotion ? undefined : { scale: 1.08, zIndex: 50, shadow: \"0 25px 50px -12px rgb(0 0 0 / 0.25)\" }}\n            className=\"absolute p-2.5 pb-4 border border-border/40 bg-card rounded-xl shadow-md w-28 cursor-grab active:cursor-grabbing hover:border-primary/25\"\n            style={{ rotate: rot }}\n          >\n            <div className=\"w-full aspect-square rounded-lg overflow-hidden border border-border/20 mb-2\">\n              <img src={ph.url} alt={ph.title} className=\"w-full h-full object-cover\" loading=\"lazy\" decoding=\"async\" />\n            </div>\n            <div className=\"flex flex-col gap-0.5\">\n              <span className=\"text-[9px] font-black text-foreground uppercase tracking-wide leading-none\">{ph.title}</span>\n              <span className=\"text-[7px] text-muted-foreground uppercase font-semibold\">Lerpa UI Roster</span>\n            </div>\n          </motion.div>\n        );\n      })}\n    </div>\n  );\n};\n"
+    }
+  ]
+}

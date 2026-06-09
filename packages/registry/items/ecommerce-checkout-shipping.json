@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-checkout-shipping",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceCheckoutShipping.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Truck } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Option = { id: string; name: string; eta: string; price: string };\n\nconst OPTIONS: Option[] = [\n  { id: \"standard\", name: \"Standard\", eta: \"5–7 business days\", price: \"Free\" },\n  { id: \"express\", name: \"Express\", eta: \"2–3 business days\", price: \"$12\" },\n  { id: \"overnight\", name: \"Overnight\", eta: \"Next business day\", price: \"$28\" },\n];\n\nexport interface EcommerceCheckoutShippingProps {\n  className?: string;\n}\n\nexport function EcommerceCheckoutShipping({ className }: EcommerceCheckoutShippingProps) {\n  const [selected, setSelected] = useState(\"express\");\n\n  return (\n    <div className={cn(\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold flex items-center gap-1.5 mb-4\"><Truck className=\"w-4 h-4 text-primary\" /> Shipping method</h3>\n\n      <fieldset className=\"space-y-2\">\n        <legend className=\"sr-only\">Choose a shipping method</legend>\n        {OPTIONS.map((o) => {\n          const on = selected === o.id;\n          return (\n            <label\n              key={o.id}\n              className={cn(\"flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors\", on ? \"border-primary/50 bg-primary/5\" : \"border-foreground/[0.06] bg-foreground/[0.02] hover:border-foreground/[0.12]\")}\n            >\n              <input type=\"radio\" name=\"shipping\" value={o.id} checked={on} onChange={() => setSelected(o.id)} className=\"sr-only\" />\n              <span className={cn(\"h-4 w-4 rounded-full border flex items-center justify-center shrink-0\", on ? \"border-primary\" : \"border-foreground/25\")}>\n                {on && <span className=\"h-2 w-2 rounded-full bg-primary\" />}\n              </span>\n              <div className=\"flex-1\">\n                <div className=\"text-sm font-semibold\">{o.name}</div>\n                <div className=\"text-xs text-muted-foreground/55\">{o.eta}</div>\n              </div>\n              <span className=\"text-sm font-bold tabular-nums\">{o.price}</span>\n            </label>\n          );\n        })}\n      </fieldset>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

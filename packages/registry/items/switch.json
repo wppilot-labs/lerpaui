@@ -1,0 +1,14 @@
+{
+  "name": "switch",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ui/react-switch"
+  ],
+  "files": [
+    {
+      "path": "components/ui/switch.tsx",
+      "type": "registry:ui",
+      "content": "import * as React from 'react';\nimport * as SwitchPrimitives from '@radix-ui/react-switch';\nimport { cn } from \"@/lib/utils\";\n\nconst Switch = React.forwardRef<\n  React.ElementRef<typeof SwitchPrimitives.Root>,\n  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>\n>(({ className, ...props }, ref) => {\n  // A switch needs an accessible name. If the consumer hasn't paired one via\n  // aria-label / aria-labelledby / an external <label htmlFor={id}>, fall back\n  // to a generic name so it never ships unlabeled.\n  const hasName =\n    props['aria-label'] !== undefined ||\n    props['aria-labelledby'] !== undefined ||\n    props.id !== undefined;\n  return (\n  <SwitchPrimitives.Root\n    aria-label={hasName ? undefined : 'Toggle'}\n    className={cn(\n      'peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-150 ease-out hover:data-[state=checked]:bg-primary/90 hover:data-[state=unchecked]:bg-input/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:data-[state=checked]:bg-primary disabled:hover:data-[state=unchecked]:bg-input data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',\n      className\n    )}\n    {...props}\n    ref={ref}\n  >\n    <SwitchPrimitives.Thumb\n      className={cn(\n        'pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform duration-150 ease-out motion-reduce:transition-none data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0'\n      )}\n    />\n  </SwitchPrimitives.Root>\n  );\n});\nSwitch.displayName = SwitchPrimitives.Root.displayName;\n\nexport { Switch };\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "comparison-before-after-section",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/ComparisonBeforeAfterSection.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { X, Check, ArrowRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst BEFORE = [\n  \"Manual spreadsheets across 6 tools\",\n  \"Reports took days to compile\",\n  \"No single source of truth\",\n  \"Constant context switching\",\n];\n\nconst AFTER = [\n  \"One unified dashboard\",\n  \"Live reports in seconds\",\n  \"Everyone sees the same data\",\n  \"Focused, automated workflows\",\n];\n\nexport interface ComparisonBeforeAfterSectionProps {\n  className?: string;\n}\n\nexport function ComparisonBeforeAfterSection({ className }: ComparisonBeforeAfterSectionProps) {\n  return (\n    <section\n      className={cn(\n        \"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <div className=\"text-center mb-6\">\n        <h2 className=\"text-base font-bold\">From chaos to clarity</h2>\n        <p className=\"mt-1 text-sm text-muted-foreground/65\">See what changes after you switch.</p>\n      </div>\n\n      <div className=\"grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-4 items-stretch\">\n        <div className=\"rounded-xl border border-red-500/20 bg-red-500/[0.04] p-4\">\n          <div className=\"mb-3 text-xs font-bold uppercase tracking-wide text-red-600 dark:text-red-400\">Before</div>\n          <ul className=\"space-y-2.5\">\n            {BEFORE.map((item) => (\n              <li key={item} className=\"flex items-start gap-2 text-sm text-muted-foreground/75\">\n                <X className=\"mt-0.5 w-4 h-4 shrink-0 text-red-600 dark:text-red-400\" />\n                {item}\n              </li>\n            ))}\n          </ul>\n        </div>\n\n        <div className=\"hidden sm:flex items-center justify-center\">\n          <span className=\"flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary\">\n            <ArrowRight className=\"w-4 h-4\" />\n          </span>\n        </div>\n\n        <div className=\"rounded-xl border border-emerald-500/25 bg-emerald-500/[0.05] p-4\">\n          <div className=\"mb-3 text-xs font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400\">After</div>\n          <ul className=\"space-y-2.5\">\n            {AFTER.map((item) => (\n              <li key={item} className=\"flex items-start gap-2 text-sm text-foreground/90\">\n                <Check className=\"mt-0.5 w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400\" />\n                {item}\n              </li>\n            ))}\n          </ul>\n        </div>\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ]
+}

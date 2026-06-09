@@ -1,0 +1,12 @@
+{
+  "name": "footer-saas",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/FooterSaas.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport function FooterSaas() {\n  return (\n    <div className=\"w-full max-w-4xl bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-xl shadow-lg select-none font-sans text-foreground\">\n      <div className=\"flex flex-col sm:flex-row items-center justify-between gap-4\">\n        <span className=\"text-[10px] text-muted-foreground/60\">Lerpa UI SaaS Enterprise Platform © 2026.</span>\n        <div className=\"flex gap-4 text-[10px] text-muted-foreground\">\n          <a href=\"#\" className=\"hover:text-foreground\">CORS Rules</a>\n          <a href=\"#\" className=\"hover:text-foreground\">Rate Limits Status</a>\n          <a href=\"#\" className=\"hover:text-foreground\">Security Audits</a>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

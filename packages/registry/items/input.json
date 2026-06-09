@@ -1,0 +1,11 @@
+{
+  "name": "input",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/input.tsx",
+      "type": "registry:ui",
+      "content": "import React from 'react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  error?: boolean | string;\n}\n\nconst Input = React.forwardRef<HTMLInputElement, InputProps>(\n  ({ className, type = 'text', error, 'aria-invalid': ariaInvalid, 'aria-describedby': ariaDescribedBy, id, ...props }, ref) => {\n    const hasError = Boolean(error) || ariaInvalid === true || ariaInvalid === 'true';\n    const errorId = typeof error === 'string' && id ? `${id}-error` : undefined;\n    return (\n      <>\n        <input\n          id={id}\n          type={type}\n          aria-invalid={hasError || undefined}\n          aria-describedby={cn(ariaDescribedBy, errorId) || undefined}\n          data-state={hasError ? 'error' : undefined}\n          className={cn(\n            'flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors duration-150 ease-out file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground hover:border-input/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none',\n            hasError &&\n              'border-destructive text-destructive placeholder:text-destructive/60 focus-visible:ring-destructive',\n            className\n          )}\n          ref={ref}\n          {...props}\n        />\n        {typeof error === 'string' && error.length > 0 && (\n          <p id={errorId} className=\"mt-1 text-xs text-destructive\" role=\"alert\">\n            {error}\n          </p>\n        )}\n      </>\n    );\n  }\n);\nInput.displayName = 'Input';\n\nexport { Input };\n"
+    }
+  ]
+}

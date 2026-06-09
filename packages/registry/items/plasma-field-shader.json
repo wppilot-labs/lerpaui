@@ -1,0 +1,15 @@
+{
+  "name": "plasma-field-shader",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/plasma-field-shader.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShaderCanvas } from \"./shader-canvas\";\nimport { cn } from \"@/lib/utils\";\n\n/** Classic 80s plasma — stacked sin/radial terms mapped to HSL; pointer-X shifts hue offset. */\nexport interface PlasmaFieldShaderProps {\n  className?: string;\n  /** Hue offset baseline. Default 0. */\n  intensity?: number;\n}\n\nconst PLASMA_GLSL = `\nprecision highp float;\nuniform float u_time;\nuniform vec2 u_mouse;\nuniform vec2 u_resolution;\n\nvec3 hsl2rgb(vec3 c) {\n  vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);\n  return c.z + c.y * (rgb - 0.5) * (1.0 - abs(2.0 * c.z - 1.0));\n}\n\nvoid main() {\n  vec2 uv = gl_FragCoord.xy / u_resolution.xy;\n  float aspect = u_resolution.x / u_resolution.y;\n  vec2 p = uv;\n  p.x *= aspect;\n\n  float t = u_time;\n  float v = sin(p.x * 10.0 + t);\n  v += sin(distance(uv, vec2(0.5, 0.5)) * 10.0 + t);\n  v += sin(t + p.y * 5.0);\n  v += sin((p.x + p.y) * 6.0 + t * 0.7);\n  v *= 0.25;\n\n  // Pointer-X shifts hue, pointer-Y nudges saturation.\n  float hueOffset = u_mouse.x * 0.6;\n  float hue = mod(v * 0.5 + 0.5 + hueOffset, 1.0);\n  float sat = 0.55 + u_mouse.y * 0.35;\n  float light = 0.5 + 0.18 * sin(v * 3.14159);\n\n  vec3 col = hsl2rgb(vec3(hue, sat, light));\n\n  // Mouse highlight ring\n  float md = length(uv - u_mouse);\n  col += smoothstep(0.25, 0.0, md) * 0.18;\n\n  // Vignette\n  col *= smoothstep(1.3, 0.4, length(uv - 0.5) * 1.3);\n\n  gl_FragColor = vec4(col, 1.0);\n}\n`;\n\nexport const PlasmaFieldShader: React.FC<PlasmaFieldShaderProps> = ({\n  className,\n}) => {\n  return (\n    <div\n      className={cn(\n        \"relative h-[400px] w-full overflow-hidden rounded-2xl bg-[var(--card)]\",\n        className,\n      )}\n    >\n      <ShaderCanvas\n        fragment={PLASMA_GLSL}\n        className=\"absolute inset-0\"\n        fallback={\n          <div className=\"absolute inset-0 bg-gradient-to-br from-fuchsia-500/25 via-violet-500/20 to-cyan-500/15\" />\n        }\n      />\n    </div>\n  );\n};\n"
+    }
+  ],
+  "registryDependencies": [
+    "shader-canvas"
+  ]
+}

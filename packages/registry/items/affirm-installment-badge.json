@@ -1,0 +1,12 @@
+{
+  "name": "affirm-installment-badge",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/affirm-installment-badge.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport interface AffirmInstallmentBadgeProps {\n  total?: number;\n  installments?: number;\n  apr?: number;\n  provider?: string;\n}\n\nexport function AffirmInstallmentBadge({\n  total = 132,\n  installments = 4,\n  apr = 0,\n  provider = \"Affirm\",\n}: AffirmInstallmentBadgeProps) {\n  const per = total / installments;\n  return (\n    <div\n      role=\"note\"\n      aria-label={`${installments} interest-free payments of $${per.toFixed(2)} via ${provider}`}\n      style={{\n        display: \"inline-flex\",\n        alignItems: \"stretch\",\n        background: \"var(--bg-2)\",\n        border: \"1px solid var(--edge-2)\",\n        borderRadius: 10,\n        overflow: \"hidden\",\n        fontFamily: \"var(--font-sans)\",\n        maxWidth: 360,\n      }}\n    >\n      <div\n        style={{\n          padding: \"10px 14px\",\n          background: \"var(--accent)\",\n          color: \"var(--bg)\",\n          fontFamily: \"var(--font-mono)\",\n          fontWeight: 700,\n          fontSize: 13,\n          letterSpacing: \"-0.01em\",\n          display: \"grid\",\n          placeItems: \"center\",\n          boxShadow: \"0 0 16px -4px var(--accent-glow)\",\n        }}\n      >\n        {provider}\n      </div>\n      <div style={{ padding: \"10px 14px\", display: \"flex\", flexDirection: \"column\", gap: 2 }}>\n        <span style={{ fontSize: 13, color: \"var(--text)\", fontWeight: 500 }}>\n          {installments} payments of <span style={{ color: \"var(--accent)\" }}>${per.toFixed(2)}</span>\n        </span>\n        <span style={{ fontFamily: \"var(--font-mono)\", fontSize: 11, color: \"var(--text-3)\" }}>\n          {apr === 0 ? \"0% APR · no fees\" : `${apr.toFixed(1)}% APR · soft check`}\n        </span>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "spotlight-feature-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/SpotlightFeatureCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useRef, useState } from \"react\";\nimport { Zap } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface SpotlightFeatureCardProps {\n  icon?: React.ReactNode;\n  title?: string;\n  description?: string;\n  className?: string;\n}\n\n/**\n * Signature feature card — cursor-tracking spotlight that works in BOTH light and dark\n * (most spotlight cards are dark-only) via color-mix on the primary token.\n */\nexport function SpotlightFeatureCard({\n  icon = <Zap className=\"h-5 w-5\" />,\n  title = \"Lightning fast\",\n  description = \"Ship in minutes with primitives that stay out of your way — fully typed, themeable, and accessible by default.\",\n  className,\n}: SpotlightFeatureCardProps) {\n  const ref = useRef<HTMLDivElement>(null);\n  const [pos, setPos] = useState({ x: -200, y: -200, on: false });\n\n  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {\n    const r = ref.current?.getBoundingClientRect();\n    if (!r) return;\n    setPos({ x: e.clientX - r.left, y: e.clientY - r.top, on: true });\n  };\n\n  return (\n    <div\n      ref={ref}\n      onPointerMove={onMove}\n      onPointerLeave={() => setPos((p) => ({ ...p, on: false }))}\n      className={cn(\n        \"group relative w-full max-w-sm overflow-hidden rounded-2xl border border-border bg-card text-card-foreground p-6 shadow-sm transition-colors\",\n        className,\n      )}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100\"\n        style={{\n          opacity: pos.on ? 1 : 0,\n          background: `radial-gradient(220px circle at ${pos.x}px ${pos.y}px, color-mix(in oklab, var(--color-primary, #6366f1) 14%, transparent), transparent 65%)`,\n        }}\n      />\n      <div className=\"relative\">\n        <div className=\"inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary ring-1 ring-primary/15\">\n          {icon}\n        </div>\n        <h3 className=\"mt-4 text-base font-semibold\">{title}</h3>\n        <p className=\"mt-1.5 text-sm leading-relaxed text-muted-foreground\">{description}</p>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

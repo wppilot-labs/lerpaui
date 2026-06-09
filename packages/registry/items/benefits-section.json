@@ -1,0 +1,15 @@
+{
+  "name": "benefits-section",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BenefitsSection.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Zap, ShieldCheck, Globe, LineChart, Puzzle, Headphones } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Benefit = {\n  icon: React.ComponentType<{ className?: string }>;\n  title: string;\n  desc: string;\n};\n\nconst BENEFITS: Benefit[] = [\n  { icon: Zap, title: \"Blazing fast\", desc: \"Sub-50ms responses worldwide on our edge network.\" },\n  { icon: ShieldCheck, title: \"Secure by default\", desc: \"SOC 2 Type II, SSO, and encryption at rest.\" },\n  { icon: Globe, title: \"Global scale\", desc: \"Deploy to 30+ regions with a single command.\" },\n  { icon: LineChart, title: \"Real-time insights\", desc: \"Live dashboards and alerts that catch issues early.\" },\n  { icon: Puzzle, title: \"Extensible\", desc: \"Plug into 200+ integrations or build your own.\" },\n  { icon: Headphones, title: \"Human support\", desc: \"Talk to real engineers, not bots, 24/7.\" },\n];\n\nexport interface BenefitsSectionProps {\n  className?: string;\n}\n\nexport function BenefitsSection({ className }: BenefitsSectionProps) {\n  return (\n    <section className={cn(\"w-full max-w-3xl bg-card backdrop-blur-xl border border-border p-6 rounded-2xl shadow-sm font-sans text-foreground\", className)}>\n      <div className=\"mb-6 text-center\">\n        <span className=\"text-xs font-bold uppercase tracking-widest text-primary\">Why teams choose us</span>\n        <h2 className=\"mt-1.5 text-2xl font-black\">Everything you need to ship</h2>\n        <p className=\"mt-1.5 text-sm text-muted-foreground\">Powerful primitives, none of the busywork.</p>\n      </div>\n\n      <div className=\"grid gap-4 sm:grid-cols-2 lg:grid-cols-3\">\n        {BENEFITS.map((b) => (\n          <div\n            key={b.title}\n            className=\"rounded-xl border border-border bg-foreground/[0.02] p-5 transition-colors hover:bg-foreground/[0.04]\"\n          >\n            <span className=\"mb-3 inline-grid h-11 w-11 place-items-center rounded-lg bg-primary/15 text-primary\">\n              <b.icon className=\"w-5 h-5\" />\n            </span>\n            <h3 className=\"text-base font-bold\">{b.title}</h3>\n            <p className=\"mt-1.5 text-sm leading-relaxed text-muted-foreground\">{b.desc}</p>\n          </div>\n        ))}\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ]
+}

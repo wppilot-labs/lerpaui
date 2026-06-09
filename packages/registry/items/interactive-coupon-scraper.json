@@ -1,0 +1,15 @@
+{
+  "name": "interactive-coupon-scraper",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/InteractiveCouponScraper.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion, AnimatePresence} from \"framer-motion\";\nimport { Ticket, Sparkles, CheckCircle2 } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function InteractiveCouponScraper({ className }: { className?: string }) {\n  const [isRevealed, setIsRevealed] = useState(false);\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl flex flex-col items-center space-y-4\", className)}>\n      <div className=\"w-full flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Interactive Coupon</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Tap and scratch ticket to reveal coupon</p>\n        </div>\n        <Ticket className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div\n        onClick={() => setIsRevealed(true)} role=\"button\" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setIsRevealed(true); } }}\n        className=\"relative w-56 h-28 rounded-xl overflow-hidden border border-border/40 cursor-pointer shadow-inner\"\n      >\n        <AnimatePresence mode=\"wait\">\n          {!isRevealed ? (\n            <motion.div\n              key=\"scratch\"\n              initial={{ opacity: 1 }}\n              exit={{ opacity: 0, scale: 0.95 }}\n              transition={{ duration: 0.2 }}\n              className=\"absolute inset-0 bg-gradient-to-br from-zinc-800 to-neutral-900 flex flex-col items-center justify-center text-center p-4\"\n            >\n              <Sparkles className=\"w-6 h-6 text-amber-400 mb-1.5 animate-pulse\" />\n              <span className=\"text-[10px] font-bold text-white uppercase tracking-widest\">Scratch Here</span>\n            </motion.div>\n          ) : (\n            <motion.div\n              key=\"code\"\n              initial={{ opacity: 0, scale: 1.05 }}\n              animate={{ opacity: 1, scale: 1 }}\n              className=\"absolute inset-0 bg-zinc-950 flex flex-col items-center justify-center text-center p-4\"\n            >\n              <CheckCircle2 className=\"w-5 h-5 text-emerald-400 mb-1\" />\n              <span className=\"text-[9px] font-bold text-muted-foreground uppercase\">Your Coupon Code</span>\n              <p className=\"text-base font-black text-primary font-mono tracking-wider mt-0.5\">LAUNCH-400</p>\n            </motion.div>\n          )}\n        </AnimatePresence>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

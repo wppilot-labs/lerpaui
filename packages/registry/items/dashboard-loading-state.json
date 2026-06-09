@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-loading-state",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DashboardLoadingState.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface DashboardLoadingStateProps {\n  className?: string;\n}\n\n/** Skeleton placeholder shown while dashboard data loads. */\nexport function DashboardLoadingState({ className }: DashboardLoadingStateProps) {\n  return (\n    <div\n      className={cn(\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans\", className)}\n      role=\"status\"\n      aria-busy=\"true\"\n      aria-label=\"Loading dashboard\"\n    >\n      <div className=\"flex items-center justify-between mb-5\">\n        <div className=\"space-y-2\">\n          <div className=\"h-3 w-28 rounded bg-foreground/[0.07] animate-pulse\" />\n          <div className=\"h-2 w-40 rounded bg-foreground/[0.05] animate-pulse\" />\n        </div>\n        <div className=\"h-8 w-20 rounded-lg bg-foreground/[0.06] animate-pulse\" />\n      </div>\n\n      <div className=\"grid grid-cols-3 gap-3 mb-5\">\n        {[0, 1, 2].map((i) => (\n          <div key={i} className=\"p-4 rounded-xl border border-foreground/[0.04] bg-foreground/[0.01]\">\n            <div className=\"h-6 w-6 rounded-lg bg-foreground/[0.07] animate-pulse mb-3\" />\n            <div className=\"h-4 w-16 rounded bg-foreground/[0.07] animate-pulse mb-2\" />\n            <div className=\"h-2 w-12 rounded bg-foreground/[0.05] animate-pulse\" />\n          </div>\n        ))}\n      </div>\n\n      <div className=\"space-y-3\">\n        {[0, 1, 2, 3].map((i) => (\n          <div key={i} className=\"flex items-center gap-3\">\n            <div className=\"h-8 w-8 rounded-full bg-foreground/[0.06] animate-pulse shrink-0\" />\n            <div className=\"h-2.5 rounded bg-foreground/[0.06] animate-pulse\" style={{ width: `${70 - i * 12}%` }} />\n            <div className=\"h-2.5 w-10 rounded bg-foreground/[0.05] animate-pulse ml-auto\" />\n          </div>\n        ))}\n      </div>\n\n      <span className=\"sr-only\">Loading…</span>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

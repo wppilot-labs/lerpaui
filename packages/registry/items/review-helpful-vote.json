@@ -1,0 +1,12 @@
+{
+  "name": "review-helpful-vote",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/ReviewHelpfulVote.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\n\nexport function ReviewHelpfulVote() {\n  const [votes, setVotes] = useState(24);\n  const [voted, setVoted] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-xl shadow-lg select-none font-sans text-foreground flex items-center justify-between\">\n      <span className=\"text-xs text-muted-foreground/60\">Was this review helpful to you?</span>\n      <button \n        onClick={() => {\n          if (!voted) {\n            setVotes(votes + 1);\n            setVoted(true);\n          }\n        }}\n        className={`px-3 py-1 text-[10px] font-bold rounded-lg border transition-all ${\n          voted ? \"bg-emerald-600 border-transparent text-white\" : \"bg-secondary border-border hover:bg-secondary/60 text-foreground\"\n        }`}\n      >\n        Yes, Helpful ({votes})\n      </button>\n    </div>\n  );\n}"
+    }
+  ]
+}

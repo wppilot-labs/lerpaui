@@ -1,0 +1,14 @@
+{
+  "name": "api-error-state-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ApiErrorStateCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { AlertTriangle, Copy, Check } from \"lucide-react\";\n\nexport function APIErrorStateCard() {\n  const [copied, setCopied] = useState(false);\n  const backtrace = \"Error: REST endpoints validation failed at apps/docs/src/components/ui/APIErrorStateCard.tsx:42\";\n\n  const triggerCopy = () => {\n    setCopied(true);\n    setTimeout(() => setCopied(false), 1500);\n  };\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-red-500/20 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <AlertTriangle className=\"w-4 h-4 text-red-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-red-400\">API Crash Incident</span>\n        </div>\n        <button \n          onClick={triggerCopy}\n          className=\"p-1.5 rounded-lg bg-secondary/30 hover:bg-secondary/60 text-muted-foreground\"\n        >\n          {copied ? <Check className=\"w-3.5 h-3.5 text-emerald-400\" /> : <Copy className=\"w-3.5 h-3.5\" />}\n        </button>\n      </div>\n\n      <div className=\"min-h-16 bg-black/40 border border-white/[0.04] p-3 rounded-xl font-mono text-[10px] text-red-300/80 leading-normal mb-3 overflow-hidden text-ellipsis\">\n        {backtrace}\n      </div>\n\n      <p className=\"text-[10px] text-muted-foreground/60\">Please review standard CORS variables inside active configuration files.</p>\n    </div>\n  );\n}"
+    }
+  ]
+}

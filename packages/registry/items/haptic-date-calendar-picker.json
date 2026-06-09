@@ -1,0 +1,15 @@
+{
+  "name": "haptic-date-calendar-picker",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/HapticDateCalendarPicker.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { Calendar, ChevronLeft, ChevronRight } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function HapticDateCalendarPicker({ className }: { className?: string }) {\n  const [selectedDate, setSelectedDate] = useState<number | null>(22);\n  const [_direction, _setDirection] = useState(0);\n\n  const daysInMonth = Array.from({ length: 31 }, (_, i) => i + 1);\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Haptic Calendar</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Select date with spring transitions</p>\n        </div>\n        <Calendar className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div className=\"flex items-center justify-between text-xs font-bold text-foreground px-1\">\n        <span>May 2026</span>\n        <div className=\"flex gap-1\">\n          <button className=\"p-1 hover:bg-zinc-800 border border-border/30 rounded cursor-pointer transition-colors\">\n            <ChevronLeft className=\"w-3.5 h-3.5\" />\n          </button>\n          <button className=\"p-1 hover:bg-zinc-800 border border-border/30 rounded cursor-pointer transition-colors\">\n            <ChevronRight className=\"w-3.5 h-3.5\" />\n          </button>\n        </div>\n      </div>\n\n      <div className=\"grid grid-cols-7 gap-1 text-center\">\n        {[\"Su\", \"Mo\", \"Tu\", \"We\", \"Th\", \"Fr\", \"Sa\"].map((d) => (\n          <span key={d} className=\"text-[9px] font-bold text-muted-foreground uppercase py-1\">\n            {d}\n          </span>\n        ))}\n\n        {daysInMonth.map((day) => {\n          const isSelected = selectedDate === day;\n          return (\n            <motion.button\n              key={day}\n              whileTap={{ scale: 0.9 }}\n              onClick={() => setSelectedDate(day)}\n              className={cn(\n                \"h-7 w-7 text-[10px] font-bold rounded-lg transition-colors flex items-center justify-center cursor-pointer border\",\n                isSelected\n                  ? \"bg-primary border-primary/50 text-white shadow-lg shadow-primary/20\"\n                  : \"bg-transparent border-transparent text-muted-foreground hover:text-foreground hover:bg-zinc-900/60\"\n              )}\n            >\n              {day}\n            </motion.button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

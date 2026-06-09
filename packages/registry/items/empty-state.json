@@ -1,0 +1,14 @@
+{
+  "name": "empty-state",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/empty-state.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport { Button } from './button';\nimport { cn } from \"@/lib/utils\";\n\nexport interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {\n  icon?: React.ReactNode;\n  title: string;\n  description: string;\n  actionLabel?: string;\n  onActionClick?: () => void;\n  secondaryActionLabel?: string;\n  onSecondaryActionClick?: () => void;\n}\n\nconst EmptyState = React.forwardRef<HTMLDivElement, EmptyStateProps>(\n  (\n    {\n      className,\n      icon,\n      title,\n      description,\n      actionLabel,\n      onActionClick,\n      secondaryActionLabel,\n      onSecondaryActionClick,\n      ...props\n    },\n    ref\n  ) => {\n    return (\n      <div\n        ref={ref}\n        className={cn(\n          'flex flex-col items-center justify-center text-center p-8 border-2 border-dashed border-border rounded-xl bg-card/50 max-w-lg mx-auto my-6',\n          className\n        )}\n        {...props}\n      >\n        {icon && (\n          <div className=\"flex items-center justify-center h-12 w-12 rounded-full bg-primary/10 text-primary mb-4 shrink-0\">\n            {icon}\n          </div>\n        )}\n        {title && <h3 className=\"text-lg font-semibold text-foreground mb-1\">{title}</h3>}\n        <p className=\"text-sm text-muted-foreground mb-6 leading-relaxed max-w-sm\">\n          {description}\n        </p>\n        {(actionLabel || secondaryActionLabel) && (\n          <div className=\"flex flex-wrap items-center justify-center gap-3\">\n            {secondaryActionLabel && onSecondaryActionClick && (\n              <Button variant=\"outline\" size=\"sm\" onClick={onSecondaryActionClick}>\n                {secondaryActionLabel}\n              </Button>\n            )}\n            {actionLabel && onActionClick && (\n              <Button size=\"sm\" onClick={onActionClick}>\n                {actionLabel}\n              </Button>\n            )}\n          </div>\n        )}\n      </div>\n    );\n  }\n);\nEmptyState.displayName = 'EmptyState';\n\nexport { EmptyState };\n"
+    }
+  ],
+  "registryDependencies": [
+    "button"
+  ]
+}

@@ -1,0 +1,5437 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "lerpa",
+  "homepage": "https://lerpaui.com",
+  "aliases": {
+    "components": "@/components",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks",
+    "utils": "@/lib/utils"
+  },
+  "registries": [
+    {
+      "name": "base",
+      "url": "https://ui.shadcn.com/r/styles/new-york"
+    },
+    {
+      "name": "components",
+      "url": "./generated/registry.json"
+    }
+  ],
+  "stats": {
+    "totalItems": 1318,
+    "uiComponents": 1099,
+    "blocks": 219
+  },
+  "items": [
+    {
+      "name": "accordion-leadership-directory",
+      "type": "registry:ui"
+    },
+    {
+      "name": "accordion-pricing-comparison",
+      "type": "registry:ui"
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-active-sessions-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-active-sessions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-avatar-upload",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-billing-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-connected-apps-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-connected-providers",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-danger-zone",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-delete-confirmation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-email-preferences",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-notification-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-password-change",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-privacy-settings",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-profile-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-profile-settings",
+      "type": "registry:ui"
+    },
+    {
+      "name": "account-security-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "account-team-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "accreditation-trust-badge-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "activity-log-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "address-auto-complete-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "address-autocomplete-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-api-health-monitor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-data-retention-settings",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-environment-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-error-log-viewer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-feature-flag-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-impersonation-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-job-queue-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-maintenance-mode-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-organization-overview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-permission-audit-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-release-notes-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-security-event-feed",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-service-status-page",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-tenant-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "admin-webhook-delivery-log",
+      "type": "registry:ui"
+    },
+    {
+      "name": "affirm-installment-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "agency-hero",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-agent-builder-canvas",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-agent-card-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-agent-permission-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-agent-status-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-agent-status-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-agent-workflow-builder",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-answer-confidence-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-artifact-preview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-assistant-profile-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-chat-header-system",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-chat-interface",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-chat-layout-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-chat-layout-sidebar",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-chat-message-actions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-chat-sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-citation-panel",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-citation-sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-code-preview-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-command-palette-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-context-window-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-conversation-branch-tree",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-conversation-export-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-cost-estimator-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-dataset-upload-manager",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-document-summary-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-document-summary-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-empty-chat-state",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-error-retry-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-evaluation-run-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-evaluation-score-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-file-upload-dropzone",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-file-upload-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-fine-tune-job-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-function-arg-editor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-human-handoff-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-image-generation-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-image-generation-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-inline-citation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-knowledge-base-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-knowledge-base-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-knowledge-source-health-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-latency-monitor-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-memory-settings-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-message-bubble-response",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-model-cost-comparison-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-model-selector-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-model-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-multi-model-arena",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-output-approval-queue",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-output-format-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-output-format-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-processing-mesh-background",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-ab-test-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-history-panel-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-history-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-injection-warning",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-input-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-prompt-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-optimizer-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-parameter-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-suggestions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-template-gallery-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-template-gallery",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-variable-field",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-prompt-version-history",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-rag-chunk-inspector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-rag-context-pills",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-rag-source-viewer-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-rag-source-viewer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-reasoning-trace",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-regenerate-toolbar-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-regenerate-toolbar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-response-card-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-response-compare-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-response-compare-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-retrieval-quality-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-review-summary-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-safety-filter-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-schema-visualizer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-smart-suggest-chips",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-source-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-source-list-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-streaming-response-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-streaming-response-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-system-prompt-editor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-thinking-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-token-burn-tracker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-token-cost-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-token-usage-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-tool-call-chip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-tool-call-timeline-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-tool-call-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-tool-result-diff",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-typing-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-usage-meter-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-voice-input-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-voice-input-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ai-workflow-run-history",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ai-workspace-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "alert-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ambient-glow-modal-sheet",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ambient-glow-toast-notifications",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ambient-glow-toast",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytical-heatmap-calendar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytical-metric-folder",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytical-sales-heatmap",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-anomaly-alert-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-attribution-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-cohort-retention-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-conversion-path-viewer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-custom-dashboard-builder",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-export-center",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-funnel-breakdown",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-goal-tracking-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-report-scheduler",
+      "type": "registry:ui"
+    },
+    {
+      "name": "analytics-segment-builder",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-bar-race",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-beam",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-bento-calendar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-border-gradient-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-card-comparison-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-delivery-tracker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "animated-gradient-background",
+      "type": "registry:block"
+    },
+    {
+      "name": "animated-heatmap-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "announcement-bar-gradient",
+      "type": "registry:block"
+    },
+    {
+      "name": "announcement-bar-simple",
+      "type": "registry:block"
+    },
+    {
+      "name": "annual-matrix-pricing",
+      "type": "registry:block"
+    },
+    {
+      "name": "annual-monthly-toggle-hero",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-endpoint-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-error-state-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-key-create-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-rate-limit-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-request-playground",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-response-viewer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-sdk-install-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-status-incident-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-token-permission-editor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-usage-quota-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "api-webhook-tester",
+      "type": "registry:ui"
+    },
+    {
+      "name": "apisdk-install-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "appointment-slot-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "area-chart-gradient",
+      "type": "registry:ui"
+    },
+    {
+      "name": "area-chart-stacked-trend",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ascii-shader-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "audit-log-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "aurora-background",
+      "type": "registry:ui"
+    },
+    {
+      "name": "aurora-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "aurora-stat-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "aurora-text-sweep",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-account-created-success",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-device-approval-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-email-verification-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-email-verification-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-forgot-password-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-forgot-password",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-invite-acceptance-page",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-invite-acceptance-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-login-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-login-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-login-split-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-magic-link-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-magic-link-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-otp-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-otp-verification",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-passkey-login-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-passkey-login",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-passkey-only-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-passwordless-login",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-register-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-register-center-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-register-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-reset-password-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-reset-password",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-role-selection-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-security-checkup",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-session-expired-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-session-expired-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-social-login-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-social-login-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-social-provider-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-two-factor-otp-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "auth-two-factor-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "auth-two-factor-setup",
+      "type": "registry:ui"
+    },
+    {
+      "name": "autosize-textarea",
+      "type": "registry:ui"
+    },
+    {
+      "name": "avatar-stack",
+      "type": "registry:ui"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "awards-recognition-strip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ballpit",
+      "type": "registry:ui"
+    },
+    {
+      "name": "banner-cookie-consent",
+      "type": "registry:ui"
+    },
+    {
+      "name": "banner-early-access",
+      "type": "registry:ui"
+    },
+    {
+      "name": "banner-version-update",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bar-chart-vertical",
+      "type": "registry:ui"
+    },
+    {
+      "name": "before-after-pricing-split",
+      "type": "registry:ui"
+    },
+    {
+      "name": "before-after-split-carousel-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "benefits-icon-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "benefits-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "benefits-split-content",
+      "type": "registry:block"
+    },
+    {
+      "name": "bento-box-detail-slider-widget",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bento-box-visual-portfolio",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bento-grid-executive-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bento-grid-metrics",
+      "type": "registry:block"
+    },
+    {
+      "name": "bento-stats-overview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-cancel-subscription-flow",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-credit-balance-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-downgrade-flow",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-invoice-history-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-payment-method-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-plan-limit-alert",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-seat-manager",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-subscription-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-tax-info-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-upgrade-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "billing-usage-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-author-bio",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-author-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-author-list-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-card-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-category-filter-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-category-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-comments-thread-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-featured-post-hero",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-featured-post",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-grid-three-column",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-hero-featured",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-post-list-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-reading-time-badge-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-related-posts",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-share-buttons",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blog-table-of-contents",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blur-reveal-team-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "blur-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "book-call-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "booking-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "border-beam",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-action-bubble-nav",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-drawer-nested",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-nav-glow-underline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-navigation-dock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-navigation-pill-slide",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-navigation-pill",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-sheet-filter-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bottom-sheet-share-dialog",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bouncy-pull-refresh-arrow",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bouncy-star-feedback",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bouncy-star-rating-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bouncy-step-wizard-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "breadcrumb-bar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "breadcrumb-dropdown",
+      "type": "registry:ui"
+    },
+    {
+      "name": "breadcrumb-scroll-spy",
+      "type": "registry:ui"
+    },
+    {
+      "name": "breadcrumb-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "bubble-scatter-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "bullet-kpi-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "candlestick-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "card-depth-flip-carousel-frame",
+      "type": "registry:ui"
+    },
+    {
+      "name": "card-skeleton-shimmer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "card-stack-loop",
+      "type": "registry:ui"
+    },
+    {
+      "name": "card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "card3-d-flip-hologram",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-abandoned-recovery-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-coupon-code-box",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-cross-sell-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-empty-state",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-free-shipping-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-gift-wrap-toggle-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-item-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-item-swipe-quantity",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-order-notes-box",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-price-summary",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-progressive-checkout-stepper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-quantity-stepper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-save-for-later-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-saved-for-later-stack",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-shipping-countdown-timer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-slide-over-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cart-upsell-bundle-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "case-study-card-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "case-study-preview-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "case-study-roster-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "category-navigation-bubble",
+      "type": "registry:ui"
+    },
+    {
+      "name": "changelog-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "channel-glitch-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-address-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-contact-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-express-pay-buttons",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-express-pay-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-failed-payment-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "checkout-gift-message-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-order-review-accordion",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-order-summary",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-payment-method-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-progress-steps",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-review-step",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-shipping-method-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-success-page",
+      "type": "registry:ui"
+    },
+    {
+      "name": "checkout-trust-security-strip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "chromatic-aberration-hero",
+      "type": "registry:ui"
+    },
+    {
+      "name": "chromatic-aberration-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cinematic-parallax-hero",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-dial-project-orbit",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-habit-tracker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-menu-dial",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-orbit-navigation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-orbit-slider-control",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-progress-ring-dial",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-progress-rotary-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-radial-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-schedule-planner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-schedule-timer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-task-orbit",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-task-progress-ring",
+      "type": "registry:ui"
+    },
+    {
+      "name": "circular-wheel-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "code-block-copy",
+      "type": "registry:ui"
+    },
+    {
+      "name": "code-block-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "code-block-with-copy",
+      "type": "registry:ui"
+    },
+    {
+      "name": "color-picker-swatch",
+      "type": "registry:ui"
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui"
+    },
+    {
+      "name": "command-k-bar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "command-menu-floating-dock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "command-menu-interactive-bubble",
+      "type": "registry:ui"
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:ui"
+    },
+    {
+      "name": "compare-mask",
+      "type": "registry:ui"
+    },
+    {
+      "name": "comparison-before-after-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "comparison-competitor-table",
+      "type": "registry:block"
+    },
+    {
+      "name": "comparison-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "component-preview-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "concentric-activity-ring",
+      "type": "registry:ui"
+    },
+    {
+      "name": "confirm-dialog-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "contact-department-router",
+      "type": "registry:ui"
+    },
+    {
+      "name": "contact-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "contact-form-split-map",
+      "type": "registry:ui"
+    },
+    {
+      "name": "contact-info-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "contact-sales-enterprise-cta",
+      "type": "registry:ui"
+    },
+    {
+      "name": "contact-sales-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "contact-support-ticket-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "container",
+      "type": "registry:ui"
+    },
+    {
+      "name": "context-action-rail-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "contextual-tooltip-descriptor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "conversion-sticky-cta",
+      "type": "registry:block"
+    },
+    {
+      "name": "copy-to-clipboard-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "corporate-board-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "corporate-custom-plan-generator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "corporate-pricing-calculator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "countdown-date-ring-timer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "countdown-promo-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "coupon-scratch-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "credit-card-form-compositor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "credit-card-visual-pay",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-account-health-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-call-log-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-contact-profile-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-customer-lifecycle-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-deal-value-summary",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-email-sequence-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-lead-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-pipeline-board",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-renewal-risk-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "crm-sales-forecast-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-app-store-download-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-book-demo-embed",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-book-demo-modal-trigger",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-contact-sales-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-floating-sticky-bar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-free-trial-multi-tier",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-gradient-glow-final",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-split-image-background",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-waitlist-counter-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cta-waitlist-glow",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cursor-attraction-magnet",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cursor-repulsion-starfield",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cursor-spotlight-wrap",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cursor-trail-constellation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cursor-velocity-ring-trail",
+      "type": "registry:ui"
+    },
+    {
+      "name": "cursor-velocity-ring",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-account-sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-address-book",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-downloads-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-order-detail",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-order-history",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-profile-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-return-request-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-reward-points-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-story-card-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-subscription-manager",
+      "type": "registry:ui"
+    },
+    {
+      "name": "customer-wishlist-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-ab-test-results-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-activity-feed",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-alert-center",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-api-requests-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-api-usage-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-audit-log-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-billing-summary-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-billing-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-cohort-retention-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-command-center",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-content-calendar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-conversion-funnel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-customer-segments-ring",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-date-range-toolbar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-empty-state",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-error-log-stream",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-filter-toolbar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-goal-progress-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-goal-progress",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-growth-chart-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-growth-metrics-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-integrations-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-integrations-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-kpi-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-kpi-grid-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-kpi-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-kpi-header",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-kpi-row",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-live-status-feed-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-live-status-feed",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-loading-state",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-notification-inbox",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-notification-panel",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-onboarding-checklist-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-onboarding-checklist",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-overview-header",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-overview",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-project-overview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-project-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-recent-customers-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-recent-customers",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-recent-orders",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-resource-monitor",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-resource-usage-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-revenue-chart-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-revenue-overview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-revenue-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-role-permission-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-sales-pipeline-board",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-server-health-monitor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-settings-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-settings-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-storage-usage-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-storage-usage",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-subscription-metrics",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-support-inbox-triage",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-system-health-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-system-health",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-task-list",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-task-summary-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-team-overview",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-team-performance-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-usage-card-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "dashboard-usage-overview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-user-analytics-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-user-management-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-welcome-header-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dashboard-welcome-header",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-advanced",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-basic",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-column-resize",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-column-visibility",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-empty-state",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-export-toolbar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-import-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-inline-edit",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-loading-skeleton",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-pagination",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-row-expansion",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-row-selection",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-saved-views",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-status-badges",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-with-bulk-actions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "data-table-with-filters",
+      "type": "registry:ui"
+    },
+    {
+      "name": "datepicker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "decrypted-text-reveal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "decrypted-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "demo-request-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "demo-request-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "depth-of-field-hover-gallery",
+      "type": "registry:ui"
+    },
+    {
+      "name": "depth-stack-profile-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "depth-video-parallax-showcase",
+      "type": "registry:ui"
+    },
+    {
+      "name": "diagonal-curtain-gate",
+      "type": "registry:ui"
+    },
+    {
+      "name": "diagonal-parallax-depth-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "diagonal-sliding-slider-frame",
+      "type": "registry:ui"
+    },
+    {
+      "name": "diagonal-split-bio-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "diagonal-split-category-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dismissible-banner-promo",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dispersion-glitch-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "displacement-wave-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dissolve-slide-switcher-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "docs-api-reference-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-changelog-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-cli-command-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-code-example-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-code-tabs-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-contributor-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-endpoint-card-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-error-code-table",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-example-gallery",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-guides-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-hero-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-install-command-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-package-install-panel",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-props-table-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-quickstart-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-search-command",
+      "type": "registry:ui"
+    },
+    {
+      "name": "docs-search-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-sidebar-layout",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "docs-support-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-toc-layout",
+      "type": "registry:block"
+    },
+    {
+      "name": "docs-toc-sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "docs-version-selector",
+      "type": "registry:block"
+    },
+    {
+      "name": "donut-chart-legend",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dotted-grid-profile-background",
+      "type": "registry:ui"
+    },
+    {
+      "name": "double-border-pricing-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "double-row-slide-swapper-masonry",
+      "type": "registry:ui"
+    },
+    {
+      "name": "double-slider-range-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "double-tab-bottom-nav",
+      "type": "registry:ui"
+    },
+    {
+      "name": "drag-task-roster-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "drag-wishlist-bucket",
+      "type": "registry:ui"
+    },
+    {
+      "name": "draggable-color-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "draggable-kanban-column",
+      "type": "registry:ui"
+    },
+    {
+      "name": "draggable-roster-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "draggable-scale-scrubber",
+      "type": "registry:ui"
+    },
+    {
+      "name": "draggable-wishlist-product-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "drawer-swipe-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dual-range-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dynamic-glow-cursor-trail",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dynamic-interactive-tag-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dynamic-pricing-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dynamic-sortable-data-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dynamic-sortable-team-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "dynamic-split-curtain-gate",
+      "type": "registry:ui"
+    },
+    {
+      "name": "eco-friendly-impact-score",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ecommerce-cart-drawer",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-cart-page",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-cart-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-category-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-category-header",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-checkout-address",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-checkout-contact",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-checkout-payment",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-checkout-shipping",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-checkout-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-empty-cart",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-filter-sidebar",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-home-hero",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-order-confirmation",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-order-tracking",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-card-row",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-detail-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-gallery-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-grid-toolbar",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-info-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-list",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-reviews-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-product-variant-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-promo-banner",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-recently-viewed",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-related-products",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-review-list",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-review-summary",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-shipping-returns-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-size-guide-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-sort-toolbar",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-store-locator-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-trust-strip-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ecommerce-trust-strip",
+      "type": "registry:block"
+    },
+    {
+      "name": "ecommerce-wishlist-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "elastic-carousel-swiper-drag",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-collapsible-accordion",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-collapsible-sidebar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-drag-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-draggable-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-expandable-gallery-item",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-image-shrink-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-image-shrinker-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-list-reorderable",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-pull-to-refresh-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-pull-to-refresh",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-search-filter-pill",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-search-pill-suggestions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-search-pill-with-suggestions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-search-pill",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-sidebar-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-swipe-accordion",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-swipe-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-swipe-list-archive",
+      "type": "registry:ui"
+    },
+    {
+      "name": "elastic-swiper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state-illustration-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state-inbox-zero",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state-onboarding-checklist",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state-search-no-results",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state-upgrade-required",
+      "type": "registry:ui"
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:ui"
+    },
+    {
+      "name": "enterprise-quote-callout-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "event-registration-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "example-card-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "expandable-detail-row-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "expandable-profile-bio-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "expanding-card-grid-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-accordion-minimal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-accordion-section-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-accordion-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-category-tabs",
+      "type": "registry:block"
+    },
+    {
+      "name": "faq-contact-cta",
+      "type": "registry:block"
+    },
+    {
+      "name": "faq-feedback-toggles",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-inline-support",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-live-chat-handoff",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-search-input-field",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-search-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "faq-two-column-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "faq-with-sidebar-search",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-alternating-rows",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-bento-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "feature-checkmark-columns",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-comparison-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-grid-3-column",
+      "type": "registry:block"
+    },
+    {
+      "name": "feature-grid-bento",
+      "type": "registry:block"
+    },
+    {
+      "name": "feature-grid-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-grid3-column",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-icon-quad-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-scroll-spy-anchor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-split-image-left",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-split-image-right",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-spotlight-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-stats-large-numbers",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-tabs-product-preview",
+      "type": "registry:block"
+    },
+    {
+      "name": "feature-tabs-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "feature-tabs-simple",
+      "type": "registry:block"
+    },
+    {
+      "name": "feedback-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "file-drop-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "file-tree-browser",
+      "type": "registry:ui"
+    },
+    {
+      "name": "file-upload-dropzone",
+      "type": "registry:ui"
+    },
+    {
+      "name": "file-upload-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "final-cta-banner",
+      "type": "registry:block"
+    },
+    {
+      "name": "flick-marquee-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "flip-card-product-vertical",
+      "type": "registry:ui"
+    },
+    {
+      "name": "flip-card-profile-horizontal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "flip-card-profile-vertical",
+      "type": "registry:ui"
+    },
+    {
+      "name": "floating-action-bubble-nav",
+      "type": "registry:ui"
+    },
+    {
+      "name": "floating-command-form-palette",
+      "type": "registry:ui"
+    },
+    {
+      "name": "floating-discount-pill",
+      "type": "registry:ui"
+    },
+    {
+      "name": "floating-dock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "floating-polaroid-wall",
+      "type": "registry:ui"
+    },
+    {
+      "name": "fluid-blob-liquid-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "fluid-dock-navigation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "fluid-simulation-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "flying-to-cart-animator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-agency-minimal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-developer-docs-links",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-docs-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "footer-docs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-ecommerce-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "footer-ecommerce-trust-badges",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-ecommerce",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-enterprise-legal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-mega-sitemap-styled",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-newsletter-center",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-saas-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "footer-saas",
+      "type": "registry:ui"
+    },
+    {
+      "name": "footer-startup-compact",
+      "type": "registry:ui"
+    },
+    {
+      "name": "fullscreen-grid-curtain-gate",
+      "type": "registry:ui"
+    },
+    {
+      "name": "funnel-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gallery-before-after-showcase",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gallery-carousel-large-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gallery-filterable-categories",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gallery-lightbox-strip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gallery-masonry-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gesture-color-palette-scrubber",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gesture-rating-stars",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gesture-swipe-card-stack",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gift-wrap-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glass-blur-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glassmorphic-segmented-control",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glassmorphic-virtual-keyboard",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glitch-pixel-dissolve-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glitch-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glow-gradient-border-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glow-member-card-outline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glow-path-drawing-progress",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glow-tab-slider-header",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glow-tab-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "glowing-status-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gooey-number-ticker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gradient-border-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gradient-border-profile-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gradient-mesh-background",
+      "type": "registry:ui"
+    },
+    {
+      "name": "grouped-bar-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "gsap-scroll-trigger-slider-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "guest-checkout-prompt-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-circular-keypad",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-date-calendar-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-date-range-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-mic-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-numpad-lock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-pull-refresh-liquid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-pull-to-action",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-swipe-confirmation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-swipe-list-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "haptic-swipe-menu-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "heatmap-grid-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "heatmap-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-agency-studio",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-ai-chat-product",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-ai-startup",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-animated-grid-glow",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-book-launch",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-data-platform",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-developer-tool",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-ecommerce-product",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-enterprise",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-event-conference",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-fintech-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-marketplace",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-mobile-app",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-newsletter-landing",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-open-source",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-podcast",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-portfolio-creator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-saas-gradient",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-saas-simple",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-saas-split-screen",
+      "type": "registry:block"
+    },
+    {
+      "name": "hero-section-agency",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-section-ai-startup",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-section-ecommerce",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-section-mobile-app",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-section-saas",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hero-waitlist-launch",
+      "type": "registry:block"
+    },
+    {
+      "name": "hold-to-confirm-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "holographic-foil-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "holographic-foil-reflector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "holographic-glare-carousel-frame",
+      "type": "registry:ui"
+    },
+    {
+      "name": "holographic-particle-loader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "holographic-pie-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "holographic-shine-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "horizontal-accordion-card-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "horizontal-bar-ranking",
+      "type": "registry:ui"
+    },
+    {
+      "name": "horizontal-step-carousel-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hover-accent-drawing-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hover-glare-interactive-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hover-lift-profile-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hover-reveal-elastic-photo-stack",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hover-reveal-photo-stack",
+      "type": "registry:ui"
+    },
+    {
+      "name": "how-it-works-steps-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "how-it-works-steps",
+      "type": "registry:ui"
+    },
+    {
+      "name": "how-it-works-timeline",
+      "type": "registry:block"
+    },
+    {
+      "name": "hyperspeed",
+      "type": "registry:ui"
+    },
+    {
+      "name": "image-upload-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "infinite-bento-marquee",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-brand-loop-marquee",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-card-ribbon-loop",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-cylinder-scroll",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-integration-marquee",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-project-carousel-ribbon",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-row-swapper-banners",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-stacked-cards",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-text-ribbon-loop-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "infinite-tunnel-scroll",
+      "type": "registry:ui"
+    },
+    {
+      "name": "influencer-quote-spotlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "inline-date-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "inline-form-feedback",
+      "type": "registry:ui"
+    },
+    {
+      "name": "input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "install-command-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "integration-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "integration-logo-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "interactive-assembly-guide",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-audio-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-bento-dashboard-mock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-bento-mockup",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-card-decliner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-command-palette",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-command-tag-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-coupon-scraper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-credit-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-engraving-field",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-feature-showcase",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-feedback-emoji-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-feedback-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-globe-canvas",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-haptic-toggle",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-holographic-globe",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-invoice-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-joypad-controller",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-mobile-loader-water-tank",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-multi-step-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-office-locator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-pricing-calculator-form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-pricing-slider-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-pricing-swapper-toggle",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-project-tag-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-radar-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-rating",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-tag-selector-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-team-card-spotlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "interactive-time-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "invoice-pricing-calculator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "job-application-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "kanban-board",
+      "type": "registry:ui"
+    },
+    {
+      "name": "keyboard-access-command-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "keyboard-safe-bottom-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "kinetic-typography-reveal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "language-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "lead-magnet-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "lens-flare-spotlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "line-chart-interactive",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-blob-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-blob-morph-background",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-blob-tab-bar-footer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-blob-tab-bar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-circular-audio-dial",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-circular-audio-visualizer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-circular-timer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-download-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-drag-table-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-drop",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-foil-glow-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-morph-slider-transitions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-morph-text-title",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-particle-interactive-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-progress-radial-ring",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-progress-tank",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-svg-photo-morph",
+      "type": "registry:ui"
+    },
+    {
+      "name": "liquid-waveform-visualizer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "live-recent-purchases-toast-feed",
+      "type": "registry:ui"
+    },
+    {
+      "name": "live-status-beacon",
+      "type": "registry:ui"
+    },
+    {
+      "name": "live-stock-counter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "loading-shimmer-line",
+      "type": "registry:ui"
+    },
+    {
+      "name": "logo-cloud-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "logo-cloud-marquee",
+      "type": "registry:block"
+    },
+    {
+      "name": "logo-cloud-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "logo-marquee-pricing-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "logo-marquee",
+      "type": "registry:block"
+    },
+    {
+      "name": "long-press-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mac-magnifying-dock-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnet",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-anchor-dot-pointer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-cursor-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-cursor-follower",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-elastic-dock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-grid-tiles",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-magnetic-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "magnetic-portfolio-portal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "marketplace-category-mega-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "marketplace-dispute-resolution-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "marketplace-escrow-status-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "marketplace-offer-negotiation-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "marquee-ring3-d",
+      "type": "registry:ui"
+    },
+    {
+      "name": "meeting-day-agenda",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mega-menu-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "mega-menu-ecommerce",
+      "type": "registry:block"
+    },
+    {
+      "name": "mega-menu-product",
+      "type": "registry:block"
+    },
+    {
+      "name": "mega-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mesh-distortion-image-hover",
+      "type": "registry:ui"
+    },
+    {
+      "name": "metaballs-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "metal-sheen-logo",
+      "type": "registry:ui"
+    },
+    {
+      "name": "micro-feedback-staggered-rating",
+      "type": "registry:ui"
+    },
+    {
+      "name": "micro-feedback-star-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "minimalist-column-portfolio-showcase",
+      "type": "registry:ui"
+    },
+    {
+      "name": "minimalist-leadership-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-app-install-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-bottom-sheet-actions",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-header-slim-hide",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-loader-border-beam",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-loader-elastic-rope",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-loader-liquid-merge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-menu-drawer-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-menu-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-menu-fullscreen",
+      "type": "registry:block"
+    },
+    {
+      "name": "mobile-nav-circle-dial",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-nav-circle-dock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-offline-sync-status",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-onboarding-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-permission-request-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "mobile-sidebar-drawer-navigation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "morphing-blob-shape",
+      "type": "registry:ui"
+    },
+    {
+      "name": "morphing-dialog",
+      "type": "registry:ui"
+    },
+    {
+      "name": "morphing-tab-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-agent-conversational-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-line-comparison",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-line-trend-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-month-range-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-select-chips-checkbox",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-step-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "multi-step-wizard",
+      "type": "registry:ui"
+    },
+    {
+      "name": "multi-tier-pricing-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-agency-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-agency",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-ai-product",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-api-docs-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-blog-magazine",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-dashboard-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-dashboard",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-docs-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-docs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-ecommerce-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-ecommerce",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-megamenu-education",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-mobile-app",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-saas-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-saas-center-logo",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-saas-transparent",
+      "type": "registry:block"
+    },
+    {
+      "name": "navbar-saas",
+      "type": "registry:ui"
+    },
+    {
+      "name": "navbar-sticky-shrink",
+      "type": "registry:ui"
+    },
+    {
+      "name": "neo-glow-tracing-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "neumorphic-outset-pricing-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "neumorphic-outset-product-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "neumorphic-outset-team-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "newsletter-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "newsletter-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "newsletter-signup-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "noise-grain-overlay",
+      "type": "registry:ui"
+    },
+    {
+      "name": "noise-texture-overlay",
+      "type": "registry:ui"
+    },
+    {
+      "name": "notification-center",
+      "type": "registry:ui"
+    },
+    {
+      "name": "notification-dropdown",
+      "type": "registry:ui"
+    },
+    {
+      "name": "notification-inbox-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "numeric-stepper-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "office-clock-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "office-status-badge-tracker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "orbit",
+      "type": "registry:ui"
+    },
+    {
+      "name": "orbiting-dots-loader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "orbits-mobile-loader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "order-confirmation-confetti-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "order-tracking-stepper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "order-tracking-timeline-live",
+      "type": "registry:ui"
+    },
+    {
+      "name": "organic-fluid-blobs-mask",
+      "type": "registry:ui"
+    },
+    {
+      "name": "otp-code-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "package-install-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "parallax-depth-layers",
+      "type": "registry:ui"
+    },
+    {
+      "name": "parallax-image-magnifier",
+      "type": "registry:ui"
+    },
+    {
+      "name": "parallax-profile-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "parallax-video-showcase",
+      "type": "registry:ui"
+    },
+    {
+      "name": "particle-canvas-field",
+      "type": "registry:ui"
+    },
+    {
+      "name": "password-strength-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "payment-method-card-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "perspective-ring",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pin-container",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pinned-columns-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pivot-group-by-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pixel-dissolve-hover-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pixel-dissolve-hover",
+      "type": "registry:ui"
+    },
+    {
+      "name": "plasma-field-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "polar-area-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui"
+    },
+    {
+      "name": "premium-executive-focus-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "press-mentions-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-3-tier-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-bento-block-layout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-billing-swapper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-calculator-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-card-basic",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-comparison-sticky-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-comparison-table-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-comparison-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-credit-pack-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-enterprise-cta",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-faq-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-feature-matrix-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-feature-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-lifetime-deal-strip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-monthly-yearly-toggle",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-multi-currency-switch",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-pay-as-you-go",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-plan-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-slider-interactive",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-table-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-team-seat-scaler",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-toggle-monthly-yearly",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing-trust-strip",
+      "type": "registry:block"
+    },
+    {
+      "name": "pricing-usage-based-calculator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pricing3-tier-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "primary-action-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-ai-recommendation-strip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-back-in-stock-alert",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-benefit-accordion",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-bulk-order-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-bundle-builder",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-bundle-discount-meter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-bundle-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card-compact",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card-horizontal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card-premium",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card-sale",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card-skeleton",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-card",
+      "type": "registry:block"
+    },
+    {
+      "name": "product-color-swatch-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-compare-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-comparison-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-discount-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-fit-finder-wizard",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "product-image-gallery",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-image-zoom-lens",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-live-stock-urgency-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-personalization-preview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-preorder-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-price-display",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-quick-view-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-recommendation-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-review-snippet-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-shipping-estimator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-shipping-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-size-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-sticky-add-to-cart-bar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-stock-status",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-subscription-box-builder",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-swatch-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-thumbnail-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-variant-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-variant-swatch-selector",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-volume-customizer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product-zoom-gallery",
+      "type": "registry:ui"
+    },
+    {
+      "name": "product360-spinner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "profile-avatar-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "profile-edit-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "progress-ring-trio",
+      "type": "registry:ui"
+    },
+    {
+      "name": "progress-toast-steps",
+      "type": "registry:ui"
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui"
+    },
+    {
+      "name": "prompt-input-glowing",
+      "type": "registry:ui"
+    },
+    {
+      "name": "prompt-input",
+      "type": "registry:block"
+    },
+    {
+      "name": "props-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "proximity-character-highlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-elastic-wave",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-foil-glare",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-help-beacon",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-loader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-location-pin",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-morph-dialog",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pull-to-refresh-order-checkout",
+      "type": "registry:ui"
+    },
+    {
+      "name": "pulsating-profile-card-outline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "quote-request-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "radar-chart-polygon",
+      "type": "registry:ui"
+    },
+    {
+      "name": "radial-bar-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "radial-gauge-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "radial-progress-draggable",
+      "type": "registry:ui"
+    },
+    {
+      "name": "rating-distribution-interactive",
+      "type": "registry:ui"
+    },
+    {
+      "name": "rating-metrics-block",
+      "type": "registry:ui"
+    },
+    {
+      "name": "rating-stars",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ray-cast-hover-effect",
+      "type": "registry:ui"
+    },
+    {
+      "name": "recently-viewed-products",
+      "type": "registry:ui"
+    },
+    {
+      "name": "recurring-event-builder-preview",
+      "type": "registry:ui"
+    },
+    {
+      "name": "reorderable-list-container",
+      "type": "registry:ui"
+    },
+    {
+      "name": "responsive-area-metric-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "responsive-heatmap-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "responsive-multi-step-wizard",
+      "type": "registry:ui"
+    },
+    {
+      "name": "responsive-step-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "responsive-step-stretch-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "retro-glitch-terminal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "retro-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "return-policy-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "returns-exchange-status-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-filter-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-helpful-vote",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-list-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-photo-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-rating-breakdown",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-sentiment-scale",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-sentiment-tags",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-sentiment-trend-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-sort-dropdown",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-summary-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-verified-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "review-write-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "rgb-chromatic-aberration-title",
+      "type": "registry:ui"
+    },
+    {
+      "name": "roi-calculator-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "rolling-customer-counter",
+      "type": "registry:ui"
+    },
+    {
+      "name": "saa-s-hero",
+      "type": "registry:block"
+    },
+    {
+      "name": "save-for-later-list-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scatter-kinetic-polaroid-wall",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scraggable-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scratch-off-ticket-reveal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-linked-gravity-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-progress-nav-rail",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-progress-path-tracer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-reveal-cinematic-image",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-reveal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-tied-progress-line",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scroll-trigger-progress-bar",
+      "type": "registry:ui"
+    },
+    {
+      "name": "scrunch-header-scroll",
+      "type": "registry:ui"
+    },
+    {
+      "name": "search-filter-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "search-suggest-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "section-header",
+      "type": "registry:ui"
+    },
+    {
+      "name": "secure-payment-trust-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "security-gesture-pattern",
+      "type": "registry:ui"
+    },
+    {
+      "name": "segmented-bar-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "segmented-billing-toggle",
+      "type": "registry:ui"
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui"
+    },
+    {
+      "name": "segmented-pill-nav",
+      "type": "registry:ui"
+    },
+    {
+      "name": "select",
+      "type": "registry:ui"
+    },
+    {
+      "name": "seller-order-queue-board",
+      "type": "registry:ui"
+    },
+    {
+      "name": "seller-payout-summary-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "seller-product-management-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "seller-profile-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "seller-rating-breakdown",
+      "type": "registry:ui"
+    },
+    {
+      "name": "seller-storefront-header",
+      "type": "registry:ui"
+    },
+    {
+      "name": "services-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "settings-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "shader-canvas",
+      "type": "registry:ui"
+    },
+    {
+      "name": "shape-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "shiny-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "shiny-glow-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "shiny-neon-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "shiny-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "shipping-rate-comparator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sidebar-collapsible",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sidebar-layout-basic",
+      "type": "registry:block"
+    },
+    {
+      "name": "sidebar-navigation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sidebar-workspace-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sizing-estimator-tool",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sizing-fit-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui"
+    },
+    {
+      "name": "skewed-gallery-carousel-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "slide-screen-panels",
+      "type": "registry:ui"
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sliding-indicator-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sliding-mini-cart-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "snackbar-undo",
+      "type": "registry:ui"
+    },
+    {
+      "name": "social-proof-strip",
+      "type": "registry:block"
+    },
+    {
+      "name": "source-citation-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sparkles",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sparkline-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sparkline-stat-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "speedometer-gauge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "splash-cursor",
+      "type": "registry:ui"
+    },
+    {
+      "name": "split-action-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "split-bio-profile-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "split-hero-glow",
+      "type": "registry:block"
+    },
+    {
+      "name": "split-text-character-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "split-text",
+      "type": "registry:ui"
+    },
+    {
+      "name": "splitter-pane",
+      "type": "registry:ui"
+    },
+    {
+      "name": "spotlight-business-pricing-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "spotlight-feature-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "spring-number-ticker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "springy-physics-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "stacked-bar-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "stacked-depth-card-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "stacking-cards",
+      "type": "registry:ui"
+    },
+    {
+      "name": "staggered-masonry-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "staggered-panel-carousel-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "staggered-roster-filter-swipe",
+      "type": "registry:ui"
+    },
+    {
+      "name": "staggered-row-slide-in",
+      "type": "registry:ui"
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "stat-delta-spark-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "static-team-image-overlay",
+      "type": "registry:ui"
+    },
+    {
+      "name": "stats-counter-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "stats-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "status-pill-indicator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "step-area-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "step-navigation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "step-progress-tracker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "sticky-comparison-matrix",
+      "type": "registry:ui"
+    },
+    {
+      "name": "structured-roster-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "support-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "survey-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "svg-glitch-text-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-accordion-open-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-card-dismissible",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-settings-toggle-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-slider-switch-button",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-slider-unlock",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-task-stack",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-to-archive-list-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-to-complete-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-to-reveal-buttons",
+      "type": "registry:ui"
+    },
+    {
+      "name": "swipe-to-reveal-status",
+      "type": "registry:ui"
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tab-navigation",
+      "type": "registry:ui"
+    },
+    {
+      "name": "table-board-switcher",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tabs-navigation-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tactile-knob-rotator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tactile-volume-scrubber",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tag-chip-input",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-activity-timeline",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-approval-workflow-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-comment-thread",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-culture-values-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-department-swapper",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-department-tabs",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-document-review-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-grid-four-column",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-hiring-open-roles-banner",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-invite-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "team-invite-modal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-leadership-spotlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-meeting-notes-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-permission-request-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-presence-avatars",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-remote-culture-map",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-section",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-shared-inbox",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-task-assignment-board",
+      "type": "registry:ui"
+    },
+    {
+      "name": "team-workload-balance-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "testimonial-carousel",
+      "type": "registry:block"
+    },
+    {
+      "name": "testimonial-grid",
+      "type": "registry:block"
+    },
+    {
+      "name": "testimonial-marquee-quotes",
+      "type": "registry:ui"
+    },
+    {
+      "name": "testimonial-masonry-wall",
+      "type": "registry:ui"
+    },
+    {
+      "name": "testimonial-quote-spotlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "testimonial-stack-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "testimonial-wall",
+      "type": "registry:block"
+    },
+    {
+      "name": "text-input-floating",
+      "type": "registry:ui"
+    },
+    {
+      "name": "text-pressure",
+      "type": "registry:ui"
+    },
+    {
+      "name": "text-reveal-sheared-mask",
+      "type": "registry:ui"
+    },
+    {
+      "name": "text-reveal-waveform",
+      "type": "registry:ui"
+    },
+    {
+      "name": "text-scramble-reveal",
+      "type": "registry:ui"
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-book-flip-page-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-product-perspective-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-product-visualizer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-product-web-gl",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-product-webgl",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-showcase-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "three-d-spring-member-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "ticker-time-marquee",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tier-badge-recommend-chip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tilt-bento-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tilt-glare-product-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tilt-glare-team-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tilt-parallax-bento-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tilt3-d-glare-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tilted-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "time-picker",
+      "type": "registry:ui"
+    },
+    {
+      "name": "time-slot-booking-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "time-zone-globe-roster",
+      "type": "registry:ui"
+    },
+    {
+      "name": "timeline-list",
+      "type": "registry:ui"
+    },
+    {
+      "name": "timeline-navigation-slider-row",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tinder-stack-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui"
+    },
+    {
+      "name": "translucent-bento-search-grid",
+      "type": "registry:ui"
+    },
+    {
+      "name": "translucent-filter-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "translucent-glass-dialog",
+      "type": "registry:ui"
+    },
+    {
+      "name": "translucent-glassmorphism-drawer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "tree-view",
+      "type": "registry:ui"
+    },
+    {
+      "name": "true-chromatic-aberration",
+      "type": "registry:ui"
+    },
+    {
+      "name": "true-focus-scope",
+      "type": "registry:ui"
+    },
+    {
+      "name": "true-focus",
+      "type": "registry:ui"
+    },
+    {
+      "name": "typewriter-elite-script",
+      "type": "registry:ui"
+    },
+    {
+      "name": "usage-based-pricing-calculator",
+      "type": "registry:ui"
+    },
+    {
+      "name": "user-account-menu",
+      "type": "registry:ui"
+    },
+    {
+      "name": "user-profile-settings-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "velocity-scroll-trigger-slider",
+      "type": "registry:ui"
+    },
+    {
+      "name": "version-badge",
+      "type": "registry:ui"
+    },
+    {
+      "name": "video-review-carousel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "view-transition-link",
+      "type": "registry:ui"
+    },
+    {
+      "name": "virtualized-infinite-scroll-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "virtualized-list-table",
+      "type": "registry:ui"
+    },
+    {
+      "name": "visual-page-navigation-dots",
+      "type": "registry:ui"
+    },
+    {
+      "name": "visual-search-overlay",
+      "type": "registry:ui"
+    },
+    {
+      "name": "voice-waveform-visualizer",
+      "type": "registry:ui"
+    },
+    {
+      "name": "waitlist-form-section",
+      "type": "registry:block"
+    },
+    {
+      "name": "waterfall-chart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "waveform-reactive-bars",
+      "type": "registry:ui"
+    },
+    {
+      "name": "wavy-lines-shader",
+      "type": "registry:ui"
+    },
+    {
+      "name": "week-strip-scheduler",
+      "type": "registry:ui"
+    },
+    {
+      "name": "wishlist-heart-fly-to-cart",
+      "type": "registry:ui"
+    },
+    {
+      "name": "wishlist-shareable-list-panel",
+      "type": "registry:ui"
+    },
+    {
+      "name": "wizard-stepper-orbit",
+      "type": "registry:ui"
+    },
+    {
+      "name": "workflow-node-card",
+      "type": "registry:ui"
+    },
+    {
+      "name": "workflow-node-pulse-link",
+      "type": "registry:ui"
+    },
+    {
+      "name": "workflow-node-spotlight",
+      "type": "registry:ui"
+    },
+    {
+      "name": "year-overview-mini-map",
+      "type": "registry:ui"
+    },
+    {
+      "name": "zoomable-image-canvas-showcase",
+      "type": "registry:ui"
+    },
+    {
+      "name": "zoomable-pinch-image",
+      "type": "registry:ui"
+    }
+  ],
+  "skills": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/skill.json",
+      "name": "lerpa-component",
+      "version": "0.1.0",
+      "homepage": "https://lerpaui.com",
+      "description": "Generate React components from the Lerpa UI library — 1318 copy-paste registry items (1099 registry:ui + 219 registry:block) compiled from 1234 source components and 30 page blocks in packages/ui, for React 19, Next 16, Tailwind v4, Framer Motion, and Radix UI. Terminal/CLI aesthetic, OKLCH design tokens, prefers-reduced-motion baked in.",
+      "when_to_use": [
+        "User asks to build, scaffold, or extend a React + Tailwind UI (page, dashboard, marketing surface, AI product)",
+        "User mentions shadcn, Radix, or copy-paste components and wants pre-built primitives",
+        "User wants animated, theme-aware UI with reduced-motion fallbacks already wired",
+        "User asks for an AI chat surface, agent panel, streaming token UI, or tool-call trace block",
+        "User wants a dashboard scaffold (stats strip, charts, CRM table, billing panel, settings page)",
+        "User wants ecommerce surfaces (cart, checkout, product card, review block)"
+      ],
+      "when_not_to_use": [
+        "User wants a non-React framework (Vue, Svelte, plain HTML)",
+        "User wants a fully custom design system from scratch with no shared tokens",
+        "User wants server-only logic with no UI surface"
+      ],
+      "capabilities": [
+        {
+          "id": "component",
+          "label": "UI Component",
+          "description": "Single-purpose primitives (Button, Card, Input, Avatar, Tabs, Dialog…). 1099 registry items available.",
+          "type": "registry:ui"
+        },
+        {
+          "id": "block",
+          "label": "Page Block",
+          "description": "Composed multi-component sections (hero, pricing, footer, CTA, feature grid, dashboard sections). 219 registry items available.",
+          "type": "registry:block"
+        },
+        {
+          "id": "dashboard-primitive",
+          "label": "Dashboard Primitive",
+          "description": "Stats cells, activity feeds, KPI cards, chart containers wired for recharts.",
+          "type": "registry:ui"
+        },
+        {
+          "id": "animation-primitive",
+          "label": "Animation Primitive",
+          "description": "Framer Motion + CSS keyframes wrappers with prefers-reduced-motion fallbacks (aurora, retro grid, shimmer, magnetic, elastic, swipe, haptic, three-d).",
+          "type": "registry:ui"
+        }
+      ],
+      "categories": [
+        "ai",
+        "buttons",
+        "cards",
+        "forms",
+        "creative",
+        "feedback",
+        "navigation",
+        "tables",
+        "calendars",
+        "charts",
+        "ecommerce",
+        "dashboard",
+        "auth",
+        "account",
+        "docs",
+        "blog"
+      ],
+      "stack": {
+        "framework": "next@16",
+        "react": "19",
+        "tailwind": "4",
+        "typescript": "5.7",
+        "framerMotion": "12",
+        "radix": "latest"
+      },
+      "conventions": {
+        "imports": {
+          "cn": "@/lib/cn",
+          "ui": "@/components/ui/<name>",
+          "hooks": "@/hooks/<name>"
+        },
+        "tokens": {
+          "background": "var(--bg)",
+          "foreground": "var(--text)",
+          "accent": "var(--accent)",
+          "border": "var(--edge)"
+        },
+        "accessibility": [
+          "Interactive <div> requires role=\"button\", tabIndex={0}, and keyboard handlers",
+          "Real <button> must NOT carry redundant role=\"button\" / tabIndex={0}",
+          "Animated components must check usePrefersReducedMotion and provide a static fallback",
+          "Color contrast targets WCAG AA on OKLCH token pairs"
+        ]
+      },
+      "install": {
+        "cli": "pnpm dlx lerpa-cli add <component-name>",
+        "registryUrl": "https://lerpaui.com/r/{name}.json"
+      },
+      "examples": [
+        {
+          "prompt": "Build a marketing landing page with a CLI-aesthetic hero, pricing comparison, and CTA block.",
+          "uses": [
+            "hero-terminal",
+            "pricing-comparison",
+            "cta-glow"
+          ]
+        },
+        {
+          "prompt": "Add a CRM dashboard with a stats strip, contact list, and activity feed.",
+          "uses": [
+            "dashboard-stats-strip",
+            "crm-contact-list",
+            "dashboard-activity-feed"
+          ]
+        },
+        {
+          "prompt": "Compose an AI chat surface with streaming tokens and tool-call traces.",
+          "uses": [
+            "ai-chat-surface",
+            "ai-token-stream",
+            "ai-tool-call-trace"
+          ]
+        },
+        {
+          "prompt": "Build a checkout flow with cart, address form, and payment review.",
+          "uses": [
+            "cart-summary",
+            "checkout-address-form",
+            "checkout-review"
+          ]
+        }
+      ],
+      "discovery": {
+        "manifest": "../registry.json",
+        "items": "../generated/registry.json"
+      }
+    }
+  ],
+  "generatedAt": "2026-06-08T13:37:58.573Z"
+}

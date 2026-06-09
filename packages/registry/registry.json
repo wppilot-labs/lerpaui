@@ -1,0 +1,56 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "lerpa",
+  "homepage": "https://lerpaui.com",
+  "aliases": {
+    "components": "@/components",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks",
+    "utils": "@/lib/utils"
+  },
+  "registries": [
+    { "name": "base", "url": "https://ui.shadcn.com/r/styles/new-york" },
+    { "name": "components", "url": "./generated/registry.json" }
+  ],
+  "items": [],
+  "skills": [
+    {
+      "name": "lerpa-component",
+      "description": "Generate from Lerpa UI's 1234 React + Tailwind v4 source components, 30 production blocks, and 1179 gallery catalog entries",
+      "mcpServer": "@lerpa/mcp-server",
+      "skillsFile": ".shadcn/skills.md",
+      "capabilities": [
+        "component",
+        "block",
+        "dashboard-primitive",
+        "animation-primitive"
+      ],
+      "categories": [
+        "ai",
+        "buttons",
+        "cards",
+        "forms",
+        "creative",
+        "feedback",
+        "navigation",
+        "tables",
+        "calendars",
+        "charts",
+        "ecommerce",
+        "dashboard",
+        "auth",
+        "account",
+        "docs",
+        "blog"
+      ],
+      "examples": [
+        "Build a dashboard with a stats grid, recent activity feed, and CRM contact list using Lerpa UI",
+        "Add a hero block with terminal aesthetic and a pricing comparison block",
+        "Compose an AI chat surface with streaming messages and tool-call traces"
+      ],
+      "install": "pnpm dlx lerpa-cli add <component-name>",
+      "manifest": "./skills/lerpa.json"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "checkout-order-summary",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CheckoutOrderSummary.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useMemo, useState } from \"react\";\nimport { ShoppingBag, ChevronDown, ChevronUp } from \"lucide-react\";\n\nexport interface CheckoutLineItem {\n  label: string;\n  price: number;\n}\n\nexport interface CheckoutOrderSummaryProps {\n  items?: CheckoutLineItem[];\n  defaultOpen?: boolean;\n}\n\nconst DEFAULT_ITEMS: CheckoutLineItem[] = [\n  { label: \"React Design Suite\", price: 129.0 },\n  { label: \"Add-on: Extended SLA\", price: 19.0 },\n];\n\nexport function CheckoutOrderSummary({\n  items = DEFAULT_ITEMS,\n  defaultOpen = true,\n}: CheckoutOrderSummaryProps) {\n  const [isOpen, setIsOpen] = useState(defaultOpen);\n\n  const total = useMemo(\n    () => items.reduce((acc, item) => acc + item.price, 0),\n    [items],\n  );\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <button\n        type=\"button\"\n        onClick={() => setIsOpen((v) => !v)}\n        aria-expanded={isOpen}\n        aria-controls=\"checkout-summary-body\"\n        className=\"w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3\"\n      >\n        <span className=\"flex items-center gap-1.5\">\n          <ShoppingBag className=\"w-4 h-4 text-primary\" aria-hidden=\"true\" /> Order summary\n        </span>\n        {isOpen ? <ChevronUp className=\"w-4 h-4\" aria-hidden=\"true\" /> : <ChevronDown className=\"w-4 h-4\" aria-hidden=\"true\" />}\n      </button>\n\n      {isOpen ? (\n        <div\n          id=\"checkout-summary-body\"\n          className=\"space-y-2 bg-secondary/20 p-2.5 rounded-xl border border-white/[0.04] text-xs\"\n        >\n          {items.map((item) => (\n            <div className=\"flex justify-between\" key={item.label}>\n              <span className=\"text-muted-foreground\">{item.label}</span>\n              <span className=\"font-bold\">${item.price.toFixed(2)}</span>\n            </div>\n          ))}\n          <div className=\"h-px bg-white/[0.04] my-2\" />\n          <div className=\"flex justify-between text-sm font-black\">\n            <span>Total</span>\n            <span className=\"text-primary\">${total.toFixed(2)}</span>\n          </div>\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

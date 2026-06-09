@@ -1,0 +1,14 @@
+{
+  "name": "product-card-compact",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ProductCardCompact.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ShoppingCart, Plus } from \"lucide-react\";\n\nexport function ProductCardCompact() {\n  const [added, setAdded] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"p-4 relative\">\n        <div className=\"h-28 bg-secondary/20 rounded-xl border border-white/[0.04] mb-3 flex items-center justify-center\">\n          <ShoppingCart className=\"w-8 h-8 text-violet-400\" />\n        </div>\n\n        <div className=\"space-y-1\">\n          <h4 className=\"text-xs font-black\">Compact Core Package</h4>\n          <div className=\"flex justify-between items-center mt-2\">\n            <span className=\"text-xs font-black\">$49.00</span>\n            <button \n              onClick={() => setAdded(!added)}\n              className={`p-1.5 rounded-lg border transition-all ${\n                added ? \"bg-emerald-600 border-transparent text-white\" : \"bg-secondary border-border text-foreground\"\n              }`}\n            >\n              <Plus className=\"w-3.5 h-3.5\" />\n            </button>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

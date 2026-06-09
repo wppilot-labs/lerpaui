@@ -1,0 +1,17 @@
+{
+  "name": "button",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "files": [
+    {
+      "path": "components/ui/button.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from 'react';\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { cn } from \"@/lib/utils\";\nimport { Spinner } from './spinner';\n\nconst buttonVariants = cva(\n  'relative inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium transition-all duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98] motion-reduce:active:scale-100 motion-reduce:transition-none disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0',\n  {\n    variants: {\n      variant: {\n        default: 'bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 shadow-sm hover:shadow',\n        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80 shadow-sm hover:shadow',\n        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground hover:border-accent active:bg-accent/80',\n        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70',\n        ghost: 'hover:bg-accent hover:text-accent-foreground active:bg-accent/80',\n        link: 'text-primary underline-offset-4 hover:underline active:text-primary/80',\n      },\n      size: {\n        default: 'h-10 px-4 py-2',\n        sm: 'h-9 rounded-md px-3',\n        lg: 'h-11 rounded-md px-8',\n        icon: 'h-10 w-10',\n      },\n    },\n    defaultVariants: {\n      variant: 'default',\n      size: 'default',\n    },\n  }\n);\n\nexport interface ButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement>,\n    VariantProps<typeof buttonVariants> {\n  asChild?: boolean;\n  loading?: boolean;\n  loadingLabel?: string;\n}\n\nconst Button = React.forwardRef<HTMLButtonElement, ButtonProps>(\n  (\n    {\n      className,\n      variant,\n      size,\n      asChild: _asChild = false,\n      loading = false,\n      loadingLabel,\n      disabled,\n      children,\n      ...props\n    },\n    ref\n  ) => {\n    const isDisabled = disabled || loading;\n    return (\n      <button\n        className={cn(buttonVariants({ variant, size, className }))}\n        ref={ref}\n        disabled={isDisabled}\n        aria-busy={loading || undefined}\n        data-loading={loading || undefined}\n        {...props}\n      >\n        {loading && (\n          <Spinner\n            size={size === 'lg' ? 'default' : 'sm'}\n            label={loadingLabel ?? 'Loading'}\n            aria-hidden={!loadingLabel || undefined}\n          />\n        )}\n        {loading && loadingLabel ? <span>{loadingLabel}</span> : children}\n      </button>\n    );\n  }\n);\nButton.displayName = 'Button';\n\nexport { Button, buttonVariants };\n"
+    }
+  ],
+  "registryDependencies": [
+    "spinner"
+  ]
+}

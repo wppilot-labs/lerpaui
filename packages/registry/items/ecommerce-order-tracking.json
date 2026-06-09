@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-order-tracking",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceOrderTracking.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { CheckCircle2, Package, Truck, Home } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Step = { label: string; date: string; icon: React.ComponentType<{ className?: string }>; done: boolean; current?: boolean };\n\nconst STEPS: Step[] = [\n  { label: \"Order placed\", date: \"Jun 3\", icon: CheckCircle2, done: true },\n  { label: \"Packed\", date: \"Jun 4\", icon: Package, done: true },\n  { label: \"Shipped\", date: \"Jun 5\", icon: Truck, done: true, current: true },\n  { label: \"Delivered\", date: \"Est. Jun 9\", icon: Home, done: false },\n];\n\nexport interface EcommerceOrderTrackingProps {\n  className?: string;\n}\n\nexport function EcommerceOrderTracking({ className }: EcommerceOrderTrackingProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-5\">\n        <h3 className=\"text-base font-bold\">Track order</h3>\n        <span className=\"text-xs font-mono text-muted-foreground/55\">#AC-80412</span>\n      </div>\n\n      <ol className=\"relative space-y-5 before:absolute before:left-[13px] before:top-2 before:bottom-2 before:w-0.5 before:bg-foreground/[0.06]\">\n        {STEPS.map((s) => {\n          const Icon = s.icon;\n          return (\n            <li key={s.label} className=\"relative flex items-center gap-3\">\n              <div\n                className={cn(\n                  \"relative z-10 h-7 w-7 rounded-full flex items-center justify-center shrink-0 border\",\n                  s.done ? \"bg-primary/15 border-primary/40 text-primary\" : \"bg-secondary/40 border-foreground/[0.08] text-muted-foreground/40\",\n                  s.current && \"ring-2 ring-primary/30\",\n                )}\n              >\n                <Icon className=\"w-4 h-4\" />\n              </div>\n              <div className=\"flex-1\">\n                <div className={cn(\"text-sm font-semibold\", !s.done && \"text-muted-foreground/50\")}>{s.label}</div>\n              </div>\n              <span className=\"text-xs text-muted-foreground/45\">{s.date}</span>\n            </li>\n          );\n        })}\n      </ol>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

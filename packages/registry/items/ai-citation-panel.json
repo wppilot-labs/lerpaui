@@ -1,0 +1,14 @@
+{
+  "name": "ai-citation-panel",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/AiCitationPanel.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { Quote, ExternalLink } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Citation = { n: number; title: string; source: string; quote: string };\n\nconst CITATIONS: Citation[] = [\n  {\n    n: 1,\n    title: \"State of SaaS Retention 2024\",\n    source: \"openviewpartners.com\",\n    quote: \"Median net revenue retention for top-quartile SaaS sits at 120%.\",\n  },\n  {\n    n: 2,\n    title: \"Onboarding & Activation Benchmarks\",\n    source: \"amplitude.com\",\n    quote: \"Products with a guided setup see 2x higher week-1 activation.\",\n  },\n  {\n    n: 3,\n    title: \"Churn Prediction Models\",\n    source: \"arxiv.org\",\n    quote: \"Early engagement signals predict 60% of eventual churn.\",\n  },\n];\n\nexport interface AiCitationPanelProps {\n  className?: string;\n}\n\nexport function AiCitationPanel({ className }: AiCitationPanelProps) {\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl p-5 font-sans text-foreground\",\n        className,\n      )}\n    >\n      <h3 className=\"text-sm font-bold flex items-center gap-1.5 mb-3\">\n        <Quote className=\"w-4 h-4 text-primary\" /> Citations\n        <span className=\"ml-auto text-xs font-normal text-muted-foreground/45\">{CITATIONS.length} sources</span>\n      </h3>\n\n      <ol className=\"space-y-2\">\n        {CITATIONS.map((c) => (\n          <li\n            key={c.n}\n            className=\"flex gap-3 rounded-xl border border-foreground/[0.06] bg-foreground/[0.02] p-3\"\n          >\n            <span className=\"h-6 w-6 shrink-0 grid place-items-center rounded-md bg-primary/15 text-primary text-xs font-bold tabular-nums\">\n              {c.n}\n            </span>\n            <div className=\"min-w-0 flex-1\">\n              <a\n                href=\"/\"\n                className=\"group flex items-center gap-1 text-sm font-semibold hover:text-primary transition-colors\"\n              >\n                <span className=\"truncate\">{c.title}</span>\n                <ExternalLink className=\"w-3.5 h-3.5 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity\" />\n              </a>\n              <p className=\"text-xs text-muted-foreground/70 italic leading-snug mt-1 border-l-2 border-foreground/[0.08] pl-2\">\n                “{c.quote}”\n              </p>\n              <div className=\"text-xs text-muted-foreground/45 mt-1.5\">{c.source}</div>\n            </div>\n          </li>\n        ))}\n      </ol>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

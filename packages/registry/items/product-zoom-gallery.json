@@ -1,0 +1,15 @@
+{
+  "name": "product-zoom-gallery",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ProductZoomGallery.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useRef, useState } from \"react\";\nimport { ZoomIn } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface ProductZoomGalleryProps {\n  className?: string;\n}\n\nexport function ProductZoomGallery({ className }: ProductZoomGalleryProps) {\n  const [zooming, setZooming] = useState(false);\n  const [pos, setPos] = useState({ x: 50, y: 50 });\n  const ref = useRef<HTMLDivElement>(null);\n\n  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {\n    const el = ref.current;\n    if (!el) return;\n    const rect = el.getBoundingClientRect();\n    const x = ((e.clientX - rect.left) / rect.width) * 100;\n    const y = ((e.clientY - rect.top) / rect.height) * 100;\n    setPos({ x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) });\n  };\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 p-3 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <div\n        ref={ref}\n        onMouseEnter={() => setZooming(true)}\n        onMouseLeave={() => setZooming(false)}\n        onMouseMove={handleMove}\n        className=\"relative h-52 rounded-xl overflow-hidden border border-foreground/[0.05] cursor-zoom-in\"\n      >\n        <div\n          className=\"absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#6366f1_0%,#0ea5e9_40%,#0f172a_100%)] transition-transform duration-150\"\n          style={{\n            transform: zooming ? \"scale(2.2)\" : \"scale(1)\",\n            transformOrigin: `${pos.x}% ${pos.y}%`,\n          }}\n        />\n        {/* fine pattern to make the zoom legible */}\n        <div\n          className=\"absolute inset-0 opacity-30 transition-transform duration-150 [background-image:linear-gradient(white_1px,transparent_1px),linear-gradient(90deg,white_1px,transparent_1px)] [background-size:14px_14px]\"\n          style={{\n            transform: zooming ? \"scale(2.2)\" : \"scale(1)\",\n            transformOrigin: `${pos.x}% ${pos.y}%`,\n          }}\n        />\n\n        {!zooming && (\n          <span className=\"absolute bottom-2 right-2 inline-flex items-center gap-1 text-xs font-semibold text-foreground bg-muted backdrop-blur px-2 py-1 rounded-lg\">\n            <ZoomIn className=\"w-3.5 h-3.5\" /> Hover to zoom\n          </span>\n        )}\n\n        {zooming && (\n          <span className=\"absolute top-2 left-2 text-xs font-bold text-foreground bg-muted backdrop-blur px-2 py-0.5 rounded\">\n            {Math.round(pos.x)}% · {Math.round(pos.y)}%\n          </span>\n        )}\n      </div>\n\n      <p className=\"mt-2.5 text-xs text-muted-foreground/55 text-center\">\n        Move your cursor over the image to magnify\n      </p>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "faq-category-tabs",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/FaqCategoryTabs.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { CreditCard, LifeBuoy, Settings, Shield } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Category = {\n  id: string;\n  label: string;\n  icon: React.ComponentType<{ className?: string }>;\n  count: number;\n};\n\nconst CATEGORIES: Category[] = [\n  { id: \"billing\", label: \"Billing\", icon: CreditCard, count: 12 },\n  { id: \"account\", label: \"Account\", icon: Settings, count: 9 },\n  { id: \"security\", label: \"Security\", icon: Shield, count: 7 },\n  { id: \"support\", label: \"Support\", icon: LifeBuoy, count: 5 },\n];\n\nexport interface FaqCategoryTabsProps {\n  className?: string;\n}\n\nexport function FaqCategoryTabs({ className }: FaqCategoryTabsProps) {\n  const [active, setActive] = useState(CATEGORIES[0].id);\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-lg bg-card/45 backdrop-blur-xl border border-border/50 p-2 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n      role=\"tablist\"\n      aria-label=\"FAQ categories\"\n    >\n      <div className=\"grid grid-cols-2 sm:grid-cols-4 gap-1.5\">\n        {CATEGORIES.map((cat) => {\n          const Icon = cat.icon;\n          const isActive = active === cat.id;\n          return (\n            <button\n              key={cat.id}\n              type=\"button\"\n              role=\"tab\"\n              aria-selected={isActive}\n              onClick={() => setActive(cat.id)}\n              className={cn(\n                \"flex flex-col items-center gap-1.5 py-3 px-2 rounded-xl border text-center transition-colors\",\n                isActive\n                  ? \"bg-primary/15 border-primary/30 text-foreground\"\n                  : \"bg-foreground/[0.02] border-foreground/[0.05] text-muted-foreground/70 hover:bg-foreground/[0.04]\",\n              )}\n            >\n              <Icon className={cn(\"w-4 h-4\", isActive ? \"text-primary\" : \"text-muted-foreground/60\")} />\n              <span className=\"text-xs font-semibold\">{cat.label}</span>\n              <span\n                className={cn(\n                  \"text-[11px] font-medium rounded-full px-1.5 py-0.5\",\n                  isActive ? \"bg-primary/20 text-primary\" : \"bg-foreground/[0.04] text-muted-foreground/50\",\n                )}\n              >\n                {cat.count}\n              </span>\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

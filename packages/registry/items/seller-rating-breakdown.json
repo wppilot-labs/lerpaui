@@ -1,0 +1,15 @@
+{
+  "name": "seller-rating-breakdown",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/SellerRatingBreakdown.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Star } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Bucket = { stars: number; count: number };\n\nconst BUCKETS: Bucket[] = [\n  { stars: 5, count: 824 },\n  { stars: 4, count: 311 },\n  { stars: 3, count: 92 },\n  { stars: 2, count: 28 },\n  { stars: 1, count: 19 },\n];\n\nexport interface SellerRatingBreakdownProps {\n  className?: string;\n}\n\nexport function SellerRatingBreakdown({ className }: SellerRatingBreakdownProps) {\n  const total = BUCKETS.reduce((sum, b) => sum + b.count, 0);\n  const average =\n    BUCKETS.reduce((sum, b) => sum + b.stars * b.count, 0) / Math.max(total, 1);\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <h3 className=\"text-base font-bold mb-4\">Customer ratings</h3>\n\n      <div className=\"flex items-center gap-4 mb-5\">\n        <div className=\"text-center\">\n          <div className=\"text-3xl font-black leading-none\">{average.toFixed(1)}</div>\n          <div className=\"mt-1 flex justify-center gap-0.5\">\n            {Array.from({ length: 5 }).map((_, i) => (\n              <Star\n                key={i}\n                className={cn(\n                  \"w-4 h-4\",\n                  i < Math.round(average)\n                    ? \"fill-amber-400 text-amber-400\"\n                    : \"text-muted-foreground/30\",\n                )}\n              />\n            ))}\n          </div>\n          <div className=\"mt-1 text-[11px] text-muted-foreground/55\">\n            {total.toLocaleString()} reviews\n          </div>\n        </div>\n\n        <div className=\"flex-1 space-y-1.5\">\n          {BUCKETS.map((b) => {\n            const pct = total ? Math.round((b.count / total) * 100) : 0;\n            return (\n              <div key={b.stars} className=\"flex items-center gap-2\">\n                <span className=\"flex w-6 shrink-0 items-center gap-0.5 text-xs text-muted-foreground/70\">\n                  {b.stars}\n                  <Star className=\"w-3 h-3 fill-amber-400 text-amber-400\" />\n                </span>\n                <div className=\"h-1.5 flex-1 overflow-hidden rounded-full bg-foreground/[0.06]\">\n                  <div\n                    className=\"h-full rounded-full bg-amber-400\"\n                    style={{ width: `${pct}%` }}\n                  />\n                </div>\n                <span className=\"w-8 shrink-0 text-right text-[11px] tabular-nums text-muted-foreground/55\">\n                  {pct}%\n                </span>\n              </div>\n            );\n          })}\n        </div>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

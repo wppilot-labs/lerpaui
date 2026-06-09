@@ -1,0 +1,12 @@
+{
+  "name": "inline-form-feedback",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/inline-form-feedback.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport type FeedbackTone = \"neutral\" | \"success\" | \"warn\" | \"error\" | \"info\";\n\nexport interface InlineFormFeedbackProps {\n  tone?: FeedbackTone;\n  message?: string;\n  hint?: string;\n  showIcon?: boolean;\n}\n\nconst TONE_MAP: Record<FeedbackTone, { color: string; icon: string }> = {\n  neutral: { color: \"var(--text-3)\", icon: \"·\" },\n  success: { color: \"var(--mint)\",   icon: \"✓\" },\n  warn:    { color: \"var(--amber)\",  icon: \"⚠\" },\n  error:   { color: \"var(--pink)\",   icon: \"×\" },\n  info:    { color: \"var(--cyan)\",   icon: \"ⓘ\" },\n};\n\nexport function InlineFormFeedback({\n  tone = \"error\",\n  message = \"Email already in use\",\n  hint = \"Try signing in instead\",\n  showIcon = true,\n}: InlineFormFeedbackProps) {\n  const t = TONE_MAP[tone];\n  return (\n    <div\n      role={tone === \"error\" ? \"alert\" : \"status\"}\n      aria-live={tone === \"error\" ? \"assertive\" : \"polite\"}\n      style={{\n        display: \"inline-flex\",\n        alignItems: \"center\",\n        gap: 8,\n        fontFamily: \"var(--font-mono)\",\n        fontSize: 11.5,\n        color: t.color,\n        animation: \"ai-fade-up 0.22s cubic-bezier(0.16, 1, 0.3, 1) both\",\n      }}\n    >\n      {showIcon ? (\n        <span\n          aria-hidden=\"true\"\n          style={{\n            width: 14,\n            height: 14,\n            borderRadius: \"50%\",\n            background: `color-mix(in srgb, ${t.color} 22%, transparent)`,\n            color: t.color,\n            display: \"grid\",\n            placeItems: \"center\",\n            fontSize: 10,\n            fontWeight: 700,\n            flexShrink: 0,\n          }}\n        >\n          {t.icon}\n        </span>\n      ) : null}\n      <span style={{ fontWeight: 500 }}>{message}</span>\n      {hint ? (\n        <span style={{ color: \"var(--text-4)\", fontWeight: 400 }}>· {hint}</span>\n      ) : null}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

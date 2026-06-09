@@ -1,0 +1,15 @@
+{
+  "name": "mobile-header-slim-hide",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/mobile-header-slim-hide.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useEffect, useState, useRef } from 'react';\nimport { motion} from \"framer-motion\";\nimport { Bell, Search, Menu } from 'lucide-react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface MobileHeaderSlimHideProps {\n  title: string;\n  onSearchClick?: () => void;\n  className?: string;\n}\n\nexport const MobileHeaderSlimHide: React.FC<MobileHeaderSlimHideProps> = ({\n  title,\n  onSearchClick,\n  className,\n}) => {\n  const [visible, setVisible] = useState(true);\n  const lastScrollY = useRef(0);\n\n  useEffect(() => {\n    const handleScroll = () => {\n      const currentScrollY = window.scrollY;\n      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {\n        // Scrolling down -> hide\n        setVisible(false);\n      } else {\n        // Scrolling up -> show\n        setVisible(true);\n      }\n      lastScrollY.current = currentScrollY;\n    };\n\n    window.addEventListener('scroll', handleScroll, { passive: true });\n    return () => window.removeEventListener('scroll', handleScroll);\n  }, []);\n\n  return (\n    <motion.header\n      initial={{ y: 0 }}\n      animate={{ y: visible ? 0 : -60 }}\n      transition={{ type: 'spring', stiffness: 300, damping: 24 }}\n      className={cn('fixed top-0 left-0 right-0 z-50 h-14 bg-card/90 backdrop-blur-md border-b border-border px-4 flex items-center justify-between shadow-sm select-none', className)}\n    >\n      <div className=\"flex items-center gap-3\">\n        <button type=\"button\" aria-label=\"Open menu\" className=\"p-1 rounded-lg hover:bg-secondary/40 text-muted-foreground hover:text-foreground\">\n          <Menu className=\"w-5 h-5\" />\n        </button>\n        {title && <h1 className=\"text-sm font-black tracking-tight text-foreground\">{title}</h1>}\n      </div>\n\n      <div className=\"flex items-center gap-2\">\n        <button\n          type=\"button\"\n          aria-label=\"Search\"\n          onClick={onSearchClick}\n          className=\"p-1.5 rounded-lg hover:bg-secondary/40 text-muted-foreground hover:text-foreground transition-all active:scale-95\"\n        >\n          <Search className=\"w-4 h-4\" />\n        </button>\n        <button type=\"button\" aria-label=\"Notifications\" className=\"p-1.5 rounded-lg hover:bg-secondary/40 text-muted-foreground hover:text-foreground relative\">\n          <Bell className=\"w-4 h-4\" />\n          <span className=\"absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-rose-500 rounded-full animate-pulse\" />\n        </button>\n      </div>\n    </motion.header>\n  );\n};\n"
+    }
+  ]
+}

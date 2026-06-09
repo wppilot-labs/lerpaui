@@ -1,0 +1,14 @@
+{
+  "name": "circular-task-progress-ring",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CircularTaskProgressRing.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { CheckCircle2 } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function CircularTaskProgressRing({ className }: { className?: string }) {\n  const [activeTaskIndex, setActiveTaskIndex] = useState(2);\n\n  const steps = [\"Config\", \"Design\", \"Install\", \"Release\"];\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div>\n        <h3 className=\"text-sm font-bold text-foreground\">Interactive Milestones</h3>\n        <p className=\"text-[10px] text-muted-foreground\">Select current pipeline active status</p>\n      </div>\n\n      <div className=\"flex justify-between items-center bg-zinc-950/60 p-3.5 rounded-xl border border-border/30\">\n        {steps.map((step, idx) => {\n          const isPassed = idx <= activeTaskIndex;\n          const _isActive = idx === activeTaskIndex;\n\n          return (\n            <button\n              key={step}\n              onClick={() => setActiveTaskIndex(idx)}\n              className=\"flex flex-col items-center gap-1.5 cursor-pointer focus:outline-none\"\n            >\n              <span className=\"text-[8px] font-bold text-muted-foreground\">{step}</span>\n              <div className={cn(\n                \"w-7 h-7 rounded-full border flex items-center justify-center transition-all\",\n                isPassed\n                  ? \"bg-primary/20 border-primary text-primary shadow-md shadow-primary/15\"\n                  : \"bg-zinc-900 border-border/40 text-muted-foreground hover:bg-zinc-800\"\n              )}>\n                {isPassed ? <CheckCircle2 className=\"w-3.5 h-3.5\" /> : <div className=\"w-1.5 h-1.5 bg-zinc-700 rounded-full\" />}\n              </div>\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

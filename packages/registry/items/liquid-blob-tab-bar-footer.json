@@ -1,0 +1,15 @@
+{
+  "name": "liquid-blob-tab-bar-footer",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/LiquidBlobTabBarFooter.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { Home, Users, Settings, Flame } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function LiquidBlobTabBarFooter({ className }: { className?: string }) {\n  const [activeTab, setActiveTab] = useState(\"home\");\n\n  const menu = [\n    { id: \"home\", Icon: Home },\n    { id: \"users\", Icon: Users },\n    { id: \"engine\", Icon: Flame },\n    { id: \"settings\", Icon: Settings },\n  ];\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div>\n        <h3 className=\"text-sm font-bold text-foreground\">Liquid Tab Bar</h3>\n        <p className=\"text-[10px] text-muted-foreground\">Bottom menu tracking visual elastic blobs</p>\n      </div>\n\n      <div className=\"flex justify-around items-center bg-zinc-950/60 p-2.5 rounded-xl border border-border/30\">\n        {menu.map((item) => {\n          const Icon = item.Icon;\n          const isActive = activeTab === item.id;\n\n          return (\n            <button\n              key={item.id}\n              onClick={() => setActiveTab(item.id)}\n              className=\"relative p-2 cursor-pointer focus:outline-none\"\n            >\n              {isActive && (\n                <motion.div\n                  layoutId=\"liquid-blob-bg\"\n                  className=\"absolute inset-0 bg-primary/20 border border-primary/30 rounded-xl\"\n                  transition={{ type: \"spring\", stiffness: 350, damping: 25 }}\n                />\n              )}\n              <Icon className={cn(\"relative z-10 w-4 h-4 transition-colors\", isActive ? \"text-primary\" : \"text-muted-foreground hover:text-foreground\")} />\n            </button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

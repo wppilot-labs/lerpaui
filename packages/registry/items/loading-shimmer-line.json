@@ -1,0 +1,12 @@
+{
+  "name": "loading-shimmer-line",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/loading-shimmer-line.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport interface LoadingShimmerLineProps {\n  width?: string | number;\n  height?: number;\n  accent?: string;\n  rounded?: boolean;\n  speed?: number;\n}\n\nexport function LoadingShimmerLine({\n  width = \"100%\",\n  height = 14,\n  accent = \"var(--accent)\",\n  rounded = true,\n  speed = 1.6,\n}: LoadingShimmerLineProps) {\n  return (\n    <span\n      role=\"status\"\n      aria-busy=\"true\"\n      aria-label=\"Loading\"\n      style={{\n        display: \"block\",\n        width,\n        height,\n        borderRadius: rounded ? height / 2 : 4,\n        background: `linear-gradient(90deg, var(--bg-3) 0%, color-mix(in srgb, ${accent} 18%, var(--bg-4)) 50%, var(--bg-3) 100%)`,\n        backgroundSize: \"200% 100%\",\n        animation: `ai-shimmer ${speed}s ease-in-out infinite`,\n        position: \"relative\",\n        overflow: \"hidden\",\n      }}\n    >\n      <span\n        aria-hidden=\"true\"\n        style={{\n          position: \"absolute\",\n          inset: 0,\n          background: `linear-gradient(90deg, transparent, color-mix(in srgb, ${accent} 24%, transparent), transparent)`,\n          backgroundSize: \"200% 100%\",\n          animation: `ai-shimmer ${speed * 0.8}s ease-in-out infinite`,\n          mixBlendMode: \"screen\",\n        }}\n      />\n    </span>\n  );\n}\n"
+    }
+  ]
+}

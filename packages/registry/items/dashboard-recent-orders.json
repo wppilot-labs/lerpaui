@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-recent-orders",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DashboardRecentOrders.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Package } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Order = { id: string; customer: string; amount: string; status: \"paid\" | \"pending\" | \"refunded\" };\n\nconst ORDERS: Order[] = [\n  { id: \"#8841\", customer: \"Olivia Hart\", amount: \"$248\", status: \"paid\" },\n  { id: \"#8840\", customer: \"Liam Chen\", amount: \"$112\", status: \"pending\" },\n  { id: \"#8839\", customer: \"Sofia Ramos\", amount: \"$96\", status: \"paid\" },\n  { id: \"#8838\", customer: \"Noah Patel\", amount: \"$74\", status: \"refunded\" },\n];\n\nconst STATUS: Record<Order[\"status\"], string> = {\n  paid: \"bg-emerald-500/10 text-emerald-400\",\n  pending: \"bg-amber-500/10 text-amber-400\",\n  refunded: \"bg-foreground/[0.05] text-muted-foreground/60\",\n};\n\nexport interface DashboardRecentOrdersProps {\n  className?: string;\n}\n\nexport function DashboardRecentOrders({ className }: DashboardRecentOrdersProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold flex items-center gap-1.5 mb-4\">\n        <Package className=\"w-4 h-4 text-primary\" /> Recent orders\n      </h3>\n      <ul className=\"space-y-1\">\n        {ORDERS.map((o) => (\n          <li key={o.id} className=\"flex items-center gap-3 py-2 border-b border-foreground/[0.04] last:border-0\">\n            <span className=\"text-xs font-mono text-muted-foreground/60 w-12 shrink-0\">{o.id}</span>\n            <span className=\"text-sm font-medium flex-1 truncate\">{o.customer}</span>\n            <span className=\"text-sm font-bold tabular-nums\">{o.amount}</span>\n            <span className={cn(\"text-[11px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full capitalize shrink-0\", STATUS[o.status])}>{o.status}</span>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

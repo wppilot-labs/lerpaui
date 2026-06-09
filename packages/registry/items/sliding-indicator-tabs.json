@@ -1,0 +1,14 @@
+{
+  "name": "sliding-indicator-tabs",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/SlidingIndicatorTabs.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function SlidingIndicatorTabs({\n  className,\n  tabs = [\"Overview\", \"Features\", \"Analytics\", \"Settings\"],\n  onTabChange,\n}: {\n  className?: string;\n  tabs?: string[];\n  onTabChange?: (tab: string) => void;\n}) {\n  const [activeTab, setActiveTab] = useState(tabs[0]);\n\n  return (\n    <div\n      className={cn(\n        \"flex items-center gap-1 bg-white/[0.02] border border-white/[0.04] p-1.5 rounded-2xl shadow-inner\",\n        className\n      )}\n    >\n      {tabs.map((tab) => {\n        const isActive = tab === activeTab;\n        return (\n          <button\n            key={tab}\n            onClick={() => {\n              setActiveTab(tab);\n              if (onTabChange) onTabChange(tab);\n            }}\n            className={cn(\n              \"relative px-4 py-2 text-xs font-semibold rounded-xl transition-colors duration-300 cursor-pointer select-none\",\n              isActive ? \"text-foreground\" : \"text-muted-foreground/60 hover:text-foreground\"\n            )}\n          >\n            {isActive && (\n              <motion.div\n                layoutId=\"active-tab-indicator\"\n                className=\"absolute inset-0 bg-primary/10 border border-primary/25 rounded-xl -z-10 shadow-sm\"\n                transition={{\n                  type: \"spring\",\n                  stiffness: 300,\n                  damping: 30,\n                }}\n              />\n            )}\n            <span className=\"relative z-10\">{tab}</span>\n          </button>\n        );\n      })}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

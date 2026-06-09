@@ -1,0 +1,15 @@
+{
+  "name": "chromatic-aberration-shader",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/chromatic-aberration-shader.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShaderCanvas } from \"./shader-canvas\";\nimport { cn } from \"@/lib/utils\";\n\n/** RGB channel offset shader — separation magnitude tracks pointer distance from center with radial falloff. */\nexport interface ChromaticAberrationShaderProps {\n  className?: string;\n  /** Multiplier for channel separation strength. Default 1. */\n  intensity?: number;\n}\n\nconst CHROMATIC_GLSL = `\nprecision highp float;\nuniform float u_time;\nuniform vec2 u_mouse;\nuniform vec2 u_resolution;\n\n// Procedural checker + ring pattern used as the sampled \"texture\".\nvec3 pattern(vec2 uv) {\n  vec2 g = uv * 8.0;\n  float checker = step(0.5, fract(g.x)) * step(0.5, fract(g.y)) +\n                  step(0.5, 1.0 - fract(g.x)) * step(0.5, 1.0 - fract(g.y));\n  float ring = sin(length(uv - 0.5) * 30.0 - u_time * 1.5) * 0.5 + 0.5;\n  vec3 base = mix(vec3(0.09, 0.10, 0.18), vec3(0.62, 0.36, 0.95), checker * 0.4);\n  base += vec3(0.20, 0.55, 0.95) * ring * 0.35;\n  base += vec3(0.95, 0.35, 0.62) * smoothstep(0.6, 0.0, length(uv - 0.5)) * 0.25;\n  return base;\n}\n\nvoid main() {\n  vec2 uv = gl_FragCoord.xy / u_resolution.xy;\n  float dist = length(uv - u_mouse);\n  float radial = smoothstep(0.0, 0.9, length(uv - vec2(0.5)));\n  vec2 dir = normalize(uv - 0.5 + 0.0001);\n  float mag = dist * 0.04 + radial * 0.012;\n  mag *= 1.0;\n\n  vec3 col;\n  col.r = pattern(uv + dir * mag).r;\n  col.g = pattern(uv).g;\n  col.b = pattern(uv - dir * mag).b;\n\n  // Subtle vignette\n  col *= smoothstep(1.15, 0.35, length(uv - 0.5) * 1.4);\n\n  gl_FragColor = vec4(col, 1.0);\n}\n`;\n\nexport const ChromaticAberrationShader: React.FC<\n  ChromaticAberrationShaderProps\n> = ({ className }) => {\n  return (\n    <div\n      className={cn(\n        \"relative h-[400px] w-full overflow-hidden rounded-2xl bg-[var(--card)]\",\n        className,\n      )}\n    >\n      <ShaderCanvas\n        fragment={CHROMATIC_GLSL}\n        className=\"absolute inset-0\"\n        fallback={\n          <div className=\"absolute inset-0 bg-gradient-to-br from-violet-500/20 via-rose-500/10 to-cyan-500/15\" />\n        }\n      />\n    </div>\n  );\n};\n"
+    }
+  ],
+  "registryDependencies": [
+    "shader-canvas"
+  ]
+}

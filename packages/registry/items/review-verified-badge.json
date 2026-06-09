@@ -1,0 +1,14 @@
+{
+  "name": "review-verified-badge",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ReviewVerifiedBadge.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShieldCheck } from \"lucide-react\";\n\nexport function ReviewVerifiedBadge() {\n  return (\n    <div className=\"w-max bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full flex items-center gap-1.5 text-xs text-emerald-400 font-extrabold uppercase select-none tracking-wider\">\n      <ShieldCheck className=\"w-4 h-4 text-emerald-400\" />\n      <span>Verified checkout purchase</span>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "workflow-node-pulse-link",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/WorkflowNodePulseLink.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Cpu, HelpCircle, CheckCircle2 } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function WorkflowNodePulseLink({ className }: { className?: string }) {\n  const [activePort, setActivePort] = useState<\"input\" | \"output\">(\"input\");\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Workflow Connector</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Interactive connected pulse node</p>\n        </div>\n        <Cpu className=\"w-4 h-4 text-primary animate-pulse\" />\n      </div>\n\n      <div className=\"flex justify-around items-center bg-zinc-950/60 p-4 rounded-xl border border-border/30\">\n        <button\n          onClick={() => setActivePort(\"input\")}\n          className={cn(\n            \"flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl border transition-colors cursor-pointer\",\n            activePort === \"input\" ? \"bg-primary/20 border-primary text-primary\" : \"bg-zinc-900 border-border/30 text-muted-foreground\"\n          )}\n        >\n          <HelpCircle className=\"w-4 h-4 shrink-0\" />\n          <span className=\"text-[9px] font-bold uppercase tracking-wider\">Input Port</span>\n        </button>\n\n        <div className=\"h-0.5 w-10 bg-zinc-800 relative\">\n          {/* Pulsing visual trail between nodes */}\n          <div className=\"absolute top-1/2 -translate-y-1/2 left-0 w-2 h-2 rounded-full bg-primary animate-ping\" />\n        </div>\n\n        <button\n          onClick={() => setActivePort(\"output\")}\n          className={cn(\n            \"flex flex-col items-center gap-1.5 px-3 py-2 rounded-xl border transition-colors cursor-pointer\",\n            activePort === \"output\" ? \"bg-emerald-500/20 border-emerald-500 text-emerald-400\" : \"bg-zinc-900 border-border/30 text-muted-foreground\"\n          )}\n        >\n          <CheckCircle2 className=\"w-4 h-4 shrink-0\" />\n          <span className=\"text-[9px] font-bold uppercase tracking-wider\">Output Port</span>\n        </button>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-api-requests-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardApiRequestsChart.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Terminal } from \"lucide-react\";\n\nexport function DashboardAPIRequestsChart() {\n  const [range, setRange] = useState(\"24h\");\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <Terminal className=\"w-4 h-4 text-violet-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">API load load chart</span>\n        </div>\n        <div className=\"flex gap-1 bg-secondary/30 p-0.5 rounded-lg border border-white/[0.04]\">\n          {[\"1h\", \"24h\"].map((item) => (\n            <button\n              key={item}\n              onClick={() => setRange(item)}\n              className={`px-2 py-0.5 rounded text-[9px] font-bold transition-all ${\n                range === item ? \"bg-card text-foreground\" : \"text-muted-foreground/60 hover:text-foreground\"\n              }`}\n            >\n              {item}\n            </button>\n          ))}\n        </div>\n      </div>\n\n      <div className=\"space-y-4\">\n        <div className=\"h-16 flex items-end justify-between gap-1 pt-4 border-b border-white/[0.04]\">\n          <div className=\"w-full bg-violet-500/20 h-[30%]\" />\n          <div className=\"w-full bg-violet-500/40 h-[45%]\" />\n          <div className=\"w-full bg-violet-500/70 h-[80%]\" />\n          <div className=\"w-full bg-violet-500/95 h-[95%]\" />\n          <div className=\"w-full bg-violet-500/30 h-[50%]\" />\n        </div>\n        <div className=\"flex justify-between text-[10px] text-muted-foreground\">\n          <span>Avg load: <span className=\"font-bold text-foreground\">84.2 requests/s</span></span>\n          <span className=\"text-emerald-400 font-bold\">● Live Monitoring</span>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

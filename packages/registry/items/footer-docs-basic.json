@@ -1,0 +1,14 @@
+{
+  "name": "footer-docs-basic",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/FooterDocsBasicBlock.tsx",
+      "type": "registry:block",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { BookOpen } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FooterDocsBasicProps {\n  className?: string;\n}\n\ninterface Column {\n  title: string;\n  links: string[];\n}\n\nconst COLUMNS: Column[] = [\n  { title: \"Docs\", links: [\"Introduction\", \"Installation\", \"Quick start\", \"Changelog\"] },\n  { title: \"Guides\", links: [\"Authentication\", \"Theming\", \"Deployment\", \"Migrations\"] },\n  { title: \"API\", links: [\"REST reference\", \"Webhooks\", \"Rate limits\", \"SDKs\"] },\n  { title: \"Community\", links: [\"GitHub\", \"Discord\", \"Stack Overflow\", \"Roadmap\"] },\n];\n\nexport function FooterDocsBasic({ className }: FooterDocsBasicProps) {\n  return (\n    <footer\n      aria-label=\"Documentation footer\"\n      className={cn(\"w-full border-t border-border bg-background text-foreground\", className)}\n    >\n      <div className=\"mx-auto max-w-6xl px-6 py-12\">\n        <div className=\"grid grid-cols-2 gap-8 md:grid-cols-4\">\n          {COLUMNS.map((column) => (\n            <nav key={column.title} aria-label={column.title}>\n              <h3 className=\"text-sm font-semibold text-foreground\">{column.title}</h3>\n              <ul className=\"mt-4 space-y-3\">\n                {column.links.map((link) => (\n                  <li key={link}>\n                    <a\n                      href=\"/\"\n                      className=\"text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background\"\n                    >\n                      {link}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            </nav>\n          ))}\n        </div>\n\n        <div className=\"mt-10 flex flex-col items-center justify-between gap-4 border-t border-border pt-6 sm:flex-row\">\n          <div className=\"flex items-center gap-2\">\n            <span className=\"flex h-7 w-7 items-center justify-center rounded-md bg-primary text-primary-foreground\">\n              <BookOpen className=\"h-4 w-4\" />\n            </span>\n            <span className=\"text-sm font-semibold text-foreground\">Acme Docs</span>\n          </div>\n          <p className=\"text-sm text-muted-foreground\">© 2026 Acme Inc. All rights reserved.</p>\n        </div>\n      </div>\n    </footer>\n  );\n}\n\nexport default FooterDocsBasic;\n"
+    }
+  ]
+}

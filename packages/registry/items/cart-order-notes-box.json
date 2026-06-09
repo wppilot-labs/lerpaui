@@ -1,0 +1,14 @@
+{
+  "name": "cart-order-notes-box",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CartOrderNotesBox.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { StickyNote, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst MAX = 200;\n\nexport interface CartOrderNotesBoxProps {\n  className?: string;\n}\n\nexport function CartOrderNotesBox({ className }: CartOrderNotesBoxProps) {\n  const [note, setNote] = useState(\"\");\n  const [saved, setSaved] = useState(false);\n\n  const remaining = MAX - note.length;\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <label\n        htmlFor=\"order-notes\"\n        className=\"flex items-center gap-1.5 text-sm font-semibold\"\n      >\n        <StickyNote className=\"h-4 w-4 text-primary\" />\n        Order notes\n      </label>\n      <p className=\"mt-0.5 text-xs text-muted-foreground/55\">\n        Add delivery instructions or a gift message (optional)\n      </p>\n\n      <textarea\n        id=\"order-notes\"\n        value={note}\n        maxLength={MAX}\n        onChange={(e) => {\n          setNote(e.target.value);\n          setSaved(false);\n        }}\n        rows={3}\n        placeholder=\"e.g. Leave at the back door. Please don't ring the bell.\"\n        className=\"mt-3 w-full resize-none rounded-lg border border-border/60 bg-secondary/30 px-3 py-2.5 text-xs leading-snug text-foreground placeholder:text-muted-foreground/40 focus:border-primary/40 focus:outline-none focus:ring-1 focus:ring-primary/30\"\n      />\n\n      <div className=\"mt-2 flex items-center justify-between\">\n        <span\n          className={cn(\n            \"text-xs\",\n            remaining < 20 ? \"text-amber-400\" : \"text-muted-foreground/45\",\n          )}\n        >\n          {remaining} characters left\n        </span>\n        <button\n          type=\"button\"\n          onClick={() => setSaved(true)}\n          disabled={!note.trim() || saved}\n          className={cn(\n            \"inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all\",\n            saved\n              ? \"border border-emerald-500/25 bg-emerald-500/10 text-emerald-400\"\n              : \"bg-primary text-primary-foreground hover:brightness-110 disabled:opacity-40\",\n          )}\n        >\n          {saved ? (\n            <>\n              <Check className=\"h-4 w-4\" /> Saved\n            </>\n          ) : (\n            \"Save note\"\n          )}\n        </button>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

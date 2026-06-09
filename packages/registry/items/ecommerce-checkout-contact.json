@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-checkout-contact",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceCheckoutContact.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Mail } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst field = \"w-full bg-foreground/[0.03] border border-foreground/[0.06] rounded-xl px-3 py-2.5 text-sm focus:ring-1 focus:ring-primary/50 focus:border-primary/30 focus:outline-none\";\nconst label = \"block text-xs font-semibold text-muted-foreground/70 mb-1\";\n\nexport interface EcommerceCheckoutContactProps {\n  className?: string;\n}\n\nexport function EcommerceCheckoutContact({ className }: EcommerceCheckoutContactProps) {\n  const [news, setNews] = useState(true);\n\n  return (\n    <form onSubmit={(e) => e.preventDefault()} className={cn(\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold flex items-center gap-1.5 mb-4\"><Mail className=\"w-4 h-4 text-primary\" /> Contact</h3>\n\n      <div className=\"mb-3\">\n        <label htmlFor=\"cc-email\" className={label}>Email</label>\n        <input id=\"cc-email\" type=\"email\" autoComplete=\"email\" placeholder=\"you@example.com\" className={field} />\n      </div>\n      <div className=\"mb-4\">\n        <label htmlFor=\"cc-phone\" className={label}>Phone (for delivery updates)</label>\n        <input id=\"cc-phone\" type=\"tel\" autoComplete=\"tel\" placeholder=\"+1 (555) 000-0000\" className={field} />\n      </div>\n\n      <label className=\"flex items-center gap-2.5 mb-4 cursor-pointer\">\n        <button\n          type=\"button\"\n          role=\"checkbox\"\n          aria-checked={news}\n          onClick={() => setNews((n) => !n)}\n          className={cn(\"h-4 w-4 rounded-[5px] border flex items-center justify-center shrink-0 transition-colors\", news ? \"bg-primary border-primary\" : \"border-foreground/20\")}\n        >\n          {news && <svg viewBox=\"0 0 12 12\" className=\"w-2.5 h-2.5 text-primary-foreground\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"2.5\"><path d=\"M2.5 6.5L5 9l4.5-5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" /></svg>}\n        </button>\n        <span className=\"text-xs text-muted-foreground/75\">Email me with news and offers</span>\n      </label>\n\n      <button type=\"submit\" className=\"w-full py-2.5 text-sm font-bold rounded-xl bg-primary text-primary-foreground hover:brightness-110 transition-all\">Continue</button>\n    </form>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "spring-number-ticker",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/SpringNumberTicker.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useEffect, useState } from \"react\";\nimport { motion, useSpring, useTransform} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function SpringNumberTicker({\n  value,\n  className,\n}: {\n  value: number;\n  className?: string;\n}) {\n  const digits = value.toString().split(\"\");\n\n  return (\n    <div className={cn(\"inline-flex items-center overflow-hidden font-mono\", className)}>\n      {digits.map((digit, idx) => {\n        const isNumber = !isNaN(Number(digit));\n        if (!isNumber) {\n          return (\n            <span key={idx} className=\"inline-block\">\n              {digit}\n            </span>\n          );\n        }\n        return <DigitColumn key={idx} digit={Number(digit)} />;\n      })}\n    </div>\n  );\n}\n\nfunction DigitColumn({ digit }: { digit: number }) {\n  const [_prevDigit, setPrevDigit] = useState(digit);\n  const springValue = useSpring(digit, {\n    stiffness: 160,\n    damping: 18,\n    mass: 0.8,\n  });\n\n  useEffect(() => {\n    springValue.set(digit);\n    setPrevDigit(digit);\n  }, [digit, springValue]);\n\n  const y = useTransform(springValue, (latest) => {\n    // Transform numerical value 0-9 into vertical percentage offset\n    return `-${latest * 10}%`;\n  });\n\n  const range = Array.from({ length: 10 }, (_, i) => i);\n\n  return (\n    <div className=\"relative h-[1.25em] w-[0.6em] overflow-hidden select-none\">\n      <motion.div\n        className=\"absolute left-0 top-0 w-full flex flex-col items-center justify-start\"\n        style={{ y }}\n      >\n        {range.map((num) => (\n          <span\n            key={num}\n            className=\"flex items-center justify-center h-[1.25em] leading-none text-foreground font-extrabold\"\n          >\n            {num}\n          </span>\n        ))}\n      </motion.div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

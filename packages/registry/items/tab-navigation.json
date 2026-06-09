@@ -1,0 +1,14 @@
+{
+  "name": "tab-navigation",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TabNavigation.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { LayoutGrid, Activity, Bell, Lock } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Tab = { id: string; label: string; icon: React.ElementType };\n\nconst TABS: Tab[] = [\n  { id: \"overview\", label: \"Overview\", icon: LayoutGrid },\n  { id: \"activity\", label: \"Activity\", icon: Activity },\n  { id: \"alerts\", label: \"Alerts\", icon: Bell },\n  { id: \"security\", label: \"Security\", icon: Lock },\n];\n\nconst PANELS: Record<string, string> = {\n  overview: \"A high-level snapshot of usage, billing, and team activity at a glance.\",\n  activity: \"Every action across your workspace, from deploys to comments, in real time.\",\n  alerts: \"Threshold notifications for spend, errors, and uptime delivered where you work.\",\n  security: \"Audit logs, active sessions, and access policies for your organization.\",\n};\n\nexport interface TabNavigationProps {\n  className?: string;\n}\n\nexport function TabNavigation({ className }: TabNavigationProps) {\n  const [active, setActive] = useState(\"overview\");\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-md rounded-2xl border border-border/50 bg-card/60 p-1.5 font-sans text-foreground shadow-xl backdrop-blur-xl\",\n        className,\n      )}\n    >\n      <div role=\"tablist\" aria-label=\"Settings sections\" className=\"flex gap-1\">\n        {TABS.map((tab) => {\n          const isActive = active === tab.id;\n          return (\n            <button\n              key={tab.id}\n              type=\"button\"\n              role=\"tab\"\n              id={`tab-${tab.id}`}\n              aria-selected={isActive}\n              aria-controls={`panel-${tab.id}`}\n              onClick={() => setActive(tab.id)}\n              className={cn(\n                \"flex flex-1 items-center justify-center gap-1.5 rounded-xl px-2.5 py-2.5 text-sm font-semibold transition-colors\",\n                isActive\n                  ? \"bg-primary text-primary-foreground shadow-sm\"\n                  : \"text-muted-foreground/70 hover:bg-foreground/[0.04] hover:text-foreground\",\n              )}\n            >\n              <tab.icon className=\"h-4 w-4\" />\n              <span>{tab.label}</span>\n            </button>\n          );\n        })}\n      </div>\n\n      <div\n        role=\"tabpanel\"\n        id={`panel-${active}`}\n        aria-labelledby={`tab-${active}`}\n        className=\"px-3 py-4 text-sm leading-relaxed text-muted-foreground\"\n      >\n        {PANELS[active]}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

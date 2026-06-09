@@ -1,0 +1,12 @@
+{
+  "name": "copy-to-clipboard-button",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/copy-to-clipboard-button.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport { useState } from \"react\";\nimport { Copy, Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface CopyToClipboardButtonProps {\n  className?: string;\n}\n\nconst VALUE = \"sk_live_a1b2c3d4e5f6g7h8\";\n\nexport function CopyToClipboardButton({ className }: CopyToClipboardButtonProps) {\n  const [copied, setCopied] = useState(false);\n\n  const handleCopy = async () => {\n    try {\n      await navigator.clipboard.writeText(VALUE);\n    } catch {\n      /* clipboard unavailable */\n    }\n    setCopied(true);\n    window.setTimeout(() => setCopied(false), 1500);\n  };\n\n  return (\n    <button\n      type=\"button\"\n      onClick={handleCopy}\n      aria-label={copied ? \"Copied to clipboard\" : \"Copy to clipboard\"}\n      aria-live=\"polite\"\n      className={cn(\n        \"inline-flex items-center gap-2 rounded-lg border border-border bg-foreground/[0.03] px-3 py-2 font-mono text-sm text-foreground/90 transition-colors hover:bg-foreground/[0.06]\",\n        className\n      )}\n    >\n      <span className=\"text-muted-foreground\">{VALUE}</span>\n      {copied ? (\n        <Check className=\"h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400\" />\n      ) : (\n        <Copy className=\"h-4 w-4 shrink-0 text-muted-foreground\" />\n      )}\n    </button>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "billing-credit-balance-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BillingCreditBalanceCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { DollarSign, ArrowRight } from \"lucide-react\";\n\nexport function BillingCreditBalanceCard() {\n  const [amount, setAmount] = useState(120.45);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <DollarSign className=\"w-4 h-4 text-emerald-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Credit Balance</span>\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20\">Active</span>\n      </div>\n\n      <div className=\"space-y-4\">\n        <div className=\"p-4 rounded-xl bg-white/[0.02] border border-white/[0.03] relative overflow-hidden\">\n          <span className=\"block text-[9px] text-muted-foreground/60 uppercase font-bold\">Remaining Credit</span>\n          <span className=\"text-2xl font-black text-foreground\">${amount.toFixed(2)}</span>\n        </div>\n\n        <button \n          onClick={() => setAmount(amount + 50.00)}\n          className=\"w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all\"\n        >\n          <span>Top Up (+$50.00)</span>\n          <ArrowRight className=\"w-3.5 h-3.5\" />\n        </button>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

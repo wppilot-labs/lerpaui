@@ -1,0 +1,14 @@
+{
+  "name": "product-price-display",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ProductPriceDisplay.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { BadgePercent } from \"lucide-react\";\n\nexport function ProductPriceDisplay() {\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-xl shadow-lg select-none font-sans text-foreground flex items-center justify-between\">\n      <div>\n        <span className=\"block text-[8px] text-muted-foreground/40 uppercase font-bold tracking-wider\">Asset Price</span>\n        <div className=\"flex items-baseline gap-2\">\n          <span className=\"text-xl font-black text-foreground\">$129.00</span>\n          <span className=\"text-xs line-through text-muted-foreground/45\">$240.00</span>\n        </div>\n      </div>\n\n      <div className=\"flex items-center gap-1 font-bold text-emerald-400 text-xs bg-emerald-500/10 px-2 py-1 rounded-lg border border-emerald-500/20\">\n        <BadgePercent className=\"w-4 h-4\" />\n        <span>Save 45%</span>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "infinite-card-ribbon-loop",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/infinite-card-ribbon-loop.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\n\nimport React, { useRef } from 'react';\nimport {motion, useMotionValue, useSpring, type PanInfo } from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface InfiniteCardRibbonLoopProps {\n  className?: string;\n}\n\nexport const InfiniteCardRibbonLoop: React.FC<InfiniteCardRibbonLoopProps> = ({ className }) => {\n  const containerRef = useRef<HTMLDivElement>(null);\n  const x = useMotionValue(0);\n  const springX = useSpring(x, { stiffness: 120, damping: 18 });\n\n  const tags = [\"AI Models\", \"Mesh net\", \"Gateway\", \"Data Vault\", \"Block Sync\", \"API Hub\", \"Docker\", \"Cron Node\"];\n\n  const handleDrag = (_e: unknown, info: PanInfo) => {\n    let newX = x.get() + info.delta.x;\n    // Circular infinite loop wrapping\n    if (newX > 0) newX = -120;\n    else if (newX < -240) newX = 0;\n    x.set(newX);\n  };\n\n  return (\n    <div className={cn('relative w-full max-w-[320px] h-[220px] bg-secondary/5 rounded-3xl border border-border flex flex-col justify-between p-5 overflow-hidden select-none', className)}>\n      <span className=\"text-[9px] text-muted-foreground font-black tracking-widest uppercase\">Continuous Ribbon Loop</span>\n\n      <div \n        ref={containerRef} \n        className=\"w-full overflow-hidden py-4 flex items-center justify-center\"\n      >\n        <motion.div\n          drag=\"x\"\n          style={{ x: springX }}\n          onDrag={handleDrag}\n          className=\"flex gap-2.5 cursor-grab active:cursor-grabbing touch-none shrink-0\"\n        >\n          {/* Double content array to allow seamless loops */}\n          {[...tags, ...tags].map((tag, idx) => (\n            <div\n              key={idx}\n              className=\"px-3.5 py-2 rounded-xl border border-border bg-card shadow-sm text-[10px] font-black text-foreground uppercase tracking-wider shrink-0 flex items-center gap-1.5 hover:border-primary/45 transition-colors\"\n            >\n              <div className=\"w-1.5 h-1.5 rounded-full bg-primary animate-pulse\" />\n              <span>{tag}</span>\n            </div>\n          ))}\n        </motion.div>\n      </div>\n\n      <span className=\"text-[8px] text-muted-foreground font-extrabold uppercase tracking-wide text-center\">Drag ribbons left/right infinitely</span>\n    </div>\n  );\n};\n"
+    }
+  ]
+}

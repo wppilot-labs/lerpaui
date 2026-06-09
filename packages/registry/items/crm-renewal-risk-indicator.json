@@ -1,0 +1,14 @@
+{
+  "name": "crm-renewal-risk-indicator",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CrmRenewalRiskIndicator.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { AlertCircle, Clock } from \"lucide-react\";\n\nexport function CRMRenewalRiskIndicator() {\n  const [days, setDays] = useState(14);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <AlertCircle className=\"w-4 h-4 text-amber-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Renewal Evaluation</span>\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20\">Churn Risk Level</span>\n      </div>\n\n      <div className=\"space-y-3.5\">\n        <div className=\"p-3 rounded-xl bg-amber-500/5 border border-amber-500/10 text-xs flex justify-between items-center\">\n          <div>\n            <p className=\"font-bold\">Contract Expiration</p>\n            <p className=\"text-[10px] text-muted-foreground/60\">Review account usage patterns.</p>\n          </div>\n          <span className=\"font-black text-amber-400 flex items-center gap-0.5\"><Clock className=\"w-3.5 h-3.5\" /> {days} days</span>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

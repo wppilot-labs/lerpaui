@@ -1,0 +1,15 @@
+{
+  "name": "elastic-search-pill",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ElasticSearchPill.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState, useRef } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { Search, X } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function ElasticSearchPill({\n  className,\n  onSearch,\n}: {\n  className?: string;\n  onSearch?: (val: string) => void;\n}) {\n  const [focused, setFocused] = useState(false);\n  const [val, setVal] = useState(\"\");\n  const inputRef = useRef<HTMLInputElement>(null);\n\n  const handleClear = () => {\n    setVal(\"\");\n    if (onSearch) onSearch(\"\");\n    inputRef.current?.focus();\n  };\n\n  const handleValChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    const nextVal = e.target.value;\n    setVal(nextVal);\n    if (onSearch) onSearch(nextVal);\n  };\n\n  return (\n    <div className={cn(\"flex items-center justify-center p-2\", className)}>\n      <motion.div\n        animate={{\n          width: focused ? \"240px\" : \"160px\",\n        }}\n        transition={{\n          type: \"spring\",\n          stiffness: 280,\n          damping: 24,\n        }}\n        className={cn(\n          \"relative flex items-center bg-white/[0.02] border border-white/[0.04] p-1 rounded-full shadow-inner transition-colors duration-300\",\n          focused ? \"border-primary/40 bg-white/[0.03]\" : \"hover:border-white/[0.12]\"\n        )}\n      >\n        <Search className=\"w-4 h-4 text-muted-foreground/30 ml-2.5 flex-shrink-0\" />\n\n        <input\n          ref={inputRef}\n          type=\"text\"\n          placeholder=\"Quick search...\"\n          value={val}\n          onChange={handleValChange}\n          onFocus={() => setFocused(true)}\n          onBlur={() => setFocused(false)}\n          className=\"w-full bg-transparent border-none text-xs text-foreground placeholder:text-muted-foreground/30 focus:ring-0 focus:outline-none pl-2.5 pr-2.5 py-1.5\"\n        />\n\n        {/* Clear Button */}\n        {val && (\n          <button\n            onClick={handleClear}\n            className=\"p-1 rounded-full hover:bg-white/[0.04] text-muted-foreground/45 hover:text-foreground transition-all cursor-pointer mr-1.5 flex-shrink-0\"\n          >\n            <X className=\"w-3.5 h-3.5\" />\n          </button>\n        )}\n\n        {/* Keyboard shortcut placeholder */}\n        {!val && (\n          <div className=\"absolute right-2 px-1.5 py-0.5 rounded border border-white/[0.04] bg-white/[0.01] text-[8px] font-bold text-muted-foreground/30 font-mono tracking-wider select-none uppercase pointer-events-none\">\n            ⌘K\n          </div>\n        )}\n      </motion.div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

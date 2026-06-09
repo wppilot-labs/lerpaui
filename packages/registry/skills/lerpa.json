@@ -1,0 +1,117 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/skill.json",
+  "name": "lerpa-component",
+  "version": "0.1.0",
+  "homepage": "https://lerpaui.com",
+  "description": "Generate React components from the Lerpa UI library — 1318 copy-paste registry items (1099 registry:ui + 219 registry:block) compiled from 1234 source components and 30 page blocks in packages/ui, for React 19, Next 16, Tailwind v4, Framer Motion, and Radix UI. Terminal/CLI aesthetic, OKLCH design tokens, prefers-reduced-motion baked in.",
+  "when_to_use": [
+    "User asks to build, scaffold, or extend a React + Tailwind UI (page, dashboard, marketing surface, AI product)",
+    "User mentions shadcn, Radix, or copy-paste components and wants pre-built primitives",
+    "User wants animated, theme-aware UI with reduced-motion fallbacks already wired",
+    "User asks for an AI chat surface, agent panel, streaming token UI, or tool-call trace block",
+    "User wants a dashboard scaffold (stats strip, charts, CRM table, billing panel, settings page)",
+    "User wants ecommerce surfaces (cart, checkout, product card, review block)"
+  ],
+  "when_not_to_use": [
+    "User wants a non-React framework (Vue, Svelte, plain HTML)",
+    "User wants a fully custom design system from scratch with no shared tokens",
+    "User wants server-only logic with no UI surface"
+  ],
+  "capabilities": [
+    {
+      "id": "component",
+      "label": "UI Component",
+      "description": "Single-purpose primitives (Button, Card, Input, Avatar, Tabs, Dialog…). 1099 registry items available.",
+      "type": "registry:ui"
+    },
+    {
+      "id": "block",
+      "label": "Page Block",
+      "description": "Composed multi-component sections (hero, pricing, footer, CTA, feature grid, dashboard sections). 219 registry items available.",
+      "type": "registry:block"
+    },
+    {
+      "id": "dashboard-primitive",
+      "label": "Dashboard Primitive",
+      "description": "Stats cells, activity feeds, KPI cards, chart containers wired for recharts.",
+      "type": "registry:ui"
+    },
+    {
+      "id": "animation-primitive",
+      "label": "Animation Primitive",
+      "description": "Framer Motion + CSS keyframes wrappers with prefers-reduced-motion fallbacks (aurora, retro grid, shimmer, magnetic, elastic, swipe, haptic, three-d).",
+      "type": "registry:ui"
+    }
+  ],
+  "categories": [
+    "ai",
+    "buttons",
+    "cards",
+    "forms",
+    "creative",
+    "feedback",
+    "navigation",
+    "tables",
+    "calendars",
+    "charts",
+    "ecommerce",
+    "dashboard",
+    "auth",
+    "account",
+    "docs",
+    "blog"
+  ],
+  "stack": {
+    "framework": "next@16",
+    "react": "19",
+    "tailwind": "4",
+    "typescript": "5.7",
+    "framerMotion": "12",
+    "radix": "latest"
+  },
+  "conventions": {
+    "imports": {
+      "cn": "@/lib/cn",
+      "ui": "@/components/ui/<name>",
+      "hooks": "@/hooks/<name>"
+    },
+    "tokens": {
+      "background": "var(--bg)",
+      "foreground": "var(--text)",
+      "accent": "var(--accent)",
+      "border": "var(--edge)"
+    },
+    "accessibility": [
+      "Interactive <div> requires role=\"button\", tabIndex={0}, and keyboard handlers",
+      "Real <button> must NOT carry redundant role=\"button\" / tabIndex={0}",
+      "Animated components must check usePrefersReducedMotion and provide a static fallback",
+      "Color contrast targets WCAG AA on OKLCH token pairs"
+    ]
+  },
+  "install": {
+    "cli": "pnpm dlx lerpa-cli add <component-name>",
+    "registryUrl": "https://lerpaui.com/r/{name}.json"
+  },
+  "examples": [
+    {
+      "prompt": "Build a marketing landing page with a CLI-aesthetic hero, pricing comparison, and CTA block.",
+      "uses": ["hero-terminal", "pricing-comparison", "cta-glow"]
+    },
+    {
+      "prompt": "Add a CRM dashboard with a stats strip, contact list, and activity feed.",
+      "uses": ["dashboard-stats-strip", "crm-contact-list", "dashboard-activity-feed"]
+    },
+    {
+      "prompt": "Compose an AI chat surface with streaming tokens and tool-call traces.",
+      "uses": ["ai-chat-surface", "ai-token-stream", "ai-tool-call-trace"]
+    },
+    {
+      "prompt": "Build a checkout flow with cart, address form, and payment review.",
+      "uses": ["cart-summary", "checkout-address-form", "checkout-review"]
+    }
+  ],
+  "discovery": {
+    "manifest": "../registry.json",
+    "items": "../generated/registry.json"
+  }
+}

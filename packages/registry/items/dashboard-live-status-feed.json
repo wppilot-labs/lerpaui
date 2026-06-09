@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-live-status-feed",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardLiveStatusFeed.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Status = \"operational\" | \"degraded\" | \"down\";\n\ntype Service = { name: string; status: Status; latency: string };\n\nconst DOT: Record<Status, string> = {\n  operational: \"bg-emerald-400\",\n  degraded: \"bg-amber-400\",\n  down: \"bg-red-400\",\n};\n\nconst SERVICES: Service[] = [\n  { name: \"API Gateway\", status: \"operational\", latency: \"42ms\" },\n  { name: \"Database\", status: \"operational\", latency: \"8ms\" },\n  { name: \"Auth service\", status: \"degraded\", latency: \"310ms\" },\n  { name: \"CDN\", status: \"operational\", latency: \"19ms\" },\n  { name: \"Webhooks\", status: \"down\", latency: \"—\" },\n];\n\nexport interface DashboardLiveStatusFeedProps {\n  className?: string;\n}\n\nexport function DashboardLiveStatusFeed({ className }: DashboardLiveStatusFeedProps) {\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-4\">\n        <h3 className=\"text-base font-bold\">System status</h3>\n        <span className=\"inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground/60\">\n          <span className=\"relative flex h-2 w-2\">\n            <span className=\"absolute inline-flex h-full w-full rounded-full bg-emerald-400/60 animate-ping\" />\n            <span className=\"relative inline-flex h-2 w-2 rounded-full bg-emerald-400\" />\n          </span>\n          Live\n        </span>\n      </div>\n\n      <ul className=\"space-y-1\">\n        {SERVICES.map((s) => (\n          <li key={s.name} className=\"flex items-center gap-3 py-2 border-b border-foreground/[0.04] last:border-0\">\n            <span className={cn(\"h-2 w-2 rounded-full shrink-0\", DOT[s.status])} />\n            <span className=\"text-sm font-medium flex-1\">{s.name}</span>\n            <span className=\"text-xs capitalize text-muted-foreground/60\">{s.status}</span>\n            <span className=\"text-xs tabular-nums text-muted-foreground/40 w-12 text-right\">{s.latency}</span>\n          </li>\n        ))}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

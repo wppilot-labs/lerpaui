@@ -1,0 +1,15 @@
+{
+  "name": "elastic-search-filter-pill",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ElasticSearchFilterPill.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { Search } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function ElasticSearchFilterPill({ className }: { className?: string }) {\n  const [query, setQuery] = useState(\"\");\n  const [selectedTag, setSelectedTag] = useState(\"all\");\n\n  const tags = [\"all\", \"latest\", \"trending\", \"featured\"];\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/40 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex gap-2 bg-zinc-950/40 p-2 rounded-xl border border-border/40 items-center\">\n        <Search className=\"w-4 h-4 text-muted-foreground ml-1\" />\n        <input\n          type=\"text\"\n          value={query}\n          onChange={(e) => setQuery(e.target.value)}\n          placeholder=\"Search items...\"\n          className=\"flex-1 bg-transparent text-xs text-foreground focus:outline-none placeholder:text-muted-foreground\"\n        />\n      </div>\n\n      <div className=\"flex gap-1.5 overflow-x-auto pb-1\">\n        {tags.map((tag) => {\n          const isActive = selectedTag === tag;\n          return (\n            <motion.button\n              key={tag}\n              whileTap={{ scale: 0.95 }}\n              onClick={() => setSelectedTag(tag)}\n              className={cn(\n                \"px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider border transition-colors cursor-pointer capitalize shrink-0\",\n                isActive\n                  ? \"bg-primary/20 border-primary/40 text-primary\"\n                  : \"bg-zinc-900 border-border/40 text-muted-foreground hover:text-foreground\"\n              )}\n            >\n              {tag}\n            </motion.button>\n          );\n        })}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

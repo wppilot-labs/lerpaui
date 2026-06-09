@@ -1,0 +1,11 @@
+{
+  "name": "textarea",
+  "type": "registry:ui",
+  "files": [
+    {
+      "path": "components/ui/textarea.tsx",
+      "type": "registry:ui",
+      "content": "import React from 'react';\nimport { cn } from \"@/lib/utils\";\n\nexport interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {\n  error?: boolean | string;\n}\n\nconst Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(\n  ({ className, error, 'aria-invalid': ariaInvalid, 'aria-describedby': ariaDescribedBy, id, ...props }, ref) => {\n    const hasError = Boolean(error) || ariaInvalid === true || ariaInvalid === 'true';\n    const errorId = typeof error === 'string' && id ? `${id}-error` : undefined;\n    return (\n      <>\n        <textarea\n          id={id}\n          aria-invalid={hasError || undefined}\n          aria-describedby={cn(ariaDescribedBy, errorId) || undefined}\n          data-state={hasError ? 'error' : undefined}\n          className={cn(\n            'flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background transition-colors duration-150 ease-out placeholder:text-muted-foreground hover:border-input/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none',\n            hasError &&\n              'border-destructive text-destructive placeholder:text-destructive/60 focus-visible:ring-destructive',\n            className\n          )}\n          ref={ref}\n          {...props}\n        />\n        {typeof error === 'string' && error.length > 0 && (\n          <p id={errorId} className=\"mt-1 text-xs text-destructive\" role=\"alert\">\n            {error}\n          </p>\n        )}\n      </>\n    );\n  }\n);\nTextarea.displayName = 'Textarea';\n\nexport { Textarea };\n"
+    }
+  ]
+}

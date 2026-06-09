@@ -1,0 +1,14 @@
+{
+  "name": "interactive-haptic-toggle",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/InteractiveHapticToggle.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function InteractiveHapticToggle({\n  className,\n  checked: controlledChecked,\n  onChange,\n}: {\n  className?: string;\n  checked?: boolean;\n  onChange?: (checked: boolean) => void;\n}) {\n  const [localChecked, setLocalChecked] = useState(false);\n  const isChecked = controlledChecked !== undefined ? controlledChecked : localChecked;\n\n  const handleToggle = () => {\n    const nextVal = !isChecked;\n    if (controlledChecked === undefined) setLocalChecked(nextVal);\n    if (onChange) onChange(nextVal);\n  };\n\n  return (\n    <div className={cn(\"flex items-center justify-center\", className)}>\n      <button\n        onClick={handleToggle}\n        className={cn(\n          \"relative w-14 h-8 rounded-full p-1 cursor-pointer transition-colors duration-300 select-none\",\n          isChecked ? \"bg-primary\" : \"bg-zinc-800 border border-zinc-700\"\n        )}\n      >\n        <motion.div\n          className=\"w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center\"\n          layout\n          transition={{\n            type: \"spring\",\n            stiffness: 400,\n            damping: 22,\n          }}\n          style={{\n            x: isChecked ? \"20px\" : \"0px\",\n          }}\n        >\n          {/* Micro dot on the thumb */}\n          <div\n            className={cn(\n              \"w-2 h-2 rounded-full transition-colors duration-300\",\n              isChecked ? \"bg-primary/80\" : \"bg-zinc-400\"\n            )}\n          />\n        </motion.div>\n      </button>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

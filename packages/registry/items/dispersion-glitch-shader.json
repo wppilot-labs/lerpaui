@@ -1,0 +1,15 @@
+{
+  "name": "dispersion-glitch-shader",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/dispersion-glitch-shader.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { ShaderCanvas } from \"./shader-canvas\";\nimport { cn } from \"@/lib/utils\";\n\n/** RGB dispersion + scanline distortion with random glitch bands triggered every ~2s. */\nexport interface DispersionGlitchShaderProps {\n  className?: string;\n  /** Scales channel separation. Default 1. */\n  intensity?: number;\n}\n\nconst DISPERSION_GLSL = `\nprecision highp float;\nuniform float u_time;\nuniform vec2 u_mouse;\nuniform vec2 u_resolution;\n\nfloat hash(float n) { return fract(sin(n) * 43758.5453123); }\nfloat hash2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }\n\nvec3 pattern(vec2 uv) {\n  // Procedural striped + radial pattern used as the sampled surface.\n  float v = sin(uv.x * 18.0 + sin(uv.y * 6.0 + u_time * 0.4) * 2.0);\n  float band = 0.5 + 0.5 * sin(uv.y * 26.0 + u_time * 0.6);\n  vec3 a = vec3(0.07, 0.09, 0.18);\n  vec3 b = vec3(0.55, 0.32, 0.95);\n  vec3 c = vec3(0.95, 0.42, 0.70);\n  vec3 col = mix(a, b, smoothstep(-0.4, 0.4, v));\n  col = mix(col, c, band * 0.4);\n  col += smoothstep(0.55, 0.0, length(uv - 0.5)) * vec3(0.25, 0.45, 0.95) * 0.4;\n  return col;\n}\n\nvoid main() {\n  vec2 uv = gl_FragCoord.xy / u_resolution.xy;\n\n  // Glitch trigger: roughly every 2s, hold for ~0.18s.\n  float seg = floor(u_time * 0.5);\n  float glitchOn = step(hash(seg), 0.55) * step(fract(u_time * 0.5), 0.36);\n  float bandY = hash(seg + 7.3);\n  float bandH = 0.04 + hash(seg + 11.7) * 0.10;\n  float inBand = step(abs(uv.y - bandY), bandH * 0.5) * glitchOn;\n  float shift = (hash(seg + uv.y * 30.0) - 0.5) * 0.18 * inBand;\n\n  // Scanline vertical distortion fed per channel.\n  float scan = sin(uv.y * 100.0 + u_time * 5.0) * 0.01;\n  vec2 uvR = uv + vec2(scan + shift, 0.0);\n  vec2 uvG = uv + vec2(shift * 0.4, 0.0);\n  vec2 uvB = uv + vec2(-scan + shift, 0.0);\n\n  vec3 col;\n  col.r = pattern(uvR).r;\n  col.g = pattern(uvG).g;\n  col.b = pattern(uvB).b;\n\n  // Pointer-driven hot spot\n  col += smoothstep(0.35, 0.0, length(uv - u_mouse)) * vec3(0.40, 0.30, 0.95) * 0.35;\n\n  // Noise grain\n  col += (hash2(uv * u_resolution.xy + u_time) - 0.5) * 0.06;\n\n  // Dark scanlines overlay\n  col *= 0.92 + 0.08 * sin(uv.y * u_resolution.y * 0.5);\n\n  gl_FragColor = vec4(col, 1.0);\n}\n`;\n\nexport const DispersionGlitchShader: React.FC<DispersionGlitchShaderProps> = ({\n  className,\n}) => {\n  return (\n    <div\n      className={cn(\n        \"relative h-[400px] w-full overflow-hidden rounded-2xl bg-[var(--card)]\",\n        className,\n      )}\n    >\n      <ShaderCanvas\n        fragment={DISPERSION_GLSL}\n        className=\"absolute inset-0\"\n        fallback={\n          <div className=\"absolute inset-0 bg-gradient-to-br from-violet-500/25 via-fuchsia-500/15 to-sky-500/15\" />\n        }\n      />\n    </div>\n  );\n};\n"
+    }
+  ],
+  "registryDependencies": [
+    "shader-canvas"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "ai-typing-indicator",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "components/ui/ai-typing-indicator.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\n\nexport interface AITypingIndicatorProps {\n  label?: string;\n  accent?: string;\n  showLabel?: boolean;\n  inline?: boolean;\n  size?: \"sm\" | \"md\";\n}\n\nexport function AITypingIndicator({\n  label = \"claude is typing\",\n  accent = \"var(--accent)\",\n  showLabel = true,\n  inline = false,\n  size = \"md\",\n}: AITypingIndicatorProps) {\n  const dotSize = size === \"sm\" ? 4 : 6;\n  const gap = size === \"sm\" ? 3 : 4;\n\n  const dots = (\n    <span style={{ display: \"inline-flex\", alignItems: \"center\", gap, height: dotSize + 2 }} aria-hidden=\"true\">\n      {[0, 1, 2].map((i) => (\n        <span\n          key={i}\n          style={{\n            width: dotSize,\n            height: dotSize,\n            borderRadius: \"50%\",\n            background: accent,\n            boxShadow: `0 0 4px ${accent}`,\n            animation: `ai-typing-bounce 1.2s ease-in-out ${i * 0.16}s infinite`,\n          }}\n        />\n      ))}\n    </span>\n  );\n\n  if (inline) return dots;\n\n  return (\n    <div\n      role=\"status\"\n      aria-live=\"polite\"\n      aria-label={label}\n      style={{\n        display: \"inline-flex\",\n        alignItems: \"center\",\n        gap: 10,\n        padding: \"8px 12px\",\n        background: \"var(--bg-2)\",\n        border: \"1px solid var(--edge)\",\n        borderRadius: 999,\n        fontFamily: \"var(--font-sans)\",\n      }}\n    >\n      <span\n        aria-hidden=\"true\"\n        style={{\n          width: 22,\n          height: 22,\n          borderRadius: 6,\n          background: accent,\n          color: \"var(--bg)\",\n          display: \"grid\",\n          placeItems: \"center\",\n          fontFamily: \"var(--font-mono)\",\n          fontSize: 11,\n          fontWeight: 700,\n          flexShrink: 0,\n        }}\n      >\n        ∗\n      </span>\n      {showLabel ? (\n        <span style={{ fontSize: 12, color: \"var(--text-2)\" }}>{label}</span>\n      ) : null}\n      {dots}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

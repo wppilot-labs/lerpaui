@@ -1,0 +1,14 @@
+{
+  "name": "crm-lead-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CrmLeadCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Mail } from \"lucide-react\";\n\nexport function CRMLeadCard() {\n  const [status, setStatus] = useState(\"Hot\");\n\n  return (\n    <div className=\"w-full max-w-xs bg-card/45 backdrop-blur-xl border border-border/50 rounded-2xl shadow-xl select-none font-sans overflow-hidden text-foreground\">\n      <div className=\"p-4 space-y-4\">\n        <div className=\"flex items-center justify-between\">\n          <div className=\"flex items-center gap-2\">\n            <div className=\"w-9 h-9 rounded-xl bg-gradient-to-tr from-violet-500 to-indigo-500 flex items-center justify-center font-bold text-white text-xs\">\n              JD\n            </div>\n            <div>\n              <h4 className=\"text-xs font-black leading-none mb-1\">Jane Doe</h4>\n              <span className=\"text-[9px] text-muted-foreground\">Product Director, TechGroup</span>\n            </div>\n          </div>\n          <span className={`text-[9px] uppercase font-bold px-2 py-0.5 rounded border ${\n            status === \"Hot\" ? \"bg-rose-500/10 text-rose-400 border-rose-500/20\" : \"bg-secondary text-muted-foreground border-border\"\n          }`}>{status} Lead</span>\n        </div>\n\n        <div className=\"pt-2 border-t border-white/[0.04] flex items-center justify-between text-xs\">\n          <span className=\"text-muted-foreground/60 flex items-center gap-1\"><Mail className=\"w-3.5 h-3.5\" /> jane@techgroup.com</span>\n          <button \n            onClick={() => setStatus(status === \"Hot\" ? \"Warm\" : \"Hot\")}\n            className=\"text-violet-400 font-bold hover:text-violet-300 transition-colors\"\n          >\n            Adjust\n          </button>\n        </div>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "circular-habit-tracker",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/CircularHabitTracker.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Check, Flame } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface HabitDay {\n  day: string;\n  done: boolean;\n}\n\nexport function CircularHabitTracker({ className }: { className?: string }) {\n  const [habitDays, setHabitDays] = useState<HabitDay[]>([\n    { day: \"M\", done: true },\n    { day: \"T\", done: true },\n    { day: \"W\", done: false },\n    { day: \"T\", done: true },\n    { day: \"F\", done: false },\n    { day: \"S\", done: false },\n    { day: \"S\", done: false },\n  ]);\n\n  const toggleDay = (idx: number) => {\n    const updated = [...habitDays];\n    updated[idx].done = !updated[idx].done;\n    setHabitDays(updated);\n  };\n\n  const completedCount = habitDays.filter(h => h.done).length;\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Habit Tracker</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Toggle daily status milestone rings</p>\n        </div>\n        <div className=\"flex items-center gap-1 text-orange-500 font-bold text-xs\">\n          <Flame className=\"w-4 h-4 animate-bounce\" />\n          <span>{completedCount} Day Streak</span>\n        </div>\n      </div>\n\n      <div className=\"flex justify-between items-center bg-zinc-950/60 p-3 rounded-xl border border-border/30\">\n        {habitDays.map((h, idx) => (\n          <button\n            key={idx}\n            onClick={() => toggleDay(idx)}\n            className=\"flex flex-col items-center gap-1.5 cursor-pointer focus:outline-none\"\n          >\n            <span className=\"text-[8px] font-bold text-muted-foreground\">{h.day}</span>\n            <div className={cn(\n              \"w-7 h-7 rounded-full border flex items-center justify-center transition-all\",\n              h.done\n                ? \"bg-emerald-500/20 border-emerald-500 text-emerald-400 shadow-md shadow-emerald-500/10\"\n                : \"bg-zinc-900 border-border/40 text-muted-foreground hover:bg-zinc-800\"\n            )}>\n              {h.done ? <Check className=\"w-3.5 h-3.5\" /> : <div className=\"w-1.5 h-1.5 bg-zinc-700 rounded-full\" />}\n            </div>\n          </button>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

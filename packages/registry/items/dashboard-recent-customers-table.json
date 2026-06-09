@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-recent-customers-table",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardRecentCustomersTable.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Row = { name: string; plan: string; mrr: string; status: \"active\" | \"trial\" | \"churned\" };\n\nconst ROWS: Row[] = [\n  { name: \"Northwind Inc\", plan: \"Enterprise\", mrr: \"$2,480\", status: \"active\" },\n  { name: \"Vertex Labs\", plan: \"Pro\", mrr: \"$290\", status: \"active\" },\n  { name: \"Lumen Co\", plan: \"Pro\", mrr: \"$290\", status: \"trial\" },\n  { name: \"Delta App\", plan: \"Starter\", mrr: \"$0\", status: \"churned\" },\n];\n\nconst STATUS: Record<Row[\"status\"], string> = {\n  active: \"bg-emerald-500/10 text-emerald-400 border-emerald-500/20\",\n  trial: \"bg-sky-500/10 text-sky-400 border-sky-500/20\",\n  churned: \"bg-foreground/[0.04] text-muted-foreground/60 border-foreground/[0.08]\",\n};\n\nexport interface DashboardRecentCustomersTableProps {\n  className?: string;\n}\n\nexport function DashboardRecentCustomersTable({ className }: DashboardRecentCustomersTableProps) {\n  return (\n    <div className={cn(\"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <h3 className=\"text-base font-bold mb-4\">Customers</h3>\n      <div className=\"overflow-hidden rounded-xl border border-foreground/[0.05]\">\n        <table className=\"w-full text-left\">\n          <thead>\n            <tr className=\"bg-foreground/[0.02] text-[11px] uppercase font-bold text-muted-foreground/50 tracking-wider\">\n              <th className=\"px-3 py-2.5\">Account</th>\n              <th className=\"px-3 py-2.5\">Plan</th>\n              <th className=\"px-3 py-2.5 text-right\">MRR</th>\n              <th className=\"px-3 py-2.5 text-right\">Status</th>\n            </tr>\n          </thead>\n          <tbody className=\"divide-y divide-foreground/[0.04] text-xs\">\n            {ROWS.map((r) => (\n              <tr key={r.name} className=\"hover:bg-foreground/[0.02] transition-colors\">\n                <td className=\"px-3 py-2.5 font-semibold\">{r.name}</td>\n                <td className=\"px-3 py-2.5 text-muted-foreground/70\">{r.plan}</td>\n                <td className=\"px-3 py-2.5 text-right tabular-nums\">{r.mrr}</td>\n                <td className=\"px-3 py-2.5 text-right\">\n                  <span className={cn(\"inline-block text-[11px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full border capitalize\", STATUS[r.status])}>{r.status}</span>\n                </td>\n              </tr>\n            ))}\n          </tbody>\n        </table>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

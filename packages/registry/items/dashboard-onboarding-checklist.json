@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-onboarding-checklist",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/DashboardOnboardingChecklist.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { Check } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst STEPS = [\n  { id: \"profile\", label: \"Complete your profile\" },\n  { id: \"invite\", label: \"Invite a teammate\" },\n  { id: \"project\", label: \"Create your first project\" },\n  { id: \"integrate\", label: \"Connect an integration\" },\n  { id: \"deploy\", label: \"Ship your first deploy\" },\n];\n\nexport interface DashboardOnboardingChecklistProps {\n  className?: string;\n}\n\nexport function DashboardOnboardingChecklist({ className }: DashboardOnboardingChecklistProps) {\n  const [done, setDone] = useState<string[]>([\"profile\", \"invite\"]);\n  const pct = Math.round((done.length / STEPS.length) * 100);\n\n  return (\n    <div className={cn(\"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <div className=\"flex items-center justify-between mb-1\">\n        <h3 className=\"text-base font-bold\">Get started</h3>\n        <span className=\"text-xs font-bold text-primary\">{done.length}/{STEPS.length}</span>\n      </div>\n      <div className=\"h-1.5 rounded-full bg-foreground/[0.06] overflow-hidden mb-4\">\n        <div className=\"h-full rounded-full bg-primary transition-all duration-500\" style={{ width: `${pct}%` }} />\n      </div>\n\n      <ul className=\"space-y-1\">\n        {STEPS.map((s) => {\n          const checked = done.includes(s.id);\n          return (\n            <li key={s.id}>\n              <button\n                type=\"button\"\n                onClick={() => setDone((d) => (checked ? d.filter((x) => x !== s.id) : [...d, s.id]))}\n                className=\"w-full flex items-center gap-3 py-2 text-left group\"\n                aria-pressed={checked}\n              >\n                <span className={cn(\"h-5 w-5 rounded-full border flex items-center justify-center shrink-0 transition-colors\", checked ? \"bg-primary border-primary\" : \"border-foreground/20 group-hover:border-foreground/40\")}>\n                  {checked && <Check className=\"w-3.5 h-3.5 text-primary-foreground\" />}\n                </span>\n                <span className={cn(\"text-sm\", checked ? \"line-through text-muted-foreground/45\" : \"text-foreground\")}>{s.label}</span>\n              </button>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

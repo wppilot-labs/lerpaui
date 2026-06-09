@@ -1,0 +1,14 @@
+{
+  "name": "text-reveal-waveform",
+  "type": "registry:ui",
+  "dependencies": [
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TextRevealWaveform.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React from \"react\";\nimport { motion} from \"framer-motion\";\nimport { cn } from \"@/lib/utils\";\n\nexport function TextRevealWaveform({\n  text,\n  className,\n}: {\n  text: string;\n  className?: string;\n}) {\n  const words = text.split(\" \");\n\n  const containerVars = {\n    initial: {},\n    hover: {\n      transition: {\n        staggerChildren: 0.04,\n      },\n    },\n  };\n\n  const charVars = {\n    initial: { y: 0 },\n    hover: {\n      y: [0, -10, 0],\n      transition: {\n        duration: 0.45,\n        ease: \"easeInOut\",\n      },\n    },\n  };\n\n  return (\n    <motion.div\n      variants={containerVars}\n      initial=\"initial\"\n      whileHover=\"hover\"\n      className={cn(\n        \"flex flex-wrap gap-x-2 text-xl sm:text-2xl font-extrabold text-foreground tracking-tight select-none cursor-pointer\",\n        className\n      )}\n    >\n      {words.map((word, wIdx) => (\n        <span key={wIdx} className=\"inline-flex overflow-hidden py-1\">\n          {word.split(\"\").map((char, cIdx) => (\n            <motion.span\n              key={cIdx}\n              variants={charVars}\n              className=\"inline-block hover:text-primary transition-colors duration-150\"\n            >\n              {char}\n            </motion.span>\n          ))}\n        </span>\n      ))}\n    </motion.div>\n  );\n}\n"
+    }
+  ]
+}

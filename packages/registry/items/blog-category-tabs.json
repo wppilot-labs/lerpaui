@@ -1,0 +1,14 @@
+{
+  "name": "blog-category-tabs",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/BlogCategoryTabs.tsx",
+      "type": "registry:ui",
+      "content": "﻿\"use client\";\n\nimport React, { useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Category = { key: string; label: string; count: number };\n\nconst CATEGORIES: Category[] = [\n  { key: \"all\", label: \"All posts\", count: 48 },\n  { key: \"engineering\", label: \"Engineering\", count: 17 },\n  { key: \"design\", label: \"Design\", count: 12 },\n  { key: \"product\", label: \"Product\", count: 9 },\n  { key: \"growth\", label: \"Growth\", count: 6 },\n  { key: \"culture\", label: \"Culture\", count: 4 },\n];\n\nexport interface BlogCategoryTabsProps {\n  className?: string;\n}\n\nexport function BlogCategoryTabs({ className }: BlogCategoryTabsProps) {\n  const [active, setActive] = useState(\"all\");\n\n  return (\n    <div\n      className={cn(\n        \"w-full max-w-xl bg-card/45 backdrop-blur-xl border border-border/50 p-2 rounded-2xl shadow-xl font-sans text-foreground\",\n        className,\n      )}\n    >\n      <nav aria-label=\"Blog categories\">\n        <ul className=\"flex flex-wrap gap-1.5\">\n          {CATEGORIES.map((c) => {\n            const isActive = active === c.key;\n            return (\n              <li key={c.key}>\n                <button\n                  type=\"button\"\n                  aria-current={isActive ? \"page\" : undefined}\n                  onClick={() => setActive(c.key)}\n                  className={cn(\n                    \"inline-flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-sm font-semibold transition-colors\",\n                    isActive\n                      ? \"bg-primary text-primary-foreground shadow-sm\"\n                      : \"text-muted-foreground hover:bg-secondary/50 hover:text-foreground\",\n                  )}\n                >\n                  {c.label}\n                  <span\n                    className={cn(\n                      \"rounded-full px-1.5 text-xs font-bold tabular-nums\",\n                      isActive\n                        ? \"bg-primary-foreground/20 text-primary-foreground\"\n                        : \"bg-secondary/60 text-muted-foreground/70\",\n                    )}\n                  >\n                    {c.count}\n                  </span>\n                </button>\n              </li>\n            );\n          })}\n        </ul>\n      </nav>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

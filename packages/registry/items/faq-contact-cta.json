@@ -1,0 +1,15 @@
+{
+  "name": "faq-contact-cta",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/FaqContactCta.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { MessageCircle, Mail } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface FaqContactCtaProps {\n  className?: string;\n}\n\nexport function FaqContactCta({ className }: FaqContactCtaProps) {\n  return (\n    <section\n      className={cn(\n        \"w-full max-w-md bg-card/45 backdrop-blur-xl border border-border/50 p-6 rounded-2xl shadow-xl font-sans text-foreground text-center\",\n        className,\n      )}\n    >\n      <div className=\"mx-auto mb-4 h-11 w-11 rounded-full bg-primary/15 flex items-center justify-center\">\n        <MessageCircle className=\"w-5 h-5 text-primary\" />\n      </div>\n      <h2 className=\"text-base font-bold\">Still have questions?</h2>\n      <p className=\"mt-1.5 text-sm text-muted-foreground/70 leading-relaxed\">\n        Can&apos;t find the answer you&apos;re looking for? Our support team is\n        happy to help you get set up.\n      </p>\n      <div className=\"mt-5 flex flex-col sm:flex-row gap-2 justify-center\">\n        <button\n          type=\"button\"\n          className=\"inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:brightness-110\"\n        >\n          <MessageCircle className=\"w-4 h-4\" />\n          Start a chat\n        </button>\n        <button\n          type=\"button\"\n          className=\"inline-flex items-center justify-center gap-1.5 rounded-lg border border-foreground/[0.08] bg-foreground/[0.02] px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-foreground/[0.05]\"\n        >\n          <Mail className=\"w-4 h-4 text-muted-foreground/70\" />\n          Email us\n        </button>\n      </div>\n    </section>\n  );\n}\n"
+    }
+  ]
+}

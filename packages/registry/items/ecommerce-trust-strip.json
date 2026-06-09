@@ -1,0 +1,15 @@
+{
+  "name": "ecommerce-trust-strip",
+  "type": "registry:block",
+  "dependencies": [
+    "framer-motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/EcommerceTrustStripBlock.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { ShieldCheck, Truck, RotateCcw, Headphones, Lock, Leaf } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Badge = {\n  id: string;\n  icon: React.ComponentType<{ className?: string }>;\n  title: string;\n  sub: string;\n};\n\nconst BADGES: Badge[] = [\n  { id: \"secure\", icon: Lock, title: \"Secure checkout\", sub: \"256-bit SSL encryption\" },\n  { id: \"ship\", icon: Truck, title: \"Free shipping\", sub: \"On orders over $50\" },\n  { id: \"returns\", icon: RotateCcw, title: \"60-day returns\", sub: \"No questions asked\" },\n  { id: \"warranty\", icon: ShieldCheck, title: \"2-year warranty\", sub: \"On all products\" },\n  { id: \"support\", icon: Headphones, title: \"24/7 support\", sub: \"Real humans, anytime\" },\n  { id: \"eco\", icon: Leaf, title: \"Carbon neutral\", sub: \"Offset every order\" },\n];\n\nexport interface EcommerceTrustStripBlockProps {\n  className?: string;\n}\n\nexport function EcommerceTrustStripBlock({ className }: EcommerceTrustStripBlockProps) {\n  return (\n    <div className={cn(\"w-full max-w-2xl bg-card/45 backdrop-blur-xl border border-border/50 p-4 rounded-2xl shadow-xl font-sans text-foreground\", className)}>\n      <ul className=\"grid grid-cols-2 sm:grid-cols-3 gap-2.5\">\n        {BADGES.map((b) => {\n          const Icon = b.icon;\n          return (\n            <li key={b.id} className=\"flex items-center gap-2.5 rounded-xl border border-foreground/[0.05] bg-foreground/[0.02] p-3.5\">\n              <div className=\"h-10 w-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0\">\n                <Icon className=\"w-5 h-5\" />\n              </div>\n              <div className=\"min-w-0\">\n                <div className=\"text-sm font-semibold truncate\">{b.title}</div>\n                <div className=\"text-xs text-muted-foreground/55 truncate\">{b.sub}</div>\n              </div>\n            </li>\n          );\n        })}\n      </ul>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

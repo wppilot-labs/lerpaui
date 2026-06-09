@@ -1,0 +1,14 @@
+{
+  "name": "time-zone-globe-roster",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/TimeZoneGlobeRoster.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState, useEffect } from \"react\";\nimport { Globe, Clock } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface TimeZoneItem {\n  city: string;\n  tz: string;\n  offset: number;\n}\n\nexport function TimeZoneGlobeRoster({ className }: { className?: string }) {\n  const timezones: TimeZoneItem[] = [\n    { city: \"San Francisco\", tz: \"PST\", offset: -8 },\n    { city: \"London\", tz: \"GMT\", offset: 0 },\n    { city: \"Tokyo\", tz: \"JST\", offset: 9 },\n  ];\n\n  const [time, setTime] = useState(new Date());\n\n  useEffect(() => {\n    const timer = setInterval(() => setTime(new Date()), 1000);\n    return () => clearInterval(timer);\n  }, []);\n\n  const formatTzTime = (offset: number) => {\n    const utc = time.getTime() + time.getTimezoneOffset() * 60000;\n    const nd = new Date(utc + 3600000 * offset);\n    return nd.toLocaleTimeString([], { hour: \"2-digit\", minute: \"2-digit\", second: \"2-digit\" });\n  };\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center gap-2.5 pb-2 border-b border-border/30\">\n        <Globe className=\"w-5 h-5 text-primary\" />\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Global Office clocks</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Dynamic synchronized business times</p>\n        </div>\n      </div>\n\n      <div className=\"space-y-2\">\n        {timezones.map((tz) => (\n          <div\n            key={tz.city}\n            className=\"flex items-center justify-between p-2.5 bg-zinc-900/30 border border-border/20 rounded-xl\"\n          >\n            <div>\n              <span className=\"text-xs font-bold text-foreground\">{tz.city}</span>\n              <p className=\"text-[8px] font-mono text-muted-foreground uppercase\">{tz.tz}</p>\n            </div>\n            <div className=\"flex items-center gap-2 text-primary font-mono text-xs font-bold\">\n              <Clock className=\"w-3.5 h-3.5\" />\n              <span>{formatTzTime(tz.offset)}</span>\n            </div>\n          </div>\n        ))}\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

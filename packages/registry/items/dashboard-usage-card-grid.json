@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-usage-card-grid",
+  "type": "registry:block",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/blocks/DashboardUsageCardGrid.tsx",
+      "type": "registry:block",
+      "content": "﻿\"use client\";\n\nimport React from \"react\";\nimport { Zap, HardDrive, Wifi, Users } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Card = { label: string; icon: React.ComponentType<{ className?: string }>; used: string; pct: number };\n\nconst CARDS: Card[] = [\n  { label: \"API calls\", icon: Zap, used: \"82k / 100k\", pct: 82 },\n  { label: \"Storage\", icon: HardDrive, used: \"44 / 50 GB\", pct: 88 },\n  { label: \"Bandwidth\", icon: Wifi, used: \"1.2 / 5 TB\", pct: 24 },\n  { label: \"Seats\", icon: Users, used: \"17 / 25\", pct: 68 },\n];\n\nexport interface DashboardUsageCardGridProps {\n  className?: string;\n}\n\nexport function DashboardUsageCardGrid({ className }: DashboardUsageCardGridProps) {\n  return (\n    <div className={cn(\"w-full max-w-md grid grid-cols-2 gap-3 font-sans text-foreground\", className)}>\n      {CARDS.map((c) => {\n        const Icon = c.icon;\n        const warn = c.pct >= 85;\n        return (\n          <div key={c.label} className=\"bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl\">\n            <div className=\"flex items-center gap-1.5 text-muted-foreground/60 mb-2\">\n              <Icon className=\"w-4 h-4\" />\n              <span className=\"text-xs uppercase tracking-wide font-bold\">{c.label}</span>\n            </div>\n            <div className=\"text-base font-bold tabular-nums mb-2\">{c.used}</div>\n            <div className=\"h-1.5 rounded-full bg-foreground/[0.06] overflow-hidden\">\n              <div className={cn(\"h-full rounded-full\", warn ? \"bg-amber-400\" : \"bg-primary\")} style={{ width: `${c.pct}%` }} />\n            </div>\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

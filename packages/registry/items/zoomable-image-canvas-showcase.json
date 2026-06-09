@@ -1,0 +1,14 @@
+{
+  "name": "zoomable-image-canvas-showcase",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ZoomableImageCanvasShowcase.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { ZoomIn, ZoomOut, Maximize2 } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nexport function ZoomableImageCanvasShowcase({ className }: { className?: string }) {\n  const [scale, setScale] = useState(1);\n\n  const zoomIn = () => setScale((s) => Math.min(s + 0.25, 2));\n  const zoomOut = () => setScale((s) => Math.max(s - 0.25, 0.5));\n  const resetScale = () => setScale(1);\n\n  return (\n    <div className={cn(\"w-full max-w-sm rounded-2xl border border-border/80 bg-card/45 p-5 backdrop-blur-xl shadow-2xl space-y-4\", className)}>\n      <div className=\"flex items-center justify-between pb-2 border-b border-border/30\">\n        <div>\n          <h3 className=\"text-sm font-bold text-foreground\">Interactive Canvas Zoom</h3>\n          <p className=\"text-[10px] text-muted-foreground\">Dynamic coordinates magnifier sheet</p>\n        </div>\n        <Maximize2 className=\"w-4 h-4 text-primary\" />\n      </div>\n\n      <div className=\"relative w-full h-[120px] bg-zinc-950/60 border border-border/40 rounded-xl overflow-hidden flex items-center justify-center shadow-inner\">\n        {/* Zoomable mock artwork frame */}\n        <div\n          style={{ transform: `scale(${scale})` }}\n          className=\"transition-transform duration-200 w-24 h-16 rounded-lg bg-gradient-to-br from-primary to-emerald-400 opacity-80 border border-white/20 flex items-center justify-center\"\n        >\n          <span className=\"text-[10px] font-mono font-black text-white uppercase tracking-wider\">Mock Art</span>\n        </div>\n      </div>\n\n      <div className=\"flex gap-2 justify-center\">\n        <button\n          onClick={zoomOut}\n          className=\"p-1.5 bg-zinc-900 border border-border/30 hover:bg-zinc-800 rounded-lg text-muted-foreground hover:text-foreground cursor-pointer transition-colors\"\n        >\n          <ZoomOut className=\"w-4 h-4\" />\n        </button>\n        <button\n          onClick={resetScale}\n          className=\"px-3 py-1 bg-zinc-900 border border-border/30 hover:bg-zinc-800 rounded-lg text-[10px] font-bold text-muted-foreground hover:text-foreground cursor-pointer transition-colors\"\n        >\n          Reset\n        </button>\n        <button\n          onClick={zoomIn}\n          className=\"p-1.5 bg-zinc-900 border border-border/30 hover:bg-zinc-800 rounded-lg text-muted-foreground hover:text-foreground cursor-pointer transition-colors\"\n        >\n          <ZoomIn className=\"w-4 h-4\" />\n        </button>\n      </div>\n    </div>\n  );\n}\n"
+    }
+  ]
+}

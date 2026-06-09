@@ -1,0 +1,14 @@
+{
+  "name": "seller-payout-summary-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "components/ui/SellerPayoutSummaryCard.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport React, { useState } from \"react\";\nimport { CreditCard, DollarSign, ArrowRight } from \"lucide-react\";\n\nexport function SellerPayoutSummaryCard() {\n  const [isProcessing, setIsProcessing] = useState(false);\n\n  return (\n    <div className=\"w-full max-w-sm bg-card/45 backdrop-blur-xl border border-border/50 p-5 rounded-2xl shadow-xl select-none font-sans text-foreground\">\n      <div className=\"flex items-center justify-between mb-4\">\n        <div className=\"flex items-center gap-1.5\">\n          <DollarSign className=\"w-4 h-4 text-emerald-400\" />\n          <span className=\"text-xs font-bold uppercase tracking-wider text-muted-foreground\">Payout Management</span>\n        </div>\n        <span className=\"text-[9px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20\">Auto-Pay Enabled</span>\n      </div>\n\n      <div className=\"space-y-4\">\n        <div className=\"p-4 rounded-xl bg-white/[0.02] border border-white/[0.03] relative overflow-hidden\">\n          <div className=\"absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-transparent\" />\n          <span className=\"block text-[9px] text-muted-foreground/60 uppercase font-bold\">Available Balance</span>\n          <span className=\"text-2xl font-black text-foreground\">$4,850.24</span>\n        </div>\n\n        <div className=\"p-3 rounded-xl bg-white/[0.02] border border-white/[0.03] space-y-2 text-xs\">\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Bank Account</span>\n            <span className=\"font-bold flex items-center gap-1\"><CreditCard className=\"w-3.5 h-3.5 text-violet-400\" /> **** 9820</span>\n          </div>\n          <div className=\"flex justify-between\">\n            <span className=\"text-muted-foreground/60\">Schedule Payout</span>\n            <span className=\"font-bold\">Every Friday</span>\n          </div>\n        </div>\n\n        <button \n          onClick={() => {\n            setIsProcessing(true);\n            setTimeout(() => setIsProcessing(false), 1200);\n          }}\n          className=\"w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 transition-all\"\n        >\n          <span>{isProcessing ? \"Processing Transfer...\" : \"Request Instant Payout\"}</span>\n          <ArrowRight className=\"w-3.5 h-3.5\" />\n        </button>\n      </div>\n    </div>\n  );\n}"
+    }
+  ]
+}
