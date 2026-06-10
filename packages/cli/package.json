@@ -42,7 +42,7 @@
     "@types/prompts": "^2.4.9"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "keywords": [
     "react",

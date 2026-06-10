@@ -8,7 +8,16 @@ import ora from "ora";
 
 const program = new Command();
 const CONFIG_FILE = "lerpa.json";
-const VERSION = "0.2.3";
+// Read the version from package.json at runtime so it can never drift from
+// the published version (dist/index.js sits one level below the package root).
+const VERSION: string = (() => {
+  try {
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8")) as { version?: string };
+    return pkg.version ?? "0.0.0";
+  } catch {
+    return "0.0.0";
+  }
+})();
 
 interface Config {
   style: string;

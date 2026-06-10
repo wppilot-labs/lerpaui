@@ -71,3 +71,6 @@ PHASE_*_REPORT.md
 PHASE_*_FINAL_REPORT.md
 *-runtime.html
 detail.md
+
+# Local archives
+*.zip

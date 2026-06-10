@@ -20,6 +20,14 @@ Built for React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion & Rad
 
 [**Website**](https://lerpaui.com) · [**Components**](https://lerpaui.com/gallery/components) · [**Blocks**](https://lerpaui.com/gallery/blocks) · [**Registry**](https://lerpaui.com/r) · [**MCP for AI agents**](#-use-with-ai-coding-agents-mcp)
 
+[![Lerpa UI — free copy-paste React components, 1,318 registry items](https://lerpaui.com/opengraph-image)](https://lerpaui.com/gallery/components)
+
+<!-- TODO assets (drop into .github/assets/ and uncomment):
+[![Component gallery — live previews](.github/assets/gallery.png)](https://lerpaui.com/gallery/components)
+![lerpa-cli add in action](.github/assets/cli-add.gif)
+![Aurora shader + magnetic button demos](.github/assets/components.gif)
+-->
+
 </div>
 
 ---
@@ -28,7 +36,7 @@ Built for React 19, Next.js 16, Tailwind CSS v4, TypeScript, Framer Motion & Rad
 
 No lock-in. No black-box `node_modules` component. Just production-grade React you control.
 
-**Jump to:** [Quick start](#-quick-start) · [CLI](#-cli-reference) · [MCP for AI agents](#-use-with-ai-coding-agents-mcp) · [What's inside](#-whats-inside) · [Lerpa vs shadcn/ui](#️-lerpa-ui-vs-shadcnui) · [FAQ](#-faq)
+**Jump to:** [Quick start](#-quick-start) · [CLI](#-cli-reference) · [MCP for AI agents](#-use-with-ai-coding-agents-mcp) · [Examples](#-examples--recipes) · [What's inside](#-whats-inside) · [Lerpa vs shadcn/ui](#️-lerpa-ui-vs-shadcnui) · [FAQ](#-faq)
 
 ## ✨ Why Lerpa UI
 
@@ -59,7 +67,7 @@ npx shadcn add https://lerpaui.com/r/button.json
 
 Or **browse & copy** from the [component gallery](https://lerpaui.com/gallery/components) — preview live, copy with one click.
 
-> Replace `button` with any id (e.g. `pricing-table`, `aurora-shader`, `dashboard-revenue-overview`). `registryDependencies` install automatically.
+> Replace `button` with any id (e.g. `magnetic-button`, `aurora-shader`, `dashboard-revenue-overview`). `registryDependencies` install automatically. Run `npx lerpa-cli list` to see every id.
 
 ## 🧰 CLI reference
 
@@ -116,13 +124,23 @@ Cursor / Windsurf / Continue / Cline / Zed — add to `mcp.json` (e.g. `~/.curso
 
 Your agent searches the registry, pulls the source, and writes it into your project — accessible, animated, and yours to edit.
 
+## 📚 Examples & recipes
+
+- **[Real-world examples](docs/examples.md)** — copy-paste usage for 10 popular components (buttons, cards, pricing, AI chat, dashboards), with verified props.
+- **[Next.js recipe](docs/recipes/nextjs.md)** — `create-next-app` → animated landing page in ~2 minutes.
+- **[shadcn/ui recipe](docs/recipes/shadcn.md)** — drop Lerpa into an existing shadcn project; how the two token systems coexist.
+- **[Claude Code recipe](docs/recipes/claude-code.md)** — MCP setup + prompt patterns + a `CLAUDE.md` snippet.
+- **[Cursor recipe](docs/recipes/cursor.md)** — MCP setup + a `.cursor/rules` file so the agent reaches for Lerpa first.
+
 ## 📦 What's inside
+
+These numbers come straight from the registry manifest ([`packages/registry/generated/manifest.json`](packages/registry/generated/manifest.json)) — the same data the CLI and MCP server ship — and the CI test run, not marketing estimates:
 
 - **Components** — `1,099` animated, accessible registry UI items.
 - **Blocks** — `219` registry block items — full page sections.
 - **Registry** — `1,318` total shadcn-compatible items with embedded source.
 - **Gallery** — `1,179` catalog entries across `16` categories.
-- **Tested** — `807` tests across `86` files (Vitest + vitest-axe).
+- **Tested** — `807` passing tests across `86` files (Vitest + vitest-axe accessibility checks).
 
 ## 🗂️ Categories
 
@@ -147,7 +165,10 @@ packages/ui         Source components, blocks, hooks, design tokens, animations
 packages/registry   shadcn-compatible registry compiler + generated items
 packages/cli        Interactive installer CLI (lerpa-cli)
 packages/mcp-server Model Context Protocol server (@lerpa/mcp-server)
+docs/               Recipes (Next.js, shadcn, Claude Code, Cursor) + examples
 ```
+
+Each package has its own README with deeper docs.
 
 ## 🛠️ Local development
 

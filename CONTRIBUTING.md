@@ -15,19 +15,22 @@ Thank you for your interest in contributing to Lerpa UI! We are excited to build
 
 ## Developing Locally
 
-Ensure you have **Node.js v20+** and **pnpm v9+** installed.
+Ensure you have **Node.js v20+** and **pnpm v10+** installed.
 
 ```bash
 # Clone and install dependencies
 git clone https://github.com/cuibit-labs/lerpaui.git
-cd lerpa
+cd lerpaui
 pnpm install
 
-# Start Next.js docs and playground in development mode
-pnpm dev
-
-# Build the workspace
+# Build the workspace (compiles the registry, CLI, and MCP server)
 pnpm build
+
+# Run tests (Vitest + vitest-axe accessibility checks)
+pnpm test
+
+# Watch mode while editing the CLI or MCP server
+pnpm dev
 ```
 
 ## Styling Guidelines
