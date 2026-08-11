@@ -1,6 +1,6 @@
 # Using Lerpa UI in a Next.js project
 
-From `create-next-app` to an animated landing page in about two minutes. Works with Next.js 14+ (App Router) and Tailwind CSS v4; Lerpa is built and tested against Next.js 16 / React 19.
+From `create-next-app` to an animated landing page with Tailwind CSS v4. Lerpa items support React 18/19; verify the selected components against the exact Next.js version used by your application.
 
 ## 1. Create the app (skip if you have one)
 
@@ -35,8 +35,8 @@ Files land in `src/components/blocks/` (blocks) and `src/components/ui/` (compon
 
 ```tsx
 // src/app/page.tsx
-import HeroSaasSimple from "@/components/blocks/hero-saas-simple";
-import { DashboardRevenueOverview } from "@/components/ui/dashboard-revenue-overview";
+import HeroSaasSimple from '@/components/blocks/hero-saas-simple';
+import { DashboardRevenueOverview } from '@/components/ui/dashboard-revenue-overview';
 
 export default function Home() {
   return (

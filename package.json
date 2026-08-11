@@ -1,6 +1,6 @@
 {
   "name": "lerpa-monorepo",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -11,18 +11,30 @@
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\"",
     "registry:build": "pnpm --filter @lerpa/registry build",
-    "registry:validate": "pnpm --filter @lerpa/registry validate"
+    "registry:validate": "pnpm --filter @lerpa/registry validate",
+    "verify:generated": "pnpm run registry:build && git diff --exit-code -- packages/registry/generated",
+    "check": "pnpm run lint && pnpm run typecheck && pnpm run test && pnpm run build && pnpm run registry:validate",
+    "check:release": "pnpm run check && pnpm audit --prod --audit-level=low && pnpm run verify:generated"
   },
   "devDependencies": {
-    "turbo": "^2.0.14",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5",
-    "eslint": "^8.57.0",
-    "@typescript-eslint/parser": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0"
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.14",
+    "typescript": "^5.4.5"
   },
-  "packageManager": "pnpm@10.2.1"
+  "packageManager": "pnpm@10.2.1",
+  "pnpm": {
+    "overrides": {
+      "@hono/node-server": "2.1.0",
+      "body-parser": "2.3.0",
+      "fast-uri": "3.1.5",
+      "hono": "4.13.1",
+      "ip-address": "10.5.0"
+    }
+  }
 }

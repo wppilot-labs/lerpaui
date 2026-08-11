@@ -1,10 +1,12 @@
 {
   "name": "@lerpa/registry",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "license": "MIT",
   "scripts": {
     "build": "tsx scripts/build-registry.ts",
+    "build:verbose": "tsx scripts/build-registry.ts --verbose",
+    "sync:sources": "tsx scripts/sync-item-sources.ts",
     "validate": "tsx scripts/validate-registry.ts",
     "lint": "eslint scripts --ext .ts",
     "typecheck": "tsc --noEmit"

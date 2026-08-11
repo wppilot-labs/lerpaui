@@ -12,7 +12,7 @@ Add `--scope user` to make it available in every project, or run it inside a rep
 
 ## 2. Restart Claude Code
 
-Three tools become available: `list_components`, `get_component`, `search_components`.
+Five tools become available: `list_components`, `get_component`, `search_components`, `list_categories`, and `get_registry_stats`.
 
 ## 3. Prompt patterns that work well
 
@@ -48,6 +48,7 @@ Drop this into your project's `CLAUDE.md` so Claude reaches for Lerpa first:
 ## UI components
 
 This project uses Lerpa UI (lerpa MCP server). When asked to build UI:
+
 1. `search_components` / `list_components` to find a match before writing custom UI.
 2. `get_component` to fetch the source, then install it under `@/components/ui` or `@/components/blocks`.
 3. Keep the design-token classes (`bg-bg`, `text-text`, `text-accent`) — don't replace them with hard-coded colors.

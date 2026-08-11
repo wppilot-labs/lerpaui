@@ -1,6 +1,6 @@
 # Using Lerpa UI with Cursor
 
-Give Cursor's agent direct access to all 1,318 Lerpa components and blocks via MCP.
+Give Cursor's agent direct access to all 1,328 Lerpa components and blocks via MCP.
 
 ## 1. Add the MCP server
 
@@ -14,7 +14,7 @@ Create or edit `~/.cursor/mcp.json` (global) or `.cursor/mcp.json` in your proje
 }
 ```
 
-Restart Cursor, then check **Settings → MCP** — `lerpa` should show three tools: `list_components`, `get_component`, `search_components`.
+Restart Cursor, then check **Settings → MCP**. `lerpa` should expose `list_components`, `get_component`, `search_components`, `list_categories`, and `get_registry_stats`.
 
 ## 2. Initialize your project once
 

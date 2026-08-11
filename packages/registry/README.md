@@ -1,39 +1,66 @@
 # @lerpa/registry
 
-Compiles the Lerpa UI component/block source (`packages/ui`) into a **shadcn-compatible registry**: standalone JSON items with embedded source code that `lerpa-cli`, `npx shadcn add`, and the MCP server consume. This package is **private** — its output is bundled into the published packages and served at `https://lerpaui.com/r/<name>.json`.
+Private compiler and validator for the Lerpa UI shadcn-compatible registry. Its output is bundled into `lerpa-cli` and `@lerpa/mcp-server` and can be served as `https://lerpaui.com/r/<name>.json` by the website deployment.
 
-## Scripts
+## Commands
 
 ```bash
-pnpm --filter @lerpa/registry build      # compile items -> generated/
-pnpm --filter @lerpa/registry validate   # schema + integrity checks (zod)
+pnpm --filter @lerpa/registry build
+pnpm --filter @lerpa/registry build:verbose
+pnpm --filter @lerpa/registry sync:sources -- <item-id> [item-id...]
+pnpm --filter @lerpa/registry validate
 ```
 
-Or from the repo root: `pnpm registry:build` / `pnpm registry:validate`.
+Root aliases are `pnpm registry:build` and `pnpm registry:validate`.
 
 ## Layout
 
-```txt
-items/        Source registry item JSON definitions
-skills/       Agent skill definitions shipped with the registry
-generated/    Build output (committed):
-  registry.json            Aggregated registry with embedded source — bundled into lerpa-cli + MCP server
-  manifest.json            Item index + stats (1,318 items: 1,099 ui + 219 blocks)
-  component-catalog.json   Descriptions/categories snapshot for the MCP server + docs gallery
+```text
+items/        Authored item metadata and fallback source payloads
+skills/       Agent skill descriptors
+generated/    Committed deterministic output
+  registry.json
+  manifest.json
+  component-catalog.json
+  skills/
 scripts/
-  build-registry.ts        Compiler (see below)
-  validate-registry.ts     Validator
+  build-registry.ts
+  validate-registry.ts
 ```
 
-## What the build does
+## Canonical source and build behavior
 
-Beyond aggregation, `build-registry.ts` makes every item install clean in a fresh project:
+Registry JSON owns item ids, types, dependencies, registry dependencies, and standalone payloads. When an install file has a matching file in `packages/ui/src/components` or `packages/ui/src/blocks`, authored UI source is canonical and replaces the embedded fallback during compilation.
 
-- **Kebab-case filenames** — install paths are normalized so case-sensitive filesystems (Linux) resolve sibling imports.
-- **Helper bundling** — block-local primitives (e.g. a block importing `../components/StatCard`) are bundled transitively into the item's `files[]` and imports rewritten, so no item depends on unpublished source.
-- **Sibling linking** — imports of other registry items become `registryDependencies`, so the CLI installs them alongside.
-- **Alias normalization** — bundled helpers import `@/lib/utils` (what `lerpa init` scaffolds), and `"use client"` directives are preserved for Next.js App Router.
+Use `sync:sources` when a reviewed UI fix should also replace the authored fallback payload for specific item ids. It is intentionally targeted and refuses to rewrite the entire registry without explicit ids.
 
-## Validation
+The build then:
 
-`validate-registry.ts` checks every item definition in `items/` against a zod schema: kebab-case names that match the filename, item type is `registry:ui` or `registry:block`, and at least one file with non-empty content per item. CI runs it on every push.
+- sorts inputs and emits stable JSON;
+- strips UTF-8 BOM markers;
+- normalizes install filenames to kebab case;
+- rewrites shared `cn` imports to `@/lib/utils`;
+- bundles local component primitives and animation hooks transitively;
+- declares sibling registry dependencies;
+- augments npm dependencies required by bundled helpers;
+- writes exact UI/block statistics and a SHA-256 digest into `manifest.json`.
+
+The CLI and MCP builds depend explicitly on this registry build, preventing stale bundled data in parallel Turbo runs.
+
+## Fail-closed validation
+
+Validation covers both authored and generated data:
+
+- strict Zod schemas and kebab-case ids;
+- duplicate item, dependency, and file detection;
+- safe relative install paths and safe npm names;
+- missing/self/cyclic registry dependencies;
+- dependency-closure file conflicts;
+- resolution of relative imports across each full dependency closure;
+- generated item/name/path parity;
+- BOM-free generated source;
+- manifest totals and SHA-256 integrity.
+
+The current validated manifest contains 1,328 items: 1,109 UI items and 219 blocks.
+
+Generated output is committed. After changing UI source or item metadata, run the build and validator, then include the generated diff in the same change.

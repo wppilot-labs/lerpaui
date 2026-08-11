@@ -1,40 +1,53 @@
 # Contributing to Lerpa UI
 
-Thank you for your interest in contributing to Lerpa UI! We are excited to build the best free, animated React UI library in the world together.
+Thank you for contributing. Please keep claims, generated output, tests, and source in sync.
 
-## How Can I Contribute?
+## Before opening a change
 
-1. **Reporting Bugs**: Open an issue detailing the steps to reproduce the issue, expected behavior, and screenshots if applicable.
-2. **Requesting Components**: Check our Roadmap and open a feature request with design references and layout ideas.
-3. **Submitting Pull Requests**:
-   - Fork the repository.
-   - Create a feature branch (`git checkout -b feature/amazing-block`).
-   - Write clean, documented code complying with our Quality Standards and design tokens.
-   - Run verification pipelines: `pnpm lint`, `pnpm typecheck`, `pnpm build`.
-   - Submit a pull request to the main repository.
+1. Search existing issues and pull requests.
+2. For a new visual item, explain the use case and provide a design reference.
+3. Keep unrelated formatting or generated churn out of the change.
+4. Never include secrets, private customer data, fabricated metrics, or unlicensed assets.
 
-## Developing Locally
+## Local setup
 
-Ensure you have **Node.js v20+** and **pnpm v10+** installed.
+Requires Node.js 20 or newer and pnpm 10.
 
 ```bash
-# Clone and install dependencies
-git clone https://github.com/cuibit-labs/lerpaui.git
+git clone https://github.com/wppilot-labs/lerpaui.git
 cd lerpaui
-pnpm install
-
-# Build the workspace (compiles the registry, CLI, and MCP server)
-pnpm build
-
-# Run tests (Vitest + vitest-axe accessibility checks)
-pnpm test
-
-# Watch mode while editing the CLI or MCP server
-pnpm dev
+pnpm install --frozen-lockfile
+pnpm check
 ```
 
-## Styling Guidelines
+## Component expectations
 
-- Every component and block must adhere to our token presets (`packages/ui/src/tokens`).
-- Use CSS variables for color values so theme-switching is seamlessly inherited.
-- Keep interactive controls highly accessible (support standard keyboard navigation and aria attributes).
+- Put authored source in `packages/ui/src/components` or `packages/ui/src/blocks`.
+- Use token-backed styles and document required third-party dependencies.
+- Use semantic elements and standard keyboard interactions before custom ARIA.
+- Add visible focus, stable labels/relationships, and reduced-motion behavior.
+- Do not fetch demo media or external services by default.
+- Add focused tests for meaningful interactions and fixed regressions.
+
+Registry item JSON owns metadata. Matching UI source is canonical during the registry build, so do not hand-edit only `packages/registry/generated`.
+
+## Verification
+
+Run the full gate:
+
+```bash
+pnpm check
+```
+
+If source or item metadata changed, also regenerate and include the output:
+
+```bash
+pnpm registry:build
+pnpm registry:validate
+```
+
+Before a release, run `pnpm check:release` from a clean working tree. It verifies generated output and audits production dependencies.
+
+## Pull requests
+
+Use a focused branch, explain behavior and tradeoffs, include screenshots or a clip for visual changes, and call out any manual or external validation still missing. A passing build is not evidence of npm publication or website deployment.

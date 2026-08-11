@@ -1,13 +1,20 @@
-import "@testing-library/jest-dom/vitest";
-import { cleanup } from "@testing-library/react";
-import { afterEach, expect } from "vitest";
+import '@testing-library/jest-dom/vitest';
+import { cleanup } from '@testing-library/react';
+import { afterEach, expect } from 'vitest';
 // @ts-expect-error vitest-axe/matchers is not typed but works at runtime
-import { toHaveNoViolations } from "vitest-axe/matchers";
+import { toHaveNoViolations } from 'vitest-axe/matchers';
 
 expect.extend({ toHaveNoViolations });
 
+// Framer Motion's target-relative scroll offsets require the document scroll
+// container to establish a positioning context. lerpa init writes the same
+// rule into the managed base CSS.
+if (typeof document !== 'undefined') {
+  document.documentElement.style.position = 'relative';
+}
+
 // jsdom polyfills used by Radix UI primitives and animation components
-if (typeof globalThis.ResizeObserver === "undefined") {
+if (typeof globalThis.ResizeObserver === 'undefined') {
   class ResizeObserverPolyfill {
     observe() {}
     unobserve() {}
@@ -17,10 +24,10 @@ if (typeof globalThis.ResizeObserver === "undefined") {
     ResizeObserverPolyfill;
 }
 
-if (typeof globalThis.IntersectionObserver === "undefined") {
+if (typeof globalThis.IntersectionObserver === 'undefined') {
   class IntersectionObserverPolyfill {
     root = null;
-    rootMargin = "";
+    rootMargin = '';
     thresholds: number[] = [];
     observe() {}
     unobserve() {}
@@ -29,12 +36,14 @@ if (typeof globalThis.IntersectionObserver === "undefined") {
       return [];
     }
   }
-  (globalThis as unknown as {
-    IntersectionObserver: typeof IntersectionObserverPolyfill;
-  }).IntersectionObserver = IntersectionObserverPolyfill;
+  (
+    globalThis as unknown as {
+      IntersectionObserver: typeof IntersectionObserverPolyfill;
+    }
+  ).IntersectionObserver = IntersectionObserverPolyfill;
 }
 
-if (typeof window !== "undefined" && !window.matchMedia) {
+if (typeof window !== 'undefined' && !window.matchMedia) {
   window.matchMedia = (query: string) => ({
     matches: false,
     media: query,
@@ -51,21 +60,30 @@ if (typeof window !== "undefined" && !window.matchMedia) {
 // "Not implemented" (recharts and canvas components hit it), flooding stderr.
 // Override unconditionally — the previous `!...getContext` guard never fired
 // because jsdom's implementation already exists.
-if (typeof HTMLCanvasElement !== "undefined") {
+if (typeof HTMLCanvasElement !== 'undefined') {
   HTMLCanvasElement.prototype.getContext = (() => null) as never;
 }
 
+// jsdom logs "not implemented" for scrollTo and pseudo-element style queries.
+// Neither behavior is under test, so use deterministic browser-like shims.
+if (typeof window !== 'undefined') {
+  window.scrollTo = () => {};
+  const nativeGetComputedStyle = window.getComputedStyle.bind(window);
+  window.getComputedStyle = ((element: Element) =>
+    nativeGetComputedStyle(element)) as typeof window.getComputedStyle;
+}
+
 // Radix UI: jsdom doesn't implement hasPointerCapture which Radix calls
-if (typeof Element !== "undefined" && !Element.prototype.hasPointerCapture) {
+if (typeof Element !== 'undefined' && !Element.prototype.hasPointerCapture) {
   Element.prototype.hasPointerCapture = () => false;
 }
-if (typeof Element !== "undefined" && !Element.prototype.setPointerCapture) {
+if (typeof Element !== 'undefined' && !Element.prototype.setPointerCapture) {
   Element.prototype.setPointerCapture = () => {};
 }
-if (typeof Element !== "undefined" && !Element.prototype.releasePointerCapture) {
+if (typeof Element !== 'undefined' && !Element.prototype.releasePointerCapture) {
   Element.prototype.releasePointerCapture = () => {};
 }
-if (typeof Element !== "undefined" && !Element.prototype.scrollIntoView) {
+if (typeof Element !== 'undefined' && !Element.prototype.scrollIntoView) {
   Element.prototype.scrollIntoView = () => {};
 }
 

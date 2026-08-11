@@ -1,41 +1,47 @@
 # @lerpa/ui
 
-Source of truth for every Lerpa UI component and block. This package is **private** — it is not published to npm. Instead, the registry compiler (`packages/registry`) turns these files into shadcn-compatible registry items that users install via `lerpa-cli`, `npx shadcn add`, or an AI agent over MCP.
+Private authored source for Lerpa UI components, blocks, hooks, animations, and tokens. Consumers do not install this package; the registry compiler turns selected files into copy-paste item payloads.
 
 ## Layout
 
-```txt
+```text
 src/
-  components/   1,300+ animated, accessible React components (the registry's registry:ui items)
-  blocks/       Full page sections — heroes, pricing, dashboards, CTAs (registry:block items)
-  hooks/        Shared hooks (useCopyToClipboard, useDebouncedValue, useLocalStorage, …)
-  animation/    Framer Motion presets, motion config, reduced-motion helpers
-  tokens/       Design tokens (colors, spacing, radius, shadows) as CSS variables
-  lib/          cn() and other tiny utilities
-  test/         Vitest setup (jsdom + vitest-axe)
-  __smoke__/    Generated render + a11y smoke tests for every component
+  components/  Primitives and composed UI components
+  blocks/      Page and product sections
+  hooks/       Shared React hooks
+  animation/   Framer Motion presets and reduced-motion helpers
+  tokens/      CSS variable tokens
+  lib/         Small utilities such as cn()
+  test/        Vitest/jsdom setup
+  __smoke__/   Public-export render and axe baseline
 ```
 
 ## Conventions
 
-- **Tailwind CSS v4 + design tokens** — components are styled exclusively through token-backed utilities (`bg-bg`, `text-text`, `text-accent`, plus shadcn-compatible aliases like `bg-primary`). No inline color values, so one theme switch restyles everything.
-- **Motion built in** — entrance/scroll/gesture animations use Framer Motion with `prefers-reduced-motion` fallbacks (see `src/animation/reduced-motion.ts`).
-- **Accessibility is tested** — every component is rendered and axe-checked in the smoke suite (807 tests across 86 files).
-- **Client directives** — interactive components carry `"use client"` so they work in Next.js App Router out of the box.
+- Support React 18 and 19 and Tailwind CSS v4.
+- Prefer token-backed classes and CSS variables over product-specific colors.
+- Use semantic controls, labels, keyboard interaction, focus indicators, and stable ARIA relationships.
+- Respect reduced-motion preferences for non-essential motion.
+- Keep browser/network side effects opt-in; demo assets must not be fetched by default.
+- Interactive files intended for Next.js App Router include `"use client"`.
+- Target-relative Framer Motion scroll components require `html { position: relative; }`; `lerpa init` adds this rule to its managed base CSS.
 
-## Scripts
+## Verification
 
 ```bash
-pnpm --filter @lerpa/ui test        # Vitest + vitest-axe
-pnpm --filter @lerpa/ui typecheck
 pnpm --filter @lerpa/ui lint
+pnpm --filter @lerpa/ui typecheck
+pnpm --filter @lerpa/ui test
 ```
 
-## Adding a component
+The broad smoke test enumerates public component exports. Components that render without props are checked with axe. Primitives or composites that require context/props must remain in an explicit reviewed baseline; new render failures, axe timeouts, and axe violations fail the gate. This automated coverage complements rather than replaces manual screen-reader, browser, device, and visual testing.
 
-1. Add the `.tsx` file under `src/components/` (or `src/blocks/` for a page section), following the token + motion conventions above.
-2. Rebuild the registry: `pnpm registry:build` (from the repo root).
-3. Validate: `pnpm registry:validate`.
-4. Run the test suite: `pnpm test`.
+## Adding or changing an item
 
-See the repo-root [CONTRIBUTING.md](../../CONTRIBUTING.md) for full guidelines.
+1. Edit the `.tsx` source under `src/components` or `src/blocks`.
+2. Add or update its metadata in `packages/registry/items`.
+3. Add focused behavior tests for meaningful interaction or regressions.
+4. Run `pnpm registry:build` and `pnpm registry:validate`.
+5. Run `pnpm check` from the repository root.
+
+See [CONTRIBUTING.md](../../CONTRIBUTING.md) for the full workflow.

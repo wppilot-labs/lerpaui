@@ -4,6 +4,33 @@ All notable changes to Lerpa UI will be documented in this file.
 
 Versions below refer to the published packages: [`lerpa-cli`](https://www.npmjs.com/package/lerpa-cli) and [`@lerpa/mcp-server`](https://www.npmjs.com/package/@lerpa/mcp-server). The component/block source and the registry are versioned with the repository itself.
 
+## [0.3.0] - Unreleased
+
+### Added
+
+- CLI multi-item installs, `--dry-run`, `--no-install`, safe `--force` backups, filtered/JSON list and search output, strict/JSON doctor output, and the `set` alias for themes.
+- MCP pagination and filters plus `list_categories` and `get_registry_stats`, bringing the read-only server to five tools.
+- Built-artifact integration tests for CLI workflows and a real MCP stdio session.
+- Focused tests for finite progress values, keyboard slider interaction, opt-in video loading, and consecutive local-storage updates.
+- Ten accessible product-operations components covering async actions, connection status, filter chips, upload queues, validation summaries, data refresh, conflict resolution, query states, API keys, and destructive confirmation.
+
+### Changed
+
+- Package and repository metadata now identify `wppilot-labs/lerpaui` as the canonical GitHub repository.
+- Registry generation is deterministic, refreshes matching payloads from authored UI source, strips BOM markers, bundles animation helpers, and records SHA-256 integrity.
+- CLI and MCP builds explicitly depend on the registry build to prevent stale packaged source.
+- The broad UI smoke/axe suite now fails on new context-required exports, asynchronous crashes, axe timeouts, and accessibility violations instead of silently accepting them.
+- MCP SDK updated to 1.30.0; vulnerable compatible transitive resolutions are pinned to patched releases.
+
+### Fixed
+
+- CLI dependency installation no longer interpolates dependency names into a shell command.
+- CLI paths and aliases reject absolute or traversal-based writes outside the project.
+- Non-interactive adds no longer overwrite locally changed source without explicit `--force` and a backup.
+- `init` installs the two dependencies required by its generated `cn` helper.
+- MCP server version is read from package metadata and registry URLs include the required `.json` suffix.
+- Liquid progress no longer produces `NaN%`; radial progress supports full keyboard slider semantics; generated SVG ids are instance-safe; guided focus uses stable dialog relationships; and video controls now control real media without a default third-party request.
+
 ## [cli 0.2.4] - 2026-06-10
 
 ### Fixed

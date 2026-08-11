@@ -8270,6 +8270,76 @@
       "category": "forms",
       "cliCommand": "pnpm dlx lerpa-cli add datepicker",
       "description": "Accessible date picker with a keyboard-navigable calendar grid (arrows, PageUp/Down, Home/End)."
+    },
+    {
+      "id": "async-action-button",
+      "name": "Async Action Button",
+      "category": "buttons",
+      "cliCommand": "pnpm dlx lerpa-cli add async-action-button",
+      "description": "Promise-aware action button with loading, success, error, duplicate-click protection, and live status announcements."
+    },
+    {
+      "id": "connection-status-banner",
+      "name": "Connection Status Banner",
+      "category": "feedback",
+      "cliCommand": "pnpm dlx lerpa-cli add connection-status-banner",
+      "description": "Online, offline, and degraded connection feedback with optional browser detection and asynchronous retry."
+    },
+    {
+      "id": "filter-chip-group",
+      "name": "Filter Chip Group",
+      "category": "forms",
+      "cliCommand": "pnpm dlx lerpa-cli add filter-chip-group",
+      "description": "Controlled or uncontrolled single and multi-select filter chips with counts, disabled options, and clear action."
+    },
+    {
+      "id": "upload-queue",
+      "name": "Upload Queue",
+      "category": "forms",
+      "cliCommand": "pnpm dlx lerpa-cli add upload-queue",
+      "description": "Accessible queued file list with progress announcements, completion and error states, retry, and removal actions."
+    },
+    {
+      "id": "validation-summary",
+      "name": "Validation Summary",
+      "category": "feedback",
+      "cliCommand": "pnpm dlx lerpa-cli add validation-summary",
+      "description": "Form error summary that announces validation failures and moves focus to the corresponding invalid field."
+    },
+    {
+      "id": "data-refresh-control",
+      "name": "Data Refresh Control",
+      "category": "feedback",
+      "cliCommand": "pnpm dlx lerpa-cli add data-refresh-control",
+      "description": "Promise-aware refresh control with relative last-updated status, duplicate request protection, and failure recovery."
+    },
+    {
+      "id": "conflict-resolution-panel",
+      "name": "Conflict Resolution Panel",
+      "category": "forms",
+      "cliCommand": "pnpm dlx lerpa-cli add conflict-resolution-panel",
+      "description": "Side-by-side local and remote value comparison with accessible selection and asynchronous apply handling."
+    },
+    {
+      "id": "query-state-panel",
+      "name": "Query State Panel",
+      "category": "feedback",
+      "cliCommand": "pnpm dlx lerpa-cli add query-state-panel",
+      "description": "Unified loading, empty, error, and success presentation with retry, clear-filter, and result content slots."
+    },
+    {
+      "id": "api-key-field",
+      "name": "API Key Field",
+      "category": "forms",
+      "cliCommand": "pnpm dlx lerpa-cli add api-key-field",
+      "description": "Masked read-only secret field with explicit reveal, secure clipboard copy feedback, and failure guidance."
+    },
+    {
+      "id": "destructive-confirmation-field",
+      "name": "Destructive Confirmation Field",
+      "category": "forms",
+      "cliCommand": "pnpm dlx lerpa-cli add destructive-confirmation-field",
+      "description": "Case-sensitive typed confirmation gate for irreversible actions with busy, disabled, and failure states."
     }
   ]
 }

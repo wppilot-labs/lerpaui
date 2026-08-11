@@ -1,22 +1,21 @@
 {
   "name": "lerpa-cli",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Copy-paste components and blocks from the Lerpa UI registry into any React/Tailwind project.",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cuibit-labs/lerpaui.git",
+    "url": "https://github.com/wppilot-labs/lerpaui.git",
     "directory": "packages/cli"
   },
   "author": "Lerpa UI",
-  "homepage": "https://github.com/cuibit-labs/lerpaui#readme",
-  "bugs": "https://github.com/cuibit-labs/lerpaui/issues",
+  "homepage": "https://github.com/wppilot-labs/lerpaui#readme",
+  "bugs": "https://github.com/wppilot-labs/lerpaui/issues",
   "bin": {
     "lerpa": "./dist/index.js",
     "lerpa-cli": "./dist/index.js"
   },
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist",
     "registry",
@@ -27,6 +26,7 @@
     "dev": "tsc -w",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs",
     "prepublishOnly": "pnpm --filter @lerpa/registry run build && pnpm run build"
   },
   "dependencies": {

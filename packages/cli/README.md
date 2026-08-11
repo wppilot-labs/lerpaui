@@ -1,40 +1,89 @@
 # lerpa-cli
 
 [![npm](https://img.shields.io/npm/v/lerpa-cli?logo=npm&color=cb3837)](https://www.npmjs.com/package/lerpa-cli)
-[![MIT License](https://img.shields.io/badge/License-MIT-22c55e.svg)](https://github.com/cuibit-labs/lerpaui/blob/main/LICENSE.md)
+[![MIT License](https://img.shields.io/badge/License-MIT-22c55e.svg)](https://github.com/wppilot-labs/lerpaui/blob/main/LICENSE.md)
 
-Install copy-paste components and blocks from the [Lerpa UI](https://github.com/cuibit-labs/lerpaui) registry into any React + Tailwind CSS v4 project. You get the *source* — no runtime dependency on Lerpa.
-
-The CLI ships with a bundled copy of the registry (1,318 items: 1,099 components + 219 blocks), so `add`, `list`, and `search` work offline.
+Install copy-paste source from the [Lerpa UI](https://github.com/wppilot-labs/lerpaui) registry into a React + Tailwind CSS v4 project. The package bundles all 1,328 registry items, so listing, searching, resolving, and writing source do not require a runtime registry request.
 
 ## Quick start
 
 ```bash
-# 1. Initialize once — writes lerpa.json, the cn helper, and Tailwind v4 design tokens
 npx lerpa-cli init
-
-# 2. Add a component or block
 npx lerpa-cli add button
-npx lerpa-cli add pricing-table
+npx lerpa-cli add button spinner pricing-table-matrix
 ```
 
-`init` scaffolds the `@theme` + `:root` token block into your global CSS so components render styled on first paint. It detects your package manager, `src/` layout, and `tsconfig.json` path aliases.
+`init` writes:
+
+- `lerpa.json`;
+- the configured `cn` helper;
+- a managed Tailwind v4 `@theme` and token block, including the document positioning context required by target-relative scroll effects;
+- `clsx` and `tailwind-merge` dependencies, unless `--no-install` is used.
+
+It understands JSONC `tsconfig.json` files, path mappings, and common `src/` layouts.
 
 ## Commands
 
-| Command | What it does |
-| --- | --- |
-| `init` | Scaffold `lerpa.json`, the `cn` helper, and Tailwind v4 tokens. Flags: `--yes`, `--css <path>`, `--components <alias>`, `--utils <alias>`, `--pm <npm\|pnpm\|yarn\|bun>`, `--no-tokens`. |
-| `add <name>` | Install a component/block plus all registry + npm dependencies in one batched install. `--yes` skips prompts. |
-| `theme [name]` | Apply a color theme: `lime`, `mono`, `ocean`, `grape`, `ember`, `gold`, `paper`. Replaces a managed CSS block, so it is safe to re-run. |
-| `list` | List every component and block (`--json` for machine output). |
-| `search <query>` | Search the registry by name. |
-| `doctor` | Verify the config and that the Tailwind v4 tokens are present. |
-| `info` | Show CLI + project metadata. |
+### `init`
 
-Every command accepts `--yes`, so it runs unattended in CI.
+```bash
+npx lerpa-cli init [--yes] [--force] [--no-install] [--no-tokens] \
+  [--css <path>] [--components <alias>] [--utils <alias>] \
+  [--pm npm|pnpm|yarn|bun]
+```
 
-## Configuration (`lerpa.json`)
+An existing `lerpa.json` is not replaced in non-interactive mode unless `--force` is explicit. A backup is created before replacement.
+
+### `add <names...>`
+
+```bash
+npx lerpa-cli add button spinner
+npx lerpa-cli add pricing-table-matrix --dry-run --no-install
+```
+
+The command resolves the full registry dependency graph, de-duplicates files and npm packages, checks file conflicts, and installs npm dependencies once. Options:
+
+- `--yes`: skip the confirmation prompt.
+- `--dry-run`: show create/unchanged/overwrite plans without changes.
+- `--no-install`: write source without running a package manager.
+- `--force`: back up and replace locally changed files.
+
+Without `--force`, an unattended add fails instead of overwriting local work.
+
+### `theme [name]` / `set [name]`
+
+Applies one managed CSS theme block. Available themes: `lime`, `mono`, `ocean`, `grape`, `ember`, `gold`, and `paper`. Re-running replaces that block rather than duplicating it.
+
+### `list`
+
+```bash
+npx lerpa-cli list --type block --limit 20
+npx lerpa-cli list --json
+```
+
+`--type` accepts `all`, `ui`, `component`, or `block`.
+
+### `search [query]`
+
+```bash
+npx lerpa-cli search pricing --type block --limit 10 --json
+```
+
+### `doctor`
+
+Checks config shape, safe CSS and alias resolution, token markers, the `cn` helper, and required dependencies.
+
+```bash
+npx lerpa-cli doctor --strict --json
+```
+
+`--strict` returns a non-zero exit for warnings as well as failures.
+
+### `info`
+
+Prints the CLI version, canonical repository, docs URL, and detected project config.
+
+## Configuration
 
 ```json
 {
@@ -48,13 +97,18 @@ Every command accepts `--yes`, so it runs unattended in CI.
 }
 ```
 
-Components are written under `<components alias>/ui/` and blocks under `<components alias>/blocks/`. Aliases are resolved through your `tsconfig.json` `paths` (falling back to a `src/` heuristic), so files land where your imports expect them. Existing files are backed up to `*.bak` before being overwritten.
+UI files are written under `<components>/ui/`; blocks are written under `<components>/blocks/`. Absolute paths and `..` traversal are rejected. Dependency installation uses executable and argument arrays rather than interpolated shell commands.
 
-## Requirements
+## Development
 
-- Node.js ≥ 20
-- Tailwind CSS v4 in the target project
+```bash
+pnpm --filter lerpa-cli build
+pnpm --filter lerpa-cli test
+pnpm --filter lerpa-cli typecheck
+```
 
-## License
+Tests execute the built CLI in isolated temporary projects, including JSONC aliases, dry runs, multi-add, backups, strict doctor output, and traversal rejection.
 
-MIT © [Cuibit Labs](https://cuibit.com) — see [LICENSE](https://github.com/cuibit-labs/lerpaui/blob/main/LICENSE.md).
+Requires Node.js 20 or newer.
+
+MIT © [Cuibit Labs](https://cuibit.com). See [LICENSE.md](https://github.com/wppilot-labs/lerpaui/blob/main/LICENSE.md).

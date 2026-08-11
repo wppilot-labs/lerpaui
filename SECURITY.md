@@ -1,17 +1,29 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
-We actively support and patch the latest major and minor versions of Lerpa UI:
+| Version                        | Status                       |
+| ------------------------------ | ---------------------------- |
+| `main` / 0.3 release candidate | Supported before publication |
+| 0.2.x                          | Supported                    |
+| 0.1.x and older                | No longer supported          |
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 0.1.x   | :white_check_mark: |
+Security fixes are normally applied to the latest supported line. Backports are assessed case by case.
 
-## Reporting a Vulnerability
+## Report a vulnerability
 
-If you discover a potential security vulnerability in Lerpa UI, please **do not** file a public issue on GitHub. Instead, report it privately to our core team.
+Do not open a public issue for a suspected vulnerability.
 
-Please email security reports to **security@lerpaui.com**.
+Use [GitHub private vulnerability reporting](https://github.com/wppilot-labs/lerpaui/security/advisories/new) when available, or email **security@lerpaui.com**. Include:
 
-We will acknowledge receipt of your report within 48 hours and work with you to analyze, reproduce, and resolve the security concern responsibly.
+- affected package, version, item, or commit;
+- reproduction steps or a minimal proof of concept;
+- expected impact and required attacker access;
+- any suggested remediation;
+- whether the report or exploit details have been shared elsewhere.
+
+We aim to acknowledge a report within 48 hours. Acknowledgement is not confirmation of impact or a fixed disclosure timeline. We will coordinate validation, remediation, release, and disclosure with the reporter where practical.
+
+## Scope notes
+
+The CLI writes source and can invoke the configured package manager. The MCP server is read-only and communicates over stdio. Reports involving path containment, dependency handling, generated registry integrity, unsafe item source, or protocol input validation are in scope.

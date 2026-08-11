@@ -1,77 +1,58 @@
 {
   "$schema": "https://ui.shadcn.com/schema/skill.json",
   "name": "lerpa-component",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "homepage": "https://lerpaui.com",
-  "description": "Generate React components from the Lerpa UI library — 1318 copy-paste registry items (1099 registry:ui + 219 registry:block) compiled from 1234 source components and 30 page blocks in packages/ui, for React 19, Next 16, Tailwind v4, Framer Motion, and Radix UI. Terminal/CLI aesthetic, OKLCH design tokens, prefers-reduced-motion baked in.",
+  "description": "Discover and install 1,328 Lerpa UI copy-paste registry items (1,109 registry:ui and 219 registry:block) for React 18/19 and Tailwind CSS v4. Items use token-backed styling and may use Framer Motion, Radix UI, Recharts, and Lucide.",
   "when_to_use": [
-    "User asks to build, scaffold, or extend a React + Tailwind UI (page, dashboard, marketing surface, AI product)",
+    "User asks to build, scaffold, or extend a React and Tailwind UI",
     "User mentions shadcn, Radix, or copy-paste components and wants pre-built primitives",
-    "User wants animated, theme-aware UI with reduced-motion fallbacks already wired",
-    "User asks for an AI chat surface, agent panel, streaming token UI, or tool-call trace block",
-    "User wants a dashboard scaffold (stats strip, charts, CRM table, billing panel, settings page)",
-    "User wants ecommerce surfaces (cart, checkout, product card, review block)"
+    "User wants animated, theme-aware UI with reduced-motion support",
+    "User asks for an AI, dashboard, ecommerce, marketing, auth, or documentation surface"
   ],
   "when_not_to_use": [
-    "User wants a non-React framework (Vue, Svelte, plain HTML)",
-    "User wants a fully custom design system from scratch with no shared tokens",
-    "User wants server-only logic with no UI surface"
+    "User wants a non-React framework",
+    "User wants server-only logic with no UI surface",
+    "User requires a component with no third-party dependencies without first checking the selected item"
   ],
   "capabilities": [
     {
       "id": "component",
       "label": "UI Component",
-      "description": "Single-purpose primitives (Button, Card, Input, Avatar, Tabs, Dialog…). 1099 registry items available.",
+      "description": "Single-purpose primitives and composed UI. 1,109 registry items are available.",
       "type": "registry:ui"
     },
     {
       "id": "block",
       "label": "Page Block",
-      "description": "Composed multi-component sections (hero, pricing, footer, CTA, feature grid, dashboard sections). 219 registry items available.",
+      "description": "Composed sections such as heroes, pricing, footers, CTAs, feature grids, and dashboard areas. 219 registry items are available.",
       "type": "registry:block"
     },
     {
       "id": "dashboard-primitive",
       "label": "Dashboard Primitive",
-      "description": "Stats cells, activity feeds, KPI cards, chart containers wired for recharts.",
+      "description": "Stats, feeds, KPI cards, tables, and chart containers.",
       "type": "registry:ui"
     },
     {
       "id": "animation-primitive",
       "label": "Animation Primitive",
-      "description": "Framer Motion + CSS keyframes wrappers with prefers-reduced-motion fallbacks (aurora, retro grid, shimmer, magnetic, elastic, swipe, haptic, three-d).",
+      "description": "Framer Motion and CSS animation components with project-specific accessibility review still required.",
       "type": "registry:ui"
     }
   ],
-  "categories": [
-    "ai",
-    "buttons",
-    "cards",
-    "forms",
-    "creative",
-    "feedback",
-    "navigation",
-    "tables",
-    "calendars",
-    "charts",
-    "ecommerce",
-    "dashboard",
-    "auth",
-    "account",
-    "docs",
-    "blog"
-  ],
+  "categories": ["ai", "buttons", "cards", "forms", "creative", "feedback", "navigation", "tables", "calendars", "charts", "ecommerce", "dashboard", "auth", "account", "docs", "blog"],
   "stack": {
-    "framework": "next@16",
-    "react": "19",
+    "framework": "react",
+    "react": "18 || 19",
     "tailwind": "4",
-    "typescript": "5.7",
-    "framerMotion": "12",
-    "radix": "latest"
+    "typescript": "5",
+    "framerMotion": "11",
+    "radix": "version varies by primitive"
   },
   "conventions": {
     "imports": {
-      "cn": "@/lib/cn",
+      "cn": "@/lib/utils",
       "ui": "@/components/ui/<name>",
       "hooks": "@/hooks/<name>"
     },
@@ -82,10 +63,9 @@
       "border": "var(--edge)"
     },
     "accessibility": [
-      "Interactive <div> requires role=\"button\", tabIndex={0}, and keyboard handlers",
-      "Real <button> must NOT carry redundant role=\"button\" / tabIndex={0}",
-      "Animated components must check usePrefersReducedMotion and provide a static fallback",
-      "Color contrast targets WCAG AA on OKLCH token pairs"
+      "Prefer semantic controls and standard keyboard behavior",
+      "Animated components must provide reduced-motion behavior",
+      "Verify labels, focus, contrast, keyboard behavior, and screen-reader output in the consuming application"
     ]
   },
   "install": {
@@ -94,20 +74,20 @@
   },
   "examples": [
     {
-      "prompt": "Build a marketing landing page with a CLI-aesthetic hero, pricing comparison, and CTA block.",
-      "uses": ["hero-terminal", "pricing-comparison", "cta-glow"]
+      "prompt": "Build a marketing landing page with a developer hero, pricing comparison, and CTA.",
+      "uses": ["hero-developer-tool", "accordion-pricing-comparison", "cta-gradient-glow-final"]
     },
     {
-      "prompt": "Add a CRM dashboard with a stats strip, contact list, and activity feed.",
-      "uses": ["dashboard-stats-strip", "crm-contact-list", "dashboard-activity-feed"]
+      "prompt": "Add a CRM dashboard with revenue, contact profile, and activity feed.",
+      "uses": ["dashboard-revenue-overview", "crm-contact-profile-panel", "dashboard-activity-feed"]
     },
     {
-      "prompt": "Compose an AI chat surface with streaming tokens and tool-call traces.",
-      "uses": ["ai-chat-surface", "ai-token-stream", "ai-tool-call-trace"]
+      "prompt": "Compose an AI chat surface with token usage and tool-call history.",
+      "uses": ["ai-chat-interface", "ai-token-usage-meter", "ai-tool-call-timeline"]
     },
     {
-      "prompt": "Build a checkout flow with cart, address form, and payment review.",
-      "uses": ["cart-summary", "checkout-address-form", "checkout-review"]
+      "prompt": "Build a checkout flow with cart summary, address form, and review step.",
+      "uses": ["cart-price-summary", "checkout-address-form", "checkout-review-step"]
     }
   ],
   "discovery": {

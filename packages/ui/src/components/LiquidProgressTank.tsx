@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
 import React, { useEffect, useId, useState } from 'react';
-import { motion} from "framer-motion";
+import { motion, useReducedMotion } from 'framer-motion';
 import { cn } from '../lib/cn';
 
 export interface LiquidProgressTankProps {
   /** Progress value from 0 to 100 */
-  progress: number;
+  progress?: number;
   /** Additional wrapper class names */
   className?: string;
   /** Height of the tank container, e.g. "h-80" or "h-96" */
@@ -32,7 +32,7 @@ interface Bubble {
 }
 
 export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
-  progress,
+  progress = 65,
   className,
   tankHeight = 'h-80',
   tankWidth = 'w-60',
@@ -41,7 +41,8 @@ export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
   title,
   shape = 'rectangular',
 }) => {
-  const safeProgress = Math.max(0, Math.min(100, progress));
+  const safeProgress = Number.isFinite(progress) ? Math.max(0, Math.min(100, progress)) : 0;
+  const prefersReducedMotion = useReducedMotion();
   const uniqueId = useId().replace(/:/g, '');
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
 
@@ -50,17 +51,19 @@ export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
     const list: Bubble[] = Array.from({ length: 8 }).map((_, idx) => ({
       id: idx,
       left: Math.random() * 80 + 10, // percentage 10% to 90%
-      size: Math.random() * 6 + 4,   // size 4px to 10px
-      delay: Math.random() * 3,      // delay up to 3s
+      size: Math.random() * 6 + 4, // size 4px to 10px
+      delay: Math.random() * 3, // delay up to 3s
       duration: Math.random() * 4 + 4, // duration 4s to 8s
     }));
     setBubbles(list);
   }, []);
 
   return (
-    <div className={cn("flex flex-col items-center justify-center p-4", className)}>
+    <div className={cn('flex flex-col items-center justify-center p-4', className)}>
       {/* Component Inline Styles for Loop Animations */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         @keyframes wave-slide-1-${uniqueId} {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -95,7 +98,9 @@ export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
           animation: bubble-rise-${uniqueId} var(--bubble-duration) ease-in infinite;
           animation-delay: var(--bubble-delay);
         }
-      `}} />
+      `,
+        }}
+      />
 
       {title && (
         <span className="mb-3 text-sm font-semibold tracking-wider uppercase text-muted-foreground">
@@ -106,7 +111,7 @@ export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
       {/* Main Glassmorphic Container */}
       <div
         className={cn(
-          "relative overflow-hidden border border-white/20 dark:border-white/10 shadow-2xl bg-white/5 dark:bg-black/20 backdrop-blur-xl flex flex-col justify-end transition-all duration-300",
+          'relative overflow-hidden border border-white/20 dark:border-white/10 shadow-2xl bg-white/5 dark:bg-black/20 backdrop-blur-xl flex flex-col justify-end transition-all duration-300',
           shape === 'circular' ? 'rounded-full aspect-square' : 'rounded-3xl',
           tankWidth,
           tankHeight
@@ -120,59 +125,81 @@ export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
         {/* Dynamic Rising Fluid Layer */}
         <motion.div
           className="absolute left-0 right-0 bottom-0 origin-bottom z-10"
-          initial={{ height: '0%' }}
+          initial={prefersReducedMotion ? false : { height: '0%' }}
           animate={{ height: `${safeProgress}%` }}
-          transition={{ type: 'spring', stiffness: 45, damping: 15 }}
+          transition={
+            prefersReducedMotion ? { duration: 0 } : { type: 'spring', stiffness: 45, damping: 15 }
+          }
         >
           {/* Waves Container */}
           <div className="absolute bottom-0 left-0 w-full h-[500px] flex flex-col justify-end">
-            
             {/* SVG Wave Headers */}
             <div className="absolute left-0 right-0 -top-8 h-8 overflow-visible pointer-events-none select-none">
-              
               {/* Back Wave (Deeper, Slower) */}
-              <div className="absolute w-[200%] h-full -left-full text-emerald-500/40 dark:text-emerald-400/30 wave-animate-1-${uniqueId}">
-                <svg viewBox="0 0 1200 120" fill="currentColor" className="w-full h-full preserve-3d" preserveAspectRatio="none">
+              <div
+                className={cn(
+                  'absolute w-[200%] h-full -left-full text-emerald-500/40 dark:text-emerald-400/30',
+                  !prefersReducedMotion && `wave-animate-1-${uniqueId}`
+                )}
+              >
+                <svg
+                  viewBox="0 0 1200 120"
+                  fill="currentColor"
+                  className="w-full h-full preserve-3d"
+                  preserveAspectRatio="none"
+                >
                   <path d="M0,60 C150,90 350,30 500,60 C650,90 850,30 1000,60 C1150,90 1350,30 1500,60 L1500,120 L0,120 Z" />
                 </svg>
               </div>
 
               {/* Front Wave (Main Accent, Faster) */}
-              <div className="absolute w-[200%] h-full -left-full text-teal-400/80 dark:text-emerald-500/80 wave-animate-2-${uniqueId}">
-                <svg viewBox="0 0 1200 120" fill="currentColor" className="w-full h-full preserve-3d" preserveAspectRatio="none">
+              <div
+                className={cn(
+                  'absolute w-[200%] h-full -left-full text-teal-400/80 dark:text-emerald-500/80',
+                  !prefersReducedMotion && `wave-animate-2-${uniqueId}`
+                )}
+              >
+                <svg
+                  viewBox="0 0 1200 120"
+                  fill="currentColor"
+                  className="w-full h-full preserve-3d"
+                  preserveAspectRatio="none"
+                >
                   <path d="M0,50 C150,20 300,80 450,50 C600,20 750,80 900,50 C1050,20 1200,80 1350,50 L1350,120 L0,120 Z" />
                 </svg>
               </div>
-
             </div>
 
             {/* Solid Water Base */}
-            <div className={cn(
-              "w-full h-[500px] bg-gradient-to-t opacity-90 shadow-inner",
-              waterColor
-            )}>
+            <div
+              className={cn(
+                'w-full h-[500px] bg-gradient-to-t opacity-90 shadow-inner',
+                waterColor
+              )}
+            >
               {/* Animated Floating Bubbles in the Tank */}
               <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {safeProgress > 5 && bubbles.map((bubble) => (
-                  <div
-                    key={bubble.id}
-                    className={cn(
-                      "absolute rounded-full bg-white/20 dark:bg-white/30 backdrop-blur-[1px] border border-white/40 shadow-sm bubble-${uniqueId}"
-                    )}
-                    style={{
-                      left: `${bubble.left}%`,
-                      width: `${bubble.size}px`,
-                      height: `${bubble.size}px`,
-                      bottom: '0px',
-                      // @ts-expect-error CSS custom property
-                      '--bubble-delay': `${bubble.delay}s`,
-                      '--bubble-duration': `${bubble.duration}s`,
-                    }}
-                  />
-                ))}
+                {!prefersReducedMotion &&
+                  safeProgress > 5 &&
+                  bubbles.map((bubble) => (
+                    <div
+                      key={bubble.id}
+                      className={cn(
+                        'absolute rounded-full bg-white/20 dark:bg-white/30 backdrop-blur-[1px] border border-white/40 shadow-sm bubble-${uniqueId}'
+                      )}
+                      style={{
+                        left: `${bubble.left}%`,
+                        width: `${bubble.size}px`,
+                        height: `${bubble.size}px`,
+                        bottom: '0px',
+                        // @ts-expect-error CSS custom property
+                        '--bubble-delay': `${bubble.delay}s`,
+                        '--bubble-duration': `${bubble.duration}s`,
+                      }}
+                    />
+                  ))}
               </div>
             </div>
-
           </div>
         </motion.div>
 
@@ -198,7 +225,7 @@ export const LiquidProgressTank: React.FC<LiquidProgressTankProps> = ({
 
         {/* Top Metallic Cap/Reflection */}
         <div className="absolute inset-x-0 top-0 h-3 bg-gradient-to-b from-white/25 to-transparent border-t border-white/30 rounded-t-[inherit] z-20" />
-        
+
         {/* Bottom Shadow Overlay */}
         <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/20 to-transparent rounded-b-[inherit] pointer-events-none z-20" />
       </div>

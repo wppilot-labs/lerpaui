@@ -13,14 +13,18 @@ npx lerpa-cli add button
 ```
 
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 export function Actions({ saving }: { saving: boolean }) {
   return (
     <div className="flex gap-3">
-      <Button loading={saving} loadingLabel="Saving…">Save changes</Button>
+      <Button loading={saving} loadingLabel="Saving…">
+        Save changes
+      </Button>
       <Button variant="outline">Preview</Button>
-      <Button variant="destructive" size="sm">Delete</Button>
+      <Button variant="destructive" size="sm">
+        Delete
+      </Button>
       <Button variant="link" asChild>
         <a href="/docs">Read the docs</a>
       </Button>
@@ -38,13 +42,13 @@ npx lerpa-cli add magnetic-button
 ```
 
 ```tsx
-"use client";
+'use client';
 
-import { MagneticButton } from "@/components/ui/magnetic-button";
+import { MagneticButton } from '@/components/ui/magnetic-button';
 
 export function NavbarCta() {
   return (
-    <MagneticButton strength={14} onClick={() => location.assign("/signup")}>
+    <MagneticButton strength={14} onClick={() => location.assign('/signup')}>
       Start free trial
     </MagneticButton>
   );
@@ -60,14 +64,17 @@ npx lerpa-cli add shiny-glow-button
 ```
 
 ```tsx
-"use client";
+'use client';
 
-import ShinyGlowButton from "@/components/ui/shiny-glow-button";
-import { Sparkles } from "lucide-react";
+import ShinyGlowButton from '@/components/ui/shiny-glow-button';
+import { Sparkles } from 'lucide-react';
 
 export function UpgradeCta() {
   return (
-    <ShinyGlowButton icon={<Sparkles className="size-4" />} onClick={() => location.assign("/checkout")}>
+    <ShinyGlowButton
+      icon={<Sparkles className="size-4" />}
+      onClick={() => location.assign('/checkout')}
+    >
       Upgrade to Pro
     </ShinyGlowButton>
   );
@@ -81,19 +88,13 @@ npx lerpa-cli add spotlight-card
 ```
 
 ```tsx
-import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { SpotlightCard } from '@/components/ui/spotlight-card';
 
 export function FeatureCard() {
   return (
-    <SpotlightCard
-      className="max-w-sm p-8"
-      glowColor="rgba(34, 197, 94, 0.15)"
-      glowSize={400}
-    >
+    <SpotlightCard className="max-w-sm p-8" glowColor="rgba(34, 197, 94, 0.15)" glowSize={400}>
       <h3 className="text-lg font-semibold text-text">Edge caching</h3>
-      <p className="mt-2 text-sm text-text-3">
-        Responses served from 30+ regions, automatically.
-      </p>
+      <p className="mt-2 text-sm text-text-3">Responses served from 30+ regions, automatically.</p>
     </SpotlightCard>
   );
 }
@@ -108,15 +109,13 @@ npx lerpa-cli add aurora-shader
 ```
 
 ```tsx
-import { AuroraShader } from "@/components/ui/aurora-shader";
+import { AuroraShader } from '@/components/ui/aurora-shader';
 
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden py-32">
       <AuroraShader className="absolute inset-0 -z-10" />
-      <h1 className="text-center text-5xl font-bold text-text">
-        Ship interfaces that move.
-      </h1>
+      <h1 className="text-center text-5xl font-bold text-text">Ship interfaces that move.</h1>
     </section>
   );
 }
@@ -131,14 +130,14 @@ npx lerpa-cli add ai-chat-interface
 ```
 
 ```tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { AIChatInterface, type AIChatMessage } from "@/components/blocks/ai-chat-interface";
+import { useState } from 'react';
+import { AIChatInterface, type AIChatMessage } from '@/components/blocks/ai-chat-interface';
 
 export function SupportChat() {
   const [messages, setMessages] = useState<AIChatMessage[]>([
-    { id: "1", role: "assistant", content: "Hi! How can I help today?" },
+    { id: '1', role: 'assistant', content: 'Hi! How can I help today?' },
   ]);
 
   return (
@@ -150,7 +149,7 @@ export function SupportChat() {
       height={560}
       placeholder="Describe your issue…"
       onSend={(text) =>
-        setMessages((m) => [...m, { id: crypto.randomUUID(), role: "user", content: text }])
+        setMessages((m) => [...m, { id: crypto.randomUUID(), role: 'user', content: text }])
       }
     />
   );
@@ -166,7 +165,7 @@ npx lerpa-cli add hero-saas-simple
 ```
 
 ```tsx
-import HeroSaasSimple from "@/components/blocks/hero-saas-simple";
+import HeroSaasSimple from '@/components/blocks/hero-saas-simple';
 
 export default function Home() {
   return <HeroSaasSimple />;
@@ -182,7 +181,7 @@ npx lerpa-cli add dashboard-revenue-overview
 ```
 
 ```tsx
-import { DashboardRevenueOverview } from "@/components/ui/dashboard-revenue-overview";
+import { DashboardRevenueOverview } from '@/components/ui/dashboard-revenue-overview';
 
 export function RevenuePage() {
   return (
@@ -200,11 +199,25 @@ npx lerpa-cli add testimonial-marquee-quotes
 ```
 
 ```tsx
-import { TestimonialMarqueeQuotes } from "@/components/ui/testimonial-marquee-quotes";
+import { TestimonialMarqueeQuotes } from '@/components/ui/testimonial-marquee-quotes';
 
 const quotes = [
-  { id: "1", quote: "Cut our launch time in half.", name: "Mara Chen", role: "CTO", company: "Driftly", rating: 5 },
-  { id: "2", quote: "The animations sold our investors.", name: "Tomás Rivera", role: "Founder", company: "Loopwise", rating: 5 },
+  {
+    id: '1',
+    quote: 'Cut our launch time in half.',
+    name: 'Mara Chen',
+    role: 'CTO',
+    company: 'Driftly',
+    rating: 5,
+  },
+  {
+    id: '2',
+    quote: 'The animations sold our investors.',
+    name: 'Tomás Rivera',
+    role: 'Founder',
+    company: 'Loopwise',
+    rating: 5,
+  },
 ];
 
 export function SocialProof() {
@@ -227,9 +240,9 @@ npx lerpa-cli add double-border-pricing-card
 ```
 
 ```tsx
-"use client";
+'use client';
 
-import { DoubleBorderPricingCard } from "@/components/ui/double-border-pricing-card";
+import { DoubleBorderPricingCard } from '@/components/ui/double-border-pricing-card';
 
 export function ProTier({ isAnnual }: { isAnnual: boolean }) {
   return (
@@ -240,9 +253,9 @@ export function ProTier({ isAnnual }: { isAnnual: boolean }) {
       isAnnual={isAnnual}
       badgeText="Most popular"
       description="For teams shipping to production."
-      features={["Unlimited projects", "Priority support", "Custom themes", "SSO"]}
+      features={['Unlimited projects', 'Priority support', 'Custom themes', 'SSO']}
       ctaText="Start 14-day trial"
-      onCtaClick={() => location.assign("/signup?plan=pro")}
+      onCtaClick={() => location.assign('/signup?plan=pro')}
     />
   );
 }
@@ -250,4 +263,4 @@ export function ProTier({ isAnnual }: { isAnnual: boolean }) {
 
 ---
 
-**Browse the other 1,300+ items:** `npx lerpa-cli list`, the [gallery](https://lerpaui.com/gallery/components), or ask your AI agent over [MCP](./recipes/claude-code.md).
+**Browse all 1,328 registry items:** `npx lerpa-cli list`, the [gallery](https://lerpaui.com/gallery/components), or ask your AI agent over [MCP](./recipes/claude-code.md).

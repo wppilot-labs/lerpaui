@@ -173,9 +173,6 @@ export * from './MobileNavCircleDock';
 
 // Hooks are exported from ../animation/hooks — do NOT re-export from individual components
 
-
-
-
 // Phase 15: Touch-First & Gesture Premium Mobile-First Components
 export * from './SwipeToArchiveListRow';
 export * from './SwipeToRevealStatus';
@@ -397,3 +394,15 @@ export * from './FooterEcommerceBasic';
 export * from './FooterSaasBasic';
 export * from './HowItWorksSteps';
 export * from './MobileMenuDrawer';
+
+// Phase 25: Product operations and resilient interaction controls
+export * from './AsyncActionButton';
+export * from './ConnectionStatusBanner';
+export * from './FilterChipGroup';
+export * from './UploadQueue';
+export * from './ValidationSummary';
+export * from './DataRefreshControl';
+export * from './ConflictResolutionPanel';
+export * from './QueryStatePanel';
+export * from './ApiKeyField';
+export * from './DestructiveConfirmationField';

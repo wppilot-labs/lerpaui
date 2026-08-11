@@ -1,17 +1,17 @@
 {
   "name": "@lerpa/mcp-server",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "private": false,
   "license": "MIT",
   "description": "Model Context Protocol server exposing the Lerpa UI registry to AI agents (Claude Code, Cursor, v0, Continue).",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cuibit-labs/lerpaui.git",
+    "url": "https://github.com/wppilot-labs/lerpaui.git",
     "directory": "packages/mcp-server"
   },
   "author": "Lerpa UI",
-  "homepage": "https://github.com/cuibit-labs/lerpaui#readme",
-  "bugs": "https://github.com/cuibit-labs/lerpaui/issues",
+  "homepage": "https://github.com/wppilot-labs/lerpaui#readme",
+  "bugs": "https://github.com/wppilot-labs/lerpaui/issues",
   "publishConfig": {
     "access": "public"
   },
@@ -37,6 +37,7 @@
     "dev": "tsc -w",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit",
+    "test": "node --test test/*.test.mjs",
     "start": "node ./dist/index.js",
     "prepublishOnly": "pnpm --filter @lerpa/registry run build && pnpm run build"
   },
@@ -59,6 +60,7 @@
     "v0"
   ],
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0"
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.76"
   }
 }

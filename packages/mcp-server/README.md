@@ -1,65 +1,60 @@
 # @lerpa/mcp-server
 
 [![npm](https://img.shields.io/npm/v/%40lerpa%2Fmcp-server?logo=npm&color=cb3837)](https://www.npmjs.com/package/@lerpa/mcp-server)
-[![MIT License](https://img.shields.io/badge/License-MIT-22c55e.svg)](https://github.com/cuibit-labs/lerpaui/blob/main/LICENSE.md)
+[![MIT License](https://img.shields.io/badge/License-MIT-22c55e.svg)](https://github.com/wppilot-labs/lerpaui/blob/main/LICENSE.md)
 
-Model Context Protocol (MCP) server that exposes the [Lerpa UI](https://github.com/cuibit-labs/lerpaui) registry — 1,318 shadcn-compatible components and blocks — to AI coding agents: **Claude Code, Cursor, Windsurf, Continue, Cline, Zed**.
-
-The registry data (including full component source) is bundled into the package, so it runs standalone via `npx` — no checkout, no network calls at runtime.
+A read-only Model Context Protocol server for the [Lerpa UI](https://github.com/wppilot-labs/lerpaui) registry. The package bundles 1,328 item definitions and their source, plus the available component catalog, so the stdio server requires no runtime network access.
 
 ## Setup
 
-**Claude Code** — one command:
+Claude Code:
 
 ```bash
 claude mcp add lerpa -- npx -y @lerpa/mcp-server
 ```
 
-**Cursor / Windsurf / Continue / Cline / Zed** — add to your MCP config (e.g. `~/.cursor/mcp.json`):
+Generic MCP config:
 
 ```json
 {
   "mcpServers": {
-    "lerpa": { "command": "npx", "args": ["-y", "@lerpa/mcp-server"] }
+    "lerpa": {
+      "command": "npx",
+      "args": ["-y", "@lerpa/mcp-server"]
+    }
   }
 }
 ```
 
-Restart your agent. Three tools become available.
+Restart the client after changing its config.
 
 ## Tools
 
-| Tool | Description |
-| --- | --- |
-| `list_components(category?)` | List components, optionally filtered by category (`ai`, `buttons`, `cards`, `charts`, `forms`, `creative`, `feedback`, `navigation`, `tables`, `calendars`, `account`, `ecommerce`, `auth`, `blog`, `dashboard`, `docs`). |
-| `get_component(id)` | Full registry item for one component, including embedded `files[].content` source code. |
-| `search_components(query)` | Fuzzy search by name and description across all registry items. |
+| Tool                 | Input                                                          | Result                                                                        |
+| -------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `list_components`    | Optional `category`, `type`, `limit` (1-250), `offset`         | Paginated item summaries, install commands, and `.json` registry URLs.        |
+| `get_component`      | Required kebab-case `id`                                       | Metadata, dependencies, and every embedded source file.                       |
+| `search_components`  | Required `query`; optional `category`, `type`, `limit` (1-100) | Ranked id/name/description/category results.                                  |
+| `list_categories`    | None                                                           | Derived category totals split into UI and blocks.                             |
+| `get_registry_stats` | None                                                           | Exact item totals, catalog coverage, server version, and network requirement. |
 
-Then just ask your agent:
+`type` accepts `all`, `ui`, `component`, or `block`. Listing defaults to 100 results and returns `nextOffset` until pagination is complete.
 
-> *"Use lerpa to build a pricing section with three tiers."*
-> *"Search lerpa for a magnetic button and add it to my navbar."*
+The generated catalog covers 1,189 of the 1,328 item ids. Items without catalog metadata remain discoverable and receive id-derived fallback categories; the server does not invent descriptions.
 
-## Development (monorepo)
+## Development
 
 ```bash
-pnpm --filter @lerpa/mcp-server build      # tsc + bundles registry data into the package
+pnpm --filter @lerpa/mcp-server build
+pnpm --filter @lerpa/mcp-server test
 pnpm --filter @lerpa/mcp-server typecheck
-node packages/mcp-server/dist/index.js     # stdio MCP server
+node packages/mcp-server/dist/index.js
 ```
 
-`build` runs `tsc`, then `scripts/copy-registry.cjs` copies `registry.json` (aggregated registry with embedded source) and `component-catalog.json` (descriptions/categories) from `packages/registry/generated/` into this package. At runtime the server reads the bundled files first and falls back to monorepo paths during local development.
+The test suite checks exported query functions and opens a real MCP stdio client session against the built server.
 
-To test against a local build instead of npm:
+For a local client config, point the command at Node and pass the absolute path to `packages/mcp-server/dist/index.js` as its first argument.
 
-```bash
-claude mcp add lerpa -- node /absolute/path/to/packages/mcp-server/dist/index.js
-```
+Requires Node.js 20 or newer.
 
-## Requirements
-
-Node.js ≥ 20.
-
-## License
-
-MIT © [Cuibit Labs](https://cuibit.com) — see [LICENSE](https://github.com/cuibit-labs/lerpaui/blob/main/LICENSE.md).
+MIT © [Cuibit Labs](https://cuibit.com). See [LICENSE.md](https://github.com/wppilot-labs/lerpaui/blob/main/LICENSE.md).

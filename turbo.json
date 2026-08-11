@@ -3,7 +3,18 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "dist/**", "generated/**", "registry/**", "!registry/items/**"]
+      "outputs": [".next/**", "dist/**"]
+    },
+    "@lerpa/registry#build": {
+      "outputs": ["generated/**"]
+    },
+    "lerpa-cli#build": {
+      "dependsOn": ["@lerpa/registry#build"],
+      "outputs": ["dist/**", "registry/**"]
+    },
+    "@lerpa/mcp-server#build": {
+      "dependsOn": ["@lerpa/registry#build"],
+      "outputs": ["dist/**", "registry/**"]
     },
     "dev": {
       "cache": false,
@@ -17,6 +28,12 @@
     },
     "test": {
       "dependsOn": ["^test"]
+    },
+    "lerpa-cli#test": {
+      "dependsOn": ["build"]
+    },
+    "@lerpa/mcp-server#test": {
+      "dependsOn": ["build"]
     }
   }
 }

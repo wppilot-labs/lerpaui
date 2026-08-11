@@ -14,7 +14,7 @@ jobs:
   quality-gates:
     name: Quality Gates
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -34,17 +34,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run typecheck
-        run: pnpm run typecheck
+      - name: Run fail-closed quality gates
+        run: pnpm run check
 
-      - name: Run lint
-        run: pnpm run lint
+      - name: Audit production dependencies
+        run: pnpm audit --prod --audit-level=low
 
-      - name: Run tests
-        run: pnpm run test
-
-      - name: Run build
-        run: pnpm run build
+      - name: Verify committed generated artifacts
+        run: pnpm run verify:generated
 
   registry-validate:
     name: Registry Validation
